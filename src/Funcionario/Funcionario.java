@@ -49,8 +49,7 @@ public class Funcionario extends javax.swing.JPanel {
         txt_endeFun.setDocument(new LimitarCampos(60));
         txt_compleFun.setDocument(new LimitarCampos(50));
         txt_numFun.setDocument(new LimitarCampos(6));
-        txt_loginFun.setDocument(new LimitarCampos(15));
-        txt_senhaFun.setDocument(new LimitarCampos(15));
+
         
         
         
@@ -67,7 +66,7 @@ public class Funcionario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        internalUsuario = new javax.swing.JInternalFrame();
+        internalFuncionario = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton15 = new javax.swing.JButton();
@@ -79,15 +78,6 @@ public class Funcionario extends javax.swing.JPanel {
         jButton19 = new javax.swing.JButton();
         jSeparator16 = new javax.swing.JToolBar.Separator();
         jButton20 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
-        txt_loginFun = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        txt_senhaFun = new javax.swing.JPasswordField();
-        CriarAcesso = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        Caixa = new javax.swing.JCheckBox();
-        Adm = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -124,8 +114,8 @@ public class Funcionario extends javax.swing.JPanel {
 
         setLayout(null);
 
-        internalUsuario.setClosable(true);
-        internalUsuario.setVisible(true);
+        internalFuncionario.setClosable(true);
+        internalFuncionario.setVisible(true);
 
         jPanel2.setLayout(null);
 
@@ -203,50 +193,6 @@ public class Funcionario extends javax.swing.JPanel {
 
         jPanel2.add(jToolBar2);
         jToolBar2.setBounds(10, 0, 790, 80);
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário e Senha"));
-        jPanel4.setLayout(null);
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel34.setText("Login:");
-        jPanel4.add(jLabel34);
-        jLabel34.setBounds(10, 30, 50, 30);
-        jPanel4.add(txt_loginFun);
-        txt_loginFun.setBounds(70, 30, 140, 30);
-
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel35.setText("Senha:");
-        jPanel4.add(jLabel35);
-        jLabel35.setBounds(10, 80, 50, 30);
-        jPanel4.add(txt_senhaFun);
-        txt_senhaFun.setBounds(70, 80, 140, 30);
-
-        CriarAcesso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/registro.png"))); // NOI18N
-        CriarAcesso.setText("Criar Acesso");
-        CriarAcesso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CriarAcessoActionPerformed(evt);
-            }
-        });
-        jPanel4.add(CriarAcesso);
-        CriarAcesso.setBounds(40, 220, 180, 40);
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Permissões"));
-        jPanel8.setLayout(null);
-
-        Caixa.setText("Caixa");
-        jPanel8.add(Caixa);
-        Caixa.setBounds(30, 20, 130, 23);
-
-        Adm.setText("Administração");
-        jPanel8.add(Adm);
-        Adm.setBounds(30, 50, 130, 23);
-
-        jPanel4.add(jPanel8);
-        jPanel8.setBounds(40, 120, 180, 90);
-
-        jPanel2.add(jPanel4);
-        jPanel4.setBounds(580, 90, 240, 290);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
         jPanel5.setLayout(null);
@@ -421,25 +367,25 @@ public class Funcionario extends javax.swing.JPanel {
         jPanel2.add(jPanel6);
         jPanel6.setBounds(10, 90, 550, 180);
 
-        javax.swing.GroupLayout internalUsuarioLayout = new javax.swing.GroupLayout(internalUsuario.getContentPane());
-        internalUsuario.getContentPane().setLayout(internalUsuarioLayout);
-        internalUsuarioLayout.setHorizontalGroup(
-            internalUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout internalFuncionarioLayout = new javax.swing.GroupLayout(internalFuncionario.getContentPane());
+        internalFuncionario.getContentPane().setLayout(internalFuncionarioLayout);
+        internalFuncionarioLayout.setHorizontalGroup(
+            internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 895, Short.MAX_VALUE)
-            .addGroup(internalUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(internalUsuarioLayout.createSequentialGroup()
+            .addGroup(internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(internalFuncionarioLayout.createSequentialGroup()
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-        internalUsuarioLayout.setVerticalGroup(
-            internalUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        internalFuncionarioLayout.setVerticalGroup(
+            internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 661, Short.MAX_VALUE)
-            .addGroup(internalUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
         );
 
-        add(internalUsuario);
-        internalUsuario.setBounds(0, 0, 860, 690);
+        add(internalFuncionario);
+        internalFuncionario.setBounds(0, 0, 860, 690);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -500,33 +446,6 @@ public class Funcionario extends javax.swing.JPanel {
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
 
     }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void CriarAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarAcessoActionPerformed
-        String loginFun,senhaFun, permissao = "";
-
-        loginFun = txt_loginFun.getText();
-        senhaFun = txt_senhaFun.getText();
-
-        if (Caixa.isSelected()) {
-            permissao += "1";
-        } else {
-            permissao += "0";
-        }
-
-        if (Adm.isSelected()) {
-            permissao += "1";
-        } else {
-            permissao += "0";
-        }
-
-
-        if (ba.gravaLogin( loginFun, senhaFun, permissao)) {
-
-            txt_loginFun.setText("");
-            txt_senhaFun.setText("");
-
-        }
-    }//GEN-LAST:event_CriarAcessoActionPerformed
 
     private void txt_setorFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_setorFunActionPerformed
         // TODO add your handling code here:
@@ -719,11 +638,8 @@ public class Funcionario extends javax.swing.JPanel {
         
     }  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox Adm;
-    private javax.swing.JCheckBox Caixa;
-    private javax.swing.JButton CriarAcesso;
     private javax.swing.JComboBox cmb_sexoFun;
-    public javax.swing.JInternalFrame internalUsuario;
+    public javax.swing.JInternalFrame internalFuncionario;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
@@ -740,18 +656,14 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator16;
@@ -765,12 +677,10 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txt_cpfFun;
     private javax.swing.JFormattedTextField txt_endeFun;
     private javax.swing.JTextField txt_estadoFun;
-    private javax.swing.JTextField txt_loginFun;
     private javax.swing.JFormattedTextField txt_nasciFun;
     private javax.swing.JFormattedTextField txt_nomeFun;
     private javax.swing.JFormattedTextField txt_numFun;
     private javax.swing.JFormattedTextField txt_rgFun;
-    private javax.swing.JPasswordField txt_senhaFun;
     private javax.swing.JTextField txt_setorFun;
     private javax.swing.JFormattedTextField txt_telFun;
     // End of variables declaration//GEN-END:variables

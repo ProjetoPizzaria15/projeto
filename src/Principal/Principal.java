@@ -10,6 +10,7 @@ import javax.swing.JInternalFrame;
 import Fornecedor.Fornecedor;
 import Caixa.Caixa;
 import Funcionario.Funcionario;
+import Usuario.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
@@ -21,6 +22,7 @@ public class Principal extends javax.swing.JFrame {
     JInternalFrame intCliente;
     JInternalFrame intProdutos;
     JInternalFrame intUsuario;
+    JInternalFrame intFuncionario;
     JInternalFrame intFornecedor;
     
     public Principal() {
@@ -44,8 +46,8 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        btnUsuarios = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
+        btnFuncionario = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -66,27 +68,32 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(255, 255, 204));
         jToolBar1.setFloatable(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1440270532_user-group.png"))); // NOI18N
-        jButton1.setText("Usuarios");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
-
-        btnUsuarios.setBackground(new java.awt.Color(255, 255, 204));
-        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/funcionario.png"))); // NOI18N
-        btnUsuarios.setText("Funcionarios");
-        btnUsuarios.setFocusable(false);
-        btnUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnUsuarios.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        btnUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1440270532_user-group.png"))); // NOI18N
+        btnUsuario.setText("Usuarios");
+        btnUsuario.setFocusable(false);
+        btnUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuariosActionPerformed(evt);
+                btnUsuarioActionPerformed(evt);
             }
         });
-        jToolBar1.add(btnUsuarios);
+        jToolBar1.add(btnUsuario);
+
+        btnFuncionario.setBackground(new java.awt.Color(255, 255, 204));
+        btnFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/funcionario.png"))); // NOI18N
+        btnFuncionario.setText("Funcionarios");
+        btnFuncionario.setFocusable(false);
+        btnFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFuncionario.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFuncionarioActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnFuncionario);
 
         btnCliente.setBackground(new java.awt.Color(255, 255, 204));
         btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1440270593_clients.png"))); // NOI18N
@@ -239,16 +246,16 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+    private void btnFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionarioActionPerformed
 
-         if(intUsuario == null || intUsuario.isClosed()){
-             intUsuario = new Funcionario().internalUsuario;
-             getContentPane().add(intUsuario);
-             desktop.add(intUsuario);
-             intUsuario.setLocation(130, 15);
-             intUsuario.moveToFront();
+         if(intFuncionario == null || intFuncionario.isClosed()){
+             intFuncionario = new Funcionario().internalFuncionario;
+             getContentPane().add(intFuncionario);
+             desktop.add(intFuncionario);
+             intFuncionario.setLocation(130, 15);
+             intFuncionario.moveToFront();
          }
-    }//GEN-LAST:event_btnUsuariosActionPerformed
+    }//GEN-LAST:event_btnFuncionarioActionPerformed
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         if(intCliente == null || intCliente.isClosed()){
@@ -281,6 +288,16 @@ public class Principal extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_EncerrarActionPerformed
+
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+        if(intUsuario == null || intUsuario.isClosed()){
+             intUsuario = new Usuario().internalUsuario;
+             getContentPane().add(intUsuario);
+             desktop.add(intUsuario);
+             intUsuario.setLocation(130, 15);
+             intUsuario.moveToFront();
+         }
+    }//GEN-LAST:event_btnUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,10 +339,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton Encerrar;
     private javax.swing.JButton Fornecedor;
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnProdutos;
-    private javax.swing.JButton btnUsuarios;
+    private javax.swing.JButton btnUsuario;
     private javax.swing.JDesktopPane desktop;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;

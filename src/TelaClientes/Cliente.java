@@ -25,6 +25,7 @@ public class Cliente extends javax.swing.JPanel {
     Banco ba = new Banco();
     
     
+    
     public Cliente() {
         initComponents();
         
@@ -33,7 +34,9 @@ public class Cliente extends javax.swing.JPanel {
               public void focusLost(java.awt.event.FocusEvent evt) {  
                   txtCepFocusLostCep(evt);  
               }  
+              
           });
+        
         
         
         txtNome.setDocument(new LimitarCampos(50));

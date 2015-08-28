@@ -614,6 +614,10 @@ public class Banco {
     
 
            catch (SQLException e) {
+                if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){
+            
+                JOptionPane.showMessageDialog(null,"Funcionario já registrado" );
+               }    
             System.out.println("Erro ao executar o comando SQL:" + e.toString());
             return false;
         }
