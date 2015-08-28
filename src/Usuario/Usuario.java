@@ -229,13 +229,13 @@ public class Usuario extends javax.swing.JFrame {
         loginFun = txt_loginFun1.getText();
         senhaFun = txt_senhaFun1.getText();
 
-        if (Caixa.isSelected()) {
+        if (Caixa1.isSelected()) {
             permissao += "1";
         } else {
             permissao += "0";
         }
 
-        if (Adm.isSelected()) {
+        if (Adm1.isSelected()) {
             permissao += "1";
         } else {
             permissao += "0";
@@ -243,8 +243,8 @@ public class Usuario extends javax.swing.JFrame {
 
         if (ba.gravaLogin( loginFun, senhaFun, permissao)) {
 
-            txt_loginFun.setText("");
-            txt_senhaFun.setText("");
+            txt_loginFun1.setText("");
+            txt_senhaFun1.setText("");
 
         }
     }//GEN-LAST:event_CriarAcesso1ActionPerformed
