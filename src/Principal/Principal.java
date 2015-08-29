@@ -202,7 +202,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 0, 1600, 60);
 
-        desktop.setBackground(new java.awt.Color(255, 255, 204));
+        desktop.setBackground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);

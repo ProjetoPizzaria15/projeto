@@ -4,6 +4,7 @@
  */
 package Banco;
 
+import BancoObjeto.ObjetoCliente;
 import Fornecedor.Fornecedor;
 import TelaClientes.Cliente;
 import java.sql.*;
@@ -767,6 +768,46 @@ public class Banco {
             return false;
         }
 
+    }
+    
+    
+    
+    // PREENCHE A BUSCA DA JTABLE CLIENTE
+    
+     public ObjetoCliente buscaClienteTabela(String telefone) {
+        String sql;
+        conecta();
+        
+        ObjetoCliente cliente = new ObjetoCliente();
+        
+        try {
+            
+             sql = "SELECT * FROM clientes WHERE telefone='" + telefone + "';";
+            
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            
+            if (rs.next()) {
+               
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCep(rs.getString("cep"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setNumero(rs.getString("numero"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setCidade(rs.getString("cidade"));
+                cliente.setUf(rs.getString("uf"));
+                cliente.setBairro(rs.getString("bairro"));
+                
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+return cliente;
     }
     
 

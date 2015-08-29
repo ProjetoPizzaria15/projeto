@@ -8,9 +8,11 @@ package TelaClientes;
 
 import Banco.Banco;
 import Banco.BancoCep;
+import BancoObjeto.ObjetoCliente;
 import Funcoes.LimitarCampos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -42,10 +44,11 @@ public class Cliente extends javax.swing.JPanel {
         txtNome.setDocument(new LimitarCampos(50));
         txtCidade.setDocument(new LimitarCampos(50));
         txtBairro.setDocument(new LimitarCampos(50));
-        txtEndereco.setDocument(new LimitarCampos(50));
-        
+        txtEndereco.setDocument(new LimitarCampos(50)); 
         txtUf.setDocument(new LimitarCampos(2));
         txtNumero.setDocument(new LimitarCampos(5));
+        
+        txtPesquisa.setDocument(new LimitarCampos(8));
         
         
         
@@ -128,7 +131,7 @@ public class Cliente extends javax.swing.JPanel {
         gridCliente = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisaCliente = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -172,7 +175,7 @@ public class Cliente extends javax.swing.JPanel {
         txtNome.setBounds(100, 70, 420, 30);
 
         jPanel3.add(jPanel4);
-        jPanel4.setBounds(10, 80, 660, 120);
+        jPanel4.setBounds(10, 80, 860, 120);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel6.setLayout(null);
@@ -248,7 +251,7 @@ public class Cliente extends javax.swing.JPanel {
         jLabel5.setBounds(530, 130, 60, 30);
 
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(10, 220, 660, 290);
+        jPanel6.setBounds(10, 220, 860, 310);
 
         jToolBar1.setRollover(true);
 
@@ -321,12 +324,13 @@ public class Cliente extends javax.swing.JPanel {
         jToolBar1.setBounds(0, 0, 860, 70);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 0, 860, 570);
+        jPanel3.setBounds(0, 0, 900, 570);
 
         jTabbedPane1.addTab("Registrar Cliente", jPanel1);
 
         jPanel2.setLayout(null);
 
+        gridCliente.setAutoCreateRowSorter(true);
         gridCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -339,22 +343,25 @@ public class Cliente extends javax.swing.JPanel {
         jScrollPane2.setViewportView(gridCliente);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 90, 800, 420);
+        jScrollPane2.setBounds(10, 90, 870, 420);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Telefone:");
         jPanel2.add(jLabel9);
-        jLabel9.setBounds(180, 30, 90, 40);
+        jLabel9.setBounds(220, 30, 90, 40);
         jPanel2.add(txtPesquisa);
         txtPesquisa.setBounds(300, 30, 190, 40);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnPesquisaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
+        btnPesquisaCliente.setText("Pesquisar");
+        btnPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisaClienteActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(530, 40, 73, 23);
+        jPanel2.add(btnPesquisaCliente);
+        btnPesquisaCliente.setBounds(510, 30, 160, 40);
 
         jTabbedPane1.addTab("Pesquisar Cliente", jPanel2);
 
@@ -362,7 +369,7 @@ public class Cliente extends javax.swing.JPanel {
         jTabbedPane1.setBounds(0, 0, 1150, 750);
 
         add(internalCliente);
-        internalCliente.setBounds(40, 30, 880, 630);
+        internalCliente.setBounds(40, 30, 920, 630);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
@@ -571,10 +578,37 @@ public class Cliente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefoneActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+    private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
+    
+        DefaultTableModel modelo = (DefaultTableModel)gridCliente.getModel();
+    gridCliente.removeAll();
+    
+    while(modelo.getRowCount() > 0){
+        modelo.removeRow(0);
+    }
+    
+    ObjetoCliente clientepesquisado = new ObjetoCliente();
+    
+    if(txtPesquisa.getText().isEmpty() == false){
+        int telefone = Integer.parseInt(txtPesquisa.getText());
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(telefone > 0){
+            clientepesquisado = ba.buscaClienteTabela(String.valueOf(telefone));
+            if(clientepesquisado != null){
+                modelo.addRow(new Object[]{clientepesquisado.getTelefone(),clientepesquisado.getNome(), clientepesquisado.getUf(), clientepesquisado.getCidade(), clientepesquisado.getBairro(), clientepesquisado.getEndereco(), clientepesquisado.getNumero(), clientepesquisado.getCep(), clientepesquisado.getComplemento()});
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nenhum Cliente encontrado !!!");
+            }
+        }
+    }
+    
+    gridCliente.repaint();
+    
+    txtPesquisa.setText(null);
+              
+
+    }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -584,9 +618,9 @@ public class Cliente extends javax.swing.JPanel {
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
     private javax.swing.JLabel aa;
+    private javax.swing.JButton btnPesquisaCliente;
     private javax.swing.JTable gridCliente;
     public javax.swing.JInternalFrame internalCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
