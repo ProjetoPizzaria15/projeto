@@ -58,6 +58,7 @@ public class Principal extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         Encerrar = new javax.swing.JButton();
         desktop = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -67,7 +68,9 @@ public class Principal extends javax.swing.JFrame {
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 204));
         jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
 
+        btnUsuario.setBackground(new java.awt.Color(255, 255, 204));
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1440270532_user-group.png"))); // NOI18N
         btnUsuario.setText("Usuarios");
         btnUsuario.setFocusable(false);
@@ -123,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnProdutos);
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/produtos.png"))); // NOI18N
         jButton2.setText("Produtos");
         jButton2.setFocusable(false);
@@ -186,6 +190,7 @@ public class Principal extends javax.swing.JFrame {
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton10);
 
+        Encerrar.setBackground(new java.awt.Color(255, 255, 204));
         Encerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/exit (2).png"))); // NOI18N
         Encerrar.setText("Sair do sitema");
         Encerrar.setFocusable(false);
@@ -204,16 +209,9 @@ public class Principal extends javax.swing.JFrame {
 
         desktop.setBackground(new java.awt.Color(102, 102, 102));
 
-        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
-        desktop.setLayout(desktopLayout);
-        desktopLayout.setHorizontalGroup(
-            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1600, Short.MAX_VALUE)
-        );
-        desktopLayout.setVerticalGroup(
-            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/pizza_grande.jpg"))); // NOI18N
+        desktop.add(jLabel1);
+        jLabel1.setBounds(0, 0, 1600, 820);
 
         getContentPane().add(desktop);
         desktop.setBounds(0, 60, 1600, 820);
@@ -348,6 +346,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

@@ -154,6 +154,7 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_cpfFor = new javax.swing.JFormattedTextField();
         AlertaCnpj = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setLayout(null);
 
@@ -475,6 +476,7 @@ public class Fornecedor extends javax.swing.JPanel {
         jLabel6.setBounds(10, 560, 260, 14);
 
         jTabbedPane1.addTab("Registrar Fornecedor", jPanel2);
+        jTabbedPane1.addTab("Pesquisar Fornecedor", jPanel1);
 
         internalFornecedor.getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(0, 0, 910, 740);
@@ -1069,6 +1071,7 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -39,7 +39,7 @@ public class Cliente extends javax.swing.JPanel {
               
           });
         
-        
+        // LIMITA O TAMANHO DOS CAMPOS
         
         txtNome.setDocument(new LimitarCampos(50));
         txtCidade.setDocument(new LimitarCampos(50));
@@ -48,8 +48,9 @@ public class Cliente extends javax.swing.JPanel {
         txtUf.setDocument(new LimitarCampos(2));
         txtNumero.setDocument(new LimitarCampos(5));
         
+        txtTelefone.setDocument(new LimitarCampos(8));
         txtPesquisa.setDocument(new LimitarCampos(8));
-        
+
         
         
     }
@@ -96,14 +97,14 @@ public class Cliente extends javax.swing.JPanel {
     private void initComponents() {
 
         internalCliente = new javax.swing.JInternalFrame();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabCliente = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JFormattedTextField();
         txtNome = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -130,8 +131,8 @@ public class Cliente extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         gridCliente = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        txtPesquisa = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JButton();
+        txtPesquisa = new javax.swing.JTextField();
 
         setLayout(null);
 
@@ -139,7 +140,7 @@ public class Cliente extends javax.swing.JPanel {
         internalCliente.setVisible(true);
         internalCliente.getContentPane().setLayout(null);
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        TabCliente.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setLayout(null);
 
@@ -158,21 +159,10 @@ public class Cliente extends javax.swing.JPanel {
         jLabel2.setText("Telefone(*):");
         jPanel4.add(jLabel2);
         jLabel2.setBounds(10, 20, 90, 30);
-
-        try {
-            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(11)####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneActionPerformed(evt);
-            }
-        });
-        jPanel4.add(txtTelefone);
-        txtTelefone.setBounds(100, 20, 110, 30);
         jPanel4.add(txtNome);
         txtNome.setBounds(100, 70, 420, 30);
+        jPanel4.add(txtTelefone);
+        txtTelefone.setBounds(100, 20, 110, 30);
 
         jPanel3.add(jPanel4);
         jPanel4.setBounds(10, 80, 860, 120);
@@ -326,7 +316,7 @@ public class Cliente extends javax.swing.JPanel {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 0, 900, 570);
 
-        jTabbedPane1.addTab("Registrar Cliente", jPanel1);
+        TabCliente.addTab("Registrar Cliente", jPanel1);
 
         jPanel2.setLayout(null);
 
@@ -340,17 +330,20 @@ public class Cliente extends javax.swing.JPanel {
             }
         ));
         gridCliente.setToolTipText("");
+        gridCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridClienteMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(gridCliente);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 90, 870, 420);
+        jScrollPane2.setBounds(0, 90, 870, 420);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Telefone:");
         jPanel2.add(jLabel9);
         jLabel9.setBounds(220, 30, 90, 40);
-        jPanel2.add(txtPesquisa);
-        txtPesquisa.setBounds(300, 30, 190, 40);
 
         btnPesquisaCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPesquisaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
@@ -361,12 +354,14 @@ public class Cliente extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btnPesquisaCliente);
-        btnPesquisaCliente.setBounds(510, 30, 160, 40);
+        btnPesquisaCliente.setBounds(440, 30, 160, 40);
+        jPanel2.add(txtPesquisa);
+        txtPesquisa.setBounds(300, 30, 120, 40);
 
-        jTabbedPane1.addTab("Pesquisar Cliente", jPanel2);
+        TabCliente.addTab("Pesquisar Cliente", jPanel2);
 
-        internalCliente.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 1150, 750);
+        internalCliente.getContentPane().add(TabCliente);
+        TabCliente.setBounds(0, 0, 900, 590);
 
         add(internalCliente);
         internalCliente.setBounds(40, 30, 920, 630);
@@ -574,10 +569,6 @@ public class Cliente extends javax.swing.JPanel {
 
     }//GEN-LAST:event_GravarActionPerformed
 
-    private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefoneActionPerformed
-
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
     
         DefaultTableModel modelo = (DefaultTableModel)gridCliente.getModel();
@@ -589,7 +580,9 @@ public class Cliente extends javax.swing.JPanel {
     
     ObjetoCliente clientepesquisado = new ObjetoCliente();
     
-    if(txtPesquisa.getText().isEmpty() == false){
+  
+    
+     if(txtPesquisa.getText().isEmpty() == false){
         int telefone = Integer.parseInt(txtPesquisa.getText());
 
         if(telefone > 0){
@@ -610,6 +603,61 @@ public class Cliente extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
+    // AO SELECIONAR UMA LINHA NA JTABLE PREENCHE OS CAMPOS NA OUTRA ABA CLIENTE
+    
+    private void gridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridClienteMouseClicked
+        
+        // PEGA OS CAMPOS QUE ESTÃO NA JTABLE 
+        
+        if (evt.getClickCount() == 1) {  
+            Object obj = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 0));  //coluna 0  
+            String telefone = obj.toString();
+            
+            Object obj1 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 1));  //coluna 0  
+            String nome = obj1.toString();
+            
+            Object obj2 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 2));  //coluna 0  
+            String uf = obj2.toString();  
+            
+            Object obj3 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 3));  //coluna 0  
+            String cidade = obj3.toString();  
+            
+            Object obj4 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 4));  //coluna 0  
+            String bairro = obj4.toString();  
+            
+            Object obj5 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 5));  //coluna 0  
+            String logradouro = obj5.toString(); 
+            
+            Object obj6 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 6));  //coluna 0  
+            String numero = obj6.toString();  
+            
+            Object obj7 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 7));  //coluna 0  
+            String cep = obj7.toString();  
+            
+            Object obj8 = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 8));  //coluna 0  
+            String complemento = obj8.toString();  
+         
+            // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
+
+             txtTelefone.setText(telefone);   
+             txtNome.setText(nome); 
+             txtCep.setText(cep); 
+             txtCidade.setText(cidade); 
+             txtBairro.setText(bairro); 
+             txtEndereco.setText(logradouro); 
+             txtComplemento.setText(complemento); 
+             txtUf.setText(uf); 
+             txtNumero.setText(numero);      
+             
+             
+             
+               // QUANDO SELECIONA A LINHA NA JTABLE MUDA A ABA
+              TabCliente.setSelectedIndex(0);   
+             
+              
+        }  
+    }//GEN-LAST:event_gridClienteMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Alterar;
@@ -617,6 +665,7 @@ public class Cliente extends javax.swing.JPanel {
     private javax.swing.JButton Gravar;
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
+    private javax.swing.JTabbedPane TabCliente;
     private javax.swing.JLabel aa;
     private javax.swing.JButton btnPesquisaCliente;
     private javax.swing.JTable gridCliente;
@@ -637,7 +686,6 @@ public class Cliente extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCep;
