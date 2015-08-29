@@ -273,9 +273,9 @@ public class Caixa extends javax.swing.JFrame {
         jTextField12.setBounds(10, 730, 410, 30);
 
         getContentPane().add(internalProdutos);
-        internalProdutos.setBounds(0, 0, 1600, 900);
+        internalProdutos.setBounds(0, 0, 1220, 720);
 
-        setBounds(0, 0, 1616, 938);
+        setBounds(0, 0, 1232, 759);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
