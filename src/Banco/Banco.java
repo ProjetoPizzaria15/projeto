@@ -5,6 +5,7 @@
 package Banco;
 
 import BancoObjeto.ObjetoCliente;
+import BancoObjeto.ObjetoFuncionario;
 import Fornecedor.Fornecedor;
 import TelaClientes.Cliente;
 import java.sql.*;
@@ -121,6 +122,49 @@ public class Banco {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao executar o comando SQL:" + e.toString());
             return null;
+        }
+
+    }
+    
+    
+    public void atualizaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun,String ufFun,String cidadeFun,String setorFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun , String sexoFun) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE funcionario SET nomeFun ='"+nomeFun+"', nasciFun ='"+nasciFun+"', endeFun ='"+endeFun+"', compleFun ='"+compleFun+"', bairroFun ='"+bairroFun+"', ufFun ='"+ufFun+"', cidadeFun ='"+cidadeFun+"' , setorFun ='"+setorFun+"', rgFun ='"+rgFun+"' , cpfFun ='"+cpfFun+"' , cepFun ='"+cepFun+"', numFun ='"+numFun+"' , telFun ='"+telFun+"', celFun ='"+celFun+"', sexoFun ='"+sexoFun+"'  WHERE cpfFun = '"+cpfFun+"'"; 
+
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Cliente Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
+    
+    public void atualizaCliente(String telefone,String nome,String cep,String cidade,String bairro,String uf,String numero,String endereco,String complemento) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE clientes SET nome ='"+nome+"', cep ='"+cep+"', cidade ='"+cidade+"', bairro ='"+bairro+"', uf ='"+uf+"', numero ='"+numero+"', endereco ='"+endereco+"' , complemento ='"+complemento+"'  WHERE telefone = '"+telefone+"'"; 
+
+        
+              stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Cliente Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
         }
 
     }
@@ -588,7 +632,7 @@ public class Banco {
     }
     
 
-     public boolean gravaLogin(String loginFun,String senhaFun, String permissao) {
+     public boolean gravaLogin(String loginFun,String senhaFun,String cpf, String permissao) {
         conecta();
         String sql;
 
@@ -599,8 +643,8 @@ public class Banco {
               
           
             
-                sql = "INSERT INTO usuario(login, senha, permissao) VALUES ('"; // nome das variaveis do BD
-                sql += loginFun + "', '" + senhaFun + "','" + permissao + "')";
+                sql = "INSERT INTO usuario(login, senha, permissao, cpfFun) VALUES ('"; // nome das variaveis do BD
+                sql += loginFun + "', '" + senhaFun + "','" + permissao + "','" + cpf + "')";
                 
                 /*sql = "INSERT INTO usuario(login, senha, permissao) VALUES ('"; // nome das variaveis do BD
                 sql += loginFun + "', '"+ senhaFun +"' , '"+ permissao +"')";*/
@@ -808,6 +852,51 @@ public class Banco {
             return null;
         }
 return cliente;
+    }
+    
+     
+     
+     // PREENCHE A JTABLE FUNCIONARIO 
+     
+       public ObjetoFuncionario buscaFuncionarioTabela(String cpf) {
+        String sql;
+        conecta();
+        
+        ObjetoFuncionario funcionario = new ObjetoFuncionario();
+        
+        try {
+            
+             sql = "SELECT * FROM funcionario WHERE cpfFun='" + cpf + "';";
+            
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            
+            if (rs.next()) {
+               
+                funcionario.setNomeFun(rs.getString("nomeFun"));
+                funcionario.setSexoFun(rs.getString("sexoFun"));
+                funcionario.setCpfFun(rs.getString("cpfFun"));
+                funcionario.setRgFun(rs.getString("rgFun"));
+                funcionario.setNasciFun(rs.getString("nasciFun"));
+                funcionario.setUfFun(rs.getString("ufFun"));
+                funcionario.setCidadeFun(rs.getString("cidadeFun"));
+                funcionario.setEndeFun(rs.getString("endeFun"));
+                funcionario.setBairroFun(rs.getString("bairroFun"));
+                funcionario.setCepFun(rs.getString("cepFun"));
+                funcionario.setNumFun(rs.getString("numFun"));
+                funcionario.setTelFun(rs.getString("telFun"));
+                funcionario.setCelFun(rs.getString("celFun"));
+                funcionario.setSetorFun(rs.getString("setorFun"));
+                funcionario.setCompleFun(rs.getString("compleFun"));
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+return funcionario;
     }
     
      

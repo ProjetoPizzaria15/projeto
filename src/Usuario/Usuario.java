@@ -7,6 +7,9 @@ package Usuario;
 
 import Banco.Banco;
 import Funcoes.LimitarCampos;
+import Funcoes.ValidaCnpj;
+import javax.swing.JOptionPane;
+import org.alfredlibrary.validadores.CPF;
 
 /**
  *
@@ -20,6 +23,13 @@ public class Usuario extends javax.swing.JFrame {
         
                 txt_loginFun1.setDocument(new LimitarCampos(15));
                 txt_senhaFun1.setDocument(new LimitarCampos(15));
+                
+                
+                 txt_Cpf.addFocusListener(new java.awt.event.FocusAdapter() {  
+              public void focusLost(java.awt.event.FocusEvent evt) {  
+                  jTextField1FocusLostCpf(evt);  
+              }  
+          });
     }
 
     /**
@@ -48,12 +58,15 @@ public class Usuario extends javax.swing.JFrame {
         txt_loginFun1 = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         txt_senhaFun1 = new javax.swing.JPasswordField();
-        CriarAcesso1 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         Caixa1 = new javax.swing.JCheckBox();
         Adm1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txt_Cpf = new javax.swing.JFormattedTextField();
+        jToolBar1 = new javax.swing.JToolBar();
+        CriarAcesso1 = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário e Senha"));
         jPanel4.setLayout(null);
@@ -132,26 +145,16 @@ public class Usuario extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel36.setText("Login:");
         jPanel5.add(jLabel36);
-        jLabel36.setBounds(10, 30, 50, 30);
+        jLabel36.setBounds(10, 40, 50, 30);
         jPanel5.add(txt_loginFun1);
-        txt_loginFun1.setBounds(70, 30, 140, 30);
+        txt_loginFun1.setBounds(70, 40, 140, 30);
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel37.setText("Senha:");
         jPanel5.add(jLabel37);
-        jLabel37.setBounds(10, 80, 50, 30);
+        jLabel37.setBounds(10, 90, 50, 30);
         jPanel5.add(txt_senhaFun1);
-        txt_senhaFun1.setBounds(70, 80, 140, 30);
-
-        CriarAcesso1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/registro.png"))); // NOI18N
-        CriarAcesso1.setText("Criar Acesso");
-        CriarAcesso1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CriarAcesso1ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(CriarAcesso1);
-        CriarAcesso1.setBounds(270, 160, 180, 70);
+        txt_senhaFun1.setBounds(70, 90, 140, 30);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Permissões", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         jPanel9.setLayout(null);
@@ -159,18 +162,18 @@ public class Usuario extends javax.swing.JFrame {
         Caixa1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Caixa1.setText("Caixa");
         jPanel9.add(Caixa1);
-        Caixa1.setBounds(30, 40, 130, 23);
+        Caixa1.setBounds(30, 30, 130, 23);
 
         Adm1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Adm1.setText("Administração");
         jPanel9.add(Adm1);
-        Adm1.setBounds(30, 70, 130, 25);
+        Adm1.setBounds(30, 60, 130, 25);
 
         jPanel5.add(jPanel9);
-        jPanel9.setBounds(20, 130, 200, 120);
+        jPanel9.setBounds(250, 20, 210, 110);
 
         internalUsuario.getContentPane().add(jPanel5);
-        jPanel5.setBounds(10, 10, 640, 270);
+        jPanel5.setBounds(10, 150, 640, 150);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,7 +189,34 @@ public class Usuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         internalUsuario.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 290, 640, 120);
+        jScrollPane1.setBounds(10, 320, 640, 120);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("CPF:");
+        internalUsuario.getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 87, 29, 30);
+
+        try {
+            txt_Cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        internalUsuario.getContentPane().add(txt_Cpf);
+        txt_Cpf.setBounds(70, 90, 140, 30);
+
+        jToolBar1.setFloatable(false);
+
+        CriarAcesso1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/registro.png"))); // NOI18N
+        CriarAcesso1.setText("Criar Acesso");
+        CriarAcesso1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CriarAcesso1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(CriarAcesso1);
+
+        internalUsuario.getContentPane().add(jToolBar1);
+        jToolBar1.setBounds(0, 0, 680, 60);
 
         jPanel1.add(internalUsuario);
         internalUsuario.setBounds(10, 0, 690, 480);
@@ -198,37 +228,29 @@ public class Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CriarAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarAcessoActionPerformed
-        String loginFun,senhaFun, permissao = "";
-
-        loginFun = txt_loginFun.getText();
-        senhaFun = txt_senhaFun.getText();
-
-        if (Caixa.isSelected()) {
-            permissao += "1";
-        } else {
-            permissao += "0";
-        }
-
-        if (Adm.isSelected()) {
-            permissao += "1";
-        } else {
-            permissao += "0";
-        }
-
-        if (ba.gravaLogin( loginFun, senhaFun, permissao)) {
-
-            txt_loginFun.setText("");
-            txt_senhaFun.setText("");
-
-        }
+   
     }//GEN-LAST:event_CriarAcessoActionPerformed
 
     private void CriarAcesso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarAcesso1ActionPerformed
-        String loginFun,senhaFun, permissao = "";
+        String loginFun,senhaFun,cpf, permissao = "";
 
+        cpf = txt_Cpf.getText();
         loginFun = txt_loginFun1.getText();
         senhaFun = txt_senhaFun1.getText();
 
+        if(loginFun.equals("") || senhaFun.equals("")){
+        
+            JOptionPane.showMessageDialog(null, "Preenche todos os campos corretamente");
+         
+        }
+        
+        else if(CPF.isValido(cpf) == false || "111.111.111-11".equals(cpf) || "000.000.000-00".equals(cpf) || "   .   .   -  ".equals(cpf)  ){
+        
+        JOptionPane.showMessageDialog(null, "Cpf Invalido");
+        
+        }
+        else{
+        
         if (Caixa1.isSelected()) {
             permissao += "1";
         } else {
@@ -240,15 +262,49 @@ public class Usuario extends javax.swing.JFrame {
         } else {
             permissao += "0";
         }
-
-        if (ba.gravaLogin( loginFun, senhaFun, permissao)) {
+        
+       
+       
+       
+             
+        
+        if (ba.gravaLogin( loginFun, senhaFun,cpf , permissao)) {
 
             txt_loginFun1.setText("");
             txt_senhaFun1.setText("");
+            txt_Cpf.setText("");
 
-        }
+             }
+           }
+        
     }//GEN-LAST:event_CriarAcesso1ActionPerformed
 
+       private void jTextField1FocusLostCpf(java.awt.event.FocusEvent evt) {
+        String cpfFor = txt_Cpf.getText();
+        String cpf = cpfFor;
+
+            if (CPF.isValido(cpfFor) == false || "111.111.111-11".equals(cpfFor) || "000.000.000-00".equals(cpfFor) || "   .   .   -  ".equals(cpfFor)  ){
+
+
+          
+
+          JOptionPane.showMessageDialog(null,"Atenção Cpf inválido");
+          
+          txt_Cpf.requestFocus();
+          
+          
+         }
+        else{
+         
+         ValidaCnpj.formatar(cpf);
+         txt_Cpf.setText(cpf);
+         System.out.println(cpf);
+         
+        }
+
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -292,6 +348,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JButton CriarAcesso;
     private javax.swing.JButton CriarAcesso1;
     public javax.swing.JInternalFrame internalUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -304,6 +361,8 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JFormattedTextField txt_Cpf;
     private javax.swing.JTextField txt_loginFun;
     private javax.swing.JTextField txt_loginFun1;
     private javax.swing.JPasswordField txt_senhaFun;

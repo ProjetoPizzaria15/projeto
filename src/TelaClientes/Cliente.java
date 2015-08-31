@@ -31,6 +31,22 @@ public class Cliente extends javax.swing.JPanel {
     public Cliente() {
         initComponents();
         
+ 
+        // BLOQUEA A EDIÇÃO DA JTABLE
+        
+      gridCliente.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Telefone", "Nome", "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Complemento" }) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});   
+        
+        //-------------------
+        
+        
         
         txtCep.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
@@ -52,7 +68,7 @@ public class Cliente extends javax.swing.JPanel {
         txtPesquisa.setDocument(new LimitarCampos(8));
 
         
-        
+    
     }
 
     
@@ -392,37 +408,30 @@ public class Cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_NovoActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-        /*
-        String txtTelefone, txtNome, txtCidade, txtBairro, txtEndereco, txtComplemento,txtUf,txtNumero;
-
         
+       String telefone, nome, cep, cidade, bairro, uf, numero,endereco , complemento;   
         
-        nomeFantasia = nome_fantasiaFor.getText();
-        cnpjFor = txt_cnpjFor2.getText();
-        endeFor = txt_endeFor.getText();
-        cidadeFor = txt_cidadeFor.getText();
-        nomeContato = nome_contatoFor.getText();
-        emailFor = txt_emailFor.getText();
-        bairroFor = txt_bairroFor.getText();
-        telFor = txt_telFor.getText();
-        cepFor = txt_cepFor.getText();
-        estadualFor = txt_estadualFor.getText();
-        celFor = txt_celFor.getText();
-        numFor = txt_numFor.getText();
-        tel2For = txt_tel2For.getText();
-        siteFor = txt_siteFor.getText();
+        telefone = txtTelefone.getText();
+        nome = txtNome.getText();
+        cep = txtCep.getText();
+        cidade = txtCidade.getText();
+        bairro = txtBairro.getText();
+        uf = txtUf.getText();
+        numero = txtNumero.getText();
+        endereco = txtEndereco.getText();
+        complemento = txtComplemento.getText();
 
-        if("  .   .   /    -  ".equals(cnpjFor)){
+        if("".equals(telefone)){
 
             JOptionPane.showMessageDialog(null,"Preecha  o campo CNPJ");
-            txt_cnpjFor2.requestFocus();
+            txtTelefone.requestFocus();
         }
         else{
 
-            ba.atualizaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor);
+            ba.atualizaCliente(telefone, nome, cep, cidade, bairro, uf,numero, endereco, complemento);
 
         }
-    */
+    
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
@@ -570,8 +579,8 @@ public class Cliente extends javax.swing.JPanel {
     }//GEN-LAST:event_GravarActionPerformed
 
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
-    
-        DefaultTableModel modelo = (DefaultTableModel)gridCliente.getModel();
+     DefaultTableModel modelo = (DefaultTableModel)gridCliente.getModel();
+       
     gridCliente.removeAll();
     
     while(modelo.getRowCount() > 0){
@@ -602,14 +611,14 @@ public class Cliente extends javax.swing.JPanel {
               
 
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
-
+ 
     // AO SELECIONAR UMA LINHA NA JTABLE PREENCHE OS CAMPOS NA OUTRA ABA CLIENTE
     
     private void gridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridClienteMouseClicked
         
         // PEGA OS CAMPOS QUE ESTÃO NA JTABLE 
         
-        if (evt.getClickCount() == 1) {  
+        if (evt.getClickCount() == 2) {  
             Object obj = (gridCliente.getValueAt(gridCliente.getSelectedRow(), 0));  //coluna 0  
             String telefone = obj.toString();
             
@@ -656,6 +665,8 @@ public class Cliente extends javax.swing.JPanel {
              
               
         }  
+        
+        
     }//GEN-LAST:event_gridClienteMouseClicked
 
 

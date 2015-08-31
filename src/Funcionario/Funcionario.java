@@ -7,11 +7,14 @@ package Funcionario;
 
 import Banco.Banco;
 import Banco.BancoCep;
+import BancoObjeto.ObjetoCliente;
+import BancoObjeto.ObjetoFuncionario;
 import Funcoes.LimitarCampos;
 import Funcoes.ValidaCnpj;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.alfredlibrary.validadores.CPF;
 
 /**
@@ -20,10 +23,29 @@ import org.alfredlibrary.validadores.CPF;
  */
 public class Funcionario extends javax.swing.JPanel {
 
+    
     Banco ba = new Banco();
     BancoCep bacep = new BancoCep();
     public Funcionario() {
         initComponents();
+        
+        
+        
+        // BLOQUEA A EDIÇÃO DA JTABLE
+        gridFuncionario.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Nome", "Sexo", "CPF", "RG", "Data Nascimento", "UF", "Cidade", "Endereco", "Bairro", "Cep", "Numero", "Complemento", "Telefone", "Ceular", "Setor" }) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }}); 
+          
+        
+        
+        
+        
         
          txt_cpfFun.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
@@ -47,8 +69,8 @@ public class Funcionario extends javax.swing.JPanel {
         txt_cidadeFun.setDocument(new LimitarCampos(32));
         txt_bairroFun.setDocument(new LimitarCampos(40));
         txt_endeFun.setDocument(new LimitarCampos(60));
-        txt_compleFun.setDocument(new LimitarCampos(50));
-        txt_numFun.setDocument(new LimitarCampos(6));
+        txtCompleFun.setDocument(new LimitarCampos(50));
+        txtNumFun.setDocument(new LimitarCampos(6));
 
         
         
@@ -67,13 +89,14 @@ public class Funcionario extends javax.swing.JPanel {
     private void initComponents() {
 
         internalFuncionario = new javax.swing.JInternalFrame();
+        TabFuncionario = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton15 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton16 = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
-        jButton18 = new javax.swing.JButton();
+        btnAlterarFuncionario = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         jButton19 = new javax.swing.JButton();
         jSeparator16 = new javax.swing.JToolBar.Separator();
@@ -88,11 +111,11 @@ public class Funcionario extends javax.swing.JPanel {
         jLabel28 = new javax.swing.JLabel();
         txt_endeFun = new javax.swing.JFormattedTextField();
         jLabel25 = new javax.swing.JLabel();
-        txt_compleFun = new javax.swing.JFormattedTextField();
         jLabel23 = new javax.swing.JLabel();
         txt_cepFun = new javax.swing.JFormattedTextField();
-        txt_numFun = new javax.swing.JFormattedTextField();
         txt_cidadeFun = new javax.swing.JTextField();
+        txtNumFun = new javax.swing.JTextField();
+        txtCompleFun = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         txt_celFun = new javax.swing.JFormattedTextField();
         jLabel36 = new javax.swing.JLabel();
@@ -111,11 +134,18 @@ public class Funcionario extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txt_nasciFun = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        gridFuncionario = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        btnPesquisa = new javax.swing.JButton();
+        txtPesquisa = new javax.swing.JFormattedTextField();
 
         setLayout(null);
 
         internalFuncionario.setClosable(true);
         internalFuncionario.setVisible(true);
+        internalFuncionario.getContentPane().setLayout(null);
 
         jPanel2.setLayout(null);
 
@@ -150,18 +180,18 @@ public class Funcionario extends javax.swing.JPanel {
         jToolBar2.add(jButton16);
         jToolBar2.add(jSeparator7);
 
-        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
-        jButton18.setText("Alterar");
-        jButton18.setFocusable(false);
-        jButton18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton18.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        jButton18.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
+        btnAlterarFuncionario.setText("Alterar");
+        btnAlterarFuncionario.setFocusable(false);
+        btnAlterarFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAlterarFuncionario.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnAlterarFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAlterarFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                btnAlterarFuncionarioActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton18);
+        jToolBar2.add(btnAlterarFuncionario);
         jToolBar2.add(jSeparator10);
 
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
@@ -192,7 +222,7 @@ public class Funcionario extends javax.swing.JPanel {
         jToolBar2.add(jButton20);
 
         jPanel2.add(jToolBar2);
-        jToolBar2.setBounds(10, 0, 790, 80);
+        jToolBar2.setBounds(0, 0, 790, 80);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
         jPanel5.setLayout(null);
@@ -212,28 +242,26 @@ public class Funcionario extends javax.swing.JPanel {
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText("Cidade: ");
         jPanel5.add(jLabel33);
-        jLabel33.setBounds(250, 30, 50, 30);
+        jLabel33.setBounds(10, 90, 50, 30);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setText("Bairro: ");
         jPanel5.add(jLabel24);
-        jLabel24.setBounds(10, 90, 50, 30);
+        jLabel24.setBounds(310, 90, 50, 30);
         jPanel5.add(txt_bairroFun);
-        txt_bairroFun.setBounds(50, 90, 250, 30);
+        txt_bairroFun.setBounds(350, 90, 250, 30);
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel28.setText("Endereço:");
         jPanel5.add(jLabel28);
         jLabel28.setBounds(10, 140, 70, 30);
         jPanel5.add(txt_endeFun);
-        txt_endeFun.setBounds(80, 140, 360, 30);
+        txt_endeFun.setBounds(100, 140, 340, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel25.setText("N°:");
         jPanel5.add(jLabel25);
         jLabel25.setBounds(450, 140, 40, 30);
-        jPanel5.add(txt_compleFun);
-        txt_compleFun.setBounds(120, 180, 320, 30);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText("Complemento: ");
@@ -247,19 +275,15 @@ public class Funcionario extends javax.swing.JPanel {
         }
         jPanel5.add(txt_cepFun);
         txt_cepFun.setBounds(40, 30, 100, 30);
-
-        try {
-            txt_numFun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel5.add(txt_numFun);
-        txt_numFun.setBounds(470, 140, 70, 30);
         jPanel5.add(txt_cidadeFun);
-        txt_cidadeFun.setBounds(290, 30, 240, 30);
+        txt_cidadeFun.setBounds(60, 90, 230, 30);
+        jPanel5.add(txtNumFun);
+        txtNumFun.setBounds(480, 140, 80, 30);
+        jPanel5.add(txtCompleFun);
+        txtCompleFun.setBounds(100, 180, 300, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(10, 280, 550, 220);
+        jPanel5.setBounds(10, 270, 1030, 220);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
         jPanel7.setLayout(null);
@@ -270,12 +294,12 @@ public class Funcionario extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel7.add(txt_celFun);
-        txt_celFun.setBounds(70, 60, 140, 30);
+        txt_celFun.setBounds(300, 20, 140, 30);
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel36.setText("Celular: ");
         jPanel7.add(jLabel36);
-        jLabel36.setBounds(10, 60, 80, 30);
+        jLabel36.setBounds(250, 20, 80, 30);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel29.setText("Telefone: ");
@@ -291,7 +315,7 @@ public class Funcionario extends javax.swing.JPanel {
         txt_telFun.setBounds(70, 20, 140, 30);
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(10, 500, 550, 110);
+        jPanel7.setBounds(10, 500, 1030, 80);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoal"));
         jPanel6.setLayout(null);
@@ -309,12 +333,12 @@ public class Funcionario extends javax.swing.JPanel {
         jPanel6.add(txt_cpfFun);
         txt_cpfFun.setBounds(60, 20, 140, 30);
         jPanel6.add(txt_nomeFun);
-        txt_nomeFun.setBounds(60, 100, 370, 30);
+        txt_nomeFun.setBounds(60, 70, 370, 30);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Nome:");
         jPanel6.add(jLabel16);
-        jLabel16.setBounds(20, 100, 50, 30);
+        jLabel16.setBounds(20, 70, 50, 30);
 
         try {
             txt_rgFun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
@@ -322,17 +346,17 @@ public class Funcionario extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel6.add(txt_rgFun);
-        txt_rgFun.setBounds(60, 60, 140, 30);
+        txt_rgFun.setBounds(280, 20, 140, 30);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("RG:");
         jPanel6.add(jLabel9);
-        jLabel9.setBounds(20, 60, 40, 30);
+        jLabel9.setBounds(240, 20, 40, 30);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Setor:");
         jPanel6.add(jLabel11);
-        jLabel11.setBounds(240, 60, 50, 30);
+        jLabel11.setBounds(240, 120, 50, 30);
 
         txt_setorFun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,21 +364,21 @@ public class Funcionario extends javax.swing.JPanel {
             }
         });
         jPanel6.add(txt_setorFun);
-        txt_setorFun.setBounds(280, 60, 140, 30);
+        txt_setorFun.setBounds(280, 120, 140, 30);
 
-        cmb_sexoFun.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Feminino", "Masculino" }));
+        cmb_sexoFun.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Feminino", "Masculino" }));
         jPanel6.add(cmb_sexoFun);
-        cmb_sexoFun.setBounds(280, 20, 100, 30);
+        cmb_sexoFun.setBounds(500, 70, 100, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Sexo:");
         jPanel6.add(jLabel8);
-        jLabel8.setBounds(240, 20, 50, 30);
+        jLabel8.setBounds(450, 70, 50, 30);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Data de nascimento: ");
         jPanel6.add(jLabel14);
-        jLabel14.setBounds(10, 140, 130, 30);
+        jLabel14.setBounds(20, 120, 130, 30);
 
         try {
             txt_nasciFun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -362,30 +386,63 @@ public class Funcionario extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel6.add(txt_nasciFun);
-        txt_nasciFun.setBounds(130, 140, 80, 30);
+        txt_nasciFun.setBounds(140, 120, 80, 30);
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(10, 90, 550, 180);
+        jPanel6.setBounds(10, 90, 1030, 180);
 
-        javax.swing.GroupLayout internalFuncionarioLayout = new javax.swing.GroupLayout(internalFuncionario.getContentPane());
-        internalFuncionario.getContentPane().setLayout(internalFuncionarioLayout);
-        internalFuncionarioLayout.setHorizontalGroup(
-            internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
-            .addGroup(internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(internalFuncionarioLayout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        internalFuncionarioLayout.setVerticalGroup(
-            internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
-            .addGroup(internalFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
-        );
+        TabFuncionario.addTab("Registro", jPanel2);
+
+        jPanel1.setLayout(null);
+
+        gridFuncionario.setAutoCreateRowSorter(true);
+        gridFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Sexo", "CPF", "RG", "Data Nascimento", "UF", "Cidade", "Endereco", "Bairro", "Cep", "Numero", "Complemento", "Telefone", "Celular", "Setor"
+            }
+        ));
+        gridFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridFuncionarioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(gridFuncionario);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 140, 1040, 400);
+
+        jLabel1.setText("CPF:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(140, 50, 50, 40);
+
+        btnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
+        btnPesquisa.setText("Pesquisar");
+        btnPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPesquisa);
+        btnPesquisa.setBounds(370, 40, 180, 50);
+
+        try {
+            txtPesquisa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel1.add(txtPesquisa);
+        txtPesquisa.setBounds(180, 50, 130, 30);
+
+        TabFuncionario.addTab("Pesquisa", jPanel1);
+
+        internalFuncionario.getContentPane().add(TabFuncionario);
+        TabFuncionario.setBounds(0, 0, 1060, 630);
 
         add(internalFuncionario);
-        internalFuncionario.setBounds(0, 0, 860, 690);
+        internalFuncionario.setBounds(0, 0, 1090, 710);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -398,7 +455,7 @@ public class Funcionario extends javax.swing.JPanel {
         nomeFun = txt_nomeFun.getText();
         nasciFun = txt_nasciFun.getText();
         endeFun = txt_endeFun.getText();
-        compleFun = txt_compleFun.getText();
+        compleFun = txtCompleFun.getText();
         bairroFun = txt_bairroFun.getText();
         ufFun = txt_estadoFun.getText();
         cidadeFun = txt_cidadeFun.getText();
@@ -406,13 +463,18 @@ public class Funcionario extends javax.swing.JPanel {
         rgFun = txt_rgFun.getText();
         cpfFun = txt_cpfFun.getText();
         cepFun = txt_cepFun.getText();
-        numFun = txt_numFun.getText();
+        numFun = txtNumFun.getText();
         telFun = txt_telFun.getText();
         celFun = txt_celFun.getText();
 
         sexoFun = cmb_sexoFun.getSelectedItem().toString();
         System.out.println(sexoFun);
 
+        if(sexoFun.equals("-")){
+            JOptionPane.showMessageDialog(null, "Escolha o sexo");
+        }
+        else{
+        
          if (CPF.isValido(cpfFun) == false || "111.111.111-11".equals(cpfFun) || "000.000.000-00".equals(cpfFun) || "   .   .   -  ".equals(cpfFun)  ){
          
              JOptionPane.showMessageDialog(null, "Cpf Invalido");
@@ -429,10 +491,10 @@ public class Funcionario extends javax.swing.JPanel {
             txt_rgFun.setText("");
             txt_nasciFun.setText("");
             txt_endeFun.setText("");
-            txt_compleFun.setText("");
+            txtCompleFun.setText("");
             txt_bairroFun.setText("");
             txt_cepFun.setText("");
-            txt_numFun.setText("");
+            txtNumFun.setText("");
             txt_telFun.setText("");
             txt_celFun.setText("");
             txt_setorFun.setText("");
@@ -440,12 +502,46 @@ public class Funcionario extends javax.swing.JPanel {
             txt_estadoFun.setText("");
          
         }
+      }
         
     }//GEN-LAST:event_jButton16ActionPerformed
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void btnAlterarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFuncionarioActionPerformed
 
-    }//GEN-LAST:event_jButton18ActionPerformed
+         String aux,nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, loginFun, senhaFun, sexoFun,
+        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, permissao = "";
+
+      
+       
+        nomeFun = txt_nomeFun.getText();
+        nasciFun = txt_nasciFun.getText();
+        endeFun = txt_endeFun.getText();
+        compleFun = txtCompleFun.getText();
+        bairroFun = txt_bairroFun.getText();
+        ufFun = txt_estadoFun.getText();
+        cidadeFun = txt_cidadeFun.getText();
+        setorFun = txt_setorFun.getText();
+        rgFun = txt_rgFun.getText();
+        cpfFun = txt_cpfFun.getText();
+        cepFun = txt_cepFun.getText();
+        numFun = txtNumFun.getText();
+        telFun = txt_telFun.getText();
+        celFun = txt_celFun.getText();
+        
+        sexoFun = cmb_sexoFun.getSelectedItem().toString();
+
+        if("   .   .   -  ".equals(cpfFun)){
+
+            JOptionPane.showMessageDialog(null,"Preecha  o campo cpf");
+            txt_cpfFun.requestFocus();
+        }
+        else{
+
+            ba.atualizaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun, ufFun,cidadeFun, setorFun, rgFun,cpfFun, cepFun, numFun, telFun, celFun,sexoFun);
+
+        }
+        
+    }//GEN-LAST:event_btnAlterarFuncionarioActionPerformed
 
     private void txt_setorFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_setorFunActionPerformed
         // TODO add your handling code here:
@@ -476,10 +572,10 @@ public class Funcionario extends javax.swing.JPanel {
             txt_rgFun.setText("");
             txt_nasciFun.setText("");
             txt_endeFun.setText("");
-            txt_compleFun.setText("");
+            txtCompleFun.setText("");
             txt_bairroFun.setText("");
             txt_cepFun.setText("");
-            txt_numFun.setText("");
+            txtNumFun.setText("");
             txt_telFun.setText("");
             txt_celFun.setText("");
             txt_setorFun.setText("");
@@ -502,7 +598,7 @@ public class Funcionario extends javax.swing.JPanel {
 
         
         String cpf = txt_cpfFun.getText();
-        
+        String sexoFun = null;
        
 
         
@@ -527,13 +623,20 @@ public class Funcionario extends javax.swing.JPanel {
                     txt_cidadeFun.setText(rs.getString("cidadeFun"));
                     txt_bairroFun.setText(rs.getString("bairroFun"));
                     txt_endeFun.setText(rs.getString("endeFun"));
-                    txt_compleFun.setText(rs.getString("compleFun"));
-                    txt_numFun.setText(rs.getString("numFun"));
+                    txtCompleFun.setText(rs.getString("compleFun"));
+                    txtNumFun.setText(rs.getString("numFun"));
                     txt_cpfFun.setText(txt_cpfFun.getText());
                     txt_telFun.setText(rs.getString("telFun"));
                      txt_celFun.setText(rs.getString("celFun"));    
-
+                    sexoFun = rs.getString("sexoFun");
+                    
+                    System.out.println(sexoFun);
+                     
+                    
+                    
                 }
+                
+             
                 else{
 
                     txt_rgFun.setText("");
@@ -545,8 +648,8 @@ public class Funcionario extends javax.swing.JPanel {
                     txt_cidadeFun.setText("");
                     txt_bairroFun.setText("");
                     txt_endeFun.setText("");
-                    txt_compleFun.setText("");
-                    txt_numFun.setText("");
+                    txtCompleFun.setText("");
+                    txtNumFun.setText("");
                     txt_cpfFun.setText("");
                     txt_telFun.setText("");
                      txt_celFun.setText("");   
@@ -565,16 +668,160 @@ public class Funcionario extends javax.swing.JPanel {
             txt_rgFun.setText("");
             txt_nasciFun.setText("");
             txt_endeFun.setText("");
-            txt_compleFun.setText("");
+            txtCompleFun.setText("");
             txt_bairroFun.setText("");
             txt_cepFun.setText("");
-            txt_numFun.setText("");
+            txtNumFun.setText("");
             txt_telFun.setText("");
             txt_celFun.setText("");
             txt_setorFun.setText("");
             txt_cidadeFun.setText("");
             txt_estadoFun.setText("");
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
+         DefaultTableModel modelo = (DefaultTableModel)gridFuncionario.getModel();
+       
+    gridFuncionario.removeAll();
+    
+    while(modelo.getRowCount() > 0){
+        modelo.removeRow(0);
+    }
+    String cpf = txtPesquisa.getText();
+    
+    ObjetoFuncionario funcionariopesquisado = new ObjetoFuncionario();
+    
+     if(txtPesquisa.equals("   .   .   -  ") || CPF.isValido(cpf) == false){
+         JOptionPane.showMessageDialog(null,"Entre com um cpf valido");
+         
+     }
+     
+     else{
+     if(txtPesquisa.getText().isEmpty() == false){
+        
+
+      
+            funcionariopesquisado = ba.buscaFuncionarioTabela(String.valueOf(cpf));
+            if(funcionariopesquisado != null){
+                modelo.addRow(new Object[]{
+                  funcionariopesquisado.getNomeFun(),
+                  funcionariopesquisado.getSexoFun(),
+                  funcionariopesquisado.getCpfFun(),
+                  funcionariopesquisado.getRgFun(),
+                  funcionariopesquisado.getNasciFun(),
+                  funcionariopesquisado.getUfFun(),
+                  funcionariopesquisado.getCidadeFun(),
+                  funcionariopesquisado.getEndeFun(),
+                  funcionariopesquisado.getBairroFun(),
+                  funcionariopesquisado.getCepFun(),
+                  funcionariopesquisado.getNumFun(),
+                  funcionariopesquisado.getCompleFun(),
+                  funcionariopesquisado.getTelFun(),
+                  funcionariopesquisado.getCelFun(),
+                  funcionariopesquisado.getSetorFun()
+                
+                
+                });
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nenhum Cliente encontrado !!!");
+            }
+        
+    }
+  }
+    gridFuncionario.repaint();
+    
+    txtPesquisa.setText(null);
+              
+    }//GEN-LAST:event_btnPesquisaActionPerformed
+
+        // PEGA OS CAMPOS QUE ESTÃO NA JTABLE E JOGA NOS TEXTFIELDS
+    
+    private void gridFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridFuncionarioMouseClicked
+        
+        
+        if (evt.getClickCount() == 2) {  
+            Object obj = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 0));  //coluna 0  
+            String nome = obj.toString();
+           
+            Object obj1 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 1));  //coluna 0  
+            String sexo = obj1.toString();
+            
+            Object obj2 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 2));  //coluna 0  
+            String cpf = obj2.toString();  
+            
+            Object obj3 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 3));  //coluna 0  
+            String rg = obj3.toString();  
+            
+            Object obj4 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 4));  //coluna 0  
+            String datanasci = obj4.toString();  
+            
+            Object obj5 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 5));  //coluna 0  
+            String uf = obj5.toString(); 
+            
+            Object obj6 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 6));  //coluna 0  
+            String cidade = obj6.toString();  
+            
+            Object obj7 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 7));  //coluna 0  
+            String endereco = obj7.toString();  
+            
+            Object obj8 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 8));  //coluna 0  
+            String bairro = obj8.toString();
+           
+            Object obj9 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 9));  //coluna 0  
+            String cep = obj9.toString();  
+            
+            Object obj10 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 10));  //coluna 0  
+            String numero = obj10.toString(); 
+            
+           Object obj11 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 11));  //coluna 0  
+            String complemento = obj11.toString();  
+           
+            Object obj12 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 12));  //coluna 0  
+            String telefone = obj12.toString();  
+            
+            Object obj13 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 13));  //coluna 0  
+            String celular = obj13.toString();  
+            
+             Object obj14 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 14));  //coluna 0  
+            String setor = obj14.toString();  
+         
+            // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
+
+             txt_cpfFun.setText(cpf);   
+             txt_rgFun.setText(rg); 
+             txt_nomeFun.setText(nome); 
+             txt_nasciFun.setText(datanasci); 
+             txt_estadoFun.setText(uf); 
+             txt_cidadeFun.setText(cidade); 
+             txt_bairroFun.setText(bairro);     
+             txt_endeFun.setText(endereco); 
+             txtNumFun.setText(numero);
+             txt_cepFun.setText(cep);       
+             txtCompleFun.setText(complemento); 
+             txt_setorFun.setText(setor); 
+         
+             txt_telFun.setText(telefone);    
+             txt_celFun.setText(celular);    
+              
+            
+            switch (sexo) {
+                case "Feminino":
+                    cmb_sexoFun.setSelectedItem(1);
+                    break;
+                case "Masculino":
+                    cmb_sexoFun.setSelectedItem(2);
+                    break;
+            }
+             
+             
+             
+               // QUANDO SELECIONA A LINHA NA JTABLE MUDA A ABA
+              TabFuncionario.setSelectedIndex(0);   
+             
+        }
+        
+    }//GEN-LAST:event_gridFuncionarioMouseClicked
 
     
     
@@ -638,13 +885,17 @@ public class Funcionario extends javax.swing.JPanel {
         
     }  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane TabFuncionario;
+    private javax.swing.JButton btnAlterarFuncionario;
+    private javax.swing.JButton btnPesquisa;
     private javax.swing.JComboBox cmb_sexoFun;
+    private javax.swing.JTable gridFuncionario;
     public javax.swing.JInternalFrame internalFuncionario;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
@@ -660,26 +911,29 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JTextField txtCompleFun;
+    private javax.swing.JTextField txtNumFun;
+    private javax.swing.JFormattedTextField txtPesquisa;
     private javax.swing.JFormattedTextField txt_bairroFun;
     private javax.swing.JFormattedTextField txt_celFun;
     private javax.swing.JFormattedTextField txt_cepFun;
     private javax.swing.JTextField txt_cidadeFun;
-    private javax.swing.JFormattedTextField txt_compleFun;
     private javax.swing.JFormattedTextField txt_cpfFun;
     private javax.swing.JFormattedTextField txt_endeFun;
     private javax.swing.JTextField txt_estadoFun;
     private javax.swing.JFormattedTextField txt_nasciFun;
     private javax.swing.JFormattedTextField txt_nomeFun;
-    private javax.swing.JFormattedTextField txt_numFun;
     private javax.swing.JFormattedTextField txt_rgFun;
     private javax.swing.JTextField txt_setorFun;
     private javax.swing.JFormattedTextField txt_telFun;
