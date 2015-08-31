@@ -6,6 +6,8 @@
 package Fornecedor;
 import Banco.Banco;
 import Banco.BancoCep;
+import BancoObjeto.ObjetoFornecedor;
+import BancoObjeto.ObjetoFuncionario;
 import Funcoes.LimitarCampos;
 import Funcoes.ValidaCnpj;
 import static Funcoes.ValoresDecimaisPreco.CNPJ;
@@ -16,6 +18,7 @@ import org.alfredlibrary.validadores.Email;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import static org.alfredlibrary.validadores.CNPJ.isValido;
 
 /**
@@ -31,10 +34,28 @@ public class Fornecedor extends javax.swing.JPanel {
     public Fornecedor() {
         initComponents();
         
+        // CRIA O TABLE MODEL DO gridFornecedor 
+        
+      gridFornecedor.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Nome", "CNPJ/CPF","Inc.Est","Tipo", "Nome Cont", "Telefone", "Telefone2","Celular", "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Site", "Email" }) {  
+  
+          // BLOQUEIA A EDIÇÃO DA JTABLE
+          
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});   
+        
         
           labelCpf.setVisible(false);
           txt_cpfFor.setVisible(false);
            AlertaCnpj.setVisible(false);
+           
+           
+           labelCpfPesquisa.setVisible(false);
+           txt_CpfPesquisa.setVisible(false);
   
         
         String cnpjFor =txt_cnpjFor2.getText();
@@ -45,7 +66,6 @@ public class Fornecedor extends javax.swing.JPanel {
         
         nome_fantasiaFor.setDocument(new LimitarCampos(50));
         txt_cepFor.setDocument(new LimitarCampos(8));
-        txt_estadoFor.setDocument(new LimitarCampos(16));
         txt_cidadeFor.setDocument(new LimitarCampos(30));
         txt_bairroFor.setDocument(new LimitarCampos(30));
         txt_endeFor.setDocument(new LimitarCampos(50));
@@ -54,6 +74,7 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_emailFor.setDocument(new LimitarCampos(40));
         txt_siteFor.setDocument(new LimitarCampos(50));
         txt_estadoFor.setDocument(new LimitarCampos(2));
+  
         
         
         
@@ -99,8 +120,9 @@ public class Fornecedor extends javax.swing.JPanel {
     private void initComponents() {
 
         grupoRadio = new javax.swing.ButtonGroup();
+        grupoRadioPesquisa = new javax.swing.ButtonGroup();
         internalFornecedor = new javax.swing.JInternalFrame();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabFornecedor = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         Novo = new javax.swing.JButton();
@@ -132,13 +154,13 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_telFor = new javax.swing.JFormattedTextField();
         jLabel29 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txt_siteFor = new javax.swing.JFormattedTextField();
         jLabel25 = new javax.swing.JLabel();
         txt_tel2For = new javax.swing.JFormattedTextField();
         txt_emailFor = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         txt_celFor = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
+        txt_siteFor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         labelCnpj = new javax.swing.JLabel();
         labelEstadual = new javax.swing.JLabel();
@@ -153,8 +175,16 @@ public class Fornecedor extends javax.swing.JPanel {
         labelCpf = new javax.swing.JLabel();
         txt_cpfFor = new javax.swing.JFormattedTextField();
         AlertaCnpj = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        labelCpfPesquisa = new javax.swing.JLabel();
+        txt_CpfPesquisa = new javax.swing.JFormattedTextField();
+        radioFisicaPesquisa = new javax.swing.JRadioButton();
+        radioJuridicaPesquisa = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        gridFornecedor = new javax.swing.JTable();
+        txt_CnpjPesquisa = new javax.swing.JFormattedTextField();
+        labelCnpjPesquisa = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -248,50 +278,50 @@ public class Fornecedor extends javax.swing.JPanel {
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
         jLabel20.setText("CEP:*");
         jPanel4.add(jLabel20);
-        jLabel20.setBounds(10, 20, 60, 30);
+        jLabel20.setBounds(20, 20, 60, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Estado: *");
         jPanel4.add(jLabel5);
-        jLabel5.setBounds(190, 20, 80, 30);
+        jLabel5.setBounds(250, 20, 80, 30);
         jPanel4.add(txt_estadoFor);
-        txt_estadoFor.setBounds(260, 20, 40, 30);
+        txt_estadoFor.setBounds(330, 20, 40, 30);
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(51, 51, 51));
         jLabel26.setText("Cidade:*");
         jPanel4.add(jLabel26);
-        jLabel26.setBounds(330, 20, 70, 30);
+        jLabel26.setBounds(410, 20, 70, 30);
         jPanel4.add(txt_cidadeFor);
-        txt_cidadeFor.setBounds(390, 20, 200, 30);
+        txt_cidadeFor.setBounds(490, 20, 200, 30);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setText("Bairro:*");
         jPanel4.add(jLabel16);
-        jLabel16.setBounds(10, 60, 80, 30);
+        jLabel16.setBounds(20, 60, 80, 30);
         jPanel4.add(txt_bairroFor);
-        txt_bairroFor.setBounds(80, 60, 260, 30);
+        txt_bairroFor.setBounds(110, 60, 260, 30);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
         jLabel22.setText("Endereço:*");
         jPanel4.add(jLabel22);
-        jLabel22.setBounds(10, 100, 80, 30);
+        jLabel22.setBounds(20, 100, 80, 30);
         jPanel4.add(txt_endeFor);
-        txt_endeFor.setBounds(80, 100, 410, 30);
+        txt_endeFor.setBounds(110, 100, 410, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Número:*");
         jPanel4.add(jLabel1);
-        jLabel1.setBounds(510, 100, 70, 30);
+        jLabel1.setBounds(550, 100, 70, 30);
         jPanel4.add(txt_numFor);
-        txt_numFor.setBounds(580, 100, 60, 30);
+        txt_numFor.setBounds(620, 100, 60, 30);
         jPanel4.add(txt_cepFor);
-        txt_cepFor.setBounds(60, 20, 110, 30);
+        txt_cepFor.setBounds(110, 20, 110, 30);
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(0, 260, 840, 140);
+        jPanel4.setBounds(10, 260, 1230, 180);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
         jPanel5.setLayout(null);
@@ -321,14 +351,6 @@ public class Fornecedor extends javax.swing.JPanel {
         jLabel3.setText("WebSite:");
         jPanel5.add(jLabel3);
         jLabel3.setBounds(50, 120, 70, 30);
-
-        try {
-            txt_siteFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**************************************************")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel5.add(txt_siteFor);
-        txt_siteFor.setBounds(110, 120, 420, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(51, 51, 51));
@@ -375,9 +397,11 @@ public class Fornecedor extends javax.swing.JPanel {
         jLabel7.setText("Email:");
         jPanel5.add(jLabel7);
         jLabel7.setBounds(470, 40, 50, 30);
+        jPanel5.add(txt_siteFor);
+        txt_siteFor.setBounds(110, 120, 420, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(0, 400, 840, 160);
+        jPanel5.setBounds(0, 450, 1230, 210);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel3.setLayout(null);
@@ -391,7 +415,7 @@ public class Fornecedor extends javax.swing.JPanel {
         labelEstadual.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelEstadual.setText("Inscri.Estadual:");
         jPanel3.add(labelEstadual);
-        labelEstadual.setBounds(250, 70, 120, 30);
+        labelEstadual.setBounds(290, 70, 120, 30);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(51, 51, 51));
@@ -404,20 +428,25 @@ public class Fornecedor extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txt_cnpjFor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cnpjFor2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(txt_cnpjFor2);
-        txt_cnpjFor2.setBounds(100, 70, 130, 30);
+        txt_cnpjFor2.setBounds(120, 70, 130, 30);
         jPanel3.add(nome_fantasiaFor);
         nome_fantasiaFor.setBounds(120, 110, 390, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Tipo de produtos:");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(530, 110, 120, 30);
+        jLabel4.setBounds(560, 110, 120, 30);
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Enlatados", "Laticionios", "Bebidas", "Congelados", "Massas", "Carnes", "Hortifruti", "Limpeza", "Variados" }));
         jPanel3.add(jComboBox1);
-        jComboBox1.setBounds(650, 110, 150, 30);
+        jComboBox1.setBounds(700, 110, 150, 30);
 
         grupoRadio.add(pessoaFisica);
         pessoaFisica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -447,7 +476,7 @@ public class Fornecedor extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel3.add(txt_estadualFor);
-        txt_estadualFor.setBounds(350, 70, 140, 30);
+        txt_estadualFor.setBounds(400, 70, 140, 30);
 
         labelCpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelCpf.setText("CPF: ");
@@ -459,8 +488,13 @@ public class Fornecedor extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txt_cpfFor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cpfForActionPerformed(evt);
+            }
+        });
         jPanel3.add(txt_cpfFor);
-        txt_cpfFor.setBounds(100, 70, 130, 30);
+        txt_cpfFor.setBounds(120, 70, 130, 30);
 
         AlertaCnpj.setBackground(new java.awt.Color(255, 51, 51));
         AlertaCnpj.setOpaque(true);
@@ -468,21 +502,108 @@ public class Fornecedor extends javax.swing.JPanel {
         AlertaCnpj.setBounds(10, 70, 220, 30);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(0, 90, 840, 160);
+        jPanel3.setBounds(0, 90, 1230, 160);
 
-        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel6.setText("Atenção campos com * são obrigatórios");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(10, 560, 260, 14);
+        TabFornecedor.addTab("Registrar Fornecedor", jPanel2);
 
-        jTabbedPane1.addTab("Registrar Fornecedor", jPanel2);
-        jTabbedPane1.addTab("Pesquisar Fornecedor", jPanel1);
+        jPanel1.setLayout(null);
 
-        internalFornecedor.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 910, 740);
+        labelCpfPesquisa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelCpfPesquisa.setText("CPF:");
+        jPanel1.add(labelCpfPesquisa);
+        labelCpfPesquisa.setBounds(280, 70, 40, 40);
+
+        try {
+            txt_CpfPesquisa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txt_CpfPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_CpfPesquisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_CpfPesquisa);
+        txt_CpfPesquisa.setBounds(320, 70, 140, 40);
+
+        grupoRadioPesquisa.add(radioFisicaPesquisa);
+        radioFisicaPesquisa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        radioFisicaPesquisa.setText("Pessoa Fisica");
+        radioFisicaPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFisicaPesquisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(radioFisicaPesquisa);
+        radioFisicaPesquisa.setBounds(310, 20, 130, 25);
+
+        grupoRadioPesquisa.add(radioJuridicaPesquisa);
+        radioJuridicaPesquisa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        radioJuridicaPesquisa.setText("Pessoa Juridica");
+        radioJuridicaPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioJuridicaPesquisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(radioJuridicaPesquisa);
+        radioJuridicaPesquisa.setBounds(480, 20, 130, 25);
+
+        gridFornecedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        gridFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridFornecedorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(gridFornecedor);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 150, 1240, 500);
+
+        try {
+            txt_CnpjPesquisa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txt_CnpjPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_CnpjPesquisaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_CnpjPesquisa);
+        txt_CnpjPesquisa.setBounds(320, 70, 140, 40);
+
+        labelCnpjPesquisa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelCnpjPesquisa.setText("CNPJ:");
+        jPanel1.add(labelCnpjPesquisa);
+        labelCnpjPesquisa.setBounds(280, 70, 40, 40);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(490, 70, 140, 40);
+
+        TabFornecedor.addTab("Pesquisar Fornecedor", jPanel1);
+
+        internalFornecedor.getContentPane().add(TabFornecedor);
+        TabFornecedor.setBounds(0, 0, 1260, 730);
 
         add(internalFornecedor);
-        internalFornecedor.setBounds(30, 20, 880, 680);
+        internalFornecedor.setBounds(30, 20, 1280, 760);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
@@ -520,9 +641,9 @@ public class Fornecedor extends javax.swing.JPanel {
         
              AlertaCnpj.setVisible(false);
 
-        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor,cpfFor;
+        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor,cpfFor, ufFor;
 
-        
+        ufFor = txt_estadoFor.getText();
         cpfFor = txt_cpfFor.getText();
         nomeFantasia = nome_fantasiaFor.getText();
         cnpjFor = txt_cnpjFor2.getText();
@@ -549,7 +670,7 @@ public class Fornecedor extends javax.swing.JPanel {
         }
        
        else{
-            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa, cpfFor);
+            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa, cpfFor, ufFor);
 
             txt_cpfFor.setText("");
             nome_fantasiaFor.setText("");
@@ -594,9 +715,9 @@ public class Fornecedor extends javax.swing.JPanel {
         
           AlertaCnpj.setVisible(false);
 
-        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor;
+        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor;
 
-        
+        ufFor = txt_estadoFor.getText();
         cpfFor = txt_cpfFor.getText();
         cnpjFor = txt_cnpjFor2.getText();
         nomeFantasia = nome_fantasiaFor.getText();
@@ -624,7 +745,7 @@ public class Fornecedor extends javax.swing.JPanel {
         }
        
         else{
-            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa,cpfFor);
+            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa,cpfFor, ufFor);
 
             txt_cpfFor.setText("");
             nome_fantasiaFor.setText("");
@@ -641,6 +762,7 @@ public class Fornecedor extends javax.swing.JPanel {
             txt_numFor.setText("");
             txt_tel2For.setText("");
             txt_siteFor.setText("");
+            txt_estadoFor.setText("");
         }
         
     }
@@ -657,9 +779,11 @@ public class Fornecedor extends javax.swing.JPanel {
     }//GEN-LAST:event_GravarActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
+  String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor;
 
-        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor;
-
+        ufFor = txt_estadoFor.getText();
+        cpfFor = txt_cpfFor.getText();
+        cnpjFor = txt_cnpjFor2.getText();
         nomeFantasia = nome_fantasiaFor.getText();
         cnpjFor = txt_cnpjFor2.getText();
         endeFor = txt_endeFor.getText();
@@ -674,17 +798,41 @@ public class Fornecedor extends javax.swing.JPanel {
         numFor = txt_numFor.getText();
         tel2For = txt_tel2For.getText();
         siteFor = txt_siteFor.getText();
+        
+        
+        
+        if(pessoaFisica.isSelected()){
+        
+        
+        if(CPF.isValido(cpfFor) == false || "111.111.111-11".equals(cpfFor)  || "000.000.000-00".equals(cpfFor) || "   .   .   -  ".equals(cpfFor)){
 
-        if("  .   .   /    -  ".equals(cnpjFor)){
+            JOptionPane.showMessageDialog(null,"Preecha  o campo CNPJ corretamente");
+            txt_cpfFor.requestFocus();
+        }
+        else{
 
-            JOptionPane.showMessageDialog(null,"Preecha  o campo CNPJ");
+            ba.atualizaFornecedorCPF(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor);
+
+        }
+     }
+        
+        else if(pessoaJuridica.isSelected()){
+        
+        
+        if(isValido(cnpjFor) == false || "11.111.111/1111-11".equals(cnpjFor) || "  .   .   /    -  ".equals(cnpjFor) || "00.000.000/0000-00".equals(cnpjFor)){
+
+            JOptionPane.showMessageDialog(null,"Preecha  o campo CNPJ corretamente");
             txt_cnpjFor2.requestFocus();
         }
         else{
 
-            ba.atualizaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor);
+            ba.atualizaFornecedorCNPJ(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor);
 
         }
+               
+        
+        
+       }
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
@@ -808,6 +956,7 @@ public class Fornecedor extends javax.swing.JPanel {
                     txt_celFor.setText(rs.getString("celFor"));
                     txt_tel2For.setText(rs.getString("tel2For"));
                     txt_siteFor.setText(rs.getString("siteFor"));
+                    txt_estadoFor.setText(rs.getString("ufFor"));
 
                     txt_cpfFor.setText(txt_cpfFor.getText());
 
@@ -823,7 +972,7 @@ public class Fornecedor extends javax.swing.JPanel {
                     txt_emailFor.setText("");
                     txt_bairroFor.setText("");
                     txt_cepFor.setText("");
-
+                      txt_estadoFor.setText("");
                     txt_celFor.setText("");
                 }
             } catch (SQLException ex) {
@@ -1045,6 +1194,292 @@ public class Fornecedor extends javax.swing.JPanel {
 
     }//GEN-LAST:event_pessoaJuridicaActionPerformed
 
+    private void txt_CpfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_CpfPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_CpfPesquisaActionPerformed
+
+    private void txt_CnpjPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_CnpjPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_CnpjPesquisaActionPerformed
+
+    private void radioFisicaPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFisicaPesquisaActionPerformed
+         if(radioFisicaPesquisa.isSelected()){
+      
+            txt_CpfPesquisa.setText("");
+            
+            
+          
+          labelCpfPesquisa.setVisible(true);
+          txt_CpfPesquisa.setVisible(true);
+          
+          
+          labelCnpjPesquisa.setVisible(false);
+          txt_CnpjPesquisa.setVisible(false);
+      }
+        
+    }//GEN-LAST:event_radioFisicaPesquisaActionPerformed
+
+    private void radioJuridicaPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioJuridicaPesquisaActionPerformed
+        if(radioJuridicaPesquisa.isSelected()){
+      
+             txt_CnpjPesquisa.setText("");
+             
+             labelCpfPesquisa.setVisible(false);
+             txt_CpfPesquisa.setVisible(false);
+      
+
+          labelCnpjPesquisa.setVisible(true);
+          txt_CnpjPesquisa.setVisible(true);
+      }
+        
+    }//GEN-LAST:event_radioJuridicaPesquisaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            DefaultTableModel modelo = (DefaultTableModel)gridFornecedor.getModel();
+       
+    gridFornecedor.removeAll();
+    
+    while(modelo.getRowCount() > 0){
+        modelo.removeRow(0);
+    }
+    String cpf = txt_CpfPesquisa.getText();
+    String cnpj = txt_CnpjPesquisa.getText();
+    
+    ObjetoFornecedor fornecedorpesquisado = new ObjetoFornecedor();
+    
+      if(radioFisicaPesquisa.isSelected()){
+               
+    
+     if(txt_CpfPesquisa.equals("   .   .   -  ") || CPF.isValido(cpf) == false){
+         JOptionPane.showMessageDialog(null,"CPF invalido");
+         
+     }
+     
+     else{
+     if(txt_CpfPesquisa.getText().isEmpty() == false){
+        
+
+      
+            fornecedorpesquisado = ba.buscaFornecedorTabelaCPF(String.valueOf(cpf));
+            if(fornecedorpesquisado != null){
+                modelo.addRow(new Object[]{
+                    
+                  fornecedorpesquisado.getNomeFantasia(),
+                  fornecedorpesquisado.getCpfFor(),
+                  fornecedorpesquisado.getEstadualFor(),
+                  fornecedorpesquisado.getTipoPessoa(),
+                  fornecedorpesquisado.getNomeContato(),
+                  fornecedorpesquisado.getTelFor(),
+                  fornecedorpesquisado.getTel2For(),
+                  fornecedorpesquisado.getCelFor(),
+                  fornecedorpesquisado.getUfFor(),
+                  fornecedorpesquisado.getCidadeFor(),
+                  fornecedorpesquisado.getBairroFor(),
+                  fornecedorpesquisado.getEndeFor(),
+                  fornecedorpesquisado.getNumFor(),
+                  fornecedorpesquisado.getCepFor(),
+                  fornecedorpesquisado.getSiteFor(),
+                  fornecedorpesquisado.getEmailFor(),
+                });
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nenhum Cliente encontrado !!!");
+            }
+        
+    }
+  } 
+ }
+      
+    else if(radioJuridicaPesquisa.isSelected()){
+               
+    
+     if(txt_CnpjPesquisa.equals("  .   .   /   -  ") || isValido(cnpj) == false){
+         JOptionPane.showMessageDialog(null,"CNPJ invalido");
+         
+     }
+     
+     else{
+     if(txt_CnpjPesquisa.getText().isEmpty() == false){
+        
+
+      
+            fornecedorpesquisado = ba.buscaFornecedorTabelaCNPJ(String.valueOf(cnpj));
+            if(fornecedorpesquisado != null){
+                modelo.addRow(new Object[]{
+                 
+                  fornecedorpesquisado.getNomeFantasia(), 
+                  fornecedorpesquisado.getCnpjFor(),
+                  fornecedorpesquisado.getEstadualFor(),
+                  fornecedorpesquisado.getTipoPessoa(),
+                  fornecedorpesquisado.getNomeContato(),
+                  fornecedorpesquisado.getTelFor(),
+                  fornecedorpesquisado.getTel2For(),
+                  fornecedorpesquisado.getCelFor(),
+                  fornecedorpesquisado.getUfFor(),
+                  fornecedorpesquisado.getCidadeFor(),
+                  fornecedorpesquisado.getBairroFor(),
+                  fornecedorpesquisado.getEndeFor(),
+                  fornecedorpesquisado.getNumFor(),
+                  fornecedorpesquisado.getCepFor(),
+                  fornecedorpesquisado.getSiteFor(),
+                  fornecedorpesquisado.getEmailFor(),
+                
+                });
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nenhum Fornecedor encontrado !!!");
+            }
+        
+    }
+  } 
+ }  
+    
+    else{
+    
+        JOptionPane.showMessageDialog(null,"Selecione o tipo de pessoa");
+        
+    }
+    
+      
+      
+    gridFornecedor.repaint();
+    
+    txt_CpfPesquisa.setText(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void gridFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridFornecedorMouseClicked
+       
+          
+        if (evt.getClickCount() == 2) {  
+            
+            Object obj = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 0));  //coluna 0  
+            String nome = obj.toString();
+            
+            Object obj1 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 1));  //coluna 0  
+            String cnpjcpf = obj1.toString();
+            
+            Object obj2 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 2));  //coluna 0  
+            String estadual = obj2.toString();
+            
+            Object obj3 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 3));  //coluna 0  
+            String tipo = obj3.toString();
+            
+            Object obj4 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 4));  //coluna 0  
+            String contato = obj4.toString();
+            
+            Object obj5 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 5));  //coluna 0  
+            String telefone = obj5.toString();
+            
+            Object obj6 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 6));  //coluna 0  
+            String telefone2 = obj6.toString();
+            
+            Object obj7 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 7));  //coluna 0  
+            String celular = obj7.toString();
+            
+            Object obj8 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 8));  //coluna 0  
+            String uf = obj8.toString();
+            
+            Object obj9 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 9));  //coluna 0  
+            String cidade = obj9.toString();
+            
+            Object obj10 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 10));  //coluna 0  
+            String bairro = obj10.toString();
+            
+            Object obj11 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 11));  //coluna 0  
+            String logradouro = obj11.toString();
+        
+            Object obj12 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 12));  //coluna 0  
+            String numero = obj12.toString();
+            
+            Object obj13 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 13));  //coluna 0  
+            String cep = obj13.toString();
+            
+            Object obj14 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 14));  //coluna 0  
+            String site = obj14.toString();
+            
+            Object obj15 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 15));  //coluna 0  
+            String email = obj15.toString();
+        
+           
+            // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
+
+
+            // VERIFICA SE É CMPJ OU CPF E COLOCA NO TEXTFIELD
+                 
+            if (CPF.isValido(cnpjcpf) == true){
+                 
+                 pessoaFisica.setSelected(true);
+                txt_cpfFor.setText(cnpjcpf);   
+                
+          labelCpf.setVisible(true);
+          txt_cpfFor.setVisible(true);
+          labelEstadual.setVisible(false);
+          txt_estadualFor.setVisible(false);
+          
+          labelCnpj.setVisible(false);
+          txt_cnpjFor2.setVisible(false);
+            
+         
+               
+           
+           
+  
+            }
+            
+            if (isValido(cnpjcpf) == true){
+              
+                txt_cnpjFor2.setText(cnpjcpf);   
+                
+                pessoaJuridica.setSelected(true);
+               
+                txt_cpfFor.setVisible(true);
+                
+              
+      
+             
+             labelCpf.setVisible(false);
+             txt_cpfFor.setVisible(false);
+          labelEstadual.setVisible(true);
+          txt_estadualFor.setVisible(true);
+          txt_cnpjFor2.setVisible(true);
+          labelCnpj.setVisible(true);
+      
+            }
+             
+            
+            nome_fantasiaFor.setText(nome);  
+            txt_estadualFor.setText(estadual);  
+            txt_cepFor.setText(cep);  
+            txt_estadoFor.setText(uf);  
+            txt_cidadeFor.setText(cidade);  
+            txt_bairroFor.setText(bairro);  
+            txt_endeFor.setText(logradouro);  
+            txt_numFor.setText(numero); 
+            nome_contatoFor.setText(contato); 
+            txt_emailFor.setText(email); 
+            txt_telFor.setText(telefone); 
+            txt_tel2For.setText(telefone2); 
+            txt_celFor.setText(celular); 
+            txt_siteFor.setText(site); 
+            
+            
+               // QUANDO SELECIONA A LINHA NA JTABLE MUDA A ABA
+              TabFornecedor.setSelectedIndex(0);   
+             
+        }
+        
+        
+        
+    }//GEN-LAST:event_gridFornecedorMouseClicked
+
+    private void txt_cnpjFor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cnpjFor2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cnpjFor2ActionPerformed
+
+    private void txt_cpfForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cpfForActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cpfForActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertaCnpj;
@@ -1053,8 +1488,12 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JButton Gravar;
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
+    private javax.swing.JTabbedPane TabFornecedor;
+    private javax.swing.JTable gridFornecedor;
     private javax.swing.ButtonGroup grupoRadio;
+    private javax.swing.ButtonGroup grupoRadioPesquisa;
     public javax.swing.JInternalFrame internalFornecedor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
@@ -1069,27 +1508,32 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelCnpj;
+    private javax.swing.JLabel labelCnpjPesquisa;
     private javax.swing.JLabel labelCpf;
+    private javax.swing.JLabel labelCpfPesquisa;
     private javax.swing.JLabel labelEstadual;
     private javax.swing.JTextField nome_contatoFor;
     private javax.swing.JTextField nome_fantasiaFor;
     private javax.swing.JRadioButton pessoaFisica;
     private javax.swing.JRadioButton pessoaJuridica;
+    private javax.swing.JRadioButton radioFisicaPesquisa;
+    private javax.swing.JRadioButton radioJuridicaPesquisa;
+    private javax.swing.JFormattedTextField txt_CnpjPesquisa;
+    private javax.swing.JFormattedTextField txt_CpfPesquisa;
     private javax.swing.JTextField txt_bairroFor;
     private javax.swing.JFormattedTextField txt_celFor;
     private javax.swing.JTextField txt_cepFor;
@@ -1101,7 +1545,7 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JTextField txt_estadoFor;
     private javax.swing.JFormattedTextField txt_estadualFor;
     private javax.swing.JTextField txt_numFor;
-    private javax.swing.JFormattedTextField txt_siteFor;
+    private javax.swing.JTextField txt_siteFor;
     private javax.swing.JFormattedTextField txt_tel2For;
     private javax.swing.JFormattedTextField txt_telFor;
     // End of variables declaration//GEN-END:variables

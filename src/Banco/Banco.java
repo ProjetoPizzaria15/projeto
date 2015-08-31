@@ -5,6 +5,7 @@
 package Banco;
 
 import BancoObjeto.ObjetoCliente;
+import BancoObjeto.ObjetoFornecedor;
 import BancoObjeto.ObjetoFuncionario;
 import Fornecedor.Fornecedor;
 import TelaClientes.Cliente;
@@ -146,6 +147,48 @@ public class Banco {
         }
 
     }
+    
+      
+    public void atualizaFornecedorCPF(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"'  WHERE cpfFor = '"+cpfFor+"'"; 
+
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Fornecedor Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
+    public void atualizaFornecedorCNPJ(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"'  WHERE cnpjFor = '"+cnpjFor+"'"; 
+
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Fornecedor Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
     
     
     public void atualizaCliente(String telefone,String nome,String cep,String cidade,String bairro,String uf,String numero,String endereco,String complemento) {
@@ -669,7 +712,7 @@ public class Banco {
     
     }
     
-    public boolean gravaFornecedor(String nomeFantasia,String endeFor,String cidadeFor,String nomeContato,String emailFor,String bairroFor,String cnpjFor,String cepFor,String telFor,String celFor,String estadualFor,String numFor,String tel2For,String siteFor, String tipoPessoa, String cpfFor) {
+    public boolean gravaFornecedor(String nomeFantasia,String endeFor,String cidadeFor,String nomeContato,String emailFor,String bairroFor,String cnpjFor,String cepFor,String telFor,String celFor,String estadualFor,String numFor,String tel2For,String siteFor, String tipoPessoa, String cpfFor, String ufFor) {
      conecta();
         String sql;
 
@@ -680,8 +723,8 @@ public class Banco {
         try {
 
 
-                sql = "INSERT INTO fornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor, cnpjFor, telFor,cepFor, celFor,estadualFor,numFor,tel2For,siteFor,tipopessoa, cpfFor) VALUES ('"; // nome das variaveis do BD
-                sql += nomeFantasia + "', '" + endeFor + "','" + cidadeFor + "' , '" + nomeContato +"' , '"+ emailFor +"' , '"+ bairroFor +"' ,'" + cnpjFor + "', '" + telFor + "','" + cepFor + "','" + celFor + "','" +estadualFor+ "','" +numFor+ "','" +tel2For+ "','" +siteFor+ "','" +tipoPessoa+ "','" +cpfFor+ "')";
+                sql = "INSERT INTO fornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor, cnpjFor, telFor,cepFor, celFor,estadualFor,numFor,tel2For,siteFor,tipopessoa, cpfFor, ufFor) VALUES ('"; // nome das variaveis do BD
+                sql += nomeFantasia + "', '" + endeFor + "','" + cidadeFor + "' , '" + nomeContato +"' , '"+ emailFor +"' , '"+ bairroFor +"' ,'" + cnpjFor + "', '" + telFor + "','" + cepFor + "','" + celFor + "','" +estadualFor+ "','" +numFor+ "','" +tel2For+ "','" +siteFor+ "','" +tipoPessoa+ "','" +cpfFor+ "','" +ufFor+ "' )";
 
 
           
@@ -898,6 +941,96 @@ return cliente;
         }
 return funcionario;
     }
+    
+         public ObjetoFornecedor buscaFornecedorTabelaCPF(String cpf) {
+        String sql;
+        conecta();
+        
+        ObjetoFornecedor fornecedor = new ObjetoFornecedor();
+        
+        try {
+            
+             sql = "SELECT * FROM fornecedor WHERE cpfFor='" + cpf + "';";
+            
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            
+            if (rs.next()) {
+               
+                fornecedor.setNomeFantasia(rs.getString("NomeFantasia"));
+                fornecedor.setCpfFor(rs.getString("cpfFor"));
+                fornecedor.setEstadualFor(rs.getString("estadualFor"));
+                fornecedor.setTipoPessoa(rs.getString("tipoPessoa"));
+                 fornecedor.setNomeContato(rs.getString("nomeContato"));
+                 fornecedor.setTelFor(rs.getString("TelFor"));
+                 fornecedor.setTel2For(rs.getString("Tel2For"));
+                 fornecedor.setCelFor(rs.getString("celFor"));
+                 fornecedor.setUfFor(rs.getString("ufFor"));
+                 fornecedor.setCidadeFor(rs.getString("cidadeFor"));
+                 fornecedor.setBairroFor(rs.getString("bairroFor"));
+                 fornecedor.setEndeFor(rs.getString("endeFor"));
+                 fornecedor.setNumFor(rs.getString("numFor"));
+                 fornecedor.setCepFor(rs.getString("cepFor"));
+                 fornecedor.setSiteFor(rs.getString("siteFor"));
+                 fornecedor.setEmailFor(rs.getString("emailFor"));
+      
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+return fornecedor;
+    }
+         
+           public ObjetoFornecedor buscaFornecedorTabelaCNPJ(String cnpj) {
+        String sql;
+        conecta();
+        
+        ObjetoFornecedor fornecedor = new ObjetoFornecedor();
+        
+        try {
+            
+             sql = "SELECT * FROM fornecedor WHERE cnpjFor='" + cnpj + "';";
+            
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            
+            if (rs.next()) {
+               
+                
+                fornecedor.setNomeFantasia(rs.getString("NomeFantasia"));
+                fornecedor.setCnpjFor(rs.getString("cnpjFor"));
+                 fornecedor.setEstadualFor(rs.getString("estadualFor"));
+                  fornecedor.setTipoPessoa(rs.getString("tipoPessoa"));
+                 fornecedor.setNomeContato(rs.getString("nomeContato"));
+                 fornecedor.setTelFor(rs.getString("TelFor"));
+                 fornecedor.setTel2For(rs.getString("Tel2For"));
+                 fornecedor.setCelFor(rs.getString("celFor"));
+                 fornecedor.setUfFor(rs.getString("ufFor"));
+                 fornecedor.setCidadeFor(rs.getString("cidadeFor"));
+                 fornecedor.setBairroFor(rs.getString("bairroFor"));
+                 fornecedor.setEndeFor(rs.getString("endeFor"));
+                 fornecedor.setNumFor(rs.getString("numFor"));
+                 fornecedor.setCepFor(rs.getString("cepFor"));
+                 fornecedor.setSiteFor(rs.getString("siteFor"));
+                 fornecedor.setEmailFor(rs.getString("emailFor"));
+      
+                
+     
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+return fornecedor;
+    }
+    
     
      
 
