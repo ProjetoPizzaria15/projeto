@@ -327,7 +327,7 @@ public class Cliente extends javax.swing.JPanel {
         jToolBar1.add(Pesquisar);
 
         jPanel3.add(jToolBar1);
-        jToolBar1.setBounds(0, 0, 860, 70);
+        jToolBar1.setBounds(0, 0, 890, 70);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 0, 900, 570);
@@ -479,7 +479,7 @@ public class Cliente extends javax.swing.JPanel {
 
         
 
-            if("(11)    -    ".equals(telefone)){
+            if("(    -    ".equals(telefone)){
 
         
                 JOptionPane.showMessageDialog(null,"Preencha o campo telefone para realizar uma busca");

@@ -15,8 +15,8 @@ public class ValoresDecimaisPreco extends JFormattedTextField {
      /**Constantes para definir o formato*/ 
     public static final String CNPJ = "#############"; 
     public static final String NUMERO = "#,##0.00; -#,##0.00";  
-    public static final String REAL = "R$ #,##0.00;R$ -#,##0.00";  
-    public static final String PORCENTAGEM = "#,##0.00'%';-#,##0.00'%'";  
+    public static final String REAL = "0.00";  
+    public static final String PORCENTAGEM = "0.00";  
     public static final String QuantAtacado = "#################";
     public static final String NotaFiscal = "############################################";
     public static final String Data = "##/##/##";

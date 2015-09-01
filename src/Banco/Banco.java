@@ -4,11 +4,14 @@
  */
 package Banco;
 
+import BancoObjeto.ObjetoCategoriaProduto;
 import BancoObjeto.ObjetoCliente;
+import BancoObjeto.ObjetoContasPagarReceber;
 import BancoObjeto.ObjetoFornecedor;
 import BancoObjeto.ObjetoFuncionario;
 import Fornecedor.Fornecedor;
 import TelaClientes.Cliente;
+import java.awt.List;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import java.text.ParseException;
@@ -211,6 +214,27 @@ public class Banco {
         }
 
     }
+    
+     public void atualizaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE contasPagar SET descricao ='"+descricao+"', dataRecebimento ='"+recebimento+"', dataEmissao ='"+emissao+"', dataVencimento ='"+vencimento+"', valor ='"+valor+"', juros ='"+juros+"', multa ='"+multa+"'  WHERE notaFiscal = '"+notaFiscal+"'"; 
+
+        
+              stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Conta Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
 
     public void atualizaFornecedor(String nomeFantasia,String endeFor,String cidadeFor,String nomeContato,String emailFor,String bairroFor,String cnpjFor,String cepFor,String telFor,String celFor,String estadualFor,String numFor,String tel2For,String siteFor) {
         String sql;
@@ -243,6 +267,8 @@ public class Banco {
         }
 
     }
+    
+    
 
     public boolean verificaSenha(int codigo, String senha) {
         String sql;
@@ -288,6 +314,29 @@ public class Banco {
         }
 
     }
+     
+     public ResultSet buscaCategoriaProduto(String categoria) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT * FROM categoriaProduto WHERE categoria='" + categoria + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("categoria") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+     
       public ResultSet buscaFuncionario(String cpf) {
         String sql;
         conecta();
@@ -440,6 +489,24 @@ public class Banco {
 
         try {
             sql = "DELETE FROM fornecedor WHERE cnpjFor= '" + cnpjFor + "';";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+            return true;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+
+    }
+     
+       public boolean excluiCategoriaProduto(String categoria) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "DELETE FROM categoriaProduto WHERE categoria= '" + categoria + "';";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             
@@ -748,6 +815,46 @@ public class Banco {
 
     }
     
+    
+     public boolean gravarCategoriaProduto(String categoria) {
+        conecta();
+        String sql;
+
+
+//Captura os dados digitados
+
+        try {
+              
+          
+            
+                sql = "INSERT INTO categoriaProduto(categoria) VALUES ('"; // nome das variaveis do BD
+                sql += categoria +"')";
+                
+           
+
+                stmt.executeUpdate(sql);
+
+                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
+                return true;
+ 
+            }
+        
+    
+
+           catch (SQLException e) {
+               
+                if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){
+            
+                JOptionPane.showMessageDialog(null,"Categoria já registrada" );
+            
+            }
+            System.out.println("Erro ao executar o comando SQL:" + e.toString());
+            return false;
+        }
+    
+    }
+    
+    
     public boolean gravaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa) {
      conecta();
         String sql;
@@ -1032,6 +1139,36 @@ return fornecedor;
     }
     
     
+           
+        public ObjetoCategoriaProduto buscaCategoriaProdutoTabela(String categoria) {
+        String sql;
+        conecta();
+        
+        ObjetoCategoriaProduto CategoriaProduto = new ObjetoCategoriaProduto();
+        
+        try {
+            
+             sql = "SELECT * FROM categoriaProduto where categoria="+ categoria + "';";
+            
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            
+            if (rs.next()) {
+               
+                CategoriaProduto.setCategoria(rs.getString("categoria"));
+    
+                
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+return CategoriaProduto;
+    }
      
+        
 
 }

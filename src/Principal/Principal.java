@@ -9,7 +9,9 @@ import TelaClientes.Cliente;
 import javax.swing.JInternalFrame;
 import Fornecedor.Fornecedor;
 import Caixa.Caixa;
+import ContaPagarReceber.ContasPagarReceber;
 import Funcionario.Funcionario;
+import Produtos.Produtos;
 import Usuario.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,6 +26,8 @@ public class Principal extends javax.swing.JFrame {
     JInternalFrame intUsuario;
     JInternalFrame intFuncionario;
     JInternalFrame intFornecedor;
+    JInternalFrame intContasPagarReceber;
+    
     
     public Principal() {
         initComponents();
@@ -133,6 +137,11 @@ public class Principal extends javax.swing.JFrame {
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setMargin(new java.awt.Insets(2, 25, 2, 25));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
 
         jButton4.setBackground(new java.awt.Color(255, 255, 204));
@@ -179,6 +188,11 @@ public class Principal extends javax.swing.JFrame {
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setMargin(new java.awt.Insets(2, 25, 2, 25));
         jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton8);
 
         jButton10.setBackground(new java.awt.Color(255, 255, 204));
@@ -296,6 +310,30 @@ public class Principal extends javax.swing.JFrame {
              intUsuario.moveToFront();
          }
     }//GEN-LAST:event_btnUsuarioActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+                
+                if(intProdutos == null || intProdutos.isClosed()){
+             intProdutos = new Produtos().internalProduto;
+             getContentPane().add(intProdutos);
+             desktop.add(intProdutos);
+             intProdutos.setLocation(130, 15);
+             intProdutos.moveToFront();
+         }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        
+                
+                  if(intContasPagarReceber == null || intContasPagarReceber.isClosed()){
+             intContasPagarReceber = new ContasPagarReceber().internalContasPagarReceber;
+             getContentPane().add(intContasPagarReceber);
+             desktop.add(intContasPagarReceber);
+             intContasPagarReceber.setLocation(130, 15);
+             intContasPagarReceber.moveToFront();
+         }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
