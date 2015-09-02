@@ -18,7 +18,7 @@ public class Produtos extends javax.swing.JFrame {
     public Produtos() {
         initComponents();
         
-        
+ 
             
       gridCategoriaProduto.setModel(  
       new DefaultTableModel(  

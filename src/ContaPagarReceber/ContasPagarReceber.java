@@ -68,15 +68,15 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
-        Novo = new javax.swing.JButton();
+        btnLimparCamposContaPagar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        Gravar = new javax.swing.JButton();
+        btnGravaContaPagar = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JToolBar.Separator();
-        Alterar = new javax.swing.JButton();
+        btnAlterarContaPagar = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
-        Excluir = new javax.swing.JButton();
+        btnExcluirContaPagar = new javax.swing.JButton();
         jSeparator16 = new javax.swing.JToolBar.Separator();
-        Pesquisar = new javax.swing.JButton();
+        btnPesquisarContaPagar = new javax.swing.JButton();
         jSeparator14 = new javax.swing.JToolBar.Separator();
         Alerta = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -243,74 +243,74 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jToolBar2.setFloatable(false);
         jToolBar2.setRollover(true);
 
-        Novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/novo.png"))); // NOI18N
-        Novo.setText("Novo");
-        Novo.setFocusable(false);
-        Novo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Novo.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Novo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Novo.addActionListener(new java.awt.event.ActionListener() {
+        btnLimparCamposContaPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/novo.png"))); // NOI18N
+        btnLimparCamposContaPagar.setText("Limpar Campos");
+        btnLimparCamposContaPagar.setFocusable(false);
+        btnLimparCamposContaPagar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimparCamposContaPagar.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnLimparCamposContaPagar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimparCamposContaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NovoActionPerformed(evt);
+                btnLimparCamposContaPagarActionPerformed(evt);
             }
         });
-        jToolBar2.add(Novo);
+        jToolBar2.add(btnLimparCamposContaPagar);
         jToolBar2.add(jSeparator1);
 
-        Gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/salvar.png"))); // NOI18N
-        Gravar.setText("Gravar");
-        Gravar.setFocusable(false);
-        Gravar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Gravar.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Gravar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Gravar.addActionListener(new java.awt.event.ActionListener() {
+        btnGravaContaPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/salvar.png"))); // NOI18N
+        btnGravaContaPagar.setText("Gravar");
+        btnGravaContaPagar.setFocusable(false);
+        btnGravaContaPagar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGravaContaPagar.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnGravaContaPagar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGravaContaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GravarActionPerformed(evt);
+                btnGravaContaPagarActionPerformed(evt);
             }
         });
-        jToolBar2.add(Gravar);
+        jToolBar2.add(btnGravaContaPagar);
         jToolBar2.add(jSeparator7);
 
-        Alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
-        Alterar.setText("Alterar");
-        Alterar.setFocusable(false);
-        Alterar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Alterar.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Alterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Alterar.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarContaPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
+        btnAlterarContaPagar.setText("Alterar");
+        btnAlterarContaPagar.setFocusable(false);
+        btnAlterarContaPagar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAlterarContaPagar.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnAlterarContaPagar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAlterarContaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarActionPerformed(evt);
+                btnAlterarContaPagarActionPerformed(evt);
             }
         });
-        jToolBar2.add(Alterar);
+        jToolBar2.add(btnAlterarContaPagar);
         jToolBar2.add(jSeparator10);
 
-        Excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
-        Excluir.setText("Excluir");
-        Excluir.setFocusable(false);
-        Excluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Excluir.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Excluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Excluir.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluirContaPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
+        btnExcluirContaPagar.setText("Excluir");
+        btnExcluirContaPagar.setFocusable(false);
+        btnExcluirContaPagar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExcluirContaPagar.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnExcluirContaPagar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExcluirContaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExcluirActionPerformed(evt);
+                btnExcluirContaPagarActionPerformed(evt);
             }
         });
-        jToolBar2.add(Excluir);
+        jToolBar2.add(btnExcluirContaPagar);
         jToolBar2.add(jSeparator16);
 
-        Pesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
-        Pesquisar.setText("Pesquisar");
-        Pesquisar.setFocusable(false);
-        Pesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Pesquisar.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Pesquisar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Pesquisar.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisarContaPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
+        btnPesquisarContaPagar.setText("Pesquisar");
+        btnPesquisarContaPagar.setFocusable(false);
+        btnPesquisarContaPagar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPesquisarContaPagar.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        btnPesquisarContaPagar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPesquisarContaPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PesquisarActionPerformed(evt);
+                btnPesquisarContaPagarActionPerformed(evt);
             }
         });
-        jToolBar2.add(Pesquisar);
+        jToolBar2.add(btnPesquisarContaPagar);
         jToolBar2.add(jSeparator14);
 
         jPanel4.add(jToolBar2);
@@ -458,7 +458,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jToolBar3.setRollover(true);
 
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/novo.png"))); // NOI18N
-        jButton20.setText("Novo");
+        jButton20.setText("Limpar Campos");
         jButton20.setFocusable(false);
         jButton20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton20.setMargin(new java.awt.Insets(2, 25, 2, 25));
@@ -486,6 +486,11 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jButton26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton26.setMargin(new java.awt.Insets(2, 25, 2, 25));
         jButton26.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
         jToolBar3.add(jButton26);
         jToolBar3.add(jSeparator18);
 
@@ -530,11 +535,39 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         setBounds(0, 0, 921, 689);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ExcluirActionPerformed
+    private void btnExcluirContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirContaPagarActionPerformed
+        
+        
 
-    private void PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarActionPerformed
+           String  notaFiscal = txt_notaPagar.getText();
+
+            if("0".equals(notaFiscal) || ("").equals(notaFiscal) || "Apenas números".equals(txt_notaPagar)){
+
+                JOptionPane.showMessageDialog(null,"Preencha o campo nota fiscal para realizar uma exclusão");
+                txt_notaPagar.requestFocus();
+
+            }
+
+            else{
+                if (ba.excluiContaPagar(notaFiscal)) {
+                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+                    
+               txt_notaPagar.setText("0");
+                txt_descricaoPagar.setText("");
+                msk_recebimentoPagar.setText("");
+                msk_emissaoPagar.setText("");
+                msk_vencimentoPagar.setText("");
+                txt_valorPagar.setText("0");
+                txt_jurosPagar.setText("0");
+                txt_multaPagar.setText("0");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Não encontrado");
+                }
+            }
+    }//GEN-LAST:event_btnExcluirContaPagarActionPerformed
+
+    private void btnPesquisarContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarContaPagarActionPerformed
         ResultSet rs;
         String notaFiscal = txt_notaPagar.getText();
 
@@ -576,20 +609,17 @@ public class ContasPagarReceber extends javax.swing.JFrame {
             } catch (SQLException ex) {
             }
         }
-    }//GEN-LAST:event_PesquisarActionPerformed
+    }//GEN-LAST:event_btnPesquisarContaPagarActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        if("Apenas números".equals(txt_valorReceber) || "Apenas números".equals(txt_jurosReceber) || "Apenas números".equals(txt_multaReceber) ){
-
-            JOptionPane.showMessageDialog(null,"Preencha o campo Nota Fiscal para realizar uma busca");
-        }
+     
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton28ActionPerformed
 
-    private void GravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GravarActionPerformed
+    private void btnGravaContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravaContaPagarActionPerformed
         String notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa;
 
         notaFiscal = txt_notaPagar.getText();
@@ -627,9 +657,9 @@ public class ContasPagarReceber extends javax.swing.JFrame {
             }
 
         }
-    }//GEN-LAST:event_GravarActionPerformed
+    }//GEN-LAST:event_btnGravaContaPagarActionPerformed
 
-    private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
+    private void btnLimparCamposContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposContaPagarActionPerformed
 
                txt_notaPagar.setText("0");
                 txt_descricaoPagar.setText("");
@@ -639,9 +669,9 @@ public class ContasPagarReceber extends javax.swing.JFrame {
                 txt_valorPagar.setText("0");
                 txt_jurosPagar.setText("0");
                 txt_multaPagar.setText("0");
-    }//GEN-LAST:event_NovoActionPerformed
+    }//GEN-LAST:event_btnLimparCamposContaPagarActionPerformed
 
-    private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
+    private void btnAlterarContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarContaPagarActionPerformed
 
            
         String notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa;
@@ -657,7 +687,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
 
 
-        if("".equals(notaFiscal)){
+        if("".equals(notaFiscal)||"0".equals(notaFiscal) ){
 
             JOptionPane.showMessageDialog(null,"Preecha o campo nota fiscal");
             txt_notaPagar.requestFocus();
@@ -668,7 +698,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
         }
         
-    }//GEN-LAST:event_AlterarActionPerformed
+    }//GEN-LAST:event_btnAlterarContaPagarActionPerformed
 
     private void txt_notaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_notaPagarActionPerformed
 
@@ -676,7 +706,11 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_notaPagarActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        // TODO add your handling code here:
+        
+        
+        int git2;
+        
+        
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void msk_vencimentoPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msk_vencimentoPagarActionPerformed
@@ -686,6 +720,10 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private void txt_vencimentoReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_vencimentoReceberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_vencimentoReceberActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton26ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -724,11 +762,11 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Alerta;
-    private javax.swing.JButton Alterar;
-    private javax.swing.JButton Excluir;
-    private javax.swing.JButton Gravar;
-    private javax.swing.JButton Novo;
-    private javax.swing.JButton Pesquisar;
+    private javax.swing.JButton btnAlterarContaPagar;
+    private javax.swing.JButton btnExcluirContaPagar;
+    private javax.swing.JButton btnGravaContaPagar;
+    private javax.swing.JButton btnLimparCamposContaPagar;
+    private javax.swing.JButton btnPesquisarContaPagar;
     private javax.swing.JButton btn_pesquisarCliente;
     private javax.swing.JComboBox combo_parcelas;
     private javax.swing.JComboBox combo_tipoPagamento;

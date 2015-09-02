@@ -464,6 +464,24 @@ public class Banco {
         }
 
     }
+    
+      public boolean excluiContaPagar(String notaFiscal) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "DELETE FROM contaspagar WHERE notafiscal= '" + notaFiscal + "';";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+            return true;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+
+    }
 
     public boolean excluiFornecedorCPF(String cpf) {
         String sql;
