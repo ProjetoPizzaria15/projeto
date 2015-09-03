@@ -450,7 +450,7 @@ public class Funcionario extends javax.swing.JPanel {
         String aux,nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, loginFun, senhaFun, sexoFun,
         rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, permissao = "";
 
-      
+      int git;
        
         nomeFun = txt_nomeFun.getText();
         nasciFun = txt_nasciFun.getText();
