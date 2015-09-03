@@ -89,8 +89,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         txt_valorReceber = new Funcoes.ValoresDecimaisPreco(Funcoes.ValoresDecimaisPreco.REAL);
         txt_multaReceber = new Funcoes.ValoresDecimaisPreco(Funcoes.ValoresDecimaisPreco.PORCENTAGEM);
         jButton10 = new javax.swing.JButton();
-        btn_pesquisarCliente = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txt_jurosReceber = new Funcoes.ValoresDecimaisPreco(Funcoes.ValoresDecimaisPreco.PORCENTAGEM);
@@ -104,7 +102,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         txt_dataRecebimento = new javax.swing.JFormattedTextField();
         txt_emissaoReceber = new javax.swing.JFormattedTextField();
-        txt_vencimentoReceber = new javax.swing.JFormattedTextField();
+        txt_dtRecebimento = new javax.swing.JFormattedTextField();
         jToolBar3 = new javax.swing.JToolBar();
         jButton20 = new javax.swing.JButton();
         jSeparator15 = new javax.swing.JToolBar.Separator();
@@ -115,6 +113,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jButton27 = new javax.swing.JButton();
         jSeparator19 = new javax.swing.JToolBar.Separator();
         jButton28 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_TelefoneClienteReceber = new javax.swing.JTextField();
+        txt_ClienteReceber = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -342,7 +346,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jScrollPane2.setBounds(70, 20, 250, 110);
 
         jPanel6.add(jPanel7);
-        jPanel7.setBounds(20, 120, 340, 140);
+        jPanel7.setBounds(380, 100, 340, 140);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalhes"));
         jPanel8.setLayout(null);
@@ -361,16 +365,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jPanel8.add(jButton10);
         jButton10.setBounds(530, 520, 160, 50);
 
-        btn_pesquisarCliente.setText("Pesquisar Cliente");
-        jPanel8.add(btn_pesquisarCliente);
-        btn_pesquisarCliente.setBounds(10, 270, 170, 50);
-
-        jTextField3.setEditable(false);
-        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField3.setText("José Carvalho");
-        jPanel8.add(jTextField3);
-        jTextField3.setBounds(190, 270, 120, 50);
-
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("Valor:");
         jPanel8.add(jLabel18);
@@ -388,7 +382,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jPanel8.add(jLabel22);
         jLabel22.setBounds(10, 125, 99, 30);
 
-        combo_tipoPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cartão de Crédito" }));
+        combo_tipoPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cartão de Crédito", "Cartão de Débito" }));
         jPanel8.add(combo_tipoPagamento);
         combo_tipoPagamento.setBounds(130, 170, 160, 30);
 
@@ -402,7 +396,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jLabel23.setBounds(10, 220, 130, 15);
 
         jPanel6.add(jPanel8);
-        jPanel8.setBounds(380, 120, 330, 380);
+        jPanel8.setBounds(380, 260, 330, 270);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Datas"));
         jPanel9.setLayout(null);
@@ -439,20 +433,15 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         txt_emissaoReceber.setBounds(140, 80, 80, 30);
 
         try {
-            txt_vencimentoReceber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txt_dtRecebimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txt_vencimentoReceber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_vencimentoReceberActionPerformed(evt);
-            }
-        });
-        jPanel9.add(txt_vencimentoReceber);
-        txt_vencimentoReceber.setBounds(140, 120, 80, 30);
+        jPanel9.add(txt_dtRecebimento);
+        txt_dtRecebimento.setBounds(140, 120, 80, 30);
 
         jPanel6.add(jPanel9);
-        jPanel9.setBounds(20, 280, 340, 220);
+        jPanel9.setBounds(20, 260, 360, 270);
 
         jToolBar3.setFloatable(false);
         jToolBar3.setRollover(true);
@@ -523,6 +512,28 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
         jPanel6.add(jToolBar3);
         jToolBar3.setBounds(0, 0, 750, 80);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
+        jPanel1.setLayout(null);
+
+        jLabel3.setText("Cliente:  ");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(30, 60, 60, 30);
+
+        jLabel2.setText("Telefone:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(30, 20, 60, 30);
+        jPanel1.add(txt_TelefoneClienteReceber);
+        txt_TelefoneClienteReceber.setBounds(90, 20, 160, 30);
+        jPanel1.add(txt_ClienteReceber);
+        txt_ClienteReceber.setBounds(90, 60, 160, 30);
+
+        jButton1.setText("Pesquisar");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(260, 20, 90, 70);
+
+        jPanel6.add(jPanel1);
+        jPanel1.setBounds(20, 100, 360, 140);
 
         jTabbedPane1.addTab("Contas a Receber", jPanel6);
 
@@ -612,7 +623,52 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarContaPagarActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+
+        
+         String notaFiscal, descricaoReceber, dtReceber,emissaoReceber, vencimentoReceber,
+                 valorReceber,jurosReceber,multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas;
+
      
+        descricaoReceber = txt_descReceber.getText();
+        dtReceber = txt_dtRecebimento.getText();
+        emissaoReceber = txt_emissaoReceber.getText();
+        vencimentoReceber = txt_dataRecebimento.getText();
+        valorReceber = txt_valorReceber.getText();
+        jurosReceber = txt_jurosReceber.getText();
+        multaReceber = txt_multaReceber.getText();
+        TelefoneClienteReceber =  txt_TelefoneClienteReceber.getText();
+        ClienteReceber  = txt_ClienteReceber.getText();
+        tipopagamento = combo_tipoPagamento.getSelectedItem().toString();
+        parcelas = combo_parcelas.getSelectedItem().toString();
+        
+        
+        if(TelefoneClienteReceber.equals("") || ClienteReceber.equals("") ){
+
+            JOptionPane.showMessageDialog(null,"Preencha o campo telefone e cliente");
+            Alerta.setVisible(true);
+        }
+        else{
+            Alerta.setVisible(false);
+
+            if (ba.gravaContaReceber(descricaoReceber, dtReceber, emissaoReceber, vencimentoReceber, valorReceber, jurosReceber, multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas)) {
+               
+                
+                txt_ClienteReceber.setText("");
+                txt_TelefoneClienteReceber.setText("");
+                txt_notaPagar.setText("0");
+                txt_descricaoPagar.setText("");
+                msk_recebimentoPagar.setText("");
+                msk_emissaoPagar.setText("");
+                msk_vencimentoPagar.setText("");
+                txt_valorPagar.setText("0");
+                txt_jurosPagar.setText("0");
+                txt_multaPagar.setText("0");
+                
+
+            }
+
+        }
+        
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
@@ -717,10 +773,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_msk_vencimentoPagarActionPerformed
 
-    private void txt_vencimentoReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_vencimentoReceberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_vencimentoReceberActionPerformed
-
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton26ActionPerformed
@@ -767,10 +819,10 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JButton btnGravaContaPagar;
     private javax.swing.JButton btnLimparCamposContaPagar;
     private javax.swing.JButton btnPesquisarContaPagar;
-    private javax.swing.JButton btn_pesquisarCliente;
     private javax.swing.JComboBox combo_parcelas;
     private javax.swing.JComboBox combo_tipoPagamento;
     public javax.swing.JInternalFrame internalContasPagarReceber;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
@@ -788,14 +840,17 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -816,15 +871,17 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator19;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
     private javax.swing.JFormattedTextField msk_emissaoPagar;
     private javax.swing.JFormattedTextField msk_recebimentoPagar;
     private javax.swing.JFormattedTextField msk_vencimentoPagar;
+    private javax.swing.JTextField txt_ClienteReceber;
+    private javax.swing.JTextField txt_TelefoneClienteReceber;
     private javax.swing.JFormattedTextField txt_dataRecebimento;
     private javax.swing.JTextArea txt_descReceber;
     private javax.swing.JTextArea txt_descricaoPagar;
+    private javax.swing.JFormattedTextField txt_dtRecebimento;
     private javax.swing.JFormattedTextField txt_emissaoReceber;
     private javax.swing.JFormattedTextField txt_jurosPagar;
     private javax.swing.JTextField txt_jurosReceber;
@@ -833,6 +890,5 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txt_notaPagar;
     private javax.swing.JFormattedTextField txt_valorPagar;
     private javax.swing.JTextField txt_valorReceber;
-    private javax.swing.JFormattedTextField txt_vencimentoReceber;
     // End of variables declaration//GEN-END:variables
 }

@@ -904,6 +904,38 @@ public class Banco {
     }
     
     
+     
+   public boolean gravaContaReceber(String descricaoReceber,String dtReceber,String emissaoReceber,String vencimentoReceber,String valorReceber,String jurosReceber,String multaReceber,String TelefoneClienteReceber,String ClienteReceber,String tipopagamento,String parcelas) {
+     conecta();
+        String sql;
+
+
+//Captura os dados digitados
+
+        try {
+
+
+
+
+                sql = "INSERT INTO contasreceber(descricao, valor, juros, multa, tipopagamento, nparcela, dtrecebimento, dtemissao, dtvencimento,Cliente ,telefone) VALUES ('"; // nome das variaveis do BD
+                sql += descricaoReceber + "', '" + valorReceber + "','" + jurosReceber + "' , '" + multaReceber +"' , '"+ tipopagamento +"' , '"+ parcelas +"' ,'" + dtReceber + "', '" + emissaoReceber + "', '" + vencimentoReceber + "' , '" + ClienteReceber + "' , '" + TelefoneClienteReceber + "')";
+
+
+                stmt.executeUpdate(sql);
+
+                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
+                return true;
+
+
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar o comando SQL:" + e.toString());
+            return false;
+        }
+
+    }
+    
+    
     public boolean gravaProdutos(String descProduto,String codigoProduto,String compleProduto,String categoriaProduto,String fornecedorProduto,String unidadeProduto,String marcaProduto,String quantidade,String minimoEstoque,String maximoEstoque,String precoCompra,String quantAtacado,String descontoAtacado,String margemLucro,String impostos,String desconto) {
      conecta();
         String sql;
