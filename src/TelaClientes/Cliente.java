@@ -535,7 +535,7 @@ public class Cliente extends javax.swing.JPanel {
         
         
         
-        String git, telefone, nome, cep, cidade, bairro, uf, numero,endereco , complemento;   
+        String telefone, nome, cep, cidade, bairro, uf, numero,endereco , complemento;   
         
         telefone = txtTelefone.getText();
         nome = txtNome.getText();
