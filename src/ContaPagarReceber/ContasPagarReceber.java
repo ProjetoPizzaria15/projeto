@@ -452,6 +452,11 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jButton20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton20.setMargin(new java.awt.Insets(2, 25, 2, 25));
         jButton20.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton20ActionPerformed(evt);
+            }
+        });
         jToolBar3.add(jButton20);
         jToolBar3.add(jSeparator15);
 
@@ -776,6 +781,10 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton26ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
 
     /**
      * @param args the command line arguments
