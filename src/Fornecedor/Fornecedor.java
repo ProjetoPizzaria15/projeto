@@ -59,7 +59,7 @@ public class Fornecedor extends javax.swing.JPanel {
   
         
         String cnpjFor =txt_cnpjFor2.getText();
-    
+        int test;
         
         
         
