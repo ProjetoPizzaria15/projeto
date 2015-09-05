@@ -769,7 +769,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         
         
-        int git2;
+        int git;
         
         
     }//GEN-LAST:event_jButton27ActionPerformed
