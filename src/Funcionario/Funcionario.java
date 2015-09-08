@@ -367,6 +367,11 @@ public class Funcionario extends javax.swing.JPanel {
         txt_setorFun.setBounds(280, 120, 140, 30);
 
         cmb_sexoFun.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Feminino", "Masculino" }));
+        cmb_sexoFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_sexoFunActionPerformed(evt);
+            }
+        });
         jPanel6.add(cmb_sexoFun);
         cmb_sexoFun.setBounds(500, 70, 100, 30);
 
@@ -821,6 +826,10 @@ public class Funcionario extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_gridFuncionarioMouseClicked
+
+    private void cmb_sexoFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_sexoFunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_sexoFunActionPerformed
 
     
     
