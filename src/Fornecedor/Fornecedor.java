@@ -126,6 +126,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         grupoRadio = new javax.swing.ButtonGroup();
         grupoRadioPesquisa = new javax.swing.ButtonGroup();
+        jMenuItem1 = new javax.swing.JMenuItem();
         internalFornecedor = new javax.swing.JInternalFrame();
         TabFornecedor = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -190,6 +191,8 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_CnpjPesquisa = new javax.swing.JFormattedTextField();
         labelCnpjPesquisa = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setLayout(null);
 
@@ -274,7 +277,7 @@ public class Fornecedor extends javax.swing.JPanel {
         jToolBar2.add(jSeparator3);
 
         jPanel2.add(jToolBar2);
-        jToolBar2.setBounds(0, 0, 590, 80);
+        jToolBar2.setBounds(0, 0, 1260, 80);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
         jPanel4.setLayout(null);
@@ -326,7 +329,7 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_cepFor.setBounds(110, 20, 110, 30);
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(10, 260, 1230, 180);
+        jPanel4.setBounds(10, 260, 930, 180);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
         jPanel5.setLayout(null);
@@ -406,7 +409,7 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_siteFor.setBounds(110, 120, 420, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(0, 450, 1230, 210);
+        jPanel5.setBounds(0, 450, 940, 210);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel3.setLayout(null);
@@ -506,7 +509,7 @@ public class Fornecedor extends javax.swing.JPanel {
         AlertaCnpj.setBounds(10, 70, 220, 30);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(0, 90, 1230, 160);
+        jPanel3.setBounds(0, 90, 940, 160);
 
         TabFornecedor.addTab("Registrar Fornecedor", jPanel2);
 
@@ -1513,6 +1516,7 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
