@@ -1,6 +1,7 @@
 
 package Produtos;
 import Banco.Banco;
+import Banco.BancoFuncoes;
 import BancoObjeto.ObjetoCategoriaProduto;
 import BancoObjeto.ObjetoCliente;
 import java.sql.ResultSet;
@@ -14,10 +15,11 @@ import javax.swing.table.DefaultTableModel;
 public class Produtos extends javax.swing.JFrame {
 
     Banco ba = new Banco();
+    BancoFuncoes bf = new BancoFuncoes();
     
     public Produtos() {
         initComponents();
-        
+        carregaTipoPruduto();
  
             
       gridCategoriaProduto.setModel(  
@@ -30,7 +32,7 @@ public class Produtos extends javax.swing.JFrame {
    
    }});  
     }
-
+private String combo;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +67,7 @@ public class Produtos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboTipoProduto = new javax.swing.JComboBox();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
@@ -237,14 +239,14 @@ public class Produtos extends javax.swing.JFrame {
         jPanel8.add(jLabel3);
         jLabel3.setBounds(20, 10, 80, 30);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um tipo de produto" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboTipoProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um tipo de produto" }));
+        comboTipoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboTipoProdutoActionPerformed(evt);
             }
         });
-        jPanel8.add(jComboBox1);
-        jComboBox1.setBounds(100, 10, 190, 30);
+        jPanel8.add(comboTipoProduto);
+        comboTipoProduto.setBounds(100, 10, 190, 30);
         jPanel8.add(jTextField1);
         jTextField1.setBounds(100, 50, 420, 30);
         jPanel8.add(jTextField2);
@@ -490,9 +492,9 @@ public class Produtos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboTipoProdutoActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
@@ -576,11 +578,11 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
     private javax.swing.JButton Pesquisar1;
+    private javax.swing.JComboBox comboTipoProduto;
     private javax.swing.JTable gridCategoriaProduto;
     public javax.swing.JInternalFrame internalProduto;
     private javax.swing.JButton jButton19;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -619,4 +621,27 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JTextField txtCategoriaProduto;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the combo
+     */
+    public String getCombo() {
+        return combo = (String) comboTipoProduto.getSelectedItem();
+    }
+
+    /**
+     * @param combo the combo to set
+     */
+    public void setCombo(String combo) {
+        this.combo = combo;
+    }
+    
+    public void carregaTipoPruduto(){
+        String msg1 = "Tipo Produto recuperados";
+        String msg2 = "Erro ao Recuperar Fornecedores";
+        String vsql = "SELECT categoria FROM categoriaProduto order by categoria";
+        String campoSql = "categoria";
+
+        bf.carregaDadoUnico(vsql, msg1, msg2, comboTipoProduto, campoSql);
+    }
 }
