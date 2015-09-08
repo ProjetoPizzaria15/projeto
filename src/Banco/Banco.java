@@ -759,6 +759,46 @@ public class Banco {
     
     }
     
+     
+    public boolean gravaProduto(String tipoProduto,String  descricao, String ingredientes,String  comboMed,String  comboEst ,String  minimoestoque,String  produtoacbprima,String  qtdeestoque,String  valor) {
+        conecta();
+        String sql;
+
+
+//Captura os dados digitados
+
+        try {
+              
+          
+            
+                sql = "INSERT INTO Produtos(tipoProduto, descricao, ingredientes, unidmedida, estocavel, qtdeminima,acabadoprima, qtdeestoque, valor) VALUES ('"; // nome das variaveis do BD
+                sql += tipoProduto + "', '" + descricao + "','" + ingredientes + "' , '"+ comboMed +"' , '"+ comboEst +"' , '"+ minimoestoque +"' ,'" + produtoacbprima + "', '" + qtdeestoque + "','" + valor + "')";
+                
+                /*sql = "INSERT INTO usuario(login, senha, permissao) VALUES ('"; // nome das variaveis do BD
+                sql += loginFun + "', '"+ senhaFun +"' , '"+ permissao +"')";*/
+
+                stmt.executeUpdate(sql);
+
+                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
+                return true;
+ 
+            }
+        
+    
+
+           catch (SQLException e) {
+               
+               if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){
+            
+                JOptionPane.showMessageDialog(null,"Funcionario já registrado" );
+               }       
+            System.out.println("Erro ao executar o comando SQL:" + e.toString());
+            return false;
+               
+        }
+    
+    }
+    
 
      public boolean gravaLogin(String loginFun,String senhaFun,String cpf, String permissao) {
         conecta();
