@@ -6,6 +6,7 @@
 package ContaPagarReceber;
 
 import Banco.Banco;
+import Banco.BancoFuncoes;
 import Funcoes.LimitarCampos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,10 +21,12 @@ import org.alfredlibrary.validadores.CPF;
 public class ContasPagarReceber extends javax.swing.JFrame {
 
    Banco ba = new Banco();
-   
+   BancoFuncoes bf = new BancoFuncoes();
    
     public ContasPagarReceber() {
         initComponents();
+        
+        carregaFornecedorCombo();
         
        Alerta.setVisible(false);
        
@@ -32,6 +35,8 @@ public class ContasPagarReceber extends javax.swing.JFrame {
        txt_descricaoPagar.setDocument(new LimitarCampos(200));
         
     }
+    
+    private String combo;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,7 +70,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         txt_valorPagar = new Funcoes.ValoresDecimaisPreco(Funcoes.ValoresDecimaisPreco.REAL);
         txt_jurosPagar = new Funcoes.ValoresDecimaisPreco(Funcoes.ValoresDecimaisPreco.PORCENTAGEM);
         txt_multaPagar = new Funcoes.ValoresDecimaisPreco(Funcoes.ValoresDecimaisPreco.PORCENTAGEM);
-        jComboBox1 = new javax.swing.JComboBox();
+        comboFornecedor = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
         btnLimparCamposContaPagar = new javax.swing.JButton();
@@ -233,8 +238,8 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jPanel3.add(txt_multaPagar);
         txt_multaPagar.setBounds(160, 140, 100, 30);
 
-        jPanel3.add(jComboBox1);
-        jComboBox1.setBounds(160, 190, 240, 30);
+        jPanel3.add(comboFornecedor);
+        comboFornecedor.setBounds(160, 190, 240, 30);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("Multa (% ao dia): ");
@@ -827,6 +832,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JButton btnGravaContaPagar;
     private javax.swing.JButton btnLimparCamposContaPagar;
     private javax.swing.JButton btnPesquisarContaPagar;
+    private javax.swing.JComboBox comboFornecedor;
     private javax.swing.JComboBox combo_parcelas;
     private javax.swing.JComboBox combo_tipoPagamento;
     public javax.swing.JInternalFrame internalContasPagarReceber;
@@ -837,7 +843,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -899,4 +904,27 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txt_valorPagar;
     private javax.swing.JTextField txt_valorReceber;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the combo
+     */
+    public String getCombo() {
+         return combo = (String) comboFornecedor.getSelectedItem();
+    }
+
+    /**
+     * @param combo the combo to set
+     */
+    public void setCombo(String combo) {
+        this.combo = combo;
+    }
+    
+    public void carregaFornecedorCombo(){
+        String msg1 = "Fornecedores recuperados";
+        String msg2 = "Erro ao Recuperar Fornecedores";
+        String vsql = "SELECT nomeFantasia FROM fornecedor order by nomeFantasia";
+        String campoSql = "nomeFantasia";
+
+        bf.carregaDadoUnico(vsql, msg1, msg2, comboFornecedor, campoSql);
+    }
 }
