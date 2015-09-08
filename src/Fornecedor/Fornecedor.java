@@ -6,6 +6,7 @@
 package Fornecedor;
 import Banco.Banco;
 import Banco.BancoCep;
+import Banco.BancoFuncoes;
 import BancoObjeto.ObjetoFornecedor;
 import BancoObjeto.ObjetoFuncionario;
 import Funcoes.LimitarCampos;
@@ -28,11 +29,13 @@ import static org.alfredlibrary.validadores.CNPJ.isValido;
 public class Fornecedor extends javax.swing.JPanel {
 
     Banco ba = new Banco();
+    BancoFuncoes bf = new BancoFuncoes();
     String tipoPessoa;
-    
+    private String combo;
     
     public Fornecedor() {
         initComponents();
+        carregaTipoPruduto();
         
         // CRIA O TABLE MODEL DO gridFornecedor 
         
@@ -104,6 +107,8 @@ public class Fornecedor extends javax.swing.JPanel {
           });
          
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,7 +173,7 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_cnpjFor2 = new javax.swing.JFormattedTextField();
         nome_fantasiaFor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboTipoProduto = new javax.swing.JComboBox();
         pessoaFisica = new javax.swing.JRadioButton();
         pessoaJuridica = new javax.swing.JRadioButton();
         txt_estadualFor = new javax.swing.JFormattedTextField();
@@ -443,10 +448,9 @@ public class Fornecedor extends javax.swing.JPanel {
         jPanel3.add(jLabel4);
         jLabel4.setBounds(560, 110, 120, 30);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Enlatados", "Laticionios", "Bebidas", "Congelados", "Massas", "Carnes", "Hortifruti", "Limpeza", "Variados" }));
-        jPanel3.add(jComboBox1);
-        jComboBox1.setBounds(700, 110, 150, 30);
+        comboTipoProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel3.add(comboTipoProduto);
+        comboTipoProduto.setBounds(700, 110, 150, 30);
 
         grupoRadio.add(pessoaFisica);
         pessoaFisica.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1489,12 +1493,12 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
     private javax.swing.JTabbedPane TabFornecedor;
+    private javax.swing.JComboBox comboTipoProduto;
     private javax.swing.JTable gridFornecedor;
     private javax.swing.ButtonGroup grupoRadio;
     private javax.swing.ButtonGroup grupoRadioPesquisa;
     public javax.swing.JInternalFrame internalFornecedor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
@@ -1549,4 +1553,27 @@ public class Fornecedor extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txt_tel2For;
     private javax.swing.JFormattedTextField txt_telFor;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the combo
+     */
+    public String getCombo() {
+        return combo = (String) comboTipoProduto.getSelectedItem();
+    }
+
+    /**
+     * @param combo the combo to set
+     */
+    public void setCombo(String combo) {
+        this.combo = combo;
+    }
+    
+    public void carregaTipoPruduto(){
+        String msg1 = "Fornecedores recuperados";
+        String msg2 = "Erro ao Recuperar Fornecedores";
+        String vsql = "SELECT categoria FROM categoriaProduto order by categoria";
+        String campoSql = "categoria";
+
+        bf.carregaDadoUnico(vsql, msg1, msg2, comboTipoProduto, campoSql);
+    }
 }
