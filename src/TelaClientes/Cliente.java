@@ -8,8 +8,10 @@ package TelaClientes;
 
 import Banco.Banco;
 import Banco.BancoCep;
+import Banco.BancoFuncoes;
 import BancoObjeto.ObjetoCliente;
 import Funcoes.LimitarCampos;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,12 +27,12 @@ public class Cliente extends javax.swing.JPanel {
 
     BancoCep bacep = new BancoCep();
     Banco ba = new Banco();
-    
+    BancoFuncoes bf = new BancoFuncoes();
     
     
     public Cliente() {
         initComponents();
-        
+        carregaTabela();
  
         // BLOQUEA A EDIÇÃO DA JTABLE
         
@@ -44,7 +46,7 @@ public class Cliente extends javax.swing.JPanel {
    
    }});   
         
-        //-------------------
+
         
         
         
@@ -371,6 +373,17 @@ public class Cliente extends javax.swing.JPanel {
         });
         jPanel2.add(btnPesquisaCliente);
         btnPesquisaCliente.setBounds(440, 30, 160, 40);
+
+        txtPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisaActionPerformed(evt);
+            }
+        });
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPesquisaKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtPesquisa);
         txtPesquisa.setBounds(300, 30, 120, 40);
 
@@ -612,6 +625,9 @@ public class Cliente extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
  
+    
+    
+    
     // AO SELECIONAR UMA LINHA NA JTABLE PREENCHE OS CAMPOS NA OUTRA ABA CLIENTE
     
     private void gridClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridClienteMouseClicked
@@ -668,6 +684,29 @@ public class Cliente extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_gridClienteMouseClicked
+
+     public void carregaTabela(){
+        String msg1 = "Clientes recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Clientes";
+        String vsql = "SELECT " +
+                        "telefone, nome, cep, endereco, numero, complemento, cidade, uf, bairro " +
+                      "FROM " +
+                        "clientes";
+
+
+        bf.tabelaClientes(vsql, msg1, msg2, gridCliente);
+    }
+
+    
+    
+    private void txtPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyPressed
+      
+
+    }//GEN-LAST:event_txtPesquisaKeyPressed
+
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
