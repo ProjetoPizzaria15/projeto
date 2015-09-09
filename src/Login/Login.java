@@ -23,7 +23,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         
-        
+        this.setLocationRelativeTo(null);  
         
         txtLogin.setDocument(new LimitarCampos(20));
         txtSenha.setDocument(new LimitarCampos(20));
