@@ -82,6 +82,8 @@ private String combo;
         txtDescricao = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtIngredientes = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        txtCodigoProduto = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         comboMedida = new javax.swing.JComboBox();
@@ -157,7 +159,7 @@ private String combo;
         jToolBar1.add(jButton19);
 
         jPanel1.add(jToolBar1);
-        jToolBar1.setBounds(0, 0, 720, 70);
+        jToolBar1.setBounds(0, 0, 750, 70);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel4.setLayout(null);
@@ -185,10 +187,10 @@ private String combo;
         jScrollPane1.setViewportView(gridCategoriaProduto);
 
         jPanel5.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 20, 740, 280);
+        jScrollPane1.setBounds(10, 20, 720, 250);
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(10, 180, 760, 310);
+        jPanel5.setBounds(10, 180, 740, 280);
 
         jTabbedPane1.addTab("Registrar Categoria", jPanel1);
 
@@ -218,7 +220,7 @@ private String combo;
         radioPrima.setBounds(140, 30, 110, 23);
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(10, 360, 260, 80);
+        jPanel6.setBounds(10, 400, 260, 80);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel7.setLayout(null);
@@ -240,7 +242,7 @@ private String combo;
         checkVenda.setBounds(50, 10, 130, 23);
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(280, 360, 230, 80);
+        jPanel7.setBounds(280, 400, 230, 80);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel8.setLayout(null);
@@ -248,17 +250,17 @@ private String combo;
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Ingredientes: ");
         jPanel8.add(jLabel4);
-        jLabel4.setBounds(10, 100, 80, 30);
+        jLabel4.setBounds(10, 140, 80, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Descrição: ");
         jPanel8.add(jLabel2);
-        jLabel2.setBounds(20, 50, 68, 30);
+        jLabel2.setBounds(30, 90, 68, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Tipo Produto: ");
         jPanel8.add(jLabel3);
-        jLabel3.setBounds(20, 10, 80, 30);
+        jLabel3.setBounds(10, 50, 80, 30);
 
         comboTipoProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione um tipo de produto" }));
         comboTipoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -267,19 +269,25 @@ private String combo;
             }
         });
         jPanel8.add(comboTipoProduto);
-        comboTipoProduto.setBounds(100, 10, 190, 30);
+        comboTipoProduto.setBounds(100, 50, 190, 30);
         jPanel8.add(txtDescricao);
-        txtDescricao.setBounds(100, 50, 540, 30);
+        txtDescricao.setBounds(100, 90, 540, 30);
 
         txtIngredientes.setColumns(20);
         txtIngredientes.setRows(5);
         jScrollPane2.setViewportView(txtIngredientes);
 
         jPanel8.add(jScrollPane2);
-        jScrollPane2.setBounds(100, 90, 540, 60);
+        jScrollPane2.setBounds(100, 130, 540, 60);
+
+        jLabel7.setText("Codigo Produto:");
+        jPanel8.add(jLabel7);
+        jLabel7.setBounds(10, 10, 90, 30);
+        jPanel8.add(txtCodigoProduto);
+        txtCodigoProduto.setBounds(100, 10, 100, 30);
 
         jPanel2.add(jPanel8);
-        jPanel8.setBounds(10, 90, 690, 160);
+        jPanel8.setBounds(10, 90, 690, 200);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel9.setLayout(null);
@@ -333,12 +341,12 @@ private String combo;
         LabelQtdeEstoque.setBounds(450, 50, 100, 30);
 
         jPanel2.add(jPanel9);
-        jPanel9.setBounds(10, 260, 690, 90);
+        jPanel9.setBounds(10, 300, 690, 90);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Data Registro: ");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(520, 390, 90, 30);
+        jLabel10.setBounds(520, 430, 90, 30);
 
         jToolBar2.setFloatable(false);
         jToolBar2.setRollover(true);
@@ -418,7 +426,7 @@ private String combo;
 
         txtDataRegistro.setEnabled(false);
         jPanel2.add(txtDataRegistro);
-        txtDataRegistro.setBounds(610, 390, 130, 30);
+        txtDataRegistro.setBounds(610, 430, 130, 30);
 
         jTabbedPane1.addTab("Registrar Produto", jPanel2);
 
@@ -426,22 +434,22 @@ private String combo;
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 785, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 502, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab3", jPanel3);
 
         internalProduto.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 790, 580);
+        jTabbedPane1.setBounds(0, 0, 760, 530);
 
         getContentPane().add(internalProduto);
-        internalProduto.setBounds(10, 0, 780, 530);
+        internalProduto.setBounds(10, 0, 790, 570);
 
-        setBounds(0, 0, 826, 591);
+        setBounds(0, 0, 828, 643);
     }// </editor-fold>//GEN-END:initComponents
 
     private void GravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GravarActionPerformed
@@ -590,22 +598,25 @@ private String combo;
     }//GEN-LAST:event_radioPrimaActionPerformed
 
     private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
-
+        limpacampos();
     }//GEN-LAST:event_NovoActionPerformed
 
     private void Gravar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Gravar1ActionPerformed
 
-        String tipoProduto, descricao, ingredientes, comboMed, comboEst, minimoestoque,produtoacbprima = "", qtdeestoque, valor, dataregistro;
+        String tipoProduto, descricao, ingredientes, comboMed, comboEst,
+               produtoacbprima = "", dataregistro, produtovenda = "", codigoproduto;
         
+        int minimoestoque = 0, qtdeestoque = 0;
+        float valor = 0;
         
+      codigoproduto = txtCodigoProduto.getText();
       tipoProduto = comboTipoProduto.getSelectedItem().toString();
       descricao = txtDescricao.getText();
       ingredientes = txtIngredientes.getText();
       comboMed = comboMedida.getSelectedItem().toString();
       comboEst = comboEstocavel.getSelectedItem().toString();
-      minimoestoque = txtQtdeMin.getText();
-      qtdeestoque = TxtQtdeEstoque.getText();    
-      valor = txtValor.getText();   
+      
+      
      
       
       if(radioAcabado.isSelected()){
@@ -617,20 +628,50 @@ private String combo;
       
       else if(radioPrima.isSelected()){
           
-           produtoacbprima += "Materia Prima Prima";
+           produtoacbprima += "Materia Prima";
           
       }
       
-        if (descricao.equals("")){
+      if(checkVenda.isSelected()){
+            
+          produtovenda += "SIM";
+          valor += Float.parseFloat(txtValor.getText());  
+        }
+      else{
+          
+          produtovenda += "NAO";
+          valor += 0;
+          
+          
+      }
+      
+      if(comboEst.equals("NAO")){
+          
+          minimoestoque += 0;
+          qtdeestoque += 0;
+          
+          
+          
+      }
+      
+      else if(comboEst.equals("SIM")){
+          
+      minimoestoque += Integer.parseInt(txtQtdeMin.getText());
+      qtdeestoque += Integer.parseInt(TxtQtdeEstoque.getText());    
+          
+      }
+      
+      
+        if (codigoproduto.equals("") || descricao.equals("")){
          
-             JOptionPane.showMessageDialog(null, "Preencha a descrição");
+             JOptionPane.showMessageDialog(null, "Preencha o codigo do produto e a descricao");
              
              
          }
         
              else {
              
-             ba.gravaProduto(tipoProduto, descricao, ingredientes, comboMed, comboEst , minimoestoque, produtoacbprima, qtdeestoque, valor);
+             ba.gravaProduto(tipoProduto, descricao, ingredientes, comboMed, comboEst , minimoestoque, produtoacbprima, qtdeestoque, valor, produtovenda,codigoproduto);
 
 
                     limpacampos();
@@ -644,6 +685,7 @@ private String combo;
     
     public void limpacampos(){
         
+        txtCodigoProduto.setText("");
         txtDescricao.setText("");
             txtIngredientes.setText("");
             txtQtdeMin.setText("");
@@ -653,14 +695,186 @@ private String combo;
     }
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
 
+          String tipoProduto, descricao, ingredientes, comboMed, comboEst,
+               produtoacbprima = "", dataregistro, produtovenda = "", codigoproduto;
+        
+        int minimoestoque = 0, qtdeestoque = 0;
+        float valor = 0;
+        
+      codigoproduto = txtCodigoProduto.getText();
+      tipoProduto = comboTipoProduto.getSelectedItem().toString();
+      descricao = txtDescricao.getText();
+      ingredientes = txtIngredientes.getText();
+      comboMed = comboMedida.getSelectedItem().toString();
+      comboEst = comboEstocavel.getSelectedItem().toString();
+      
+      
+     
+      
+      if(radioAcabado.isSelected()){
+          
+          
+         produtoacbprima += "Produto Acabado";
+          
+      }
+      
+      else if(radioPrima.isSelected()){
+          
+           produtoacbprima += "Materia Prima";
+          
+      }
+      
+      if(checkVenda.isSelected()){
+            
+          produtovenda += "SIM";
+          valor += Float.parseFloat(txtValor.getText());  
+        }
+      else{
+          
+          produtovenda += "NAO";
+          valor += 0;
+          
+          
+      }
+      
+      if(comboEst.equals("NAO")){
+          
+          minimoestoque += 0;
+          qtdeestoque += 0;
+          
+          
+          
+      }
+      
+      else if(comboEst.equals("SIM")){
+          
+      minimoestoque += Integer.parseInt(txtQtdeMin.getText());
+      qtdeestoque += Integer.parseInt(TxtQtdeEstoque.getText());    
+          
+      }
+      
+      
+         if (codigoproduto.equals("")){
+         
+             JOptionPane.showMessageDialog(null, "Preencha o codigo do produto");
+             
+             
+         }
+        else{
+
+            ba.atualizaProduto(tipoProduto, descricao, ingredientes, comboMed, comboEst , minimoestoque, produtoacbprima, qtdeestoque, valor, produtovenda,codigoproduto);
+
+        }
+        
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        // TODO add your handling code here:
+
+       String codigoproduto = txtCodigoProduto.getText();
+         
+         if (codigoproduto.equals("")){
+         
+             JOptionPane.showMessageDialog(null, "Preencha o codigo do produto");
+             
+            
+            txtCodigoProduto.requestFocus();
+
+        }
+
+        else{
+            if (ba.excluiProduto(codigoproduto)) {
+                JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+
+           limpacampos();
+
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Não encontrado");
+            }
+        }
+        
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void Pesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pesquisar1ActionPerformed
-     
+
+         ResultSet rs;
+
+        
+         String codigoproduto = txtCodigoProduto.getText();
+        String sexoFun = null;
+       
+
+        
+        if("".equals(codigoproduto)){
+
+            JOptionPane.showMessageDialog(null,"Preencha o campo codigo produto para realizar uma busca");
+            txtCodigoProduto.requestFocus();
+        }
+
+        else{
+
+            rs = ba.buscaProduto(codigoproduto);
+            try {
+
+                if (ba.buscaProduto(codigoproduto) != null) {
+                     String tipoProduto,unidmedida,estocavel,produtovenda,produtoacabadoprima ;
+                    
+                    tipoProduto = rs.getString("tipoproduto");
+                    unidmedida = rs.getString("unidmedida");
+                    estocavel = rs.getString("estocavel");
+                    produtovenda = rs.getString("produtovenda");
+                    produtoacabadoprima = rs.getString("acabadoprima");
+                  
+                    comboTipoProduto.setSelectedItem(tipoProduto);
+                    comboMedida.setSelectedItem(unidmedida);
+                    comboEstocavel.setSelectedItem(estocavel);
+                    
+                    
+                    if(produtoacabadoprima.equals("Produto Acabado")){
+                        
+                        radioAcabado.setSelected(true);
+                        
+                    }
+                    
+                    else if(produtoacabadoprima.equals("Materia Prima")){
+                        
+                        radioPrima.setSelected(true);
+                        
+                    }
+                    
+                    if(produtovenda.equals("SIM")){
+                        
+                        checkVenda.setSelected(true);
+                        txtValor.setVisible(true);
+                        
+                    }
+                    else{
+                        
+                         checkVenda.setSelected(false);
+                         txtValor.setVisible(false);
+                    }
+                    
+                    txtCodigoProduto.setText(rs.getString("codigoproduto"));
+                    txtDescricao.setText(rs.getString("descricao"));
+                    txtIngredientes.setText(rs.getString("ingredientes"));
+                    txtQtdeMin.setText(rs.getString("qtdeminima"));
+                    TxtQtdeEstoque.setText(rs.getString("qtdeestoque"));
+                    txtValor.setText(rs.getString("valor"));
+                    
+                   
+                    
+                    
+                }
+                
+             
+                else{
+
+                   limpacampos();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        
     }//GEN-LAST:event_Pesquisar1ActionPerformed
 
     private void checkVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkVendaActionPerformed
@@ -748,6 +962,7 @@ private String combo;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -771,6 +986,7 @@ private String combo;
     private javax.swing.JRadioButton radioAcabado;
     private javax.swing.JRadioButton radioPrima;
     private javax.swing.JTextField txtCategoriaProduto;
+    private javax.swing.JTextField txtCodigoProduto;
     private com.toedter.calendar.JDateChooser txtDataRegistro;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextArea txtIngredientes;
