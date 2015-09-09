@@ -634,7 +634,7 @@ public class Funcionario extends javax.swing.JPanel {
                      txt_celFun.setText(rs.getString("celFun"));    
                     sexoFun = rs.getString("sexoFun");
                     
-                    System.out.println(sexoFun);
+                  
                      
                     
                     
