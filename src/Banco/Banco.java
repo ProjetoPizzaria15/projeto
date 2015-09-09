@@ -151,6 +151,27 @@ public class Banco {
 
     }
     
+    
+    public void atualizaProduto(String tipoProduto,String  descricao, String ingredientes,String  comboMed,String  comboEst ,int  minimoestoque,String  produtoacbprima,int  qtdeestoque,float  valor, String produtovenda,String codigoproduto) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE produtos SET tipoproduto ='"+tipoProduto+"', descricao ='"+descricao+"', ingredientes ='"+ingredientes+"', unidmedida ='"+comboMed+"', estocavel ='"+comboEst+"', qtdeminima ="+minimoestoque+", acabadoprima ='"+produtoacbprima+"' , valor ="+valor+", qtdeestoque ="+qtdeestoque+" , produtovenda ='"+produtovenda+"' WHERE codigoproduto = '"+codigoproduto+"'"; 
+
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Cliente Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
       
     public void atualizaFornecedorCPF(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor) {
         String sql;
@@ -358,6 +379,30 @@ public class Banco {
         }
 
     }
+      
+       public ResultSet buscaProduto(String codigoproduto) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT * FROM produtos WHERE codigoproduto='" + codigoproduto + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("codigoproduto") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+      
+      
     /* REALIZA A BUSCA DO FORNECEDOR POR MEIO DO CPF  */
     
     public ResultSet buscaFornecedorCPF(String cpf) {
@@ -453,6 +498,24 @@ public class Banco {
 
         try {
             sql = "DELETE FROM funcionario WHERE cpfFun= '" + cpf + "';";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+            return true;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+
+    }
+    
+     public boolean excluiProduto(String codigoproduto) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "DELETE FROM produtos WHERE codigoproduto= '" + codigoproduto + "';";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             
@@ -760,7 +823,7 @@ public class Banco {
     }
     
      
-    public boolean gravaProduto(String tipoProduto,String  descricao, String ingredientes,String  comboMed,String  comboEst ,String  minimoestoque,String  produtoacbprima,String  qtdeestoque,String  valor) {
+    public boolean gravaProduto(String tipoProduto,String  descricao, String ingredientes,String  comboMed,String  comboEst ,int  minimoestoque,String  produtoacbprima,int  qtdeestoque,float  valor, String produtovenda,String codigoproduto) {
         conecta();
         String sql;
 
@@ -771,8 +834,8 @@ public class Banco {
               
           
             
-                sql = "INSERT INTO Produtos(tipoProduto, descricao, ingredientes, unidmedida, estocavel, qtdeminima,acabadoprima, qtdeestoque, valor) VALUES ('"; // nome das variaveis do BD
-                sql += tipoProduto + "', '" + descricao + "','" + ingredientes + "' , '"+ comboMed +"' , '"+ comboEst +"' , '"+ minimoestoque +"' ,'" + produtoacbprima + "', '" + qtdeestoque + "','" + valor + "')";
+                sql = "INSERT INTO Produtos(tipoProduto, descricao, ingredientes, unidmedida, estocavel, qtdeminima,acabadoprima, qtdeestoque, valor,produtovenda,codigoproduto) VALUES ('"; // nome das variaveis do BD
+                sql += tipoProduto + "', '" + descricao + "','" + ingredientes + "' , '"+ comboMed +"' , '"+ comboEst +"' , "+ minimoestoque +" ,'" + produtoacbprima + "', " + qtdeestoque + "," + valor + " ,'" + produtovenda + "','" + codigoproduto + "')";
                 
                 /*sql = "INSERT INTO usuario(login, senha, permissao) VALUES ('"; // nome das variaveis do BD
                 sql += loginFun + "', '"+ senhaFun +"' , '"+ permissao +"')";*/
@@ -976,83 +1039,8 @@ public class Banco {
     }
     
     
-    public boolean gravaProdutos(String descProduto,String codigoProduto,String compleProduto,String categoriaProduto,String fornecedorProduto,String unidadeProduto,String marcaProduto,String quantidade,String minimoEstoque,String maximoEstoque,String precoCompra,String quantAtacado,String descontoAtacado,String margemLucro,String impostos,String desconto) {
-     conecta();
-        String sql;
-
-
-//Captura os dados digitados
-
-        try {
-
-
-
-
-                sql = "INSERT INTO Produtos(descProduto, codigoProduto, compleProduto, categoriaProduto, fornecedorProduto, unidadeProduto, marcaProduto, quantidade, minimoEstoque, maximoEstoque,precoCompra, quantAtacado, descontoAtacado, margemLucro, impostos, desconto) VALUES ('"; // nome das variaveis do BD
-                sql += descProduto + "', '" + codigoProduto + "','" + compleProduto + "' , '" + categoriaProduto +"' , '"+ fornecedorProduto +"' , '"+ unidadeProduto +"' ,'" + marcaProduto + "', '" + quantidade + "' , '" + minimoEstoque + "' , '" + maximoEstoque + "' , '" + precoCompra +"' , '" + quantAtacado + "' , '" + descontoAtacado + "' , '" + margemLucro + "' , '" + impostos + "' , '" + desconto + "' )";
-
-
-                stmt.executeUpdate(sql);
-
-                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
-                return true;
-
-
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao executar o comando SQL:" + e.toString());
-            return false;
-        }
-
-    }
-   
-    public boolean excluiProduto(String codigoProduto) {
-        String sql;
-        conecta();
-
-        try {
-            sql = "DELETE FROM Produtos WHERE codigoProduto= '" + codigoProduto + "';";
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-            
-            return true;
-
-        } catch (SQLException e) {
-
-            return false;
-        }
-
-    }
+  
     
-    public boolean gravaCategoria(String Categoria,String Marca,String Unidade) {
-     conecta();
-        String sql;
-
-
-//Captura os dados digitados
-
-        try {
-
-
-
-
-                sql = "INSERT INTO Categoria(Categoria, Marca, Unidade) VALUES ('"; // nome das variaveis do BD
-                sql += Categoria + "', '" + Marca + "','" + Unidade + "')";
-
-
-                stmt.executeUpdate(sql);
-
-                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
-                return true;
-
-
-
-        } catch (SQLException e) {
-            System.out.println("Erro ao executar o comando SQL:" + e.toString());
-            return false;
-        }
-
-    }
     
     
     
