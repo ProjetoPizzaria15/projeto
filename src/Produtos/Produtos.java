@@ -4,6 +4,7 @@ import Banco.Banco;
 import Banco.BancoFuncoes;
 import BancoObjeto.ObjetoCategoriaProduto;
 import BancoObjeto.ObjetoCliente;
+import Funcoes.LimitarCampos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -31,6 +32,17 @@ public class Produtos extends javax.swing.JFrame {
         txtValor.setVisible(false);
         labelValor.setVisible(false);
 
+        
+        txtCodigoProduto.setDocument(new LimitarCampos(5));
+        txtDescricao.setDocument(new LimitarCampos(50));
+        txtIngredientes.setDocument(new LimitarCampos(200));
+        txtQtdeMin.setDocument(new LimitarCampos(6));
+        TxtQtdeEstoque.setDocument(new LimitarCampos(6));
+        txtValor.setDocument(new LimitarCampos(6));
+        txtCategoriaProduto.setDocument(new LimitarCampos(20));
+        
+        
+        
             
       gridCategoriaProduto.setModel(  
       new DefaultTableModel(  
@@ -164,14 +176,14 @@ private String combo;
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel4.setLayout(null);
         jPanel4.add(txtCategoriaProduto);
-        txtCategoriaProduto.setBounds(70, 40, 140, 30);
+        txtCategoriaProduto.setBounds(70, 40, 250, 30);
 
         jLabel1.setText("Categoria:");
         jPanel4.add(jLabel1);
         jLabel1.setBounds(10, 40, 70, 30);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(10, 70, 250, 100);
+        jPanel4.setBounds(10, 70, 340, 100);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Registros Categoria"));
         jPanel5.setLayout(null);
