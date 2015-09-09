@@ -27,7 +27,7 @@ CREATE TABLE `categoriaproduto` (
 
 /*Data for the table `categoriaproduto` */
 
-insert  into `categoriaproduto`(`categoria`) values ('Refrigerante'),('testando');
+insert  into `categoriaproduto`(`categoria`) values ('Massa'),('Refrigerante');
 
 /*Table structure for table `clientes` */
 
@@ -69,6 +69,28 @@ CREATE TABLE `contaspagar` (
 /*Data for the table `contaspagar` */
 
 insert  into `contaspagar`(`notaFiscal`,`descricao`,`dataRecebimento`,`dataEmissao`,`dataVencimento`,`valor`,`juros`,`multa`) values ('121','jghj','12/12/1212','12/12/1212','12/12/1212','1,00','1,00','1,00'),('123','ghgf123','21/22/2121','12/12/1212','12/12/1212','100,50','3,25','1,00'),('2113','hjghj','23/13/2213','12/31/2312','12/31/2313','2,00','2,00','2,00'),('321','mnmbnm','02/09/2013','02/09/2013','02/09/2013',' 1,00','1,50','1,30'),('5434534534','gdfgdfgfdgd','34/23/4243','34/23/4234','42/34/3242','R$ 3,00','3,00%','4,00%'),('63','sdfsfsf		','12/31/3131','34/34/3434','43/43/4343','R$ 1,00','1,00%','1,00%');
+
+/*Table structure for table `contasreceber` */
+
+DROP TABLE IF EXISTS `contasreceber`;
+
+CREATE TABLE `contasreceber` (
+  `descricao` varchar(200) DEFAULT NULL,
+  `valor` varchar(7) DEFAULT NULL,
+  `juros` varchar(7) DEFAULT NULL,
+  `multa` varchar(7) DEFAULT NULL,
+  `tipopagamento` varchar(20) DEFAULT NULL,
+  `nparcela` varchar(1) DEFAULT NULL,
+  `dtrecebimento` varchar(10) DEFAULT NULL,
+  `dtemissao` varchar(10) DEFAULT NULL,
+  `dtvencimento` varchar(10) DEFAULT NULL,
+  `Cliente` varchar(50) DEFAULT NULL,
+  `telefone` varchar(13) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `contasreceber` */
+
+insert  into `contasreceber`(`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`,`Cliente`,`telefone`) values ('1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    ','2312312','2113'),('1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    ','4535','45345'),('1312312','0,00','0,00','0,00','Cartão de Débito','5','31/23/2313','31/23/1231','  /  /    ','1','1'),('45345','5,00','5,00','5,00','Cartão de Débito','2','53/45/4354','45/33/4534','  /  /    ','343','43'),('7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546','6565','545');
 
 /*Table structure for table `fornecedor` */
 
@@ -132,21 +154,24 @@ insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`comp
 DROP TABLE IF EXISTS `produtos`;
 
 CREATE TABLE `produtos` (
+  `codigoproduto` varchar(5) NOT NULL,
   `tipoproduto` varchar(20) DEFAULT NULL,
   `descricao` varchar(50) DEFAULT NULL,
   `ingredientes` varchar(50) DEFAULT NULL,
   `unidmedida` varchar(2) DEFAULT NULL,
   `estocavel` varchar(3) DEFAULT NULL,
-  `qtdeminima` varchar(6) DEFAULT NULL,
+  `qtdeminima` int(6) DEFAULT NULL,
   `acabadoprima` varchar(25) DEFAULT NULL,
   `dataregistro` varchar(10) DEFAULT NULL,
-  `valor` varchar(6) DEFAULT NULL,
-  `qtdeestoque` varchar(6) DEFAULT NULL
+  `valor` float(6,2) DEFAULT NULL,
+  `qtdeestoque` int(6) DEFAULT NULL,
+  `produtovenda` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`codigoproduto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `produtos` */
 
-insert  into `produtos`(`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`dataregistro`,`valor`,`qtdeestoque`) values ('Refrigerante','Coca Cola','	','LT','SIM','10','nullProduto Acabado',NULL,'5,30','15'),('testando','Teste','um pouco de teste	','CX','SIM','10','Produto Prima',NULL,'5,30','100'),('testando','Teste 2','Teste 264','CX','NAO','','Produto Prima',NULL,'','');
+insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`dataregistro`,`valor`,`qtdeestoque`,`produtovenda`) values ('','testando','testando int float','massa, tomate, oleo, queijo','UN','SIM',10,'Produto Acabado',NULL,12.30,100,'SIM'),('123','Massa','massa para pizza','trigo	','UN','SIM',11,'Produto Acabado',NULL,10.00,11,'SIM'),('5566','','343','45435','UN','SIM',4,'Produto Acabado',NULL,323.00,43,'SIM');
 
 /*Table structure for table `usuario` */
 
