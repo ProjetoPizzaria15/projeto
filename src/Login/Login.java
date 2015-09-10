@@ -9,6 +9,7 @@ import Banco.Banco;
 import Caixa.Caixa;
 import Funcoes.LimitarCampos;
 import Principal.Principal;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,8 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
+        
+        getRootPane().setDefaultButton(btnLogin);
         
         this.setLocationRelativeTo(null);  
         
@@ -44,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,15 +87,20 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(20, 600, 130, 50);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/login.png"))); // NOI18N
-        jButton3.setText("Entrar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/login.png"))); // NOI18N
+        btnLogin.setText("Entrar");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(440, 370, 160, 50);
+        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnLoginKeyPressed(evt);
+            }
+        });
+        getContentPane().add(btnLogin);
+        btnLogin.setBounds(440, 370, 160, 50);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/pizza_grande.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -105,7 +113,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String login =txtLogin.getText();
      String senha =txtSenha.getText();
         
@@ -133,7 +141,47 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Login ou senha incorreta");
             }   
       }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){ 
+           
+                String login =txtLogin.getText();
+     String senha =txtSenha.getText();
+        
+     
+    if("".equals(login) || "".equals(senha)){
+        JOptionPane.showMessageDialog(null,"Preencha todos os campos");    
+    }
+     
+      else{
+       if (ba.login(login, senha)) {
+            
+                if(login.contains("caixa"))
+                {
+                    Caixa frente = new Caixa();
+                    frente.setVisible(true);
+                    this.setVisible(false);
+                }
+                else{
+                    Principal p = new Principal();
+                    p.setVisible(true);
+                    this.setVisible(false);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Login ou senha incorreta");
+            }   
+      }
+    }     
+            
+             
+    
+        
+        
+        
+    }//GEN-LAST:event_btnLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -171,9 +219,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
