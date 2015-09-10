@@ -612,6 +612,11 @@ public class ContasPagarReceber extends javax.swing.JFrame {
                     txt_jurosPagar.setText(rs.getString("juros"));
                     txt_multaPagar.setText(rs.getString("multa"));
 
+                    
+                     String fornecedor = rs.getString("fornecedor");
+                  
+                    comboFornecedor.setSelectedItem(fornecedor);
+                    
                 }
                 else{
 
@@ -686,7 +691,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void btnGravaContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravaContaPagarActionPerformed
-        String notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa;
+        String notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa, fornecedor;
 
         notaFiscal = txt_notaPagar.getText();
         descricao = txt_descricaoPagar.getText();
@@ -696,6 +701,9 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         valor = txt_valorPagar.getText();
         juros = txt_jurosPagar.getText();
         multa = txt_multaPagar.getText();
+        
+       fornecedor = comboFornecedor.getSelectedItem().toString();
+        
 
         if("".equals(notaFiscal) || "0".equals(notaFiscal) || "".equals(descricao) || "  /  /    ".equals(descricao)
             || "  /  /    ".equals(recebimento) || "  /  /    ".equals(emissao)
@@ -708,7 +716,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         else{
             Alerta.setVisible(false);
 
-            if (ba.gravaContaPagar(notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa)) {
+            if (ba.gravaContaPagar(notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa, fornecedor)) {
 
                 txt_notaPagar.setText("0");
                 txt_descricaoPagar.setText("");
@@ -740,7 +748,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private void btnAlterarContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarContaPagarActionPerformed
 
            
-        String notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa;
+        String notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa, fornecedor;
         
         notaFiscal = txt_notaPagar.getText();
         descricao = txt_descricaoPagar.getText();
@@ -750,7 +758,8 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         valor = txt_valorPagar.getText();
         juros = txt_jurosPagar.getText();
         multa = txt_multaPagar.getText();
-
+        
+        fornecedor = comboFornecedor.getSelectedItem().toString();
 
 
         if("".equals(notaFiscal)||"0".equals(notaFiscal) ){
@@ -760,7 +769,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         }
         else{
 
-            ba.atualizaContaPagar(notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa);
+            ba.atualizaContaPagar(notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa, fornecedor);
 
         }
         
