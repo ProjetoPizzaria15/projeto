@@ -236,13 +236,13 @@ public class Banco {
 
     }
     
-     public void atualizaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa) {
+     public void atualizaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa,String fornecedor) {
         String sql;
         conecta();
 
         try {
 
-              sql = "UPDATE contasPagar SET descricao ='"+descricao+"', dataRecebimento ='"+recebimento+"', dataEmissao ='"+emissao+"', dataVencimento ='"+vencimento+"', valor ='"+valor+"', juros ='"+juros+"', multa ='"+multa+"'  WHERE notaFiscal = '"+notaFiscal+"'"; 
+              sql = "UPDATE contasPagar SET descricao ='"+descricao+"', dataRecebimento ='"+recebimento+"', dataEmissao ='"+emissao+"', dataVencimento ='"+vencimento+"', valor ='"+valor+"', juros ='"+juros+"', multa ='"+multa+"' , fornecedor ='"+fornecedor+"'  WHERE notaFiscal = '"+notaFiscal+"'"; 
 
         
               stmt.executeUpdate(sql);
@@ -976,7 +976,7 @@ public class Banco {
     }
     
     
-    public boolean gravaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa) {
+    public boolean gravaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa, String fornecedor) {
      conecta();
         String sql;
 
@@ -988,8 +988,8 @@ public class Banco {
 
 
 
-                sql = "INSERT INTO ContasPagar(notaFiscal, descricao, dataRecebimento, dataEmissao, dataVencimento, valor, juros, multa) VALUES ('"; // nome das variaveis do BD
-                sql += notaFiscal + "', '" + descricao + "','" + recebimento + "' , '" + emissao +"' , '"+ vencimento +"' , '"+ valor +"' ,'" + juros + "', '" + multa + "')";
+                sql = "INSERT INTO ContasPagar(notaFiscal, descricao, dataRecebimento, dataEmissao, dataVencimento, valor, juros, multa,fornecedor) VALUES ('"; // nome das variaveis do BD
+                sql += notaFiscal + "', '" + descricao + "','" + recebimento + "' , '" + emissao +"' , '"+ vencimento +"' , '"+ valor +"' ,'" + juros + "', '" + multa + "', '" + fornecedor + "')";
 
 
                 stmt.executeUpdate(sql);
