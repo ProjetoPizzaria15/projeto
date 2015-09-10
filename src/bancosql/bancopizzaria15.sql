@@ -63,12 +63,13 @@ CREATE TABLE `contaspagar` (
   `valor` varchar(100) DEFAULT NULL,
   `juros` varchar(100) DEFAULT NULL,
   `multa` varchar(100) DEFAULT NULL,
+  `fornecedor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`notaFiscal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `contaspagar` */
 
-insert  into `contaspagar`(`notaFiscal`,`descricao`,`dataRecebimento`,`dataEmissao`,`dataVencimento`,`valor`,`juros`,`multa`) values ('121','jghj','12/12/1212','12/12/1212','12/12/1212','1,00','1,00','1,00'),('123','ghgf123','21/22/2121','12/12/1212','12/12/1212','100,50','3,25','1,00'),('2113','hjghj','23/13/2213','12/31/2312','12/31/2313','2,00','2,00','2,00'),('321','mnmbnm','02/09/2013','02/09/2013','02/09/2013',' 1,00','1,50','1,30'),('5434534534','gdfgdfgfdgd','34/23/4243','34/23/4234','42/34/3242','R$ 3,00','3,00%','4,00%'),('63','sdfsfsf		','12/31/3131','34/34/3434','43/43/4343','R$ 1,00','1,00%','1,00%');
+insert  into `contaspagar`(`notaFiscal`,`descricao`,`dataRecebimento`,`dataEmissao`,`dataVencimento`,`valor`,`juros`,`multa`,`fornecedor`) values ('121','jghj','12/12/1212','12/12/1212','12/12/1212','1,00','1,00','1,00',NULL),('123','ghgf123','21/22/2121','12/12/1212','12/12/1212','100,50','3,25','1,00',NULL),('2113','hjghj','23/13/2213','12/31/2312','12/31/2313','2,00','2,00','2,00',NULL),('321','mnmbnm','02/09/2013','02/09/2013','02/09/2013',' 1,00','1,50','1,30',NULL),('5434534534','gdfgdfgfdgd','34/23/4243','34/23/4234','42/34/3242','R$ 3,00','3,00%','4,00%',NULL),('545354535435','3433','43/53/5435','45/34/5453','54/35/4433','3,00','4,00','3,00','Paulo'),('63','sdfsfsf		','12/31/3131','34/34/3434','43/43/4343','R$ 1,00','1,00%','1,00%',NULL);
 
 /*Table structure for table `contasreceber` */
 
@@ -157,7 +158,7 @@ CREATE TABLE `produtos` (
   `codigoproduto` varchar(5) NOT NULL,
   `tipoproduto` varchar(20) DEFAULT NULL,
   `descricao` varchar(50) DEFAULT NULL,
-  `ingredientes` varchar(200) DEFAULT NULL,
+  `ingredientes` varchar(50) DEFAULT NULL,
   `unidmedida` varchar(2) DEFAULT NULL,
   `estocavel` varchar(3) DEFAULT NULL,
   `qtdeminima` int(6) DEFAULT NULL,
@@ -171,7 +172,7 @@ CREATE TABLE `produtos` (
 
 /*Data for the table `produtos` */
 
-insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`dataregistro`,`valor`,`qtdeestoque`,`produtovenda`) values ('','testando','testando int float','massa, tomate, oleo, queijo','UN','SIM',10,'Produto Acabado',NULL,12.30,100,'SIM'),('123','Massa','massa para pizza','trigo	','UN','SIM',11,'Produto Acabado',NULL,10.00,11,'SIM'),('13143','Massa','ytyht','jghjgj','GR','SIM',20,'Produto Acabado',NULL,70.00,40,'SIM'),('5566','','343','45435','UN','SIM',4,'Produto Acabado',NULL,323.00,43,'SIM');
+insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`dataregistro`,`valor`,`qtdeestoque`,`produtovenda`) values ('','testando','testando int float','massa, tomate, oleo, queijo','UN','SIM',10,'Produto Acabado',NULL,12.30,100,'SIM'),('123','Massa','massa para pizza','trigo	','UN','SIM',11,'Produto Acabado',NULL,10.00,11,'SIM'),('5566','','343','45435','UN','SIM',4,'Produto Acabado',NULL,323.00,43,'SIM');
 
 /*Table structure for table `usuario` */
 
@@ -184,13 +185,13 @@ CREATE TABLE `usuario` (
   `senha` varchar(60) DEFAULT NULL,
   `permissao` varchar(4) DEFAULT NULL,
   `logado` char(2) DEFAULT NULL,
-  `cpfFun` varchar(15) DEFAULT NULL,
+  `cpf` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'','','00','n',NULL),(NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'11','11','10','n',NULL),(NULL,NULL,'11111','11111',NULL,'n',NULL),(NULL,NULL,'123123','123123','01','n',NULL),(NULL,NULL,'4455','4545',NULL,'n',NULL),(NULL,NULL,'4545','4545',NULL,'n',NULL),(NULL,NULL,'caixa','caixa','10','n',NULL),(NULL,NULL,'caixa2','caixa2','10','n',NULL),(0,'paulo','paulo36','3636','111','n',NULL),(NULL,NULL,'teste2','teste2',NULL,'n',NULL),(NULL,NULL,'usuario3','3636',NULL,'n',NULL),(NULL,NULL,'usuario4','3636',NULL,'n',NULL),(NULL,NULL,'usuario5','3636',NULL,'n',NULL),(NULL,NULL,'youtuber','cash','00','n',NULL);
+insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpf`) values (NULL,NULL,'','','00','n',NULL),(NULL,NULL,'11','11','10','n',NULL),(NULL,NULL,'11111','11111',NULL,'n',NULL),(NULL,NULL,'123123','123123','01','s',NULL),(NULL,NULL,'4455','4545',NULL,'n',NULL),(NULL,NULL,'4545','4545',NULL,'n',NULL),(NULL,NULL,'caixa','caixa','10','n',NULL),(NULL,NULL,'caixa2','caixa2','10','n',NULL),(0,'paulo','paulo36','3636','111','n',NULL),(NULL,NULL,'teste2','teste2',NULL,'n',NULL),(NULL,NULL,'usuario3','3636',NULL,'n',NULL),(NULL,NULL,'usuario4','3636',NULL,'n',NULL),(NULL,NULL,'usuario5','3636',NULL,'n',NULL),(NULL,NULL,'youtuber','cash','00','n',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
