@@ -257,6 +257,27 @@ public class Banco {
 
     }
 
+      public void atualizaContaReceber(String  descricaoReceber,String dtReceber,String emissaoReceber,String  vencimentoReceber,
+                String  valorReceber,String jurosReceber,String multaReceber, String TelefoneClienteReceber,String  ClienteReceber,String  tipopagamento,String  parcelas) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE contasReceber SET descricao ='"+descricaoReceber+"', dtrecebimento ='"+dtReceber+"', dtemissao ='"+emissaoReceber+"', dtvencimento ='"+vencimentoReceber+"', valor ='"+valorReceber+"', juros ='"+jurosReceber+"', multa ='"+multaReceber+"' , Cliente ='"+ClienteReceber+"' , tipopagamento ='"+tipopagamento+"' , nparcela ='"+parcelas+"'  WHERE telefone = '"+TelefoneClienteReceber+"'"; 
+
+        
+              stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Conta Atualizado com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
     public void atualizaFornecedor(String nomeFantasia,String endeFor,String cidadeFor,String nomeContato,String emailFor,String bairroFor,String cnpjFor,String cepFor,String telFor,String celFor,String estadualFor,String numFor,String tel2For,String siteFor) {
         String sql;
         conecta();
@@ -473,6 +494,27 @@ public class Banco {
 
     }
     
+     public ResultSet buscaContaReceber(String telefone) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT * FROM contasreceber WHERE telefone='" + telefone + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("telefone") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
     
     public boolean excluiCliente(String telefone) {
         String sql;
@@ -546,6 +588,24 @@ public class Banco {
 
     }
 
+      public boolean excluiContaReceber(String telefone) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "DELETE FROM contasreceber WHERE telefone= '" + telefone + "';";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+            return true;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+
+    }
+      
     public boolean excluiFornecedorCPF(String cpf) {
         String sql;
         conecta();
