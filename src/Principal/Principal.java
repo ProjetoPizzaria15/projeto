@@ -183,7 +183,7 @@ public class Principal extends javax.swing.JFrame {
 
         jButton8.setBackground(new java.awt.Color(255, 255, 204));
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1440271170_wallet.png"))); // NOI18N
-        jButton8.setText("Contas a Pagar");
+        jButton8.setText("Contas a Pagar/Receber");
         jButton8.setFocusable(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setMargin(new java.awt.Insets(2, 25, 2, 25));
