@@ -60,9 +60,9 @@ CREATE TABLE `contaspagar` (
   `dataRecebimento` varchar(10) DEFAULT NULL,
   `dataEmissao` varchar(10) DEFAULT NULL,
   `dataVencimento` varchar(10) DEFAULT NULL,
-  `valor` varchar(100) DEFAULT NULL,
-  `juros` varchar(100) DEFAULT NULL,
-  `multa` varchar(100) DEFAULT NULL,
+  `valor` varchar(10) DEFAULT NULL,
+  `juros` varchar(10) DEFAULT NULL,
+  `multa` varchar(10) DEFAULT NULL,
   `fornecedor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`notaFiscal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -76,22 +76,22 @@ insert  into `contaspagar`(`notaFiscal`,`descricao`,`dataRecebimento`,`dataEmiss
 DROP TABLE IF EXISTS `contasreceber`;
 
 CREATE TABLE `contasreceber` (
+  `telefone` varchar(13) DEFAULT NULL,
+  `Cliente` varchar(50) DEFAULT NULL,
   `descricao` varchar(200) DEFAULT NULL,
-  `valor` varchar(7) DEFAULT NULL,
-  `juros` varchar(7) DEFAULT NULL,
-  `multa` varchar(7) DEFAULT NULL,
+  `valor` varchar(10) DEFAULT NULL,
+  `juros` varchar(10) DEFAULT NULL,
+  `multa` varchar(10) DEFAULT NULL,
   `tipopagamento` varchar(20) DEFAULT NULL,
   `nparcela` varchar(1) DEFAULT NULL,
   `dtrecebimento` varchar(10) DEFAULT NULL,
   `dtemissao` varchar(10) DEFAULT NULL,
-  `dtvencimento` varchar(10) DEFAULT NULL,
-  `Cliente` varchar(50) DEFAULT NULL,
-  `telefone` varchar(13) DEFAULT NULL
+  `dtvencimento` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `contasreceber` */
 
-insert  into `contasreceber`(`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`,`Cliente`,`telefone`) values ('1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    ','2312312','2113'),('1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    ','4535','45345'),('1312312','0,00','0,00','0,00','Cartão de Débito','5','31/23/2313','31/23/1231','  /  /    ','1','1'),('45345','5,00','5,00','5,00','Cartão de Débito','2','53/45/4354','45/33/4534','  /  /    ','343','43'),('7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546','6565','545');
+insert  into `contasreceber`(`telefone`,`Cliente`,`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`) values ('2113','2312312','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('45345','4535','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('1','1','1312312','0,00','0,00','0,00','Cartão de Débito','5','31/23/2313','31/23/1231','  /  /    '),('43','343','45345','5,00','5,00','5,00','Cartão de Débito','2','53/45/4354','45/33/4534','  /  /    '),('545','6565','7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546'),('25858180','Paulo','gdfgdgdg','43343,00','343,00','3434,00','Cartão de Débito','2','33/24/3434','23/42/3443','32/42/3442'),('25858180','Paulo','gdfgdgdg','43343,00','343,00','3434,00','Cartão de Débito','2','33/24/3434','23/42/3443','32/42/3442');
 
 /*Table structure for table `fornecedor` */
 
