@@ -6,6 +6,7 @@
 package ContaPagarReceber;
 
 import Banco.Banco;
+import Banco.BancoCep;
 import Banco.BancoFuncoes;
 import Funcoes.LimitarCampos;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ import org.alfredlibrary.validadores.CPF;
  * @author Usuario
  */
 public class ContasPagarReceber extends javax.swing.JFrame {
-
+    BancoCep bacep = new BancoCep();
    Banco ba = new Banco();
    BancoFuncoes bf = new BancoFuncoes();
    
@@ -30,9 +31,31 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         
        Alerta.setVisible(false);
        
-       
+       // limita campos contas a pagar
        txt_notaPagar.setDocument(new LimitarCampos(50));
        txt_descricaoPagar.setDocument(new LimitarCampos(200));
+       txt_valorPagar.setDocument(new LimitarCampos(10));
+       txt_jurosPagar.setDocument(new LimitarCampos(10));
+       txt_multaPagar.setDocument(new LimitarCampos(10));
+       
+       // limita campos contas a receber
+       
+       txt_TelefoneClienteReceber.setDocument(new LimitarCampos(9));
+       txt_ClienteReceber.setDocument(new LimitarCampos(50));
+       txt_descReceber.setDocument(new LimitarCampos(200));
+       txt_valorReceber.setDocument(new LimitarCampos(10));
+       txt_jurosReceber.setDocument(new LimitarCampos(10));
+       txt_multaReceber.setDocument(new LimitarCampos(10));
+       
+           
+       
+       
+       txt_TelefoneClienteReceber.addFocusListener(new java.awt.event.FocusAdapter() {  
+              public void focusLost(java.awt.event.FocusEvent evt) {  
+                  txtTelefoneFocusLostCep(evt);  
+              }  
+              
+          });
         
     }
     
@@ -123,7 +146,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_TelefoneClienteReceber = new javax.swing.JTextField();
         txt_ClienteReceber = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -348,10 +370,10 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txt_descReceber);
 
         jPanel7.add(jScrollPane2);
-        jScrollPane2.setBounds(70, 20, 250, 110);
+        jScrollPane2.setBounds(70, 20, 380, 110);
 
         jPanel6.add(jPanel7);
-        jPanel7.setBounds(380, 100, 340, 140);
+        jPanel7.setBounds(380, 100, 460, 140);
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalhes"));
         jPanel8.setLayout(null);
@@ -401,7 +423,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jLabel23.setBounds(10, 220, 130, 15);
 
         jPanel6.add(jPanel8);
-        jPanel8.setBounds(380, 260, 330, 270);
+        jPanel8.setBounds(380, 260, 460, 270);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Datas"));
         jPanel9.setLayout(null);
@@ -521,7 +543,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jToolBar3.add(jButton28);
 
         jPanel6.add(jToolBar3);
-        jToolBar3.setBounds(0, 0, 750, 80);
+        jToolBar3.setBounds(0, 0, 850, 80);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
         jPanel1.setLayout(null);
@@ -533,14 +555,18 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jLabel2.setText("Telefone:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 20, 60, 30);
-        jPanel1.add(txt_TelefoneClienteReceber);
-        txt_TelefoneClienteReceber.setBounds(90, 20, 160, 30);
-        jPanel1.add(txt_ClienteReceber);
-        txt_ClienteReceber.setBounds(90, 60, 160, 30);
 
-        jButton1.setText("Pesquisar");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(260, 20, 90, 70);
+        txt_TelefoneClienteReceber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_TelefoneClienteReceberFocusLost(evt);
+            }
+        });
+        jPanel1.add(txt_TelefoneClienteReceber);
+        txt_TelefoneClienteReceber.setBounds(90, 20, 110, 30);
+
+        txt_ClienteReceber.setEditable(false);
+        jPanel1.add(txt_ClienteReceber);
+        txt_ClienteReceber.setBounds(30, 90, 310, 30);
 
         jPanel6.add(jPanel1);
         jPanel1.setBounds(20, 100, 360, 140);
@@ -573,14 +599,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
                 if (ba.excluiContaPagar(notaFiscal)) {
                     JOptionPane.showMessageDialog(null, "Excluido com sucesso");
                     
-               txt_notaPagar.setText("0");
-                txt_descricaoPagar.setText("");
-                msk_recebimentoPagar.setText("");
-                msk_emissaoPagar.setText("");
-                msk_vencimentoPagar.setText("");
-                txt_valorPagar.setText("0");
-                txt_jurosPagar.setText("0");
-                txt_multaPagar.setText("0");
+               limparcamposPagar();
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Não encontrado");
@@ -644,6 +663,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
                  valorReceber,jurosReceber,multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas;
 
      
+      
         descricaoReceber = txt_descReceber.getText();
         dtReceber = txt_dtRecebimento.getText();
         emissaoReceber = txt_emissaoReceber.getText();
@@ -668,16 +688,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
             if (ba.gravaContaReceber(descricaoReceber, dtReceber, emissaoReceber, vencimentoReceber, valorReceber, jurosReceber, multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas)) {
                
                 
-                txt_ClienteReceber.setText("");
-                txt_TelefoneClienteReceber.setText("");
-                txt_notaPagar.setText("0");
-                txt_descricaoPagar.setText("");
-                msk_recebimentoPagar.setText("");
-                msk_emissaoPagar.setText("");
-                msk_vencimentoPagar.setText("");
-                txt_valorPagar.setText("0");
-                txt_jurosPagar.setText("0");
-                txt_multaPagar.setText("0");
+              limparcamposReceber();
                 
 
             }
@@ -686,8 +697,67 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton21ActionPerformed
 
+    public void limparcamposReceber(){
+        
+                txt_TelefoneClienteReceber.setText("");
+                txt_ClienteReceber.setText("");
+                txt_dataRecebimento.setText("");
+                txt_emissaoReceber.setText("");
+                txt_dtRecebimento.setText("");
+                txt_descReceber.setText("");
+                txt_valorReceber.setText("0");
+                txt_jurosReceber.setText("0");
+                txt_multaReceber.setText("0");
+              
+        
+    }
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        // TODO add your handling code here:
+        
+        
+         ResultSet rs;
+        String telefone = txt_TelefoneClienteReceber.getText();
+
+        if("".equals(telefone)){
+
+            JOptionPane.showMessageDialog(null,"Preencha o campo telefone para realizar uma busca");
+        }
+
+        else{
+
+            rs = ba.buscaContaReceber(telefone);
+            try {
+
+                if (ba.buscaContaReceber(telefone) != null) {
+                    
+                    txt_ClienteReceber.setText(rs.getString("cliente"));
+                    txt_dataRecebimento.setText(rs.getString("dtrecebimento"));
+                    txt_emissaoReceber.setText(rs.getString("dtemissao"));
+                    txt_dtRecebimento.setText(rs.getString("dtvencimento"));
+                    txt_descReceber.setText(rs.getString("descricao"));
+                    txt_valorReceber.setText(rs.getString("valor"));
+                    txt_jurosReceber.setText(rs.getString("juros"));
+                    txt_multaReceber.setText(rs.getString("multa"));
+                    
+
+                    
+                     String tipopagamento = rs.getString("tipopagamento");
+                     String parcelas = rs.getString("nparcela");
+                  
+                    combo_tipoPagamento.setSelectedItem(tipopagamento);
+                    
+                    combo_parcelas.setSelectedItem(parcelas);
+                    
+                }
+                else{
+
+                    JOptionPane.showMessageDialog(rootPane, "não encontrado");
+
+               limparcamposReceber();
+
+                }
+            } catch (SQLException ex) {
+            }
+        }
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void btnGravaContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravaContaPagarActionPerformed
@@ -718,14 +788,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
             if (ba.gravaContaPagar(notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa, fornecedor)) {
 
-                txt_notaPagar.setText("0");
-                txt_descricaoPagar.setText("");
-                msk_recebimentoPagar.setText("");
-                msk_emissaoPagar.setText("");
-                msk_vencimentoPagar.setText("");
-                txt_valorPagar.setText("0");
-                txt_jurosPagar.setText("0");
-                txt_multaPagar.setText("0");
+                limparcamposPagar();
                 
 
             }
@@ -735,7 +798,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
     private void btnLimparCamposContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposContaPagarActionPerformed
 
-               txt_notaPagar.setText("0");
+              limparcamposPagar();
+    }//GEN-LAST:event_btnLimparCamposContaPagarActionPerformed
+
+    public void limparcamposPagar(){
+        
+        txt_notaPagar.setText("0");
                 txt_descricaoPagar.setText("");
                 msk_recebimentoPagar.setText("");
                 msk_emissaoPagar.setText("");
@@ -743,8 +811,8 @@ public class ContasPagarReceber extends javax.swing.JFrame {
                 txt_valorPagar.setText("0");
                 txt_jurosPagar.setText("0");
                 txt_multaPagar.setText("0");
-    }//GEN-LAST:event_btnLimparCamposContaPagarActionPerformed
-
+        
+    }
     private void btnAlterarContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarContaPagarActionPerformed
 
            
@@ -775,6 +843,36 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAlterarContaPagarActionPerformed
 
+    private void txtTelefoneFocusLostCep(java.awt.event.FocusEvent evt) {  
+        ResultSet rs;
+   
+
+        String telefone = txt_TelefoneClienteReceber.getText();
+
+        if("".equals(telefone)){
+
+        }
+
+        
+        else{
+            
+            
+            rs = ba.buscaCliente(telefone);
+            try {
+
+                if (ba.buscaCliente(telefone) != null) {
+
+                    txt_ClienteReceber.setText(rs.getString("nome"));
+                   
+                }
+                else{
+
+                }
+            } catch (SQLException ex) {
+            }
+        } 
+    }
+    
     private void txt_notaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_notaPagarActionPerformed
 
 
@@ -784,6 +882,25 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         
        
         
+           String  telefone = txt_TelefoneClienteReceber.getText();
+
+            if( "".equals(txt_TelefoneClienteReceber)){
+
+                JOptionPane.showMessageDialog(null,"Preencha o campo telefone para realizar uma exclusão");
+                txt_TelefoneClienteReceber.requestFocus();
+
+            }
+
+            else{
+                if (ba.excluiContaReceber(telefone)) {
+                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+                    
+               limparcamposReceber();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Não encontrado");
+                }
+            }
         
     }//GEN-LAST:event_jButton27ActionPerformed
 
@@ -792,12 +909,49 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     }//GEN-LAST:event_msk_vencimentoPagarActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
+
+        
+         String descricaoReceber, dtReceber,emissaoReceber, vencimentoReceber,
+                 valorReceber,jurosReceber,multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas;
+
+     
+        descricaoReceber = txt_descReceber.getText();
+        dtReceber = txt_dtRecebimento.getText();
+        emissaoReceber = txt_emissaoReceber.getText();
+        vencimentoReceber = txt_dataRecebimento.getText();
+        valorReceber = txt_valorReceber.getText();
+        jurosReceber = txt_jurosReceber.getText();
+        multaReceber = txt_multaReceber.getText();
+        TelefoneClienteReceber =  txt_TelefoneClienteReceber.getText();
+        ClienteReceber  = txt_ClienteReceber.getText();
+        tipopagamento = combo_tipoPagamento.getSelectedItem().toString();
+        parcelas = combo_parcelas.getSelectedItem().toString();
+        
+
+        if("".equals(TelefoneClienteReceber) ){
+
+            JOptionPane.showMessageDialog(null,"Preecha o campo telefone");
+            txt_notaPagar.requestFocus();
+        }
+        else{
+
+            ba.atualizaContaReceber( descricaoReceber, dtReceber,emissaoReceber, vencimentoReceber,
+                 valorReceber,jurosReceber,multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas);
+
+        }
+
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+        limparcamposReceber();
     }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void txt_TelefoneClienteReceberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_TelefoneClienteReceberFocusLost
+        
+        
+        
+        
+    }//GEN-LAST:event_txt_TelefoneClienteReceberFocusLost
 
     /**
      * @param args the command line arguments
@@ -845,7 +999,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JComboBox combo_parcelas;
     private javax.swing.JComboBox combo_tipoPagamento;
     public javax.swing.JInternalFrame internalContasPagarReceber;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
