@@ -617,22 +617,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         AlertaCnpj.setVisible(false);
 
-        nome_fantasiaFor.setText("");
-        txt_cnpjFor2.setText("");
-        txt_endeFor.setText("");
-        txt_cidadeFor.setText("");
-        nome_contatoFor.setText("");
-        txt_bairroFor.setText("");
-        txt_telFor.setText("");
-        txt_cepFor.setText("");
-        txt_estadualFor.setText("");
-        txt_celFor.setText("");
-        txt_numFor.setText("");
-        txt_tel2For.setText("");
-        txt_siteFor.setText("");
-        txt_cepFor.setText("");
-        txt_estadoFor.setText("");
-        txt_cpfFor.setText("");
+       limpacampos();
     }//GEN-LAST:event_NovoActionPerformed
 
     private void GravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GravarActionPerformed
@@ -648,7 +633,7 @@ public class Fornecedor extends javax.swing.JPanel {
         
              AlertaCnpj.setVisible(false);
 
-        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor,cpfFor, ufFor;
+        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor,cpfFor, ufFor,tipoproduto;
 
         ufFor = txt_estadoFor.getText();
         cpfFor = txt_cpfFor.getText();
@@ -666,7 +651,7 @@ public class Fornecedor extends javax.swing.JPanel {
         numFor = txt_numFor.getText();
         tel2For = txt_tel2For.getText();
         siteFor = txt_siteFor.getText();
-
+        tipoproduto = comboTipoProduto.getSelectedItem().toString();
       
        if(CPF.isValido(cpfFor) == false || "111.111.111-11".equals(cpfFor)  || "000.000.000-00".equals(cpfFor) || "   .   .   -  ".equals(cpfFor)){
 
@@ -677,23 +662,10 @@ public class Fornecedor extends javax.swing.JPanel {
         }
        
        else{
-            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa, cpfFor, ufFor);
+            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor,
+                    cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa, cpfFor, ufFor, tipoproduto);
 
-            txt_cpfFor.setText("");
-            nome_fantasiaFor.setText("");
-            txt_cnpjFor2.setText("");
-            txt_endeFor.setText("");
-            txt_cidadeFor.setText("");
-            nome_contatoFor.setText("");
-            txt_emailFor.setText("");
-            txt_bairroFor.setText("");
-            txt_telFor.setText("");
-            txt_cepFor.setText("");
-            txt_estadualFor.setText("");
-            txt_celFor.setText("");
-            txt_numFor.setText("");
-            txt_tel2For.setText("");
-            txt_siteFor.setText("");
+           limpacampos();
         }
        
         }
@@ -722,7 +694,7 @@ public class Fornecedor extends javax.swing.JPanel {
         
           AlertaCnpj.setVisible(false);
 
-        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor;
+        String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor,tipoproduto;
 
         ufFor = txt_estadoFor.getText();
         cpfFor = txt_cpfFor.getText();
@@ -741,7 +713,7 @@ public class Fornecedor extends javax.swing.JPanel {
         numFor = txt_numFor.getText();
         tel2For = txt_tel2For.getText();
         siteFor = txt_siteFor.getText();
-
+        tipoproduto = comboTipoProduto.getSelectedItem().toString();
       
        if(isValido(cnpjFor) == false || "11.111.111/1111-11".equals(cnpjFor) || "  .   .   /    -  ".equals(cnpjFor) || "00.000.000/0000-00".equals(cnpjFor)){
 
@@ -752,24 +724,9 @@ public class Fornecedor extends javax.swing.JPanel {
         }
        
         else{
-            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa,cpfFor, ufFor);
+            ba.gravaFornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, tipoPessoa,cpfFor, ufFor, tipoproduto);
 
-            txt_cpfFor.setText("");
-            nome_fantasiaFor.setText("");
-            txt_cnpjFor2.setText("");
-            txt_endeFor.setText("");
-            txt_cidadeFor.setText("");
-            nome_contatoFor.setText("");
-            txt_emailFor.setText("");
-            txt_bairroFor.setText("");
-            txt_telFor.setText("");
-            txt_cepFor.setText("");
-            txt_estadualFor.setText("");
-            txt_celFor.setText("");
-            txt_numFor.setText("");
-            txt_tel2For.setText("");
-            txt_siteFor.setText("");
-            txt_estadoFor.setText("");
+           limpacampos();
         }
         
     }
@@ -785,8 +742,28 @@ public class Fornecedor extends javax.swing.JPanel {
 
     }//GEN-LAST:event_GravarActionPerformed
 
+    public void limpacampos(){
+        txt_cpfFor.setText("");
+            nome_fantasiaFor.setText("");
+            txt_cnpjFor2.setText("");
+            txt_endeFor.setText("");
+            txt_cidadeFor.setText("");
+            nome_contatoFor.setText("");
+            txt_emailFor.setText("");
+            txt_bairroFor.setText("");
+            txt_telFor.setText("");
+            txt_cepFor.setText("");
+            txt_estadualFor.setText("");
+            txt_celFor.setText("");
+            txt_numFor.setText("");
+            txt_tel2For.setText("");
+            txt_siteFor.setText("");
+            txt_estadoFor.setText("");
+            AlertaCnpj.setVisible(false);
+    }
+    
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-  String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor;
+  String nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor,tipoproduto;
 
         ufFor = txt_estadoFor.getText();
         cpfFor = txt_cpfFor.getText();
@@ -805,7 +782,7 @@ public class Fornecedor extends javax.swing.JPanel {
         numFor = txt_numFor.getText();
         tel2For = txt_tel2For.getText();
         siteFor = txt_siteFor.getText();
-        
+        tipoproduto = comboTipoProduto.getSelectedItem().toString();
         
         
         if(pessoaFisica.isSelected()){
@@ -818,7 +795,7 @@ public class Fornecedor extends javax.swing.JPanel {
         }
         else{
 
-            ba.atualizaFornecedorCPF(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor);
+            ba.atualizaFornecedorCPF(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor,tipoproduto);
 
         }
      }
@@ -833,7 +810,7 @@ public class Fornecedor extends javax.swing.JPanel {
         }
         else{
 
-            ba.atualizaFornecedorCNPJ(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor);
+            ba.atualizaFornecedorCNPJ(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor,cnpjFor, cepFor, telFor, celFor, estadualFor, numFor, tel2For, siteFor, cpfFor, ufFor, tipoproduto);
 
         }
                
@@ -864,17 +841,7 @@ public class Fornecedor extends javax.swing.JPanel {
             if (ba.excluiFornecedorCPF(cpf)) {
                 JOptionPane.showMessageDialog(null, "Excluido com sucesso");
 
-                nome_fantasiaFor.setText("");
-                txt_cnpjFor2.setText("");
-                txt_endeFor.setText("");
-                txt_cidadeFor.setText("");
-                nome_contatoFor.setText("");
-                txt_telFor.setText("");
-                txt_emailFor.setText("");
-                txt_bairroFor.setText("");
-                txt_cepFor.setText("");
-
-                txt_celFor.setText("");
+                limpacampos();
 
             }
             else {
@@ -885,7 +852,7 @@ public class Fornecedor extends javax.swing.JPanel {
         
         
                 
-        if(pessoaJuridica.isSelected()){
+        else if(pessoaJuridica.isSelected()){
             
              
         String cnpjFor =txt_cnpjFor2.getText();
@@ -902,17 +869,7 @@ public class Fornecedor extends javax.swing.JPanel {
             if (ba.excluiFornecedorCNPJ(cnpjFor)) {
                 JOptionPane.showMessageDialog(null, "Excluido com sucesso");
 
-                nome_fantasiaFor.setText("");
-                txt_cnpjFor2.setText("");
-                txt_endeFor.setText("");
-                txt_cidadeFor.setText("");
-                nome_contatoFor.setText("");
-                txt_telFor.setText("");
-                txt_emailFor.setText("");
-                txt_bairroFor.setText("");
-                txt_cepFor.setText("");
-
-                txt_celFor.setText("");
+               limpacampos();
 
             }
             else {
@@ -967,20 +924,15 @@ public class Fornecedor extends javax.swing.JPanel {
 
                     txt_cpfFor.setText(txt_cpfFor.getText());
 
+                    String tipoproduto = rs.getString("tipoproduto");
+                  
+                    comboTipoProduto.setSelectedItem(tipoproduto);
+                    
                 }
                 else{
 
-                    nome_fantasiaFor.setText("");
-                    txt_cnpjFor2.setText("");
-                    txt_endeFor.setText("");
-                    txt_cidadeFor.setText("");
-                    nome_contatoFor.setText("");
-                    txt_telFor.setText("");
-                    txt_emailFor.setText("");
-                    txt_bairroFor.setText("");
-                    txt_cepFor.setText("");
-                      txt_estadoFor.setText("");
-                    txt_celFor.setText("");
+                    limpacampos();
+
                 }
             } catch (SQLException ex) {
             }
@@ -1039,17 +991,8 @@ public class Fornecedor extends javax.swing.JPanel {
                 }
                 else{
 
-                    nome_fantasiaFor.setText("");
-                    txt_cnpjFor2.setText("");
-                    txt_endeFor.setText("");
-                    txt_cidadeFor.setText("");
-                    nome_contatoFor.setText("");
-                    txt_telFor.setText("");
-                    txt_emailFor.setText("");
-                    txt_bairroFor.setText("");
-                    txt_cepFor.setText("");
+                    limpacampos();
 
-                    txt_celFor.setText("");
                 }
             } catch (SQLException ex) {
             }
@@ -1411,7 +1354,7 @@ public class Fornecedor extends javax.swing.JPanel {
             // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
 
 
-            // VERIFICA SE É CMPJ OU CPF E COLOCA NO TEXTFIELD
+            // VERIFICA SE É CnPJ OU CPF E COLOCA NO TEXTFIELD
                  
             if (CPF.isValido(cnpjcpf) == true){
                  
