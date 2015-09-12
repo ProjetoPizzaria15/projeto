@@ -24,6 +24,8 @@ public class ObjetoFornecedor {
      private String siteFor;
      private String cpfFor;
      private String tipoPessoa;
+     private String tipoproduto;
+     
         private String ufFor;
     /**
      * @return the nomeFantasia
@@ -261,6 +263,20 @@ public class ObjetoFornecedor {
      */
     public void setUfFor(String ufFor) {
         this.ufFor = ufFor;
+    }
+
+    /**
+     * @return the tipoproduto
+     */
+    public String getTipoproduto() {
+        return tipoproduto;
+    }
+
+    /**
+     * @param tipoproduto the tipoproduto to set
+     */
+    public void setTipoproduto(String tipoproduto) {
+        this.tipoproduto = tipoproduto;
     }
     
 }
