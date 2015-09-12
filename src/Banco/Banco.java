@@ -1176,6 +1176,9 @@ return cliente;
                 funcionario.setCelFun(rs.getString("celFun"));
                 funcionario.setSetorFun(rs.getString("setorFun"));
                 funcionario.setCompleFun(rs.getString("compleFun"));
+               
+                
+                
             } else {
                 return null;
             }
@@ -1218,7 +1221,9 @@ return funcionario;
                  fornecedor.setCepFor(rs.getString("cepFor"));
                  fornecedor.setSiteFor(rs.getString("siteFor"));
                  fornecedor.setEmailFor(rs.getString("emailFor"));
-      
+                 fornecedor.setEmailFor(rs.getString("emailFor"));
+                 fornecedor.setTipoproduto(rs.getString("tipoproduto"));
+                 
             } else {
                 return null;
             }
@@ -1262,7 +1267,7 @@ return fornecedor;
                  fornecedor.setCepFor(rs.getString("cepFor"));
                  fornecedor.setSiteFor(rs.getString("siteFor"));
                  fornecedor.setEmailFor(rs.getString("emailFor"));
-      
+                 fornecedor.setTipoproduto(rs.getString("tipoproduto"));
                 
      
             } else {
