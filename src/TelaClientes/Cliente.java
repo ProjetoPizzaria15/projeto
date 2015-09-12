@@ -39,7 +39,7 @@ public class Cliente extends javax.swing.JPanel {
       gridCliente.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Telefone", "Nome", "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Complemento" }) {  
+      new String[] {"Telefone", "Nome", "UF", "Cidade", "Bairro", "Endereco", "Numero", "Cep", "Complemento" }) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -159,6 +159,14 @@ public class Cliente extends javax.swing.JPanel {
         internalCliente.getContentPane().setLayout(null);
 
         TabCliente.setBackground(new java.awt.Color(255, 255, 255));
+        TabCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabClienteMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TabClienteMousePressed(evt);
+            }
+        });
 
         jPanel1.setLayout(null);
 
@@ -351,6 +359,9 @@ public class Cliente extends javax.swing.JPanel {
         gridCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gridClienteMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                gridClienteMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(gridCliente);
@@ -707,6 +718,23 @@ public class Cliente extends javax.swing.JPanel {
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisaActionPerformed
+
+    private void TabClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabClienteMouseClicked
+        
+       
+        
+    }//GEN-LAST:event_TabClienteMouseClicked
+
+    private void TabClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabClienteMousePressed
+      
+        // AO CLICAR NA TABMENU PREENCHE A TABELA CLIENTES
+        
+        carregaTabela();
+    }//GEN-LAST:event_TabClienteMousePressed
+
+    private void gridClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridClienteMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gridClienteMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
