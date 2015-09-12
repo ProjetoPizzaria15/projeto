@@ -635,7 +635,7 @@ public class Funcionario extends javax.swing.JPanel {
                     sexoFun = rs.getString("sexoFun");
                     
                   
-                     
+                     cmb_sexoFun.setSelectedItem(sexoFun);
                     
                     
                 }
@@ -788,7 +788,9 @@ public class Funcionario extends javax.swing.JPanel {
             String celular = obj13.toString();  
             
              Object obj14 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 14));  //coluna 0  
-            String setor = obj14.toString();  
+            String setor = obj14.toString();
+            
+            
          
             // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
 
@@ -808,15 +810,8 @@ public class Funcionario extends javax.swing.JPanel {
              txt_telFun.setText(telefone);    
              txt_celFun.setText(celular);    
               
-            
-            switch (sexo) {
-                case "Feminino":
-                    cmb_sexoFun.setSelectedItem(1);
-                    break;
-                case "Masculino":
-                    cmb_sexoFun.setSelectedItem(2);
-                    break;
-            }
+            cmb_sexoFun.setSelectedItem(sexo);
+           
              
              
              
