@@ -48,7 +48,7 @@ CREATE TABLE `clientes` (
 
 /*Data for the table `clientes` */
 
-insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('(11)    -   ','hhjgj','08080100','SUACUAPARA','121','jjgh','SAO PAULO','SP','PARQUE PAULISTANO'),('(11)1221-1221','aasda','08080100','SUACUAPARA','212','','SAO PAULO','SP','PARQUE PAULISTANO'),('(11)2585-8180','ghjghj','08081400','ALVARO COELHO','1','jgjhjg','SAO PAULO','SP','PARQUE PAULISTANO'),('20258316','Paulo','08081400','ALVARO COELHO','10','teste','SAO PAULO','SP','PARQUE PAULISTANO'),('25858180','Paulo','08080100','SUACUAPARA','11','sdsdfsdfs','SAO PAULO','SP','PARQUE PAULISTANO');
+insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','1544','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('20258316','Teste','08081400','ALVARO COELHO','30','10','SAO PAULO','SP','PARQUE PAULISTANO'),('34344534','Paulo','08080100','SUACUAPARA','10','aaaa','SAO PAULO','SP','PARQUE PAULISTANO');
 
 /*Table structure for table `contaspagar` */
 
@@ -91,7 +91,7 @@ CREATE TABLE `contasreceber` (
 
 /*Data for the table `contasreceber` */
 
-insert  into `contasreceber`(`telefone`,`Cliente`,`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`) values ('2113','2312312','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('45345','4535','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('1','1','1312312','0,00','0,00','0,00','Cartão de Débito','5','31/23/2313','31/23/1231','  /  /    '),('43','343','45345','5,00','5,00','5,00','Cartão de Débito','2','53/45/4354','45/33/4534','  /  /    '),('545','6565','7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546'),('25858180','Paulo','gdfgdgdg','43343,00','343,00','3434,00','Cartão de Débito','2','33/24/3434','23/42/3443','32/42/3442'),('25858180','Paulo','gdfgdgdg','43343,00','343,00','3434,00','Cartão de Débito','2','33/24/3434','23/42/3443','32/42/3442');
+insert  into `contasreceber`(`telefone`,`Cliente`,`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`) values ('2113','2312312','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('45345','4535','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('1','1','1312312','0,00','0,00','0,00','Cartão de Débito','5','31/23/2313','31/23/1231','  /  /    '),('43','343','45345','5,00','5,00','5,00','Cartão de Débito','2','53/45/4354','45/33/4534','  /  /    '),('545','6565','7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546');
 
 /*Table structure for table `fornecedor` */
 
@@ -115,12 +115,13 @@ CREATE TABLE `fornecedor` (
   `siteFor` varchar(40) DEFAULT NULL,
   `tipopessoa` varchar(17) DEFAULT NULL,
   `ufFor` varchar(2) DEFAULT NULL,
+  `tipoproduto` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`cnpjFor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `fornecedor` */
 
-insert  into `fornecedor`(`cnpjFor`,`cpfFor`,`nomeFantasia`,`endeFor`,`cidadeFor`,`nomeContato`,`emailFor`,`bairroFor`,`telFor`,`cepFor`,`celFor`,`estadualFor`,`numFor`,`tel2For`,`siteFor`,`tipopessoa`,`ufFor`) values ('  .   .   /    -  ','455.365.058-40','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','   .   .   .   ','11','(12)3435-4786','a.com.br                                ','Pessoa Fisica','SP'),(' 1.111.111/1111-11',NULL,'','','','','','','(  )    -    ','','(  )     -    ','0','','(  )    -    ','',NULL,NULL),('20.326.772/0001-25','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','424245@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','121.231.321.312','421','(12)3435-4786','asdasdadasdasda','Pessoa Juridica',''),('21.235.465/4313-21',NULL,'','','','','','','(  )    -    ','','(  )     -    ','0','','(  )    -    ','',NULL,NULL),('51.492.707/0001-01','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','424245@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','121.231.321.312','421','(12)3435-4786','                                        ','Pessoa Juridica','SP'),('53.747.727/0001-01','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','a@a.com','PARQUE PAULISTANO','(52)7243-4645','08080100','(64)56464-6464','454.556.654.646','10','(64)5646-4565','   fgfgsgsg                             ','Pessoa Juridica','SP'),('61.452.562/0001-60','   .   .   -  ','Teste','SUACUAPARA','SAO PAULO','Teste','a@a.com','PARQUE PAULISTANO','(11)1124-5454','08080100','(21)34687-8635','234.523.543.245','1','(12)3436-8623','a.com.br                                ','Pessoa Juridica',NULL),('61.585.465/0001-46','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','424245@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','121.231.321.312','421','(12)3435-4786','asdasdadasdasda                         ','Pessoa Juridica','SP'),('70.823.212/0001-54','   .   .   -  ','gdgdf','','','','','','(  )    -    ','','(  )     -    ','112.312.321.312','','(  )    -    ','                                        ','Pessoa Juridica',NULL);
+insert  into `fornecedor`(`cnpjFor`,`cpfFor`,`nomeFantasia`,`endeFor`,`cidadeFor`,`nomeContato`,`emailFor`,`bairroFor`,`telFor`,`cepFor`,`celFor`,`estadualFor`,`numFor`,`tel2For`,`siteFor`,`tipopessoa`,`ufFor`,`tipoproduto`) values ('  .   .   /    -  ','455.365.058-40','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@a.com','PARQUE PAULISTANO','(11)2343-4434','08080100','(13)13143-4343','   .   .   .   ','10','(12)1354-3464','aaa.com.br','Pessoa Fisica','SP','Massa'),(' 1.111.111/1111-11',NULL,'','','','','','','(  )    -    ','','(  )     -    ','0','','(  )    -    ','',NULL,NULL,NULL),('20.326.772/0001-25','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','424245@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','121.231.321.312','421','(12)3435-4786','asdasdadasdasda','Pessoa Juridica','',NULL),('21.235.465/4313-21',NULL,'','','','','','','(  )    -    ','','(  )     -    ','0','','(  )    -    ','',NULL,NULL,NULL),('51.492.707/0001-01','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','424245@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','121.231.321.312','421','(12)3435-4786','                                        ','Pessoa Juridica','SP',NULL),('53.747.727/0001-01','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','a@a.com','PARQUE PAULISTANO','(52)7243-4645','08080100','(64)56464-6464','454.556.654.646','10','(64)5646-4565','   fgfgsgsg                             ','Pessoa Juridica','SP',NULL),('61.452.562/0001-60','   .   .   -  ','Teste','SUACUAPARA','SAO PAULO','Teste','a@a.com','PARQUE PAULISTANO','(11)1124-5454','08080100','(21)34687-8635','234.523.543.245','1','(12)3436-8623','a.com.br                                ','Pessoa Juridica',NULL,NULL),('61.585.465/0001-46','   .   .   -  ','bgdghdfgd','SUACUAPARA','SAO PAULO','gfsgf','424245@a.com','PARQUE PAULISTANO','(12)2543-4554','08080100','(11)23463-7687','121.231.321.312','421','(12)3435-4786','asdasdadasdasda                         ','Pessoa Juridica','SP',NULL),('70.823.212/0001-54','   .   .   -  ','gdgdf','','','','','','(  )    -    ','','(  )     -    ','112.312.321.312','','(  )    -    ','                                        ','Pessoa Juridica',NULL,NULL);
 
 /*Table structure for table `funcionario` */
 
@@ -185,13 +186,13 @@ CREATE TABLE `usuario` (
   `senha` varchar(60) DEFAULT NULL,
   `permissao` varchar(4) DEFAULT NULL,
   `logado` char(2) DEFAULT NULL,
-  `cpf` varchar(15) DEFAULT NULL,
+  `cpfFun` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpf`) values (NULL,NULL,'','','00','n',NULL),(NULL,NULL,'11','11','10','n',NULL),(NULL,NULL,'11111','11111',NULL,'n',NULL),(NULL,NULL,'123123','123123','01','s',NULL),(NULL,NULL,'4455','4545',NULL,'n',NULL),(NULL,NULL,'4545','4545',NULL,'n',NULL),(NULL,NULL,'caixa','caixa','10','n',NULL),(NULL,NULL,'caixa2','caixa2','10','n',NULL),(0,'paulo','paulo36','3636','111','n',NULL),(NULL,NULL,'teste2','teste2',NULL,'n',NULL),(NULL,NULL,'usuario3','3636',NULL,'n',NULL),(NULL,NULL,'usuario4','3636',NULL,'n',NULL),(NULL,NULL,'usuario5','3636',NULL,'n',NULL),(NULL,NULL,'youtuber','cash','00','n',NULL);
+insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'','','00','n',NULL),(NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'11','11','10','n',NULL),(NULL,NULL,'11111','11111',NULL,'n',NULL),(NULL,NULL,'123123','123123','01','n',NULL),(NULL,NULL,'4455','4545',NULL,'n',NULL),(NULL,NULL,'4545','4545',NULL,'n',NULL),(NULL,NULL,'caixa','caixa','10','n',NULL),(NULL,NULL,'caixa2','caixa2','10','n',NULL),(0,'paulo','paulo36','3636','111','n',NULL),(NULL,NULL,'teste2','teste2',NULL,'n',NULL),(NULL,NULL,'usuario3','3636',NULL,'n',NULL),(NULL,NULL,'usuario4','3636',NULL,'n',NULL),(NULL,NULL,'usuario5','3636',NULL,'n',NULL),(NULL,NULL,'youtuber','cash','00','n',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
