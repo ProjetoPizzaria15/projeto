@@ -6,9 +6,11 @@
 package Usuario;
 
 import Banco.Banco;
+import Banco.BancoFuncoes;
 import Funcoes.LimitarCampos;
 import Funcoes.ValidaCnpj;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.alfredlibrary.validadores.CPF;
 
 /**
@@ -17,20 +19,20 @@ import org.alfredlibrary.validadores.CPF;
  */
 public class Usuario extends javax.swing.JFrame {
     
-    
+    BancoFuncoes bf = new BancoFuncoes();
     Banco ba = new Banco();
     public Usuario() {
         initComponents();
-        
+            
                 txt_loginFun1.setDocument(new LimitarCampos(15));
                 txt_senhaFun1.setDocument(new LimitarCampos(15));
                 
+                carregaTabela();
                 
-                 txt_Cpf.addFocusListener(new java.awt.event.FocusAdapter() {  
-              public void focusLost(java.awt.event.FocusEvent evt) {  
-                  jTextField1FocusLostCpf(evt);  
-              }  
-          });
+  
+        
+        
+      
     }
 
 
@@ -48,6 +50,7 @@ public class Usuario extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         Caixa = new javax.swing.JCheckBox();
         Adm = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         internalUsuario = new javax.swing.JInternalFrame();
         jPanel5 = new javax.swing.JPanel();
@@ -59,11 +62,12 @@ public class Usuario extends javax.swing.JFrame {
         Caixa1 = new javax.swing.JCheckBox();
         Adm1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gridUsuarios = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txt_Cpf = new javax.swing.JFormattedTextField();
         jToolBar1 = new javax.swing.JToolBar();
         CriarAcesso1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário e Senha"));
         jPanel4.setLayout(null);
@@ -127,6 +131,8 @@ public class Usuario extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
@@ -172,7 +178,7 @@ public class Usuario extends javax.swing.JFrame {
         internalUsuario.getContentPane().add(jPanel5);
         jPanel5.setBounds(10, 150, 640, 150);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gridUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -180,10 +186,10 @@ public class Usuario extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "CPF", "Login", "Permissao"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(gridUsuarios);
 
         internalUsuario.getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 320, 640, 120);
@@ -205,12 +211,21 @@ public class Usuario extends javax.swing.JFrame {
 
         CriarAcesso1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/registro.png"))); // NOI18N
         CriarAcesso1.setText("Criar Acesso");
+        CriarAcesso1.setMargin(new java.awt.Insets(2, 25, 2, 25));
         CriarAcesso1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CriarAcesso1ActionPerformed(evt);
             }
         });
         jToolBar1.add(CriarAcesso1);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
+        jButton2.setText("Atualiza Tabela");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton2);
 
         internalUsuario.getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 0, 680, 60);
@@ -300,7 +315,14 @@ public class Usuario extends javax.swing.JFrame {
         }
 
     }
-    
+     public void carregaTabela(){
+        String msg1 = "Usuario recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Usuario";
+        String vsql = "SELECT f.nomeFun,u.cpfFun, u.login, u.permissao FROM usuario u INNER JOIN funcionario f ON f.cpffun = u.cpffun";
+
+
+        bf.tabelaUsuario(vsql, msg1, msg2, gridUsuarios);
+    }
     
     /**
      * @param args the command line arguments
@@ -344,7 +366,10 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JCheckBox Caixa1;
     private javax.swing.JButton CriarAcesso;
     private javax.swing.JButton CriarAcesso1;
+    private javax.swing.JTable gridUsuarios;
     public javax.swing.JInternalFrame internalUsuario;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -357,7 +382,6 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JFormattedTextField txt_Cpf;
     private javax.swing.JTextField txt_loginFun;
