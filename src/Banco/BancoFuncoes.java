@@ -86,9 +86,11 @@ public class BancoFuncoes {
 
    }
            
-           public BancoFuncoes 
+            public BancoFuncoes
            tabelaClientes(String sql, String msg1, String msg2, final JTable gridCliente){
 
+               
+               
           Connection connection = null;
 
    try {
@@ -108,25 +110,18 @@ public class BancoFuncoes {
                    }
 
                    while (rs.next()){
-                        String telefone = rs.getString("telefone");
+                       String telefone = rs.getString("telefone");
                         String nome = rs.getString("nome");
                         String uf = rs.getString("uf");
                         String cidade = rs.getString("cidade");
                         String bairro = rs.getString("bairro");
-                        String logradouro = rs.getString("logradouro");
+                        String logradouro = rs.getString("endereco");
                         String numero = rs.getString("numero");
                         String cep = rs.getString("cep");
                         String complemento = rs.getString("complemento");
-                     
-                        
-                        
-                        dtm.addRow(new Object[]{telefone, nome, uf, cidade,bairro, logradouro, numero, cep, complemento});
+                        dtm.addRow(new Object[]{telefone, nome, uf, cidade, bairro, logradouro, numero, cep, complemento});
                    }
 
-//-----------------------------------------inicio do mouse listener------------------------------------
-
-         
-//---------------------Fim mouse listener-------------------------------------------------------------
 
 //        System.out.println("Fornecedores Recuperados com sucesso");
 
@@ -153,5 +148,4 @@ public class BancoFuncoes {
     }
 
  }
-    
 }
