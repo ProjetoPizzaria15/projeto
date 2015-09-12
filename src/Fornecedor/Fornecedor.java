@@ -42,7 +42,7 @@ public class Fornecedor extends javax.swing.JPanel {
       gridFornecedor.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Nome", "CNPJ/CPF","Inc.Est","Tipo", "Nome Cont", "Telefone", "Telefone2","Celular", "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Site", "Email" }) {  
+      new String[] {"Nome", "CNPJ/CPF","Inc.Est","Tipo", "Nome Cont", "Telefone", "Telefone2","Celular", "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Site", "Email" ,"Tipo_Produto" }) {  
   
           // BLOQUEIA A EDIÇÃO DA JTABLE
           
@@ -1230,6 +1230,8 @@ public class Fornecedor extends javax.swing.JPanel {
                   fornecedorpesquisado.getCepFor(),
                   fornecedorpesquisado.getSiteFor(),
                   fornecedorpesquisado.getEmailFor(),
+                  fornecedorpesquisado.getTipoproduto(),
+                  
                 });
             }
             else{
@@ -1273,7 +1275,7 @@ public class Fornecedor extends javax.swing.JPanel {
                   fornecedorpesquisado.getCepFor(),
                   fornecedorpesquisado.getSiteFor(),
                   fornecedorpesquisado.getEmailFor(),
-                
+                  fornecedorpesquisado.getTipoproduto()
                 });
             }
             else{
@@ -1350,6 +1352,9 @@ public class Fornecedor extends javax.swing.JPanel {
             Object obj15 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 15));  //coluna 0  
             String email = obj15.toString();
         
+            Object obj16 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 16));  //coluna 0  
+            String tipoproduto = obj16.toString();
+        
            
             // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
 
@@ -1369,7 +1374,7 @@ public class Fornecedor extends javax.swing.JPanel {
           labelCnpj.setVisible(false);
           txt_cnpjFor2.setVisible(false);
             
-         
+         comboTipoProduto.setSelectedItem(tipoproduto);
                
            
            
