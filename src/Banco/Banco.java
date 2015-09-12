@@ -173,13 +173,13 @@ public class Banco {
     }
     
       
-    public void atualizaFornecedorCPF(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor) {
+    public void atualizaFornecedorCPF(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor,String tipoproduto) {
         String sql;
         conecta();
 
         try {
 
-              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"'  WHERE cpfFor = '"+cpfFor+"'"; 
+              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"', tipoproduto ='"+tipoproduto+"'  WHERE cpfFor = '"+cpfFor+"'"; 
 
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Fornecedor Atualizado com sucesso");
@@ -193,13 +193,13 @@ public class Banco {
 
     }
     
-    public void atualizaFornecedorCNPJ(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor) {
+    public void atualizaFornecedorCNPJ(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor, String tipoproduto) {
         String sql;
         conecta();
 
         try {
 
-              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"'  WHERE cnpjFor = '"+cnpjFor+"'"; 
+              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"' , ufFor ='"+tipoproduto+"'  WHERE cnpjFor = '"+cnpjFor+"'"; 
 
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Fornecedor Atualizado com sucesso");
@@ -960,7 +960,7 @@ public class Banco {
     
     }
     
-    public boolean gravaFornecedor(String nomeFantasia,String endeFor,String cidadeFor,String nomeContato,String emailFor,String bairroFor,String cnpjFor,String cepFor,String telFor,String celFor,String estadualFor,String numFor,String tel2For,String siteFor, String tipoPessoa, String cpfFor, String ufFor) {
+    public boolean gravaFornecedor(String nomeFantasia,String endeFor,String cidadeFor,String nomeContato,String emailFor,String bairroFor,String cnpjFor,String cepFor,String telFor,String celFor,String estadualFor,String numFor,String tel2For,String siteFor, String tipoPessoa, String cpfFor, String ufFor,String tipoproduto) {
      conecta();
         String sql;
 
@@ -971,8 +971,8 @@ public class Banco {
         try {
 
 
-                sql = "INSERT INTO fornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor, cnpjFor, telFor,cepFor, celFor,estadualFor,numFor,tel2For,siteFor,tipopessoa, cpfFor, ufFor) VALUES ('"; // nome das variaveis do BD
-                sql += nomeFantasia + "', '" + endeFor + "','" + cidadeFor + "' , '" + nomeContato +"' , '"+ emailFor +"' , '"+ bairroFor +"' ,'" + cnpjFor + "', '" + telFor + "','" + cepFor + "','" + celFor + "','" +estadualFor+ "','" +numFor+ "','" +tel2For+ "','" +siteFor+ "','" +tipoPessoa+ "','" +cpfFor+ "','" +ufFor+ "' )";
+                sql = "INSERT INTO fornecedor(nomeFantasia, endeFor, cidadeFor, nomeContato, emailFor, bairroFor, cnpjFor, telFor,cepFor, celFor,estadualFor,numFor,tel2For,siteFor,tipopessoa, cpfFor, ufFor,tipoproduto) VALUES ('"; // nome das variaveis do BD
+                sql += nomeFantasia + "', '" + endeFor + "','" + cidadeFor + "' , '" + nomeContato +"' , '"+ emailFor +"' , '"+ bairroFor +"' ,'" + cnpjFor + "', '" + telFor + "','" + cepFor + "','" + celFor + "','" +estadualFor+ "','" +numFor+ "','" +tel2For+ "','" +siteFor+ "','" +tipoPessoa+ "','" +cpfFor+ "','" +ufFor+ "','" +tipoproduto+ "' )";
 
 
           
