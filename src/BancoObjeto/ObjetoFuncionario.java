@@ -26,6 +26,7 @@ public class ObjetoFuncionario {
     private String telFun;
     private String celFun;
 
+
     /**
      * @return the nomeFun
      */
