@@ -149,7 +149,7 @@ CREATE TABLE `funcionario` (
 
 /*Data for the table `funcionario` */
 
-insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`expedidoFun`,`ufFun`) values ('','  .   .   - ','   .   .   -  ','  /  /    ','','','','','','','(  )    -    ','(  )     -    ',NULL,'',NULL,NULL),('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100','     ','(11)2585-8180','(11)25813-1621','Feminino','balcao',NULL,'SP'),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','nada','PARQUE PAULISTANO','SAO PAULO','08080100','23','(11)2138-6634','(11)97445-1131','Masculino','balcao',NULL,'SP');
+insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`expedidoFun`,`ufFun`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao',NULL,'SP');
 
 /*Table structure for table `produtos` */
 
