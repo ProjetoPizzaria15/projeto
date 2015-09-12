@@ -149,7 +149,7 @@ CREATE TABLE `funcionario` (
 
 /*Data for the table `funcionario` */
 
-insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`expedidoFun`,`ufFun`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao',NULL,'SP');
+insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`expedidoFun`,`ufFun`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao',NULL,'SP'),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao',NULL,'SP');
 
 /*Table structure for table `produtos` */
 
@@ -192,7 +192,7 @@ CREATE TABLE `usuario` (
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'','','00','n',NULL),(NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'11','11','10','n',NULL),(NULL,NULL,'11111','11111',NULL,'n',NULL),(NULL,NULL,'123123','123123','01','n',NULL),(NULL,NULL,'4455','4545',NULL,'n',NULL),(NULL,NULL,'4545','4545',NULL,'n',NULL),(NULL,NULL,'caixa','caixa','10','n',NULL),(NULL,NULL,'caixa2','caixa2','10','n',NULL),(0,'paulo','paulo36','3636','111','n',NULL),(NULL,NULL,'teste2','teste2',NULL,'n',NULL),(NULL,NULL,'usuario3','3636',NULL,'n',NULL),(NULL,NULL,'usuario4','3636',NULL,'n',NULL),(NULL,NULL,'usuario5','3636',NULL,'n',NULL),(NULL,NULL,'youtuber','cash','00','n',NULL);
+insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'pedro','pedro','01',NULL,'057.045.958-39');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
