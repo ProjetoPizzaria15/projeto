@@ -7,6 +7,7 @@ package Funcionario;
 
 import Banco.Banco;
 import Banco.BancoCep;
+import Banco.BancoFuncoes;
 import BancoObjeto.ObjetoCliente;
 import BancoObjeto.ObjetoFuncionario;
 import Funcoes.LimitarCampos;
@@ -23,7 +24,7 @@ import org.alfredlibrary.validadores.CPF;
  */
 public class Funcionario extends javax.swing.JPanel {
 
-    
+    BancoFuncoes bf = new BancoFuncoes();
     Banco ba = new Banco();
     BancoCep bacep = new BancoCep();
     public Funcionario() {
@@ -35,7 +36,7 @@ public class Funcionario extends javax.swing.JPanel {
         gridFuncionario.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Nome", "Sexo", "CPF", "RG", "Data Nascimento", "UF", "Cidade", "Endereco", "Bairro", "Cep", "Numero", "Complemento", "Telefone", "Ceular", "Setor" }) {  
+      new String[] {"nomeFun", "sexoFun", "CPF", "RG", "Data_Nascimento", "UF", "Cidade", "Endereco", "Bairro", "Cep", "Numero", "Complemento", "Telefone", "Ceular", "Setor" }) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -146,6 +147,12 @@ public class Funcionario extends javax.swing.JPanel {
         internalFuncionario.setClosable(true);
         internalFuncionario.setVisible(true);
         internalFuncionario.getContentPane().setLayout(null);
+
+        TabFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TabFuncionarioMousePressed(evt);
+            }
+        });
 
         jPanel2.setLayout(null);
 
@@ -280,7 +287,7 @@ public class Funcionario extends javax.swing.JPanel {
         jPanel5.add(txtNumFun);
         txtNumFun.setBounds(480, 140, 80, 30);
         jPanel5.add(txtCompleFun);
-        txtCompleFun.setBounds(100, 180, 300, 30);
+        txtCompleFun.setBounds(100, 180, 340, 30);
 
         jPanel2.add(jPanel5);
         jPanel5.setBounds(10, 270, 1030, 220);
@@ -826,6 +833,13 @@ public class Funcionario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_sexoFunActionPerformed
 
+    private void TabFuncionarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFuncionarioMousePressed
+        
+        carregaTabela();
+        
+        
+    }//GEN-LAST:event_TabFuncionarioMousePressed
+
     
     
       private void jTextField1FocusLostCpf(java.awt.event.FocusEvent evt) {
@@ -887,6 +901,22 @@ public class Funcionario extends javax.swing.JPanel {
         } 
         
     }  
+       
+       
+        public void carregaTabela(){
+        String msg1 = "funcionario recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar funcionario";
+        String vsql = "SELECT " +
+                        "nomeFun, rgFun, cpfFun, nasciFun, endeFun, compleFun, bairroFun, cidadeFun, cepFun,numFun,telFun ,celFun ,sexoFun ,setorFun ,expedidoFun , ufFun " +
+                      "FROM " +
+                        "funcionario";
+
+
+        bf.tabelaFuncionario(vsql, msg1, msg2, gridFuncionario);
+    }
+       
+       
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabFuncionario;
     private javax.swing.JButton btnAlterarFuncionario;
