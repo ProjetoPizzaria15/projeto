@@ -729,7 +729,7 @@ public class Funcionario extends javax.swing.JPanel {
                   funcionariopesquisado.getCompleFun(),
                   funcionariopesquisado.getTelFun(),
                   funcionariopesquisado.getCelFun(),
-                  funcionariopesquisado.getSetorFun()
+                  funcionariopesquisado.getSetorFun(),
                 
                 
                 });
