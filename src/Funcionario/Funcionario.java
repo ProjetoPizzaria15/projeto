@@ -907,7 +907,7 @@ public class Funcionario extends javax.swing.JPanel {
         String msg1 = "funcionario recuperados com sucesso";
         String msg2 = "Erro ao Recuperar funcionario";
         String vsql = "SELECT " +
-                        "nomeFun, rgFun, cpfFun, nasciFun, endeFun, compleFun, bairroFun, cidadeFun, cepFun,numFun,telFun ,celFun ,sexoFun ,setorFun ,expedidoFun , ufFun " +
+                        "nomeFun, rgFun, cpfFun, nasciFun, endeFun, compleFun, bairroFun, cidadeFun, cepFun,numFun,telFun ,celFun ,sexoFun ,setorFun, ufFun " +
                       "FROM " +
                         "funcionario";
 
