@@ -25,6 +25,10 @@ public class Produtos extends javax.swing.JFrame {
     
     public Produtos() {
         
+        
+        carregaTabelaProduto();
+        carregaTabelaCategoria();
+        
         initComponents();
         carregaTipoPruduto();
         dataHoje();
@@ -42,12 +46,21 @@ public class Produtos extends javax.swing.JFrame {
         txtCategoriaProduto.setDocument(new LimitarCampos(20));
         
         
-        
+         gridProdutos.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Codigo_Produto", "TipoProduto", "Descricao", "Ingredientes","Unidade_Medida",
+                        "Estocavel","Qtde_Minima", "QtdeEstoque", "ProdutoAcabadoPrima", "Valor", "ProdutoVenda" }) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});
             
       gridCategoriaProduto.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Nome Categoria" }) {  
+      new String[] {"Categoria" }) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -76,7 +89,7 @@ private String combo;
         txtCategoriaProduto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         gridCategoriaProduto = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -119,6 +132,11 @@ private String combo;
         jSeparator14 = new javax.swing.JToolBar.Separator();
         txtDataRegistro = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        gridProdutos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -190,16 +208,19 @@ private String combo;
 
         gridCategoriaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(gridCategoriaProduto);
+        jScrollPane3.setViewportView(gridCategoriaProduto);
 
-        jPanel5.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 20, 720, 250);
+        jPanel5.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 20, 720, 240);
 
         jPanel1.add(jPanel5);
         jPanel5.setBounds(10, 180, 740, 280);
@@ -442,21 +463,38 @@ private String combo;
 
         jTabbedPane1.addTab("Registrar Produto", jPanel2);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
-        );
+        jPanel3.setLayout(null);
+        jPanel3.add(jTextField1);
+        jTextField1.setBounds(320, 50, 140, 40);
 
-        jTabbedPane1.addTab("tab3", jPanel3);
+        jLabel8.setText("Codigo Produto: ");
+        jPanel3.add(jLabel8);
+        jLabel8.setBounds(220, 50, 110, 40);
+
+        jButton1.setText("Pesquisar");
+        jPanel3.add(jButton1);
+        jButton1.setBounds(490, 50, 100, 40);
+
+        gridProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(gridProdutos);
+
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 110, 740, 180);
+
+        jTabbedPane1.addTab("Pesquisar Produtos", jPanel3);
 
         internalProduto.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 760, 530);
+        jTabbedPane1.setBounds(0, 0, 770, 530);
 
         getContentPane().add(internalProduto);
         internalProduto.setBounds(10, 0, 790, 570);
@@ -683,7 +721,8 @@ private String combo;
         
              else {
              
-             ba.gravaProduto(tipoProduto, descricao, ingredientes, comboMed, comboEst , minimoestoque, produtoacbprima, qtdeestoque, valor, produtovenda,codigoproduto);
+             ba.gravaProduto(tipoProduto, descricao, ingredientes, comboMed, comboEst , minimoestoque, produtoacbprima,
+                     qtdeestoque, valor, produtovenda,codigoproduto);
 
 
                     limpacampos();
@@ -888,7 +927,32 @@ private String combo;
         }
         
     }//GEN-LAST:event_Pesquisar1ActionPerformed
+public void carregaTipoPruduto(){
+        String msg1 = "Tipo Produto recuperados";
+        String msg2 = "Erro ao Recuperar Fornecedores";
+        String vsql = "SELECT categoria FROM categoriaProduto order by categoria";
+        String campoSql = "categoria";
 
+        bf.carregaDadoUnico(vsql, msg1, msg2, comboTipoProduto, campoSql);
+    }
+    
+     public void carregaTabelaCategoria(){
+        String msg1 = "Usuario recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Usuario";
+        String vsql = "SELECT * FROM categoriaProduto order by categoria";
+
+
+        bf.tabelaCategoria(vsql, msg1, msg2, gridCategoriaProduto);
+    }
+     
+      public void carregaTabelaProduto(){
+        String msg1 = "Produtos recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Produtos";
+        String vsql = "SELECT * FROM produtos order by codigoproduto";
+
+
+        bf.tabelaProdutos(vsql, msg1, msg2, gridProdutos);
+    }
     private void checkVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkVendaActionPerformed
         
         
@@ -964,8 +1028,10 @@ private String combo;
     private javax.swing.JComboBox comboMedida;
     private javax.swing.JComboBox comboTipoProduto;
     private javax.swing.JTable gridCategoriaProduto;
+    private javax.swing.JTable gridProdutos;
     private javax.swing.ButtonGroup grupoRadio;
     public javax.swing.JInternalFrame internalProduto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton19;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -975,6 +1041,7 @@ private String combo;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -986,12 +1053,14 @@ private String combo;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator14;
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelValor;
@@ -1020,14 +1089,7 @@ private String combo;
         this.combo = combo;
     }
     
-    public void carregaTipoPruduto(){
-        String msg1 = "Tipo Produto recuperados";
-        String msg2 = "Erro ao Recuperar Fornecedores";
-        String vsql = "SELECT categoria FROM categoriaProduto order by categoria";
-        String campoSql = "categoria";
-
-        bf.carregaDadoUnico(vsql, msg1, msg2, comboTipoProduto, campoSql);
-    }
+    
 
     /**
      * @return the DataRegistro
