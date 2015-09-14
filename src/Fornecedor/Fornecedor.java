@@ -42,7 +42,8 @@ public class Fornecedor extends javax.swing.JPanel {
       gridFornecedor.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Nome", "CNPJ/CPF","Inc.Est","Tipo", "Nome Cont", "Telefone", "Telefone2","Celular", "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Site", "Email" ,"Tipo_Produto" }) {  
+      new String[] {"Nome", "CNPJ_CPF","Inc_Est","Tipo", "Nome_Cont", "Telefone", "Telefone2","Celular"
+              , "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Site", "Email" ,"Tipo_Produto" }) {  
   
           // BLOQUEIA A EDIÇÃO DA JTABLE
           
@@ -200,6 +201,12 @@ public class Fornecedor extends javax.swing.JPanel {
         internalFornecedor.setResizable(true);
         internalFornecedor.setVisible(true);
         internalFornecedor.getContentPane().setLayout(null);
+
+        TabFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TabFornecedorMousePressed(evt);
+            }
+        });
 
         jPanel2.setLayout(null);
 
@@ -1435,6 +1442,12 @@ public class Fornecedor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cpfForActionPerformed
 
+    private void TabFornecedorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabFornecedorMousePressed
+
+        carregaTabela();
+        
+    }//GEN-LAST:event_TabFornecedorMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertaCnpj;
@@ -1527,5 +1540,15 @@ public class Fornecedor extends javax.swing.JPanel {
         String campoSql = "categoria";
 
         bf.carregaDadoUnico(vsql, msg1, msg2, comboTipoProduto, campoSql);
+    }
+    
+    
+     public void carregaTabela(){
+        String msg1 = "Fornecedor recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Fornecedor";
+        String vsql = "SELECT * from fornecedor order by nomeFantasia";
+
+
+        bf.tabelaFornecedor(vsql, msg1, msg2, gridFornecedor);
     }
 }
