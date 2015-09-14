@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.table.TableColumn;
+import static org.alfredlibrary.validadores.CNPJ.isValido;
+import org.alfredlibrary.validadores.CPF;
 
 
 public class BancoFuncoes {
@@ -255,6 +257,159 @@ public class BancoFuncoes {
 
 
 //        System.out.println("Fornecedores Recuperados com sucesso");
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+       public BancoFuncoes
+           tabelaCategoria(String sql, String msg1, String msg2, final JTable gridCategoriaProduto){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridCategoriaProduto.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                       String Categoria = rs.getString("categoria");
+                     
+             
+                        dtm.addRow(new Object[]{Categoria});
+                   }
+
+
+//        System.out.println("Fornecedores Recuperados com sucesso");
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+  
+           
+            public BancoFuncoes
+           tabelaFornecedor(String sql, String msg1, String msg2, final JTable gridFornecedor){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridFornecedor.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                        String Nome = rs.getString("nomeFantasia");
+                        String pegaCPF = rs.getString("cpfFor");
+                        String pegaCNPJ = rs.getString("cnpjFor");
+                        
+                        
+                        String CPF_CNPJ = "";
+                        
+                        
+                        if(CPF.isValido(pegaCPF) == true){
+                            
+                            CPF_CNPJ += pegaCPF;
+                            
+                        }
+                        
+                        else if (isValido(pegaCNPJ) == true){
+                            
+                            CPF_CNPJ += pegaCNPJ;
+                            
+                        }
+                            
+                            
+                        
+                        
+                        String Inc_Est = rs.getString("estadualFor");
+                        String Tipo = rs.getString("tipopessoa");
+                        String Nome_Cont = rs.getString("nomeContato");                     
+                        String Telefone = rs.getString("telFor");                      
+                        String Telefone2 = rs.getString("tel2For");
+                        String Celular = rs.getString("celFor");
+                        String UF = rs.getString("ufFor");
+                        String Cidade = rs.getString("cidadeFor");
+                        String Bairro = rs.getString("bairroFor");
+                        String Logradouro = rs.getString("endeFor");
+                        String Numero = rs.getString("numFor");
+                        String Cep = rs.getString("cepFor");
+                        String Site = rs.getString("siteFor");
+                        String Email = rs.getString("emailFor");
+                        String Tipo_Produto = rs.getString("tipoproduto");
+                
+                        
+                        
+                        dtm.addRow(new Object[]{Nome, CPF_CNPJ,Inc_Est,Tipo, Nome_Cont, Telefone, Telefone2,Celular
+              , UF, Cidade, Bairro, Logradouro, Numero, Cep, Site, Email ,Tipo_Produto});
+                   }
+
 
          s.close();
          connection.close();
