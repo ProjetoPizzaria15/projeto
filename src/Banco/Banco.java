@@ -199,7 +199,7 @@ public class Banco {
 
         try {
 
-              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"' , ufFor ='"+tipoproduto+"'  WHERE cnpjFor = '"+cnpjFor+"'"; 
+              sql = "UPDATE fornecedor SET nomeFantasia ='"+nomeFantasia+"', endeFor ='"+endeFor+"', cidadeFor ='"+cidadeFor+"', nomeContato ='"+nomeContato+"', emailFor ='"+emailFor+"', bairroFor ='"+bairroFor+"', cepFor ='"+cepFor+"' , telFor ='"+telFor+"', celFor ='"+celFor+"' , estadualFor ='"+estadualFor+"' , numFor ='"+numFor+"', tel2For ='"+tel2For+"' , siteFor ='"+siteFor+"', cpfFor ='"+cpfFor+"', ufFor ='"+ufFor+"' , tipoproduto ='"+tipoproduto+"'  WHERE cnpjFor = '"+cnpjFor+"'"; 
 
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Fornecedor Atualizado com sucesso");
@@ -1281,37 +1281,6 @@ return fornecedor;
 return fornecedor;
     }
     
-    
-           
-        public ObjetoCategoriaProduto buscaCategoriaProdutoTabela(String categoria) {
-        String sql;
-        conecta();
-        
-        ObjetoCategoriaProduto CategoriaProduto = new ObjetoCategoriaProduto();
-        
-        try {
-            
-             sql = "SELECT * FROM categoriaProduto where categoria="+ categoria + "';";
-            
-            System.out.println(sql);
-            rs = stmt.executeQuery(sql);
-            
-            if (rs.next()) {
-               
-                CategoriaProduto.setCategoria(rs.getString("categoria"));
-    
-                
-            } else {
-                return null;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-return CategoriaProduto;
-    }
-     
-        
+      
 
 }
