@@ -336,7 +336,7 @@ public class Fornecedor extends javax.swing.JPanel {
         txt_cepFor.setBounds(110, 20, 110, 30);
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(10, 260, 930, 180);
+        jPanel4.setBounds(0, 250, 940, 140);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
         jPanel5.setLayout(null);
@@ -345,9 +345,9 @@ public class Fornecedor extends javax.swing.JPanel {
         jLabel21.setForeground(new java.awt.Color(51, 51, 51));
         jLabel21.setText("Nome Contato:");
         jPanel5.add(jLabel21);
-        jLabel21.setBounds(10, 40, 120, 30);
+        jLabel21.setBounds(10, 20, 120, 30);
         jPanel5.add(nome_contatoFor);
-        nome_contatoFor.setBounds(110, 40, 340, 30);
+        nome_contatoFor.setBounds(110, 20, 340, 30);
 
         try {
             txt_telFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
@@ -355,23 +355,23 @@ public class Fornecedor extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel5.add(txt_telFor);
-        txt_telFor.setBounds(110, 80, 150, 30);
+        txt_telFor.setBounds(110, 60, 150, 30);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(51, 51, 51));
         jLabel29.setText("Telefone:*");
         jPanel5.add(jLabel29);
-        jLabel29.setBounds(40, 80, 80, 30);
+        jLabel29.setBounds(40, 60, 80, 30);
 
         jLabel3.setText("WebSite:");
         jPanel5.add(jLabel3);
-        jLabel3.setBounds(50, 120, 70, 30);
+        jLabel3.setBounds(50, 100, 70, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(51, 51, 51));
         jLabel25.setText("Telefone 2:");
         jPanel5.add(jLabel25);
-        jLabel25.setBounds(270, 80, 80, 30);
+        jLabel25.setBounds(270, 60, 80, 30);
 
         try {
             txt_tel2For.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
@@ -384,7 +384,7 @@ public class Fornecedor extends javax.swing.JPanel {
             }
         });
         jPanel5.add(txt_tel2For);
-        txt_tel2For.setBounds(350, 80, 170, 30);
+        txt_tel2For.setBounds(350, 60, 170, 30);
 
         txt_emailFor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,13 +392,13 @@ public class Fornecedor extends javax.swing.JPanel {
             }
         });
         jPanel5.add(txt_emailFor);
-        txt_emailFor.setBounds(510, 40, 280, 30);
+        txt_emailFor.setBounds(510, 20, 280, 30);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(51, 51, 51));
         jLabel18.setText("Celular:");
         jPanel5.add(jLabel18);
-        jLabel18.setBounds(540, 80, 60, 30);
+        jLabel18.setBounds(540, 60, 60, 30);
 
         try {
             txt_celFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -406,17 +406,17 @@ public class Fornecedor extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel5.add(txt_celFor);
-        txt_celFor.setBounds(610, 80, 150, 30);
+        txt_celFor.setBounds(610, 60, 150, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Email:");
         jPanel5.add(jLabel7);
-        jLabel7.setBounds(470, 40, 50, 30);
+        jLabel7.setBounds(470, 20, 50, 30);
         jPanel5.add(txt_siteFor);
-        txt_siteFor.setBounds(110, 120, 420, 30);
+        txt_siteFor.setBounds(110, 100, 420, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(0, 450, 940, 210);
+        jPanel5.setBounds(0, 390, 940, 150);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel3.setLayout(null);
@@ -614,10 +614,10 @@ public class Fornecedor extends javax.swing.JPanel {
         TabFornecedor.addTab("Pesquisar Fornecedor", jPanel1);
 
         internalFornecedor.getContentPane().add(TabFornecedor);
-        TabFornecedor.setBounds(0, 0, 1260, 730);
+        TabFornecedor.setBounds(0, 0, 1260, 580);
 
         add(internalFornecedor);
-        internalFornecedor.setBounds(30, 20, 1280, 760);
+        internalFornecedor.setBounds(30, 20, 1280, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
@@ -660,7 +660,7 @@ public class Fornecedor extends javax.swing.JPanel {
         siteFor = txt_siteFor.getText();
         tipoproduto = comboTipoProduto.getSelectedItem().toString();
       
-       if(CPF.isValido(cpfFor) == false || "111.111.111-11".equals(cpfFor)  || "000.000.000-00".equals(cpfFor) || "   .   .   -  ".equals(cpfFor)){
+       if(CPF.isValido(cpfFor) == false || "111.111.111-11".equals(cpfFor)  || "00.000.000-00".equals(cpfFor) || "  .   .   -  ".equals(cpfFor)){
 
             JOptionPane.showMessageDialog(null,"CPF Inválido");
             AlertaCnpj.setVisible(true);
@@ -1121,7 +1121,7 @@ public class Fornecedor extends javax.swing.JPanel {
       if(pessoaFisica.isSelected()){
       
             txt_cpfFor.setText("");
-          
+          txt_cnpjFor2.setText("");
           labelCpf.setVisible(true);
           txt_cpfFor.setVisible(true);
           labelEstadual.setVisible(false);
@@ -1139,7 +1139,7 @@ public class Fornecedor extends javax.swing.JPanel {
          if(pessoaJuridica.isSelected()){
       
              txt_cnpjFor2.setText("");
-             
+             txt_cpfFor.setText("");
              labelCpf.setVisible(false);
              txt_cpfFor.setVisible(false);
           labelEstadual.setVisible(true);
