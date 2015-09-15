@@ -11,7 +11,7 @@ import Fornecedor.Fornecedor;
 import Caixa.Caixa;
 import ContaPagarReceber.ContasPagarReceber;
 import Funcionario.Funcionario;
-import Produtos.Produtos;
+import Produtos.Produto;
 import Usuario.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -315,7 +315,7 @@ public class Principal extends javax.swing.JFrame {
         
                 
                 if(intProdutos == null || intProdutos.isClosed()){
-             intProdutos = new Produtos().internalProduto;
+             intProdutos = new Produto().internalProduto;
              getContentPane().add(intProdutos);
              desktop.add(intProdutos);
              intProdutos.setLocation(130, 15);
