@@ -27,7 +27,7 @@ CREATE TABLE `categoriaproduto` (
 
 /*Data for the table `categoriaproduto` */
 
-insert  into `categoriaproduto`(`categoria`) values ('Massa'),('Refrigerante');
+insert  into `categoriaproduto`(`categoria`) values ('Massa');
 
 /*Table structure for table `clientes` */
 
@@ -121,7 +121,7 @@ CREATE TABLE `fornecedor` (
 
 /*Data for the table `fornecedor` */
 
-insert  into `fornecedor`(`cnpjFor`,`cpfFor`,`nomeFantasia`,`endeFor`,`cidadeFor`,`nomeContato`,`emailFor`,`bairroFor`,`telFor`,`cepFor`,`celFor`,`estadualFor`,`numFor`,`tel2For`,`siteFor`,`tipopessoa`,`ufFor`,`tipoproduto`) values ('  .   .   /    -  ','455.365.058-40','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@a.com','PARQUE PAULISTANO','(12)3132-3243','08080100','(23)12312-4124','   .   .   .   ','10','(12)3111-2312','a.com.br','Pessoa Fisica','SP','Massa'),('63.312.206/0001-77','   .   .   -  ','Extra','SUACUAPARA','SAO PAULO','Roberto','a@a.com','PARQUE PAULISTANO','(12)2334-4324','08080100','(11)23432-4213','867.545.524.534','2','(23)1323-1243','a.com.br','Pessoa Juridica','SP','Refrigerante');
+insert  into `fornecedor`(`cnpjFor`,`cpfFor`,`nomeFantasia`,`endeFor`,`cidadeFor`,`nomeContato`,`emailFor`,`bairroFor`,`telFor`,`cepFor`,`celFor`,`estadualFor`,`numFor`,`tel2For`,`siteFor`,`tipopessoa`,`ufFor`,`tipoproduto`) values ('  .   .   /    -  ','455.365.058-40','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@qa.com','PARQUE PAULISTANO','(34)2342-3424','08080100','(24)32343-2423','   .   .   .   ','1','(32)4234-3242','a.com.br','Pessoa Fisica','SP','Massa'),('01.554.910/0001-89','   .   .   -  ','gfdgdf','SUACUAPARA','SAO PAULO','525235','a@a.com','PARQUE PAULISTANO','(45)2332-2525','08080100','(34)23252-5525','453.554.354.536','6','(34)2342-3252','gfsgdgs','Pessoa Juridica','SP','');
 
 /*Table structure for table `funcionario` */
 
@@ -163,16 +163,16 @@ CREATE TABLE `produtos` (
   `estocavel` varchar(3) DEFAULT NULL,
   `qtdeminima` int(6) DEFAULT NULL,
   `acabadoprima` varchar(25) DEFAULT NULL,
-  `dataregistro` varchar(10) DEFAULT NULL,
   `valor` float(6,2) DEFAULT NULL,
   `qtdeestoque` int(6) DEFAULT NULL,
   `produtovenda` varchar(3) DEFAULT NULL,
+  `dataregistro` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`codigoproduto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `produtos` */
 
-insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`dataregistro`,`valor`,`qtdeestoque`,`produtovenda`) values ('','testando','testando int float','massa, tomate, oleo, queijo','UN','SIM',10,'Produto Acabado',NULL,12.30,100,'SIM'),('123','Massa','massa para pizza','trigo	','UN','SIM',11,'Produto Acabado',NULL,10.00,11,'SIM'),('5566','','343','45435','UN','SIM',4,'Produto Acabado',NULL,323.00,43,'SIM');
+insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('1','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('123','Massa','massa para pizza','trigo	','UN','NAO',0,'Produto Acabado',10.00,0,'SIM',NULL),('5566','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL);
 
 /*Table structure for table `usuario` */
 
