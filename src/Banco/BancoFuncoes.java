@@ -306,10 +306,10 @@ public class BancoFuncoes {
                    }
 
                    while (rs.next()){
-                       String Categoria = rs.getString("categoria");
+                       String categoria = rs.getString("categoria");
                      
              
-                        dtm.addRow(new Object[]{Categoria});
+                        dtm.addRow(new Object[]{categoria});
                    }
 
 
