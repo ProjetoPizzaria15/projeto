@@ -69,7 +69,7 @@ CREATE TABLE `contaspagar` (
 
 /*Data for the table `contaspagar` */
 
-insert  into `contaspagar`(`notaFiscal`,`descricao`,`dataRecebimento`,`dataEmissao`,`dataVencimento`,`valor`,`juros`,`multa`,`fornecedor`) values ('121','jghj','12/12/1212','12/12/1212','12/12/1212','1,00','1,00','1,00',NULL),('123','ghgf123','21/22/2121','12/12/1212','12/12/1212','100,50','3,25','1,00',NULL),('2113','hjghj','23/13/2213','12/31/2312','12/31/2313','2,00','2,00','2,00',NULL),('321','mnmbnm','02/09/2013','02/09/2013','02/09/2013',' 1,00','1,50','1,30',NULL),('5434534534','gdfgdfgfdgd','34/23/4243','34/23/4234','42/34/3242','R$ 3,00','3,00%','4,00%',NULL),('545354535435','3433','43/53/5435','45/34/5453','54/35/4433','3,00','4,00','3,00','Paulo'),('63','sdfsfsf		','12/31/3131','34/34/3434','43/43/4343','R$ 1,00','1,00%','1,00%',NULL);
+insert  into `contaspagar`(`notaFiscal`,`descricao`,`dataRecebimento`,`dataEmissao`,`dataVencimento`,`valor`,`juros`,`multa`,`fornecedor`) values ('121','jghj','12/12/1212','12/12/1212','12/12/1212','34,00','43,00','3,00','Paulo'),('42442','asdfghjklç','12/12/1212','12/12/1212','12/12/1212','34,00','43,00','3,00','Paulo');
 
 /*Table structure for table `contasreceber` */
 
@@ -91,7 +91,7 @@ CREATE TABLE `contasreceber` (
 
 /*Data for the table `contasreceber` */
 
-insert  into `contasreceber`(`telefone`,`Cliente`,`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`) values ('2113','2312312','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('45345','4535','1312312','0,00','0,00','0,00','Cartão de Crédito','3','31/23/2313','31/23/1231','  /  /    '),('1','1','1312312','0,00','0,00','0,00','Cartão de Débito','5','31/23/2313','31/23/1231','  /  /    '),('43','343','45345','5,00','5,00','5,00','Cartão de Débito','2','53/45/4354','45/33/4534','  /  /    '),('545','6565','7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546');
+insert  into `contasreceber`(`telefone`,`Cliente`,`descricao`,`valor`,`juros`,`multa`,`tipopagamento`,`nparcela`,`dtrecebimento`,`dtemissao`,`dtvencimento`) values ('545','6565','7876','78,00','7,00','7,00','Cartão de Débito','1','56/54/6546','45/65/4654','56/65/6546'),('11343485','Paulo','5455234','4,00','3,00','2,00','Cartão de Débito','1','34/23/4234','34/23/4234','23/42/4324');
 
 /*Table structure for table `fornecedor` */
 
