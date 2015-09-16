@@ -505,5 +505,133 @@ public class BancoFuncoes {
     }
 
  }
+        
+           
+           
+           
+            public BancoFuncoes
+           tabelaContasPagar(String sql, String msg1, String msg2, final JTable girdContaPagar){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)girdContaPagar.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                       String Nota_Fiscal = rs.getString("notaFiscal");
+                        String Descricao = rs.getString("descricao");
+                        String Dt_Recebimento = rs.getString("dataRecebimento");
+                        String Dt_Emissao = rs.getString("dataEmissao");
+                        String Dt_Vencimento = rs.getString("dataVencimento");
+                        String Valor = rs.getString("valor");
+                        String Juros = rs.getString("juros");
+                        String Multa = rs.getString("multa");
+                        String Fornecedor = rs.getString("fornecedor");
+                        dtm.addRow(new Object[]{Nota_Fiscal, Descricao, Dt_Recebimento, Dt_Emissao, Dt_Vencimento, Valor, Juros, Multa, Fornecedor});
+                   }
+
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+           
+           
+            public BancoFuncoes
+           tabelaContasReceber(String sql, String msg1, String msg2, final JTable gridContaReceber){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridContaReceber.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                       String Telefone = rs.getString("telefone");
+                        String Cliente = rs.getString("Cliente");
+                        String Descricao = rs.getString("descricao");
+                        String Dt_Recebimento = rs.getString("dtrecebimento");
+                        String Dt_Vencimento = rs.getString("dtvencimento");
+                        String Valor = rs.getString("valor");
+                        String Tipo_Pagamento = rs.getString("tipopagamento");
+                     
+                        dtm.addRow(new Object[]{Telefone, Cliente, Descricao, Dt_Recebimento, Dt_Vencimento, Valor, Tipo_Pagamento});
+                   }
+
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+           
            
 }
