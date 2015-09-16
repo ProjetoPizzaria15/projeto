@@ -12,6 +12,7 @@ import Funcoes.LimitarCampos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import static org.alfredlibrary.validadores.CNPJ.isValido;
 import org.alfredlibrary.validadores.CPF;
 
@@ -27,6 +28,30 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     public ContasPagarReceber() {
         initComponents();
         
+        
+           
+      gridContasPagar.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Nota_Fiscal", "Descricao", "Dt_Recebimento", "Dt_Emissao", "Dt_Vencimento", "Valor", "Juros", "Multa", "Fornecedor" }) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});   
+      
+      gridContaReceber.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Telefone", "Cliente", "Descricao", "Dt Recebimento", "Dt_Vencimento", "Valor", "Tipo_Pagamento" }) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});   
+        
+        carregaTabelaPagar();
+        carregaTabelaReceber();
         carregaFornecedorCombo();
         
        Alerta.setVisible(false);
@@ -71,7 +96,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private void initComponents() {
 
         internalContasPagarReceber = new javax.swing.JInternalFrame();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabContas = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -107,6 +132,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         btnPesquisarContaPagar = new javax.swing.JButton();
         jSeparator14 = new javax.swing.JToolBar.Separator();
         Alerta = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        gridContasPagar = new javax.swing.JTable();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -146,6 +177,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_TelefoneClienteReceber = new javax.swing.JTextField();
         txt_ClienteReceber = new javax.swing.JTextField();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        gridContaReceber = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -153,6 +190,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         internalContasPagarReceber.setClosable(true);
         internalContasPagarReceber.setVisible(true);
         internalContasPagarReceber.getContentPane().setLayout(null);
+
+        tabContas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabContasMousePressed(evt);
+            }
+        });
 
         jPanel4.setLayout(null);
 
@@ -181,7 +224,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txt_descricaoPagar);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(80, 70, 330, 100);
+        jScrollPane1.setBounds(80, 80, 330, 100);
 
         jPanel4.add(jPanel2);
         jPanel2.setBounds(10, 100, 430, 180);
@@ -351,9 +394,47 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         Alerta.setText("                                                                                                                   Atenção preencher todos campos");
         Alerta.setOpaque(true);
         jPanel4.add(Alerta);
-        Alerta.setBounds(0, 530, 850, 30);
+        Alerta.setBounds(0, 520, 850, 30);
 
-        jTabbedPane1.addTab("Contas a Pagar", jPanel4);
+        tabContas.addTab("Contas a Pagar", jPanel4);
+
+        jPanel10.setLayout(null);
+
+        jButton1.setText("Pesquisar");
+        jPanel10.add(jButton1);
+        jButton1.setBounds(420, 40, 110, 40);
+
+        gridContasPagar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        gridContasPagar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridContasPagarMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                gridContasPagarMousePressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(gridContasPagar);
+
+        jPanel10.add(jScrollPane3);
+        jScrollPane3.setBounds(10, 120, 840, 240);
+        jPanel10.add(jTextField2);
+        jTextField2.setBounds(280, 40, 120, 40);
+
+        jLabel5.setText("Nota Fiscal :");
+        jPanel10.add(jLabel5);
+        jLabel5.setBounds(190, 40, 90, 30);
+
+        tabContas.addTab("Pesquisar Contas a Pagar", jPanel10);
 
         jPanel6.setLayout(null);
 
@@ -571,15 +652,50 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jPanel6.add(jPanel1);
         jPanel1.setBounds(20, 100, 360, 140);
 
-        jTabbedPane1.addTab("Contas a Receber", jPanel6);
+        tabContas.addTab("Contas a Receber", jPanel6);
 
-        internalContasPagarReceber.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 860, 600);
+        jPanel11.setLayout(null);
+
+        gridContaReceber.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        gridContaReceber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridContaReceberMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(gridContaReceber);
+
+        jPanel11.add(jScrollPane4);
+        jScrollPane4.setBounds(10, 140, 840, 240);
+
+        jButton2.setText("Pesquisar");
+        jPanel11.add(jButton2);
+        jButton2.setBounds(380, 50, 110, 40);
+        jPanel11.add(jTextField1);
+        jTextField1.setBounds(250, 50, 120, 40);
+
+        jLabel4.setText("Telefone :");
+        jPanel11.add(jLabel4);
+        jLabel4.setBounds(180, 50, 70, 40);
+
+        tabContas.addTab("Pesquisar Contas a Receber", jPanel11);
+
+        internalContasPagarReceber.getContentPane().add(tabContas);
+        tabContas.setBounds(0, 0, 860, 590);
 
         getContentPane().add(internalContasPagarReceber);
-        internalContasPagarReceber.setBounds(10, 10, 890, 640);
+        internalContasPagarReceber.setBounds(10, 10, 890, 620);
 
-        setBounds(0, 0, 921, 689);
+        setBounds(0, 0, 921, 674);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirContaPagarActionPerformed
@@ -641,14 +757,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
                     JOptionPane.showMessageDialog(rootPane, "não encontrado");
 
-                txt_notaPagar.setText("0");
-                txt_descricaoPagar.setText("");
-                msk_recebimentoPagar.setText("");
-                msk_emissaoPagar.setText("");
-                msk_vencimentoPagar.setText("");
-                txt_valorPagar.setText("0");
-                txt_jurosPagar.setText("0");
-                txt_multaPagar.setText("0");
+                limparcamposPagar();
 
                 }
             } catch (SQLException ex) {
@@ -942,6 +1051,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton26ActionPerformed
 
+     
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         limparcamposReceber();
     }//GEN-LAST:event_jButton20ActionPerformed
@@ -952,6 +1062,126 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_txt_TelefoneClienteReceberFocusLost
+
+    private void gridContasPagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridContasPagarMouseClicked
+         // PEGA OS CAMPOS QUE ESTÃO NA JTABLE 
+        
+        if (evt.getClickCount() == 2) {  
+            
+            Object obj = (gridContasPagar.getValueAt(gridContasPagar.getSelectedRow(), 0));  //coluna 0  
+            String notaFiscal = obj.toString();
+            
+     ResultSet rs;
+       
+
+      
+
+      
+
+            rs = ba.buscaContaPagar(notaFiscal);
+            try {
+
+                if (ba.buscaContaPagar(notaFiscal) != null) {
+                    
+                    txt_notaPagar.setText(notaFiscal);
+                    txt_notaPagar.setText(rs.getString("notaFiscal"));
+                    txt_descricaoPagar.setText(rs.getString("descricao"));
+                    msk_recebimentoPagar.setText(rs.getString("dataRecebimento"));
+                    msk_emissaoPagar.setText(rs.getString("dataEmissao"));
+                    msk_vencimentoPagar.setText(rs.getString("dataVencimento"));
+                    txt_valorPagar.setText(rs.getString("valor"));
+                    txt_jurosPagar.setText(rs.getString("juros"));
+                    txt_multaPagar.setText(rs.getString("multa"));
+
+                    
+                     String fornecedor = rs.getString("fornecedor");
+                  
+                    comboFornecedor.setSelectedItem(fornecedor);
+                    
+                }
+                else{
+
+                    JOptionPane.showMessageDialog(rootPane, "não encontrado");
+
+                limparcamposPagar();
+
+                }
+            } catch (SQLException ex) {
+            }
+        
+             
+             
+             
+               // QUANDO SELECIONA A LINHA NA JTABLE MUDA A ABA
+              tabContas.setSelectedIndex(0);   
+             
+              
+        }  
+    }//GEN-LAST:event_gridContasPagarMouseClicked
+
+    private void gridContasPagarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridContasPagarMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gridContasPagarMousePressed
+
+    private void tabContasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabContasMousePressed
+       carregaTabelaPagar();
+       carregaTabelaReceber();
+    }//GEN-LAST:event_tabContasMousePressed
+
+    private void gridContaReceberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridContaReceberMouseClicked
+        if (evt.getClickCount() == 2) {  
+        
+        Object obj = (gridContaReceber.getValueAt(gridContaReceber.getSelectedRow(), 0));  //coluna 0  
+            String telefone = obj.toString();
+            
+         ResultSet rs;
+     
+
+        if("".equals(telefone)){
+
+            JOptionPane.showMessageDialog(null,"Preencha o campo telefone para realizar uma busca");
+        }
+
+        else{
+
+            rs = ba.buscaContaReceber(telefone);
+            try {
+
+                if (ba.buscaContaReceber(telefone) != null) {
+                    
+                    txt_TelefoneClienteReceber.setText(telefone);
+                    txt_ClienteReceber.setText(rs.getString("cliente"));
+                    txt_dataRecebimento.setText(rs.getString("dtrecebimento"));
+                    txt_emissaoReceber.setText(rs.getString("dtemissao"));
+                    txt_dtRecebimento.setText(rs.getString("dtvencimento"));
+                    txt_descReceber.setText(rs.getString("descricao"));
+                    txt_valorReceber.setText(rs.getString("valor"));
+                    txt_jurosReceber.setText(rs.getString("juros"));
+                    txt_multaReceber.setText(rs.getString("multa"));
+                    
+
+                    
+                     String tipopagamento = rs.getString("tipopagamento");
+                     String parcelas = rs.getString("nparcela");
+                  
+                    combo_tipoPagamento.setSelectedItem(tipopagamento);
+                    
+                    combo_parcelas.setSelectedItem(parcelas);
+                    
+                }
+                else{
+
+                    JOptionPane.showMessageDialog(rootPane, "não encontrado");
+
+               limparcamposReceber();
+
+                }
+            } catch (SQLException ex) {
+            }
+        }
+         tabContas.setSelectedIndex(2);   
+        }
+    }//GEN-LAST:event_gridContaReceberMouseClicked
 
     /**
      * @param args the command line arguments
@@ -998,8 +1228,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JComboBox comboFornecedor;
     private javax.swing.JComboBox combo_parcelas;
     private javax.swing.JComboBox combo_tipoPagamento;
+    private javax.swing.JTable gridContaReceber;
+    private javax.swing.JTable gridContasPagar;
     public javax.swing.JInternalFrame internalContasPagarReceber;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton26;
@@ -1021,11 +1255,15 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1036,6 +1274,8 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator14;
@@ -1045,12 +1285,14 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator18;
     private javax.swing.JToolBar.Separator jSeparator19;
     private javax.swing.JToolBar.Separator jSeparator7;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
     private javax.swing.JFormattedTextField msk_emissaoPagar;
     private javax.swing.JFormattedTextField msk_recebimentoPagar;
     private javax.swing.JFormattedTextField msk_vencimentoPagar;
+    private javax.swing.JTabbedPane tabContas;
     private javax.swing.JTextField txt_ClienteReceber;
     private javax.swing.JTextField txt_TelefoneClienteReceber;
     private javax.swing.JFormattedTextField txt_dataRecebimento;
@@ -1088,5 +1330,23 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         String campoSql = "nomeFantasia";
 
         bf.carregaDadoUnico(vsql, msg1, msg2, comboFornecedor, campoSql);
+    }
+    
+    public void carregaTabelaPagar(){
+        String msg1 = "Clientes recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Clientes";
+        String vsql = "SELECT * from contaspagar";
+
+
+        bf.tabelaContasPagar(vsql, msg1, msg2, gridContasPagar);
+    }
+    
+    public void carregaTabelaReceber(){
+        String msg1 = "Conta recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Conta";
+        String vsql = "SELECT * from contasreceber";
+
+
+        bf.tabelaContasReceber(vsql, msg1, msg2, gridContaReceber);
     }
 }
