@@ -166,6 +166,7 @@ public class Produto extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         internalProduto.setClosable(true);
+        internalProduto.setTitle("Produtos e Categoria");
         internalProduto.setVisible(true);
         internalProduto.getContentPane().setLayout(null);
 
