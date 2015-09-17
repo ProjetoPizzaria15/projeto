@@ -199,6 +199,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         internalFornecedor.setClosable(true);
         internalFornecedor.setResizable(true);
+        internalFornecedor.setTitle("Fornecedor");
         internalFornecedor.setVisible(true);
         internalFornecedor.getContentPane().setLayout(null);
 
