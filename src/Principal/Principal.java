@@ -11,6 +11,7 @@ import Fornecedor.Fornecedor;
 import Caixa.Caixa;
 import ContaPagarReceber.ContasPagarReceber;
 import Funcionario.Funcionario;
+import Compras.Compras;
 import Produtos.Produto;
 import Usuario.Usuario;
 import javax.swing.JFrame;
@@ -27,7 +28,8 @@ public class Principal extends javax.swing.JFrame {
     JInternalFrame intFuncionario;
     JInternalFrame intFornecedor;
     JInternalFrame intContasPagarReceber;
-    
+    JInternalFrame intCompras;
+
     
     public Principal() {
         initComponents();
@@ -255,7 +257,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        if(intCompras == null || intCompras.isClosed()){
+             intCompras = new Compras().internalCompras;
+             getContentPane().add(intCompras);
+             desktop.add(intCompras);
+             intCompras.setLocation(130, 15);
+             intCompras.moveToFront();
+         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionarioActionPerformed
