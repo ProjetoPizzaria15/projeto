@@ -139,6 +139,7 @@ public class Usuario extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         internalUsuario.setClosable(true);
+        internalUsuario.setTitle("Usuários");
         internalUsuario.setVisible(true);
         internalUsuario.getContentPane().setLayout(null);
 
