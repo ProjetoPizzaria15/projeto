@@ -145,6 +145,7 @@ public class Funcionario extends javax.swing.JPanel {
         setLayout(null);
 
         internalFuncionario.setClosable(true);
+        internalFuncionario.setTitle("Funcionário");
         internalFuncionario.setVisible(true);
         internalFuncionario.getContentPane().setLayout(null);
 
