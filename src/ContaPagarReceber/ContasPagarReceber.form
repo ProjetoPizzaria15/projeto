@@ -31,6 +31,7 @@
     <Container class="javax.swing.JInternalFrame" name="internalContasPagarReceber">
       <Properties>
         <Property name="closable" type="boolean" value="true"/>
+        <Property name="title" type="java.lang.String" value="Contas a Pagar e Receber"/>
         <Property name="visible" type="boolean" value="true"/>
       </Properties>
       <AuxValues>

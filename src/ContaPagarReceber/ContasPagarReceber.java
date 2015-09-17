@@ -188,6 +188,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         internalContasPagarReceber.setClosable(true);
+        internalContasPagarReceber.setTitle("Contas a Pagar e Receber");
         internalContasPagarReceber.setVisible(true);
         internalContasPagarReceber.getContentPane().setLayout(null);
 
