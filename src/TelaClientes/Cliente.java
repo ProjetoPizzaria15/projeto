@@ -46,10 +46,10 @@ public class Cliente extends javax.swing.JPanel {
    
    }});   
         
+      
+      
 
-        
-        
-        
+       
         txtCep.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
                   txtCepFocusLostCep(evt);  
@@ -155,6 +155,7 @@ public class Cliente extends javax.swing.JPanel {
         setLayout(null);
 
         internalCliente.setClosable(true);
+        internalCliente.setTitle("Clientes");
         internalCliente.setVisible(true);
         internalCliente.getContentPane().setLayout(null);
 
