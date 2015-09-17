@@ -76,6 +76,7 @@ public class Caixa extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         internalProdutos.setClosable(true);
+        internalProdutos.setTitle("PDV");
         internalProdutos.setVisible(true);
         internalProdutos.getContentPane().setLayout(null);
 
