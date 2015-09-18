@@ -26,6 +26,7 @@ public class Banco {
     Connection con;
     Statement stmt;
     ResultSet rs;
+    ResultSet rs2;
     private int codi;
     private String nom;
 
@@ -433,7 +434,7 @@ public class Banco {
             System.out.println(sql);
             rs = stmt.executeQuery(sql);
             rs.first();
-            if (rs.getString("descricao") != null) {
+            if (rs.getString("unidmedida") != null) {
                 return rs;
             } else {
                 return null;
@@ -485,6 +486,66 @@ public class Banco {
             rs = stmt.executeQuery(sql);
             rs.first();
             if (rs.getString("cnpjFor") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+    
+     public ResultSet buscaFornecedorComprasCPF(String nome) {
+        String sql;
+    
+        conecta();
+
+        try {
+            sql = "SELECT cpfFor FROM fornecedor WHERE nomeFantasia='" + nome + "';";
+            
+            
+            System.out.println(sql);
+
+            rs = stmt.executeQuery(sql);
+ 
+            rs.first();
+          
+            if (rs.getString("cpfFor") != null) {
+
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+     
+     
+     
+      public ResultSet buscaFornecedorCompraCNPJ(String nome) {
+        String sql;
+        
+        conecta();
+
+        try {
+            sql = "SELECT cnpjFor FROM fornecedor WHERE nomeFantasia='" + nome + "';";
+            
+            
+            System.out.println(sql);
+
+            rs = stmt.executeQuery(sql);
+ 
+            rs.first();
+          
+            if (rs.getString("cnpjFor") != null) {
+
                 return rs;
             } else {
                 return null;
