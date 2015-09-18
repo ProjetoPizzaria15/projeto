@@ -423,6 +423,31 @@ public class Banco {
 
     }
       
+       
+           public ResultSet buscaUnidadeMedida(String produto) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT unidmedida FROM produtos WHERE descricao='" + produto + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("descricao") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+       
+       
+       
       
     /* REALIZA A BUSCA DO FORNECEDOR POR MEIO DO CPF  */
     
