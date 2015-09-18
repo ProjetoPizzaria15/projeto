@@ -27,7 +27,7 @@ CREATE TABLE `categoriaproduto` (
 
 /*Data for the table `categoriaproduto` */
 
-insert  into `categoriaproduto`(`categoria`) values ('Massa');
+insert  into `categoriaproduto`(`categoria`) values ('Alimento'),('Massa'),('Refrigerante');
 
 /*Table structure for table `clientes` */
 
@@ -172,7 +172,7 @@ CREATE TABLE `produtos` (
 
 /*Data for the table `produtos` */
 
-insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('1','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('123','Massa','massa para pizza','trigo	','UN','NAO',0,'Produto Acabado',10.00,0,'SIM',NULL),('5566','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL);
+insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('1','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('121','Refrigerante','Refrigerante 300ML','','LT','SIM',5,'Produto Acabado',5.99,100,'SIM',NULL),('123','Massa','massa para pizza','trigo	','UN','NAO',0,'Produto Acabado',10.00,0,'SIM',NULL),('5566','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL);
 
 /*Table structure for table `usuario` */
 
