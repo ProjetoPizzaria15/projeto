@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import static org.alfredlibrary.validadores.CNPJ.isValido;
+import org.alfredlibrary.validadores.CPF;
 
 /**
  *
@@ -49,7 +52,9 @@ public class Compras extends javax.swing.JFrame {
         }
       }
     );
-         
+    
+        
+       
      
     }
 
@@ -63,7 +68,6 @@ public class Compras extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         comboNomeFor = new javax.swing.JComboBox();
-        cnpjFor = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelCnpj = new javax.swing.JLabel();
@@ -84,7 +88,8 @@ public class Compras extends javax.swing.JFrame {
         txtObservacao = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         labelCpf = new javax.swing.JLabel();
-        cpfFor = new javax.swing.JFormattedTextField();
+        cpfFor = new javax.swing.JTextField();
+        cnpjFor = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         Novo = new javax.swing.JButton();
         Gravar = new javax.swing.JButton();
@@ -124,17 +129,13 @@ public class Compras extends javax.swing.JFrame {
         jPanel3.setLayout(null);
 
         comboNomeFor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboNomeFor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboNomeForFocusLost(evt);
+            }
+        });
         jPanel3.add(comboNomeFor);
         comboNomeFor.setBounds(80, 30, 400, 30);
-
-        cnpjFor.setEditable(false);
-        try {
-            cnpjFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel3.add(cnpjFor);
-        cnpjFor.setBounds(10, 100, 120, 30);
 
         jLabel1.setText("Fornecedor:");
         jPanel3.add(jLabel1);
@@ -207,13 +208,11 @@ public class Compras extends javax.swing.JFrame {
         jPanel3.add(labelCpf);
         labelCpf.setBounds(10, 70, 80, 30);
 
-        try {
-            cpfFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        cpfFor.setEditable(false);
         jPanel3.add(cpfFor);
         cpfFor.setBounds(10, 100, 120, 30);
+        jPanel3.add(cnpjFor);
+        cnpjFor.setBounds(550, 30, 140, 30);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 80, 760, 300);
@@ -310,6 +309,21 @@ public class Compras extends javax.swing.JFrame {
         comboTipoProduto.setBounds(20, 60, 150, 30);
 
         comboProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboProduto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboProdutoItemStateChanged(evt);
+            }
+        });
+        comboProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboProdutoFocusLost(evt);
+            }
+        });
+        comboProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboProdutoActionPerformed(evt);
+            }
+        });
         jPanel4.add(comboProduto);
         comboProduto.setBounds(210, 60, 200, 30);
 
@@ -416,6 +430,123 @@ public class Compras extends javax.swing.JFrame {
     
     }//GEN-LAST:event_comboTipoProdutoItemStateChanged
 
+    private void comboProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProdutoActionPerformed
+
+  
+        
+    }//GEN-LAST:event_comboProdutoActionPerformed
+
+    private void comboProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboProdutoItemStateChanged
+ 
+    }//GEN-LAST:event_comboProdutoItemStateChanged
+
+    private void comboProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboProdutoFocusLost
+
+        ResultSet rs;
+           String produto = comboProduto.getSelectedItem().toString();
+           
+
+
+
+        if("".equals(produto)){
+
+        }
+
+        
+        else{
+            
+            
+            rs = ba.buscaUnidadeMedida(produto);
+            try {
+
+                if (ba.buscaUnidadeMedida(produto) != null) {
+
+                    txtUnidMedida.setText(rs.getString("unidmedida"));
+                   
+                }
+                else{
+
+                }
+            } catch (SQLException ex) {
+            }
+        } 
+        
+        
+    }//GEN-LAST:event_comboProdutoFocusLost
+
+    private void comboNomeForFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboNomeForFocusLost
+        
+        
+        ResultSet rs;
+           String nome = comboNomeFor.getSelectedItem().toString();
+           
+
+
+
+        if("".equals(nome)){
+
+        }   
+        
+        else{
+            
+            
+            rs = ba.buscaFornecedorComprasCPF(nome);
+            try {
+
+                if (ba.buscaFornecedorComprasCPF(nome) != null) {
+
+                    String cpf = rs.getString("cpfFor");
+                    
+                    
+                  
+                    if(CPF.isValido(cpf) == true){
+                        
+                        cpfFor.setText(rs.getString("cpfFor"));
+                        
+                        cnpjFor.setVisible(false);
+                        labelCnpj.setVisible(false);
+                        
+                        cpfFor.setVisible(true);
+                        labelCpf.setVisible(true);
+                    }
+                }
+                    
+                    else if(ba.buscaFornecedorCompraCNPJ(nome) != null){
+
+                        
+                          String cnpj = rs.getString("cnpjFor");
+
+                          
+                         if(isValido(cnpj) == true){
+                         
+                         cnpjFor.setText(rs.getString("cnpjFor"));
+                             
+                        cnpjFor.setVisible(true);
+                        labelCnpj.setVisible(true);
+                        
+                        cpfFor.setVisible(false);
+                        labelCpf.setVisible(false);
+                        
+                             
+                         
+                         }
+                            
+                    
+                        
+                    }
+                    
+                    
+                
+                else{
+
+                }
+            } catch (SQLException ex) {
+            }
+        } 
+        
+        
+    }//GEN-LAST:event_comboNomeForFocusLost
+
      public void carregaTipoPruduto(){;
         String msg1 = "Tipo Produto recuperados";
         String msg2 = "Erro ao Recuperar Tipo Produto ";
@@ -449,37 +580,9 @@ public class Compras extends javax.swing.JFrame {
 
         bf.carregaDadoUnico(vsql, msg1, msg2, comboProduto, campoSql);
     }
-    public void carregaUnidade (){
-        
-         ResultSet rs;
-   
-
-        String produto = comboProduto.getSelectedItem().toString();
-
-        if("".equals(produto)){
-
-        }
-
-        
-        else{
-            
-            
-            rs = ba.buscaCliente(produto);
-            try {
-
-                if (ba.buscaUnidadeMedida(produto) != null) {
-
-                    txtUnidMedida.setText(rs.getString("unidmedida"));
-                   
-                }
-                else{
-
-                }
-            } catch (SQLException ex) {
-            }
-        } 
-    }
     
+    
+ 
    
     
     public static void main(String args[]) {
@@ -520,14 +623,14 @@ public class Compras extends javax.swing.JFrame {
     private javax.swing.JButton Gravar;
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
-    private javax.swing.JFormattedTextField cnpjFor;
+    private javax.swing.JTextField cnpjFor;
     private javax.swing.JComboBox comboCondicaoPagto;
     private javax.swing.JComboBox comboFormaPagto;
     private javax.swing.JComboBox comboNomeFor;
     private javax.swing.JComboBox comboProduto;
     private javax.swing.JComboBox comboTipoPedido;
     private javax.swing.JComboBox comboTipoProduto;
-    private javax.swing.JFormattedTextField cpfFor;
+    private javax.swing.JTextField cpfFor;
     public javax.swing.JInternalFrame internalCompras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
