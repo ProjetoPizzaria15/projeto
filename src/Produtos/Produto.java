@@ -553,7 +553,7 @@ public class Produto extends javax.swing.JFrame {
     }
     private void GravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GravarActionPerformed
 
-        /*SE A PESSOA FOR FISICA FAZ A INSERÇÃO NO BANCO É O MESMO CODIGO DE BAIXO*/
+     
 
         String categoria;
 
@@ -567,9 +567,10 @@ public class Produto extends javax.swing.JFrame {
 
         else{
             ba.gravarCategoriaProduto(categoria);
-
+            
             txtCategoriaProduto.setText("");
             carregaTabelaCategoria();
+             carregaTipoPruduto();
         }
     }//GEN-LAST:event_GravarActionPerformed
 
