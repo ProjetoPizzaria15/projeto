@@ -27,7 +27,7 @@ public class Compras extends javax.swing.JFrame {
         initComponents();
         carregaTipoPruduto();
         carregaFornecedorCombo();
-        
+        escondecampos();
          
         // DETECTA QUANDO O COMBOBOX É ALTERADO
         
@@ -89,7 +89,7 @@ public class Compras extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         labelCpf = new javax.swing.JLabel();
         cpfFor = new javax.swing.JTextField();
-        cnpjFor = new javax.swing.JTextField();
+        cnpjFor = new javax.swing.JFormattedTextField();
         jToolBar1 = new javax.swing.JToolBar();
         Novo = new javax.swing.JButton();
         Gravar = new javax.swing.JButton();
@@ -114,6 +114,8 @@ public class Compras extends javax.swing.JFrame {
         txtValorDescItens = new javax.swing.JTextField();
         txtValorNfItens = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -143,55 +145,55 @@ public class Compras extends javax.swing.JFrame {
 
         jLabel2.setText("Valor NF:");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(390, 140, 90, 30);
+        jLabel2.setBounds(420, 140, 90, 30);
 
         labelCnpj.setText("CNPJ Fornecedor:");
         jPanel3.add(labelCnpj);
-        labelCnpj.setBounds(10, 70, 100, 30);
+        labelCnpj.setBounds(10, 70, 130, 30);
 
-        comboFormaPagto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboFormaPagto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
         jPanel3.add(comboFormaPagto);
-        comboFormaPagto.setBounds(160, 100, 160, 30);
+        comboFormaPagto.setBounds(180, 100, 210, 30);
 
         jLabel4.setText("Forma de Pagto:");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(160, 70, 100, 30);
+        jLabel4.setBounds(180, 70, 100, 30);
 
-        comboCondicaoPagto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCondicaoPagto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha cond/Pagamento", "À Vista", "Parcelado" }));
         jPanel3.add(comboCondicaoPagto);
-        comboCondicaoPagto.setBounds(350, 100, 150, 30);
+        comboCondicaoPagto.setBounds(430, 100, 190, 30);
 
         jLabel5.setText("Condição Pagto:");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(350, 70, 100, 30);
+        jLabel5.setBounds(430, 70, 100, 30);
         jPanel3.add(txtParcela);
-        txtParcela.setBounds(530, 100, 70, 30);
+        txtParcela.setBounds(650, 100, 70, 30);
 
         jLabel6.setText("Parcelas:");
         jPanel3.add(jLabel6);
-        jLabel6.setBounds(530, 70, 100, 30);
+        jLabel6.setBounds(650, 70, 100, 30);
 
-        comboTipoPedido.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboTipoPedido.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Tipo Produto" }));
         jPanel3.add(comboTipoPedido);
-        comboTipoPedido.setBounds(20, 170, 120, 30);
+        comboTipoPedido.setBounds(20, 170, 170, 30);
 
         jLabel7.setText("Observação:");
         jPanel3.add(jLabel7);
         jLabel7.setBounds(10, 210, 90, 30);
         jPanel3.add(txtValorTotal);
-        txtValorTotal.setBounds(180, 170, 70, 30);
+        txtValorTotal.setBounds(210, 170, 70, 30);
 
         jLabel8.setText("Valor Total:");
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(180, 140, 90, 30);
+        jLabel8.setBounds(210, 140, 90, 30);
         jPanel3.add(txtValorDesc);
-        txtValorDesc.setBounds(280, 170, 70, 30);
+        txtValorDesc.setBounds(310, 170, 70, 30);
 
         jLabel9.setText("Valor Desc:");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(280, 140, 90, 30);
+        jLabel9.setBounds(310, 140, 90, 30);
         jPanel3.add(txtValotNf);
-        txtValotNf.setBounds(390, 170, 100, 30);
+        txtValotNf.setBounds(420, 170, 100, 30);
 
         txtObservacao.setColumns(20);
         txtObservacao.setRows(5);
@@ -204,15 +206,21 @@ public class Compras extends javax.swing.JFrame {
         jPanel3.add(jLabel10);
         jLabel10.setBounds(20, 140, 90, 30);
 
-        labelCpf.setText("CPF:");
+        labelCpf.setText("CPF Fornecedor:");
         jPanel3.add(labelCpf);
-        labelCpf.setBounds(10, 70, 80, 30);
+        labelCpf.setBounds(10, 70, 110, 30);
 
         cpfFor.setEditable(false);
         jPanel3.add(cpfFor);
-        cpfFor.setBounds(10, 100, 120, 30);
+        cpfFor.setBounds(10, 100, 140, 30);
+
+        try {
+            cnpjFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jPanel3.add(cnpjFor);
-        cnpjFor.setBounds(550, 30, 140, 30);
+        cnpjFor.setBounds(10, 100, 140, 30);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 80, 760, 300);
@@ -292,7 +300,7 @@ public class Compras extends javax.swing.JFrame {
 
         jLabel11.setText("Valor NF:");
         jPanel4.add(jLabel11);
-        jLabel11.setBounds(440, 100, 90, 30);
+        jLabel11.setBounds(450, 100, 90, 30);
 
         comboTipoProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboTipoProduto.addItemListener(new java.awt.event.ItemListener() {
@@ -367,25 +375,32 @@ public class Compras extends javax.swing.JFrame {
         jPanel4.add(txtValorDescItens);
         txtValorDescItens.setBounds(350, 130, 70, 30);
         jPanel4.add(txtValorNfItens);
-        txtValorNfItens.setBounds(440, 130, 70, 30);
+        txtValorNfItens.setBounds(450, 130, 70, 30);
 
         jPanel1.add(jPanel4);
         jPanel4.setBounds(0, 380, 760, 200);
 
         jTabbedPane1.addTab("Registro de Compras", jPanel1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
-        );
+        jPanel2.setLayout(null);
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel2.add(jScrollPane2);
+        jScrollPane2.setBounds(20, 80, 730, 340);
+
+        jTabbedPane1.addTab("Pesquisar Compras", jPanel2);
 
         internalCompras.getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(0, 0, 770, 620);
@@ -490,13 +505,13 @@ public class Compras extends javax.swing.JFrame {
         else{
             
             
-            rs = ba.buscaFornecedorComprasCPF(nome);
+            rs = ba.buscaFornecedorCompras(nome);
             try {
 
-                if (ba.buscaFornecedorComprasCPF(nome) != null) {
+                if (ba.buscaFornecedorCompras(nome) != null) {
 
                     String cpf = rs.getString("cpfFor");
-                    
+                    String cnpj = rs.getString("cnpjFor");
                     
                   
                     if(CPF.isValido(cpf) == true){
@@ -509,17 +524,11 @@ public class Compras extends javax.swing.JFrame {
                         cpfFor.setVisible(true);
                         labelCpf.setVisible(true);
                     }
-                }
                     
-                    else if(ba.buscaFornecedorCompraCNPJ(nome) != null){
+                    else if(isValido(cnpj) == true){
 
-                        
-                          String cnpj = rs.getString("cnpjFor");
-
-                          
-                         if(isValido(cnpj) == true){
                          
-                         cnpjFor.setText(rs.getString("cnpjFor"));
+                        cnpjFor.setText(rs.getString("cnpjFor"));
                              
                         cnpjFor.setVisible(true);
                         labelCnpj.setVisible(true);
@@ -527,13 +536,11 @@ public class Compras extends javax.swing.JFrame {
                         cpfFor.setVisible(false);
                         labelCpf.setVisible(false);
                         
-                             
-                         
-                         }
-                            
-                    
                         
                     }
+                }
+                    
+                    
                     
                     
                 
@@ -581,7 +588,14 @@ public class Compras extends javax.swing.JFrame {
         bf.carregaDadoUnico(vsql, msg1, msg2, comboProduto, campoSql);
     }
     
-    
+    public void escondecampos(){
+        
+                  
+                        
+                        cpfFor.setVisible(false);
+                        labelCpf.setVisible(false);
+        
+    }
  
    
     
@@ -623,7 +637,7 @@ public class Compras extends javax.swing.JFrame {
     private javax.swing.JButton Gravar;
     private javax.swing.JButton Novo;
     private javax.swing.JButton Pesquisar;
-    private javax.swing.JTextField cnpjFor;
+    private javax.swing.JFormattedTextField cnpjFor;
     private javax.swing.JComboBox comboCondicaoPagto;
     private javax.swing.JComboBox comboFormaPagto;
     private javax.swing.JComboBox comboNomeFor;
@@ -654,7 +668,9 @@ public class Compras extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelCnpj;
     private javax.swing.JLabel labelCpf;
