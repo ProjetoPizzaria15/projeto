@@ -498,13 +498,13 @@ public class Banco {
 
     }
     
-     public ResultSet buscaFornecedorComprasCPF(String nome) {
+     public ResultSet buscaFornecedorCompras(String nome) {
         String sql;
     
         conecta();
 
         try {
-            sql = "SELECT cpfFor FROM fornecedor WHERE nomeFantasia='" + nome + "';";
+            sql = "SELECT * FROM fornecedor WHERE nomeFantasia='" + nome + "';";
             
             
             System.out.println(sql);
@@ -513,7 +513,7 @@ public class Banco {
  
             rs.first();
           
-            if (rs.getString("cpfFor") != null) {
+            if (rs.getString("nomeFantasia") != null) {
 
                 return rs;
             } else {
@@ -529,34 +529,6 @@ public class Banco {
      
      
      
-      public ResultSet buscaFornecedorCompraCNPJ(String nome) {
-        String sql;
-        
-        conecta();
-
-        try {
-            sql = "SELECT cnpjFor FROM fornecedor WHERE nomeFantasia='" + nome + "';";
-            
-            
-            System.out.println(sql);
-
-            rs = stmt.executeQuery(sql);
- 
-            rs.first();
-          
-            if (rs.getString("cnpjFor") != null) {
-
-                return rs;
-            } else {
-                return null;
-            }
-
-        } catch (SQLException e) {
-
-            return null;
-        }
-
-    }
     
     public ResultSet buscaContaPagar(String notaFiscal) {
         String sql;
