@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import static org.alfredlibrary.validadores.CNPJ.isValido;
 import org.alfredlibrary.validadores.CPF;
 
@@ -25,11 +26,25 @@ public class Compras extends javax.swing.JFrame {
     BancoFuncoes bf = new BancoFuncoes();
     public Compras() {
         initComponents();
+        
+        
+         gridCompras.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"N_Pedido", "CPF", "CNPJ", "Fornecedor", "Tipo_Produto", "Produto", "Qtde"}) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});   
+        
         carregaTipoPruduto();
         carregaFornecedorCombo();
         escondecampos();
-         
-        // DETECTA QUANDO O COMBOBOX É ALTERADO
+       carregaTabela(); 
+       carregaFornecedorPesquisa();
+       
+        // DETECTA QUANDO O COMBOBOX TIPO PRODUTO É ALTERADO E PREENCHE O COMBO PRODUTOS
         
         comboTipoProduto.addActionListener(
       new ActionListener(){
@@ -53,18 +68,41 @@ public class Compras extends javax.swing.JFrame {
       }
     );
     
+        // AO SELECIONAR O FORNECEDOR PREENCHE A TABELA COM OS PEDIDOS DE COMPRA DO MESMO
         
+        comboFornePesquisa.addActionListener(
+      new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            
+       String Fornecedor = comboFornePesquisa.getSelectedItem().toString();
+       
+       
+        
+        String msg1 = "Compras recuperadas com sucesso";
+        String msg2 = "Erro ao Recuperar Compras";
+        String vsql = "SELECT " +
+                        "npedido, cpfFor, cnpjFor, nomeFantasia, tipoProduto, produto, qtde " +
+                      "FROM " +
+                        "Compras where nomeFantasia = '"+Fornecedor+"'";
+
+
+        bf.tabelaCompras(vsql, msg1, msg2, gridCompras);
+            
+        
+        }
+      }
+    );
        
      
+    
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         internalCompras = new javax.swing.JInternalFrame();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabCompras = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         comboNomeFor = new javax.swing.JComboBox();
@@ -88,14 +126,12 @@ public class Compras extends javax.swing.JFrame {
         txtObservacao = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         labelCpf = new javax.swing.JLabel();
-        cpfFor = new javax.swing.JTextField();
-        cnpjFor = new javax.swing.JFormattedTextField();
+        txtCpfFor = new javax.swing.JTextField();
+        txtCnpjFor = new javax.swing.JFormattedTextField();
         jToolBar1 = new javax.swing.JToolBar();
         Novo = new javax.swing.JButton();
         Gravar = new javax.swing.JButton();
         Alterar = new javax.swing.JButton();
-        Excluir = new javax.swing.JButton();
-        Pesquisar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         comboTipoProduto = new javax.swing.JComboBox();
@@ -115,7 +151,10 @@ public class Compras extends javax.swing.JFrame {
         txtValorNfItens = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gridCompras = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        comboFornePesquisa = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -125,12 +164,17 @@ public class Compras extends javax.swing.JFrame {
         internalCompras.setVisible(true);
         internalCompras.getContentPane().setLayout(null);
 
+        tabCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabComprasMousePressed(evt);
+            }
+        });
+
         jPanel1.setLayout(null);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
         jPanel3.setLayout(null);
 
-        comboNomeFor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboNomeFor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 comboNomeForFocusLost(evt);
@@ -173,7 +217,7 @@ public class Compras extends javax.swing.JFrame {
         jPanel3.add(jLabel6);
         jLabel6.setBounds(650, 70, 100, 30);
 
-        comboTipoPedido.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar Tipo Produto" }));
+        comboTipoPedido.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo de Pedido", "Pedido", "Cotação" }));
         jPanel3.add(comboTipoPedido);
         comboTipoPedido.setBounds(20, 170, 170, 30);
 
@@ -210,17 +254,17 @@ public class Compras extends javax.swing.JFrame {
         jPanel3.add(labelCpf);
         labelCpf.setBounds(10, 70, 110, 30);
 
-        cpfFor.setEditable(false);
-        jPanel3.add(cpfFor);
-        cpfFor.setBounds(10, 100, 140, 30);
+        txtCpfFor.setEditable(false);
+        jPanel3.add(txtCpfFor);
+        txtCpfFor.setBounds(10, 100, 140, 30);
 
         try {
-            cnpjFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+            txtCnpjFor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel3.add(cnpjFor);
-        cnpjFor.setBounds(10, 100, 140, 30);
+        jPanel3.add(txtCnpjFor);
+        txtCnpjFor.setBounds(10, 100, 140, 30);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 80, 760, 300);
@@ -266,32 +310,6 @@ public class Compras extends javax.swing.JFrame {
         });
         jToolBar1.add(Alterar);
 
-        Excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
-        Excluir.setText("Excluir");
-        Excluir.setFocusable(false);
-        Excluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Excluir.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Excluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Excluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExcluirActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(Excluir);
-
-        Pesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
-        Pesquisar.setText("Pesquisar");
-        Pesquisar.setFocusable(false);
-        Pesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Pesquisar.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        Pesquisar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        Pesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PesquisarActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(Pesquisar);
-
         jPanel1.add(jToolBar1);
         jToolBar1.setBounds(0, 0, 770, 70);
 
@@ -302,7 +320,6 @@ public class Compras extends javax.swing.JFrame {
         jPanel4.add(jLabel11);
         jLabel11.setBounds(450, 100, 90, 30);
 
-        comboTipoProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboTipoProduto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboTipoProdutoItemStateChanged(evt);
@@ -316,7 +333,6 @@ public class Compras extends javax.swing.JFrame {
         jPanel4.add(comboTipoProduto);
         comboTipoProduto.setBounds(20, 60, 150, 30);
 
-        comboProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboProduto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboProdutoItemStateChanged(evt);
@@ -362,6 +378,12 @@ public class Compras extends javax.swing.JFrame {
         jLabel16.setText("Qtde: ");
         jPanel4.add(jLabel16);
         jLabel16.setBounds(160, 100, 90, 30);
+
+        txtValorUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorUnitActionPerformed(evt);
+            }
+        });
         jPanel4.add(txtValorUnit);
         txtValorUnit.setBounds(250, 130, 70, 30);
 
@@ -380,11 +402,11 @@ public class Compras extends javax.swing.JFrame {
         jPanel1.add(jPanel4);
         jPanel4.setBounds(0, 380, 760, 200);
 
-        jTabbedPane1.addTab("Registro de Compras", jPanel1);
+        tabCompras.addTab("Registro de Compras", jPanel1);
 
         jPanel2.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gridCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -395,15 +417,38 @@ public class Compras extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        gridCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridComprasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(gridCompras);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 80, 730, 340);
+        jScrollPane2.setBounds(10, 140, 740, 350);
 
-        jTabbedPane1.addTab("Pesquisar Compras", jPanel2);
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar"));
+        jPanel5.setLayout(null);
 
-        internalCompras.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 770, 620);
+        jLabel3.setText("Fornecedor:");
+        jPanel5.add(jLabel3);
+        jLabel3.setBounds(60, 30, 110, 30);
+
+        comboFornePesquisa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboFornePesquisaItemStateChanged(evt);
+            }
+        });
+        jPanel5.add(comboFornePesquisa);
+        comboFornePesquisa.setBounds(140, 30, 320, 30);
+
+        jPanel2.add(jPanel5);
+        jPanel5.setBounds(90, 20, 540, 80);
+
+        tabCompras.addTab("Pedidos de Compra", jPanel2);
+
+        internalCompras.getContentPane().add(tabCompras);
+        tabCompras.setBounds(0, 0, 770, 620);
 
         getContentPane().add(internalCompras);
         internalCompras.setBounds(0, 0, 790, 650);
@@ -413,13 +458,65 @@ public class Compras extends javax.swing.JFrame {
 
     private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
 
-
+        limpacampos();
     }//GEN-LAST:event_NovoActionPerformed
 
     private void GravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GravarActionPerformed
 
   
+        String nomeFor, cpfFor, cnpjFor, formaPagto, condicaoPagto, tipoPedido,
+               observacao,tipoProduto,nomeProduto,unidMedida,
+                refProduto;
+        
+        int parcelas,qtde;
+        float valorTotal,valorDesc,valorNf,valorUnit,valorDescItens,valorNfItens;
+        
+        
+        
+        cpfFor = txtCpfFor.getText();
+        cnpjFor = txtCnpjFor.getText();
+        observacao = txtObservacao.getText();
+        unidMedida = txtUnidMedida.getText();
+        refProduto = txtRefProduto.getText();
 
+         nomeFor = comboNomeFor.getSelectedItem().toString();
+         formaPagto = comboFormaPagto.getSelectedItem().toString();
+         condicaoPagto = comboCondicaoPagto.getSelectedItem().toString();
+         tipoPedido = comboTipoPedido.getSelectedItem().toString();
+         tipoProduto = comboTipoProduto.getSelectedItem().toString();
+         nomeProduto = comboProduto.getSelectedItem().toString();
+         
+         parcelas = Integer.parseInt(txtParcela.getText());
+         qtde =  Integer.parseInt(txtQtde.getText());
+         
+         valorTotal = Float.parseFloat(txtValorTotal.getText());
+         valorDesc  = Float.parseFloat(txtValorDesc.getText());
+         valorNf  = Float.parseFloat(txtValotNf.getText());
+         valorUnit = Float.parseFloat(txtValorUnit.getText());
+        valorDescItens = Float.parseFloat(txtValorDescItens.getText());
+         valorNfItens = Float.parseFloat(txtValorNfItens.getText());
+         
+         
+         if("".equals(nomeFor)){
+            
+            JOptionPane.showMessageDialog(null," Preenche os campos obrigatorios (*)");
+            
+        
+        
+        }
+        
+        else{ 
+            ba.gravarCompras(nomeFor, cpfFor, cnpjFor, formaPagto, condicaoPagto , tipoPedido, observacao,tipoProduto,
+                    valorTotal,valorDesc,valorNf,valorUnit,valorDescItens,valorNfItens,
+                    nomeProduto,unidMedida,refProduto,parcelas,qtde);
+
+             limpacampos();
+            
+        
+       
+        }
+         
+         
     }//GEN-LAST:event_GravarActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
@@ -427,15 +524,6 @@ public class Compras extends javax.swing.JFrame {
        
 
     }//GEN-LAST:event_AlterarActionPerformed
-
-    private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-
-       
-    }//GEN-LAST:event_ExcluirActionPerformed
-
-    private void PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarActionPerformed
-     
-    }//GEN-LAST:event_PesquisarActionPerformed
 
     private void comboTipoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoProdutoActionPerformed
        
@@ -455,6 +543,28 @@ public class Compras extends javax.swing.JFrame {
  
     }//GEN-LAST:event_comboProdutoItemStateChanged
 
+    public void limpacampos(){
+        
+         comboNomeFor.setSelectedItem("");
+         txtCnpjFor.setText("");
+        txtCpfFor.setText("");
+        comboFormaPagto.setSelectedItem("Escolha forma de Pagamento");
+        comboCondicaoPagto.setSelectedItem("Escolha cond/Pagamento");
+        txtParcela.setText("");
+        comboTipoPedido.setSelectedItem("Tipo de Pedido");
+        txtValorTotal.setText("");
+        txtValorDesc.setText("");
+        txtValotNf.setText("");
+        txtObservacao.setText("");
+        comboTipoProduto.setSelectedItem("");
+        comboProduto.setSelectedItem("");
+        txtUnidMedida.setText("");
+        txtQtde.setText("");
+        txtValorUnit.setText("");
+        txtValorDescItens.setText("");
+        txtValorNfItens.setText("");
+        txtRefProduto.setText("");
+    }
     private void comboProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboProdutoFocusLost
 
         ResultSet rs;
@@ -516,24 +626,24 @@ public class Compras extends javax.swing.JFrame {
                   
                     if(CPF.isValido(cpf) == true){
                         
-                        cpfFor.setText(rs.getString("cpfFor"));
+                        txtCpfFor.setText(rs.getString("cpfFor"));
                         
-                        cnpjFor.setVisible(false);
+                        txtCnpjFor.setVisible(false);
                         labelCnpj.setVisible(false);
                         
-                        cpfFor.setVisible(true);
+                        txtCpfFor.setVisible(true);
                         labelCpf.setVisible(true);
                     }
                     
                     else if(isValido(cnpj) == true){
 
                          
-                        cnpjFor.setText(rs.getString("cnpjFor"));
+                        txtCnpjFor.setText(rs.getString("cnpjFor"));
                              
-                        cnpjFor.setVisible(true);
+                        txtCnpjFor.setVisible(true);
                         labelCnpj.setVisible(true);
                         
-                        cpfFor.setVisible(false);
+                        txtCpfFor.setVisible(false);
                         labelCpf.setVisible(false);
                         
                         
@@ -554,6 +664,101 @@ public class Compras extends javax.swing.JFrame {
         
     }//GEN-LAST:event_comboNomeForFocusLost
 
+    private void txtValorUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorUnitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtValorUnitActionPerformed
+
+    private void tabComprasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabComprasMousePressed
+       comboFornePesquisa.setSelectedItem("");
+       carregaTabela();
+       
+    }//GEN-LAST:event_tabComprasMousePressed
+
+    private void gridComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridComprasMouseClicked
+        
+          if (evt.getClickCount() == 2) { 
+          
+          
+             ResultSet rs;
+
+        Object obj = (gridCompras.getValueAt(gridCompras.getSelectedRow(), 0));  //coluna 0  
+            String npedido = obj.toString();
+            
+
+        rs = ba.buscaCompras(npedido);
+                try {
+
+                    if (ba.buscaCompras(npedido) != null) {
+                        
+                       String cpf,cnpj;
+                        
+                       cpf = rs.getString("cpfFor");
+                       cnpj = rs.getString("cnpjFor");
+                       
+                       
+                        comboNomeFor.setSelectedItem(rs.getString("nomeFantasia"));
+                        comboFormaPagto.setSelectedItem(rs.getString("formapagto"));    
+                        comboCondicaoPagto.setSelectedItem(rs.getString("condicaopagto"));        
+                        txtParcela.setText(rs.getString("parcelas"));
+                        comboTipoPedido.setSelectedItem(rs.getString("tipopedido"));     
+                        txtValorTotal.setText(rs.getString("valortotal"));
+                        txtValorDesc.setText(rs.getString("valordesc"));
+                        txtValotNf.setText(rs.getString("valornf"));
+                        txtObservacao.setText(rs.getString("observacao"));
+                        comboTipoProduto.setSelectedItem(rs.getString("tipoproduto")); 
+                        comboProduto.setSelectedItem(rs.getString("produto")); 
+                        txtUnidMedida.setText(rs.getString("unidmedida"));
+                        txtRefProduto.setText(rs.getString("refproduto"));
+                        txtQtde.setText(rs.getString("Qtde"));
+                        txtValorUnit.setText(rs.getString("valorunit"));
+                        txtValorDescItens.setText(rs.getString("valordescitens"));
+                        txtValorNfItens.setText(rs.getString("valornfitens"));
+                        
+                         if(CPF.isValido(cpf) == true){
+                        
+                        txtCpfFor.setText(cpf);
+                        
+                        txtCnpjFor.setVisible(false);
+                        labelCnpj.setVisible(false);
+                        
+                        txtCpfFor.setVisible(true);
+                        labelCpf.setVisible(true);
+                    }
+                    
+                    else if(isValido(cnpj) == true){
+
+                         
+                        txtCnpjFor.setText(cnpj);
+                             
+                        txtCnpjFor.setVisible(true);
+                        labelCnpj.setVisible(true);
+                        
+                        txtCpfFor.setVisible(false);
+                        labelCpf.setVisible(false);
+                        
+                        
+                    }
+                        
+                        tabCompras.setSelectedIndex(0);   
+                    }
+                    else{
+
+                        
+                    }
+                } catch (SQLException ex) {
+                }
+            }
+
+          
+               
+             
+
+    }//GEN-LAST:event_gridComprasMouseClicked
+
+    private void comboFornePesquisaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFornePesquisaItemStateChanged
+      
+    }//GEN-LAST:event_comboFornePesquisaItemStateChanged
+
      public void carregaTipoPruduto(){;
         String msg1 = "Tipo Produto recuperados";
         String msg2 = "Erro ao Recuperar Tipo Produto ";
@@ -573,6 +778,15 @@ public class Compras extends javax.swing.JFrame {
         bf.carregaDadoUnico(vsql, msg1, msg2, comboNomeFor, campoSql);
     }
     
+     public void carregaFornecedorPesquisa(){
+        String msg1 = "Fornecedores recuperados";
+        String msg2 = "Erro ao Recuperar Fornecedores";
+        String vsql = "SELECT nomeFantasia FROM fornecedor order by nomeFantasia";
+        String campoSql = "nomeFantasia";
+
+        bf.carregaDadoUnico(vsql, msg1, msg2, comboFornePesquisa, campoSql);
+    }
+    
     public void carregaProduto(){
         
         
@@ -588,11 +802,25 @@ public class Compras extends javax.swing.JFrame {
         bf.carregaDadoUnico(vsql, msg1, msg2, comboProduto, campoSql);
     }
     
+    
+    
+    public void carregaTabela(){
+        String msg1 = "Compras recuperadas com sucesso";
+        String msg2 = "Erro ao Recuperar Compras";
+        String vsql = "SELECT " +
+                        "npedido, cpfFor, cnpjFor, nomeFantasia, tipoProduto, produto, qtde " +
+                      "FROM " +
+                        "Compras";
+
+
+        bf.tabelaCompras(vsql, msg1, msg2, gridCompras);
+    }
+    
     public void escondecampos(){
         
                   
                         
-                        cpfFor.setVisible(false);
+                        txtCpfFor.setVisible(false);
                         labelCpf.setVisible(false);
         
     }
@@ -633,18 +861,16 @@ public class Compras extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Alterar;
-    private javax.swing.JButton Excluir;
     private javax.swing.JButton Gravar;
     private javax.swing.JButton Novo;
-    private javax.swing.JButton Pesquisar;
-    private javax.swing.JFormattedTextField cnpjFor;
     private javax.swing.JComboBox comboCondicaoPagto;
     private javax.swing.JComboBox comboFormaPagto;
+    private javax.swing.JComboBox comboFornePesquisa;
     private javax.swing.JComboBox comboNomeFor;
     private javax.swing.JComboBox comboProduto;
     private javax.swing.JComboBox comboTipoPedido;
     private javax.swing.JComboBox comboTipoProduto;
-    private javax.swing.JTextField cpfFor;
+    private javax.swing.JTable gridCompras;
     public javax.swing.JInternalFrame internalCompras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -657,6 +883,7 @@ public class Compras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -667,13 +894,15 @@ public class Compras extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelCnpj;
     private javax.swing.JLabel labelCpf;
+    private javax.swing.JTabbedPane tabCompras;
+    private javax.swing.JFormattedTextField txtCnpjFor;
+    private javax.swing.JTextField txtCpfFor;
     private javax.swing.JTextArea txtObservacao;
     private javax.swing.JTextField txtParcela;
     private javax.swing.JTextField txtQtde;
