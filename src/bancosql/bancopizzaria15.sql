@@ -50,6 +50,38 @@ CREATE TABLE `clientes` (
 
 insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('34344534','Paulo','08080100','SUACUAPARA','10','aaaa','SAO PAULO','SP','PARQUE PAULISTANO');
 
+/*Table structure for table `compras` */
+
+DROP TABLE IF EXISTS `compras`;
+
+CREATE TABLE `compras` (
+  `NPedido` int(10) NOT NULL AUTO_INCREMENT,
+  `nomeFantasia` varchar(50) DEFAULT NULL,
+  `cpfFor` varchar(14) DEFAULT NULL,
+  `cnpjFor` varchar(18) DEFAULT NULL,
+  `formapagto` varchar(18) DEFAULT NULL,
+  `condicaopagto` varchar(9) DEFAULT NULL,
+  `parcelas` int(1) DEFAULT NULL,
+  `tipopedido` varchar(7) DEFAULT NULL,
+  `valortotal` float(5,2) DEFAULT NULL,
+  `valordesc` float(5,2) DEFAULT NULL,
+  `valornf` float(5,2) DEFAULT NULL,
+  `observacao` varchar(200) DEFAULT NULL,
+  `tipoproduto` varchar(30) DEFAULT NULL,
+  `produto` varchar(50) DEFAULT NULL,
+  `unidmedida` varchar(2) DEFAULT NULL,
+  `refproduto` varchar(20) DEFAULT NULL,
+  `qtde` int(7) DEFAULT NULL,
+  `valorunit` float(5,2) DEFAULT NULL,
+  `valordescitens` float(5,2) DEFAULT NULL,
+  `valornfitens` float(5,2) DEFAULT NULL,
+  PRIMARY KEY (`NPedido`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+/*Data for the table `compras` */
+
+insert  into `compras`(`NPedido`,`nomeFantasia`,`cpfFor`,`cnpjFor`,`formapagto`,`condicaopagto`,`parcelas`,`tipopedido`,`valortotal`,`valordesc`,`valornf`,`observacao`,`tipoproduto`,`produto`,`unidmedida`,`refproduto`,`qtde`,`valorunit`,`valordescitens`,`valornfitens`) values (8,'Paulo','455.365.058-40','  .   .   /    -  ','Cartão de Crédito','À Vista',6,'Pedido',6.00,5.00,6.00,'656','Massa','massa para pizza','UN','6',5,6.00,5.00,6.00),(9,'gfdgdf','','01.554.910/0001-89','Cartão de Crédito','Parcelado',5,'Pedido',5.00,4.00,5.00,'45','Massa','massa para pizza','UN','4',5,4.00,54.00,5.00),(10,'Paulo','455.365.058-40','  .   .   /    -  ','Cartão de Crédito','Parcelado',6,'Pedido',4.00,5.00,45.00,'4554','Massa','massa para pizza','UN','5',4,5.00,4.00,5.00);
+
 /*Table structure for table `contaspagar` */
 
 DROP TABLE IF EXISTS `contaspagar`;
