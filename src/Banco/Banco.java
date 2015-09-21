@@ -237,6 +237,31 @@ public class Banco {
 
     }
     
+    
+    public void atualizaCompra(int npedido,String nomeFor,String cpfFor,String cnpjFor,String formaPagto,String condicaoPagto ,
+            String tipoPedido,String observacao,String tipoProduto,Float valorTotal,Float valorDesc,
+            Float valorNf,Float valorUnit,Float valorDescItens,Float valorNfItens,String nomeProduto,
+            String unidMedida,String refProduto,int parcelas, int qtde) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE compras SET nomeFantasia ='"+nomeFor+"', cpfFor ='"+cpfFor+"', cnpjFor ='"+cnpjFor+"', formapagto ='"+formaPagto+"', condicaopagto ='"+condicaoPagto+"', parcelas ="+parcelas+", tipopedido ='"+tipoPedido+"' , valortotal ="+valorTotal+" , valordesc ="+valorDesc+" , valornf ="+valorNf+" , observacao ='"+observacao+"' , tipoproduto ='"+tipoProduto+"' , produto ='"+nomeProduto+"'  , refproduto ='"+refProduto+"' , qtde ="+qtde+" , valorunit ="+valorUnit+" , valordescitens ="+valorDescItens+" , valornfitens ="+valorNfItens+"  WHERE NPedido = '"+npedido+"'"; 
+
+        
+              stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Compra Atualizada com sucesso");
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
      public void atualizaContaPagar(String notaFiscal,String descricao,String recebimento,String emissao,String vencimento,String valor,String juros,String multa,String fornecedor) {
         String sql;
         conecta();
