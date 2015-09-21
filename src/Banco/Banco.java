@@ -358,6 +358,28 @@ public class Banco {
 
     }
      
+     public ResultSet buscaCompras(String npedido) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT * FROM compras WHERE npedido='" + npedido + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("npedido") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+     
      public ResultSet buscaCategoriaProduto(String categoria) {
         String sql;
         conecta();
@@ -900,6 +922,51 @@ public class Banco {
         }
     
     }
+    
+    
+    public boolean gravarCompras(String nomeFor,String cpfFor,String cnpjFor,String formaPagto,String condicaoPagto ,
+            String tipoPedido,String observacao,String tipoProduto,Float valorTotal,Float valorDesc,
+            Float valorNf,Float valorUnit,Float valorDescItens,Float valorNfItens,String nomeProduto,
+            String unidMedida,String refProduto,int parcelas, int qtde) {
+     
+        
+        conecta();
+        String sql;
+
+
+//Captura os dados digitados
+
+        try {
+              
+          
+            
+                sql = "INSERT INTO Compras(nomeFantasia, cpfFor, cnpjFor, formapagto, condicaopagto, parcelas,tipopedido, valortotal, valordesc,valornf ,observacao ,tipoproduto , produto,unidmedida ,refproduto ,qtde ,valorunit,valordescitens ,valornfitens ) VALUES ('"; // nome das variaveis do BD
+                sql += nomeFor + "', '" + cpfFor + "','" + cnpjFor + "' , '"+ formaPagto +"' , '"+ condicaoPagto +"' , "+ parcelas +" ,'" + tipoPedido + "', " + valorTotal + "," + valorDesc +"," + valorNf +",'" + observacao +"','" + tipoProduto +"','" + nomeProduto +"','" + unidMedida +"','" + refProduto +"'," + qtde +"," + valorUnit +"," + valorDescItens +"," + valorNfItens +")";
+                
+           
+
+                stmt.executeUpdate(sql);
+
+                JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso!");
+                return true;
+ 
+            }
+        
+    
+
+           catch (SQLException e) {
+               
+                if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){
+            
+                JOptionPane.showMessageDialog(null,"Numero de telefone já registrado" );
+            
+            }
+            System.out.println("Erro ao executar o comando SQL:" + e.toString());
+            return false;
+        }
+    
+    }
+    
     
     public boolean gravaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun ,String cidadeFun,String setorFun,String sexoFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun, String ufFun) {
         conecta();
