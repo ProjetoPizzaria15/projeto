@@ -21,7 +21,7 @@ import org.alfredlibrary.validadores.CPF;
  * @author Usuario
  */
 public class Compras extends javax.swing.JFrame {
-
+  
     Banco ba = new Banco();
     BancoFuncoes bf = new BancoFuncoes();
     public Compras() {
@@ -43,6 +43,8 @@ public class Compras extends javax.swing.JFrame {
         escondecampos();
        carregaTabela(); 
        carregaFornecedorPesquisa();
+       
+       
        
         // DETECTA QUANDO O COMBOBOX TIPO PRODUTO É ALTERADO E PREENCHE O COMBO PRODUTOS
         
@@ -158,6 +160,8 @@ public class Compras extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         comboFornePesquisa = new javax.swing.JComboBox();
+        jToolBar2 = new javax.swing.JToolBar();
+        Excluir1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -167,6 +171,11 @@ public class Compras extends javax.swing.JFrame {
         internalCompras.setVisible(true);
         internalCompras.getContentPane().setLayout(null);
 
+        tabCompras.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabComprasStateChanged(evt);
+            }
+        });
         tabCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tabComprasMousePressed(evt);
@@ -342,7 +351,7 @@ public class Compras extends javax.swing.JFrame {
 
         jLabel11.setText("Valor NF:");
         jPanel4.add(jLabel11);
-        jLabel11.setBounds(450, 100, 90, 30);
+        jLabel11.setBounds(450, 80, 90, 30);
 
         comboTipoProduto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -355,7 +364,7 @@ public class Compras extends javax.swing.JFrame {
             }
         });
         jPanel4.add(comboTipoProduto);
-        comboTipoProduto.setBounds(20, 60, 150, 30);
+        comboTipoProduto.setBounds(20, 40, 150, 30);
 
         comboProduto.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -373,35 +382,35 @@ public class Compras extends javax.swing.JFrame {
             }
         });
         jPanel4.add(comboProduto);
-        comboProduto.setBounds(210, 60, 200, 30);
+        comboProduto.setBounds(210, 40, 200, 30);
 
         jLabel12.setText("Tipo Produto:");
         jPanel4.add(jLabel12);
-        jLabel12.setBounds(20, 30, 90, 30);
+        jLabel12.setBounds(20, 10, 90, 30);
 
         jLabel13.setText("Produto: ");
         jPanel4.add(jLabel13);
-        jLabel13.setBounds(210, 30, 90, 30);
+        jLabel13.setBounds(210, 10, 90, 30);
 
         txtUnidMedida.setEditable(false);
         jPanel4.add(txtUnidMedida);
-        txtUnidMedida.setBounds(470, 60, 70, 30);
+        txtUnidMedida.setBounds(470, 40, 70, 30);
         jPanel4.add(txtRefProduto);
-        txtRefProduto.setBounds(20, 130, 110, 30);
+        txtRefProduto.setBounds(20, 110, 110, 30);
 
         jLabel14.setText("Unid Medida:");
         jPanel4.add(jLabel14);
-        jLabel14.setBounds(470, 30, 90, 30);
+        jLabel14.setBounds(470, 10, 90, 30);
 
         jLabel15.setText("Ref. Produto: ");
         jPanel4.add(jLabel15);
-        jLabel15.setBounds(20, 100, 90, 30);
+        jLabel15.setBounds(20, 80, 90, 30);
         jPanel4.add(txtQtde);
-        txtQtde.setBounds(160, 130, 70, 30);
+        txtQtde.setBounds(160, 110, 70, 30);
 
         jLabel16.setText("Qtde: ");
         jPanel4.add(jLabel16);
-        jLabel16.setBounds(160, 100, 90, 30);
+        jLabel16.setBounds(160, 80, 90, 30);
 
         txtValorUnit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,22 +418,22 @@ public class Compras extends javax.swing.JFrame {
             }
         });
         jPanel4.add(txtValorUnit);
-        txtValorUnit.setBounds(250, 130, 70, 30);
+        txtValorUnit.setBounds(250, 110, 70, 30);
 
         jLabel17.setText("Valor Unit:");
         jPanel4.add(jLabel17);
-        jLabel17.setBounds(250, 100, 90, 30);
+        jLabel17.setBounds(250, 80, 90, 30);
 
         jLabel18.setText("Valor Desc:");
         jPanel4.add(jLabel18);
-        jLabel18.setBounds(350, 100, 90, 30);
+        jLabel18.setBounds(350, 80, 90, 30);
         jPanel4.add(txtValorDescItens);
-        txtValorDescItens.setBounds(350, 130, 70, 30);
+        txtValorDescItens.setBounds(350, 110, 70, 30);
         jPanel4.add(txtValorNfItens);
-        txtValorNfItens.setBounds(450, 130, 70, 30);
+        txtValorNfItens.setBounds(450, 110, 70, 30);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(0, 400, 760, 180);
+        jPanel4.setBounds(0, 400, 760, 150);
 
         tabCompras.addTab("Registro de Compras", jPanel1);
 
@@ -449,7 +458,7 @@ public class Compras extends javax.swing.JFrame {
         jScrollPane2.setViewportView(gridCompras);
 
         jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 140, 740, 350);
+        jScrollPane2.setBounds(10, 190, 740, 340);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar"));
         jPanel5.setLayout(null);
@@ -467,12 +476,30 @@ public class Compras extends javax.swing.JFrame {
         comboFornePesquisa.setBounds(140, 30, 320, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(90, 20, 540, 80);
+        jPanel5.setBounds(100, 80, 540, 80);
+
+        jToolBar2.setRollover(true);
+
+        Excluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
+        Excluir1.setText("Excluir");
+        Excluir1.setFocusable(false);
+        Excluir1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Excluir1.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        Excluir1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Excluir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Excluir1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(Excluir1);
+
+        jPanel2.add(jToolBar2);
+        jToolBar2.setBounds(0, 0, 770, 70);
 
         tabCompras.addTab("Pedidos de Compra", jPanel2);
 
         internalCompras.getContentPane().add(tabCompras);
-        tabCompras.setBounds(0, 0, 780, 610);
+        tabCompras.setBounds(0, 0, 780, 580);
 
         getContentPane().add(internalCompras);
         internalCompras.setBounds(0, 0, 810, 640);
@@ -483,10 +510,16 @@ public class Compras extends javax.swing.JFrame {
     private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
 
         limpacampos();
+        txtNPedido.setVisible(false);
+                        labelPedido.setVisible(false);
+                        txtNPedido.setText("");
     }//GEN-LAST:event_NovoActionPerformed
 
     private void GravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GravarActionPerformed
 
+                        txtNPedido.setVisible(false);
+                        labelPedido.setVisible(false);
+                        txtNPedido.setText("");
   
         String nomeFor, cpfFor, cnpjFor, formaPagto, condicaoPagto, tipoPedido,
                observacao,tipoProduto,nomeProduto,unidMedida,
@@ -589,7 +622,11 @@ public class Compras extends javax.swing.JFrame {
             ba.atualizaCompra(npedido,nomeFor, cpfFor, cnpjFor, formaPagto, condicaoPagto , tipoPedido, observacao,tipoProduto,
                     valorTotal,valorDesc,valorNf,valorUnit,valorDescItens,valorNfItens,
                     nomeProduto,unidMedida,refProduto,parcelas,qtde);
-
+            
+            
+                        txtNPedido.setVisible(false);
+                        labelPedido.setVisible(false);
+                        txtNPedido.setText("");
         }
 
     }//GEN-LAST:event_AlterarActionPerformed
@@ -633,6 +670,9 @@ public class Compras extends javax.swing.JFrame {
         txtValorDescItens.setText("");
         txtValorNfItens.setText("");
         txtRefProduto.setText("");
+        txtNPedido.setVisible(false);
+         labelPedido.setVisible(false);
+         txtNPedido.setText("");
     }
     private void comboProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboProdutoFocusLost
 
@@ -738,8 +778,7 @@ public class Compras extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorUnitActionPerformed
 
     private void tabComprasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabComprasMousePressed
-       comboFornePesquisa.setSelectedItem("");
-       carregaTabela();
+       
        
     }//GEN-LAST:event_tabComprasMousePressed
 
@@ -834,9 +873,66 @@ public class Compras extends javax.swing.JFrame {
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
 
-       
+       String npedido = txtNPedido.getText();
+        
+        if(npedido.equals("")){
+
+                JOptionPane.showMessageDialog(null,"Realize uma busca para fazer a exclusão");
+                
+
+            }
+
+            else{
+                if (ba.excluiCompra(npedido)) {
+                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+                    
+                       carregaTabela(); 
+                       limpacampos();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Não encontrado");
+                }
+            }
+        
         
     }//GEN-LAST:event_ExcluirActionPerformed
+
+    private void Excluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Excluir1ActionPerformed
+
+        
+        
+         Object obj = (gridCompras.getValueAt(gridCompras.getSelectedRow(), 0));  //coluna 0  
+            String npedido = obj.toString();
+                          
+
+            if(npedido.equals("")){
+
+                JOptionPane.showMessageDialog(null,"Selecione um pedido de compra para realizar uma exclusão");
+                
+
+            }
+
+            else{
+                if (ba.excluiCompra(npedido)) {
+                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+                    
+                       carregaTabela(); 
+                      
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Não encontrado");
+                }
+            }
+        
+        
+    }//GEN-LAST:event_Excluir1ActionPerformed
+
+    private void tabComprasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabComprasStateChanged
+comboFornePesquisa.setSelectedItem("");
+       carregaTabela();
+
+
+    }//GEN-LAST:event_tabComprasStateChanged
 
      public void carregaTipoPruduto(){;
         String msg1 = "Tipo Produto recuperados";
@@ -942,6 +1038,7 @@ public class Compras extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Alterar;
     private javax.swing.JButton Excluir;
+    private javax.swing.JButton Excluir1;
     private javax.swing.JButton Gravar;
     private javax.swing.JButton Novo;
     private javax.swing.JComboBox comboCondicaoPagto;
@@ -979,6 +1076,7 @@ public class Compras extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelCnpj;
     private javax.swing.JLabel labelCpf;
     private javax.swing.JLabel labelPedido;
