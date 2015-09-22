@@ -639,6 +639,24 @@ public class Banco {
 
     }
     
+     public boolean excluiCompra(String npedido) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "DELETE FROM compras WHERE npedido= '" + npedido + "';";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+            return true;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+
+    }
+    
     public boolean excluiUsuario(String cpf) {
         String sql;
         conecta();
