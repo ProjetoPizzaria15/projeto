@@ -27,7 +27,7 @@ CREATE TABLE `categoriaproduto` (
 
 /*Data for the table `categoriaproduto` */
 
-insert  into `categoriaproduto`(`categoria`) values ('Alimento'),('Massa'),('Refrigerante');
+insert  into `categoriaproduto`(`categoria`) values ('Alimento'),('Massa'),('Pizza'),('Refrigerante');
 
 /*Table structure for table `clientes` */
 
@@ -48,7 +48,7 @@ CREATE TABLE `clientes` (
 
 /*Data for the table `clientes` */
 
-insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('34344534','Paulo','08080100','SUACUAPARA','10','aaaa','SAO PAULO','SP','PARQUE PAULISTANO');
+insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO');
 
 /*Table structure for table `compras` */
 
@@ -76,11 +76,11 @@ CREATE TABLE `compras` (
   `valordescitens` float(5,2) DEFAULT NULL,
   `valornfitens` float(5,2) DEFAULT NULL,
   PRIMARY KEY (`NPedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 /*Data for the table `compras` */
 
-insert  into `compras`(`NPedido`,`nomeFantasia`,`cpfFor`,`cnpjFor`,`formapagto`,`condicaopagto`,`parcelas`,`tipopedido`,`valortotal`,`valordesc`,`valornf`,`observacao`,`tipoproduto`,`produto`,`unidmedida`,`refproduto`,`qtde`,`valorunit`,`valordescitens`,`valornfitens`) values (8,'Paulo','455.365.058-40','  .   .   /    -  ','Cartão de Crédito','À Vista',6,'Pedido',6.00,5.00,6.00,'656','Massa','massa para pizza','UN','6',5,6.00,5.00,6.00),(9,'gfdgdf','','01.554.910/0001-89','Cartão de Crédito','Parcelado',5,'Pedido',5.00,4.00,5.00,'45','Massa','massa para pizza','UN','4',5,4.00,54.00,5.00),(10,'Paulo','455.365.058-40','  .   .   /    -  ','Cartão de Crédito','Parcelado',6,'Pedido',4.00,5.00,45.00,'4554','Massa','massa para pizza','UN','5',4,5.00,4.00,5.00);
+insert  into `compras`(`NPedido`,`nomeFantasia`,`cpfFor`,`cnpjFor`,`formapagto`,`condicaopagto`,`parcelas`,`tipopedido`,`valortotal`,`valordesc`,`valornf`,`observacao`,`tipoproduto`,`produto`,`unidmedida`,`refproduto`,`qtde`,`valorunit`,`valordescitens`,`valornfitens`) values (10,'gfdgdf','455.365.058-40','01.554.910/0001-89','Cartão de Crédito','Parcelado',6,'Pedido',4.00,5.00,45.00,'4554','Massa','massa para pizza','UN','5',4,5.00,4.00,5.00),(17,'gfdgdf','455.365.058-40','01.554.910/0001-89','Cartão de Crédito','Parcelado',6,'Pedido',4.00,5.00,45.00,'4554','Massa','massa para pizza','UN','5',4,5.00,4.00,5.00),(19,'Paulo','455.365.058-40','  .   .   /    -  ','Cartão de Crédito','Parcelado',6,'Pedido',4.00,5.00,45.00,'4554','Massa','massa para pizza','UN','5',4,5.00,4.00,5.00);
 
 /*Table structure for table `contaspagar` */
 
@@ -204,7 +204,7 @@ CREATE TABLE `produtos` (
 
 /*Data for the table `produtos` */
 
-insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('1','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('121','Refrigerante','Refrigerante 300ML','','LT','SIM',5,'Produto Acabado',5.99,100,'SIM',NULL),('123','Massa','massa para pizza','trigo	','UN','NAO',0,'Produto Acabado',10.00,0,'SIM',NULL),('5566','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL);
+insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('1','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('121','Refrigerante','Refrigerante 300ML','','LT','SIM',5,'Produto Acabado',5.99,100,'SIM',NULL),('123','Massa','massa para pizza','trigo	','UN','NAO',0,'Produto Acabado',10.00,0,'SIM',NULL),('31','Pizza','Pizza mussarela ','queijo queijo e mais queijo','UN','NAO',0,'Produto Acabado',28.00,0,'SIM',NULL),('34','Pizza','Pizza Calabresa','calabreza , fermento','UN','NAO',0,'Produto Acabado',25.00,0,'SIM',NULL),('5566','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('75','Pizza','Atum','atum','UN','-',0,'Produto Acabado',32.00,0,'SIM',NULL);
 
 /*Table structure for table `usuario` */
 
