@@ -472,6 +472,29 @@ public class Banco {
     }
       
        
+       public ResultSet buscaProdutoNome(String produto) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT * FROM produtos WHERE descricao='" + produto + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("descricao") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
+       
+       
            public ResultSet buscaUnidadeMedida(String produto) {
         String sql;
         conecta();
