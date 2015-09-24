@@ -182,6 +182,20 @@ CREATE TABLE `funcionario` (
 
 insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`ufFun`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP'),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP');
 
+/*Table structure for table `itenspedido` */
+
+DROP TABLE IF EXISTS `itenspedido`;
+
+CREATE TABLE `itenspedido` (
+  `npedido` int(10) DEFAULT NULL,
+  `produto` varchar(50) DEFAULT NULL,
+  `preco` float(5,2) DEFAULT NULL,
+  `qtde` varchar(3) DEFAULT NULL,
+  `total` float(5,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `itenspedido` */
+
 /*Table structure for table `produtos` */
 
 DROP TABLE IF EXISTS `produtos`;
@@ -224,6 +238,26 @@ CREATE TABLE `usuario` (
 /*Data for the table `usuario` */
 
 insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'pedro','pedro','01','n','057.045.958-39'),(NULL,NULL,'teste','teste','00','n','563.553.262-43');
+
+/*Table structure for table `venda` */
+
+DROP TABLE IF EXISTS `venda`;
+
+CREATE TABLE `venda` (
+  `npedido` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `telefone` int(8) DEFAULT NULL,
+  `produto` varchar(100) DEFAULT NULL,
+  `qtde` int(3) DEFAULT NULL,
+  `total` float(5,2) DEFAULT NULL,
+  `formaPagamento` varchar(20) DEFAULT NULL,
+  `observacao` varchar(50) DEFAULT NULL,
+  `data` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`npedido`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `venda` */
+
+insert  into `venda`(`npedido`,`telefone`,`produto`,`qtde`,`total`,`formaPagamento`,`observacao`,`data`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
