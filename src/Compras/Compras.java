@@ -7,6 +7,7 @@ package Compras;
 
 import Banco.Banco;
 import Banco.BancoFuncoes;
+import Funcoes.LimitarCampos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -95,7 +96,19 @@ public class Compras extends javax.swing.JFrame {
       }
     );
        
-     
+     //limita os campos
+        
+        txtParcela.setDocument(new LimitarCampos(2));
+        txtValorTotal.setDocument(new LimitarCampos(8));
+        txtValorDesc.setDocument(new LimitarCampos(8));
+        txtValotNf.setDocument(new LimitarCampos(8)); 
+        txtObservacao.setDocument(new LimitarCampos(200));
+        txtRefProduto.setDocument(new LimitarCampos(15));
+        txtQtde.setDocument(new LimitarCampos(5));
+        txtValorUnit.setDocument(new LimitarCampos(8));
+        txtValorDescItens.setDocument(new LimitarCampos(8));
+        txtValorNfItens.setDocument(new LimitarCampos(8));
+        
     
     }
     
@@ -393,6 +406,11 @@ public class Compras extends javax.swing.JFrame {
         jLabel13.setBounds(210, 10, 90, 30);
 
         txtUnidMedida.setEditable(false);
+        txtUnidMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnidMedidaActionPerformed(evt);
+            }
+        });
         jPanel4.add(txtUnidMedida);
         txtUnidMedida.setBounds(470, 40, 70, 30);
         jPanel4.add(txtRefProduto);
@@ -933,6 +951,10 @@ comboFornePesquisa.setSelectedItem("");
 
 
     }//GEN-LAST:event_tabComprasStateChanged
+
+    private void txtUnidMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUnidMedidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUnidMedidaActionPerformed
 
      public void carregaTipoPruduto(){;
         String msg1 = "Tipo Produto recuperados";
