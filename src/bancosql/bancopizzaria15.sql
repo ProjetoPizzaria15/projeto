@@ -48,7 +48,7 @@ CREATE TABLE `clientes` (
 
 /*Data for the table `clientes` */
 
-insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO');
+insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('25858180','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO');
 
 /*Table structure for table `compras` */
 
@@ -190,11 +190,13 @@ CREATE TABLE `itenspedido` (
   `npedido` int(10) DEFAULT NULL,
   `produto` varchar(50) DEFAULT NULL,
   `preco` float(5,2) DEFAULT NULL,
-  `qtde` varchar(3) DEFAULT NULL,
+  `qtde` int(3) DEFAULT NULL,
   `total` float(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `itenspedido` */
+
+insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (5,'massa para pizza',10.00,1,10.00),(5,'Refrigerante 300ML',5.99,1,5.99),(5,'Pizza mussarela ',28.00,1,28.00),(5,'Refrigerante 300ML',5.99,60,359.40),(5,'Pizza Calabresa',25.00,1,25.00),(5,'Pizza mussarela ',28.00,5,140.00);
 
 /*Table structure for table `produtos` */
 
