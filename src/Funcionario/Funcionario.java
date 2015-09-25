@@ -238,43 +238,43 @@ public class Funcionario extends javax.swing.JPanel {
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel30.setText("Cep:");
         jPanel5.add(jLabel30);
-        jLabel30.setBounds(10, 30, 40, 30);
+        jLabel30.setBounds(10, 20, 40, 30);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel27.setText("UF:");
         jPanel5.add(jLabel27);
-        jLabel27.setBounds(150, 30, 40, 30);
+        jLabel27.setBounds(150, 20, 40, 30);
         jPanel5.add(txt_estadoFun);
-        txt_estadoFun.setBounds(180, 30, 40, 30);
+        txt_estadoFun.setBounds(180, 20, 40, 30);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText("Cidade: ");
         jPanel5.add(jLabel33);
-        jLabel33.setBounds(10, 90, 50, 30);
+        jLabel33.setBounds(10, 60, 50, 30);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel24.setText("Bairro: ");
         jPanel5.add(jLabel24);
-        jLabel24.setBounds(310, 90, 50, 30);
+        jLabel24.setBounds(360, 60, 50, 30);
         jPanel5.add(txt_bairroFun);
-        txt_bairroFun.setBounds(350, 90, 250, 30);
+        txt_bairroFun.setBounds(430, 60, 250, 30);
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel28.setText("Endereço:");
         jPanel5.add(jLabel28);
-        jLabel28.setBounds(10, 140, 70, 30);
+        jLabel28.setBounds(10, 110, 70, 30);
         jPanel5.add(txt_endeFun);
-        txt_endeFun.setBounds(100, 140, 340, 30);
+        txt_endeFun.setBounds(100, 110, 340, 30);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel25.setText("N°:");
         jPanel5.add(jLabel25);
-        jLabel25.setBounds(450, 140, 40, 30);
+        jLabel25.setBounds(450, 110, 40, 30);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText("Complemento: ");
         jPanel5.add(jLabel23);
-        jLabel23.setBounds(10, 180, 100, 30);
+        jLabel23.setBounds(10, 150, 100, 30);
 
         try {
             txt_cepFun.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
@@ -282,16 +282,16 @@ public class Funcionario extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel5.add(txt_cepFun);
-        txt_cepFun.setBounds(40, 30, 100, 30);
+        txt_cepFun.setBounds(40, 20, 100, 30);
         jPanel5.add(txt_cidadeFun);
-        txt_cidadeFun.setBounds(60, 90, 230, 30);
+        txt_cidadeFun.setBounds(100, 60, 230, 30);
         jPanel5.add(txtNumFun);
-        txtNumFun.setBounds(480, 140, 80, 30);
+        txtNumFun.setBounds(480, 110, 80, 30);
         jPanel5.add(txtCompleFun);
-        txtCompleFun.setBounds(100, 180, 340, 30);
+        txtCompleFun.setBounds(100, 150, 340, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(10, 270, 1030, 220);
+        jPanel5.setBounds(10, 250, 1030, 190);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
         jPanel7.setLayout(null);
@@ -323,7 +323,7 @@ public class Funcionario extends javax.swing.JPanel {
         txt_telFun.setBounds(70, 20, 140, 30);
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(10, 500, 1030, 80);
+        jPanel7.setBounds(10, 440, 1030, 80);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoal"));
         jPanel6.setLayout(null);
@@ -402,7 +402,7 @@ public class Funcionario extends javax.swing.JPanel {
         txt_nasciFun.setBounds(140, 120, 80, 30);
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(10, 90, 1030, 180);
+        jPanel6.setBounds(10, 90, 1030, 160);
 
         TabFuncionario.addTab("Registro", jPanel2);
 
@@ -452,10 +452,10 @@ public class Funcionario extends javax.swing.JPanel {
         TabFuncionario.addTab("Pesquisa", jPanel1);
 
         internalFuncionario.getContentPane().add(TabFuncionario);
-        TabFuncionario.setBounds(0, 0, 1060, 630);
+        TabFuncionario.setBounds(0, 0, 1060, 550);
 
         add(internalFuncionario);
-        internalFuncionario.setBounds(0, 0, 1090, 710);
+        internalFuncionario.setBounds(0, 0, 1090, 580);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
