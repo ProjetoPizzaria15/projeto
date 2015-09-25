@@ -54,7 +54,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         carregaTabelaReceber();
         carregaFornecedorCombo();
         
-       Alerta.setVisible(false);
+
        
        // limita campos contas a pagar
        txt_notaPagar.setDocument(new LimitarCampos(50));
@@ -131,7 +131,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jSeparator16 = new javax.swing.JToolBar.Separator();
         btnPesquisarContaPagar = new javax.swing.JButton();
         jSeparator14 = new javax.swing.JToolBar.Separator();
-        Alerta = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -225,7 +224,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txt_descricaoPagar);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(80, 80, 330, 100);
+        jScrollPane1.setBounds(80, 80, 330, 80);
 
         jPanel4.add(jPanel2);
         jPanel2.setBounds(10, 100, 430, 180);
@@ -390,12 +389,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
         jPanel4.add(jToolBar2);
         jToolBar2.setBounds(0, 0, 750, 80);
-
-        Alerta.setBackground(new java.awt.Color(255, 51, 51));
-        Alerta.setText("                                                                                                                   Atenção preencher todos campos");
-        Alerta.setOpaque(true);
-        jPanel4.add(Alerta);
-        Alerta.setBounds(0, 520, 850, 30);
 
         tabContas.addTab("Contas a Pagar", jPanel4);
 
@@ -691,12 +684,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         tabContas.addTab("Pesquisar Contas a Receber", jPanel11);
 
         internalContasPagarReceber.getContentPane().add(tabContas);
-        tabContas.setBounds(0, 0, 860, 590);
+        tabContas.setBounds(0, 0, 860, 550);
 
         getContentPane().add(internalContasPagarReceber);
-        internalContasPagarReceber.setBounds(10, 10, 890, 620);
+        internalContasPagarReceber.setBounds(10, 10, 890, 580);
 
-        setBounds(0, 0, 921, 674);
+        setBounds(0, 0, 921, 634);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirContaPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirContaPagarActionPerformed
@@ -790,11 +783,10 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         if(TelefoneClienteReceber.equals("") || ClienteReceber.equals("") ){
 
             JOptionPane.showMessageDialog(null,"Preencha o campo telefone e cliente");
-            Alerta.setVisible(true);
+          
         }
         else{
-            Alerta.setVisible(false);
-
+     
             if (ba.gravaContaReceber(descricaoReceber, dtReceber, emissaoReceber, vencimentoReceber, valorReceber, jurosReceber, multaReceber, TelefoneClienteReceber, ClienteReceber, tipopagamento, parcelas)) {
                
                 
@@ -891,10 +883,10 @@ public class ContasPagarReceber extends javax.swing.JFrame {
             || "Apenas números".equals(txt_notaPagar) || "Apenas números".equals(txt_valorPagar) || "Apenas números".equals(txt_multaPagar) ){
 
             JOptionPane.showMessageDialog(null,"Preencha os campos corretamente");
-            Alerta.setVisible(true);
+          
         }
         else{
-            Alerta.setVisible(false);
+           
 
             if (ba.gravaContaPagar(notaFiscal, descricao, recebimento,emissao, vencimento, valor,juros,multa, fornecedor)) {
 
@@ -1220,7 +1212,6 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Alerta;
     private javax.swing.JButton btnAlterarContaPagar;
     private javax.swing.JButton btnExcluirContaPagar;
     private javax.swing.JButton btnGravaContaPagar;
