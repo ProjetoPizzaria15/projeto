@@ -520,7 +520,7 @@ public class Compras extends javax.swing.JFrame {
         tabCompras.setBounds(0, 0, 780, 580);
 
         getContentPane().add(internalCompras);
-        internalCompras.setBounds(0, 0, 810, 640);
+        internalCompras.setBounds(0, 0, 810, 610);
 
         setBounds(0, 0, 840, 765);
     }// </editor-fold>//GEN-END:initComponents
