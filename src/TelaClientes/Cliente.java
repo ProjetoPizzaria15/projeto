@@ -268,7 +268,7 @@ public class Cliente extends javax.swing.JPanel {
         jLabel5.setBounds(530, 130, 60, 30);
 
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(10, 220, 860, 310);
+        jPanel6.setBounds(10, 220, 860, 280);
 
         jToolBar1.setRollover(true);
 
@@ -402,10 +402,10 @@ public class Cliente extends javax.swing.JPanel {
         TabCliente.addTab("Pesquisar Cliente", jPanel2);
 
         internalCliente.getContentPane().add(TabCliente);
-        TabCliente.setBounds(0, 0, 900, 590);
+        TabCliente.setBounds(0, 0, 900, 540);
 
         add(internalCliente);
-        internalCliente.setBounds(40, 30, 920, 630);
+        internalCliente.setBounds(40, 30, 920, 580);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
