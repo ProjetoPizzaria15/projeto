@@ -990,6 +990,46 @@ public class Banco {
     }
     
     
+    
+    public boolean gravarItensCompra(int pedido,int qtde,String produto,Float valorproduto,Float total) {
+        conecta();
+        String sql;
+
+
+//Captura os dados digitados
+
+        try {
+              
+          
+            
+                sql = "INSERT INTO itenspedido(npedido,qtde,produto,preco,total) VALUES ("; // nome das variaveis do BD
+                sql += pedido + ", " + qtde + ",'" + produto + "' , "+ valorproduto +" , "+ total +")";
+                
+           
+
+                stmt.executeUpdate(sql);
+
+               
+                return true;
+ 
+            }
+        
+    
+
+           catch (SQLException e) {
+               
+                if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){
+            
+                JOptionPane.showMessageDialog(null,"Numero de telefone já registrado" );
+            
+            }
+            System.out.println("Erro ao executar o comando SQL:" + e.toString());
+            return false;
+        }
+    
+    }
+    
+    
     public boolean gravarCompras(String nomeFor,String cpfFor,String cnpjFor,String formaPagto,String condicaoPagto ,
             String tipoPedido,String observacao,String tipoProduto,Float valorTotal,Float valorDesc,
             Float valorNf,Float valorUnit,Float valorDescItens,Float valorNfItens,String nomeProduto,
