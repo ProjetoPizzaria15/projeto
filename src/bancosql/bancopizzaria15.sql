@@ -196,7 +196,7 @@ CREATE TABLE `itenspedido` (
 
 /*Data for the table `itenspedido` */
 
-insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (5,'massa para pizza',10.00,1,10.00),(5,'Refrigerante 300ML',5.99,1,5.99),(5,'Pizza mussarela ',28.00,1,28.00),(5,'Refrigerante 300ML',5.99,60,359.40),(5,'Pizza Calabresa',25.00,1,25.00),(5,'Pizza mussarela ',28.00,5,140.00);
+insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (6,'Meio a Meio de Pizza mussarela  e Atum',28.00,1,28.00),(6,'Meio a Meio de Pizza mussarela  e Atum',32.00,1,32.00);
 
 /*Table structure for table `produtos` */
 
@@ -220,7 +220,7 @@ CREATE TABLE `produtos` (
 
 /*Data for the table `produtos` */
 
-insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('1','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('121','Refrigerante','Refrigerante 300ML','','LT','SIM',5,'Produto Acabado',5.99,100,'SIM',NULL),('123','Massa','massa para pizza','trigo	','UN','NAO',0,'Produto Acabado',10.00,0,'SIM',NULL),('31','Pizza','Pizza mussarela ','queijo queijo e mais queijo','UN','NAO',0,'Produto Acabado',28.00,0,'SIM',NULL),('34','Pizza','Pizza Calabresa','calabreza , fermento','UN','NAO',0,'Produto Acabado',25.00,0,'SIM',NULL),('5566','Massa','343','45435','CX','SIM',4,'Produto Acabado',323.00,43,'SIM',NULL),('75','Pizza','Atum','atum','UN','-',0,'Produto Acabado',32.00,0,'SIM',NULL);
+insert  into `produtos`(`codigoproduto`,`tipoproduto`,`descricao`,`ingredientes`,`unidmedida`,`estocavel`,`qtdeminima`,`acabadoprima`,`valor`,`qtdeestoque`,`produtovenda`,`dataregistro`) values ('121','Refrigerante','Refrigerante 300ML','','LT','SIM',5,'Produto Acabado',5.99,100,'SIM',NULL),('31','Pizza','Pizza mussarela ','queijo queijo e mais queijo','UN','NAO',0,'Produto Acabado',28.00,0,'SIM',NULL),('34','Pizza','Pizza Calabresa','calabreza , fermento','UN','NAO',0,'Produto Acabado',25.00,0,'SIM',NULL),('75','Pizza','Atum','atum','UN','-',0,'Produto Acabado',32.00,0,'SIM',NULL);
 
 /*Table structure for table `usuario` */
 
@@ -255,11 +255,11 @@ CREATE TABLE `venda` (
   `observacao` varchar(50) DEFAULT NULL,
   `data` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`npedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `venda` */
 
-insert  into `venda`(`npedido`,`telefone`,`produto`,`qtde`,`total`,`formaPagamento`,`observacao`,`data`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `venda`(`npedido`,`telefone`,`produto`,`qtde`,`total`,`formaPagamento`,`observacao`,`data`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
