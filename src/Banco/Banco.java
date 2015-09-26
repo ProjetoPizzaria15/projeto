@@ -1029,7 +1029,7 @@ public class Banco {
     
     }
     
-    
+  
     public boolean gravarCompras(String nomeFor,String cpfFor,String cnpjFor,String formaPagto,String condicaoPagto ,
             String tipoPedido,String observacao,String tipoProduto,Float valorTotal,Float valorDesc,
             Float valorNf,Float valorUnit,Float valorDescItens,Float valorNfItens,String nomeProduto,
