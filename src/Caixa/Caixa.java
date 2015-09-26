@@ -11,9 +11,13 @@ import Banco.conectaBanco;
 import TelaClientes.Cliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,7 +40,7 @@ public class Caixa extends javax.swing.JFrame {
         carregaSaborPizza2();
         carregaSaborPizza1();
         carregaNumeroPedido();
-        
+        somaVendas();
         txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
                   txtTelefoneFocusLost(evt);  
@@ -268,7 +272,7 @@ public class Caixa extends javax.swing.JFrame {
         txtQtde2Sabores = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtTotalVenda = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
@@ -348,10 +352,10 @@ public class Caixa extends javax.swing.JFrame {
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
         btnAlterar.setText("Alterar Dados do Cliente");
         jPanel1.add(btnAlterar);
-        btnAlterar.setBounds(180, 260, 250, 40);
+        btnAlterar.setBounds(180, 250, 250, 40);
 
         internalProdutos.getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 550, 330);
+        jPanel1.setBounds(0, 0, 550, 310);
 
         gridCaixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -364,10 +368,15 @@ public class Caixa extends javax.swing.JFrame {
                 "Descricao", "Qtde", "Preco", "Total"
             }
         ));
+        gridCaixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridCaixaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(gridCaixa);
 
         internalProdutos.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 340, 1170, 120);
+        jScrollPane1.setBounds(10, 320, 1170, 120);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel2.setLayout(null);
@@ -474,7 +483,7 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnIncluir2);
-        btnIncluir2.setBounds(380, 50, 160, 60);
+        btnIncluir2.setBounds(380, 30, 160, 60);
 
         jLabel21.setText("Qtde: ");
         jPanel3.add(jLabel21);
@@ -500,10 +509,10 @@ public class Caixa extends javax.swing.JFrame {
         txtQtde2Sabores.setBounds(100, 120, 40, 30);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(10, 130, 580, 180);
+        jPanel3.setBounds(10, 130, 580, 160);
 
         internalProdutos.getContentPane().add(jPanel2);
-        jPanel2.setBounds(550, 10, 610, 320);
+        jPanel2.setBounds(550, 10, 610, 300);
 
         jLabel14.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel14);
@@ -511,19 +520,19 @@ public class Caixa extends javax.swing.JFrame {
         internalProdutos.getContentPane().add(jTextField12);
         jTextField12.setBounds(10, 730, 410, 30);
 
-        jTextField1.setEditable(false);
-        internalProdutos.getContentPane().add(jTextField1);
-        jTextField1.setBounds(1040, 470, 100, 30);
+        txtTotalVenda.setEditable(false);
+        internalProdutos.getContentPane().add(txtTotalVenda);
+        txtTotalVenda.setBounds(1040, 450, 100, 30);
 
         jLabel15.setText("Total:");
         internalProdutos.getContentPane().add(jLabel15);
-        jLabel15.setBounds(1000, 470, 80, 30);
+        jLabel15.setBounds(1000, 450, 80, 30);
 
         jLabel16.setText("Forma de Pagamento: ");
         internalProdutos.getContentPane().add(jLabel16);
         jLabel16.setBounds(220, 510, 130, 30);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
         internalProdutos.getContentPane().add(jComboBox1);
         jComboBox1.setBounds(360, 510, 180, 30);
         internalProdutos.getContentPane().add(jTextField2);
@@ -540,14 +549,19 @@ public class Caixa extends javax.swing.JFrame {
         jTextField3.setBounds(820, 510, 70, 30);
 
         jButton1.setText("Finalizar Pedido");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         internalProdutos.getContentPane().add(jButton1);
-        jButton1.setBounds(1010, 510, 150, 30);
+        jButton1.setBounds(1000, 490, 180, 50);
 
         jLabel19.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel19);
-        jLabel19.setBounds(20, 470, 90, 30);
+        jLabel19.setBounds(20, 450, 90, 30);
         internalProdutos.getContentPane().add(jTextField4);
-        jTextField4.setBounds(110, 470, 620, 30);
+        jTextField4.setBounds(110, 450, 620, 30);
 
         txtNPedido.setEditable(false);
         txtNPedido.setBackground(new java.awt.Color(255, 255, 204));
@@ -635,20 +649,110 @@ public class Caixa extends javax.swing.JFrame {
         
         ba.gravarItensCompra(pedido, qtde, produto, valorproduto, total);
 
-                txtTelefone.setText("");
-                comboProduto.setSelectedItem("");
-                txtPreco.setText("");
-                txtCodProduto.setText("");
-                txtQtde.setText("");
-                txtTotal.setText("");
+                limpacampos1();
               
                 carregaTabela();
+                somaVendas();
+                
                 
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnIncluir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluir2ActionPerformed
-        // TODO add your handling code here:
+        
+        String sabor1, sabor2,saborfinal;
+        
+        sabor1 = comboSabor1.getSelectedItem().toString();
+        sabor2 = comboSabor2.getSelectedItem().toString();
+        
+        saborfinal = "Meio a Meio de "+sabor1+" e "+sabor2;
+        
+        int pedido,qtde;
+  
+        float valorproduto = 0,total,valor1,valor2;
+        
+        
+        pedido = Integer.parseInt(txtNPedido.getText());
+        qtde = Integer.parseInt(txtQtde2Sabores.getText());
+        
+ 
+
+        total = Float.parseFloat(txtValorTotalPizza.getText());
+        
+        valor1 = Float.parseFloat(txtValorPizza1.getText());
+        valor2 = Float.parseFloat(txtValorPizza2.getText());
+        
+        if(valor1 > valor2){
+            
+            valorproduto += valor1;
+            
+            
+        }
+        
+        else if (valor2 > valor1){
+        
+        valorproduto += valor2;
+        
+    }
+        
+        
+        ba.gravarItensCompra(pedido, qtde, saborfinal, valorproduto, total);
+
+               
+                limpacampos2();
+              
+                carregaTabela();
+                somaVendas();
+        
     }//GEN-LAST:event_btnIncluir2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+      
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void gridCaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridCaixaMouseClicked
+         gridCaixa.addMouseListener(new MouseAdapter(){
+                public void mouseClicked(MouseEvent e){
+                 try{
+                     
+                             conectaBanco cb = new conectaBanco();  
+                     
+                     if(e.getClickCount() == 2){
+                       int    col = gridCaixa.getSelectedColumn();
+                       int    lin = gridCaixa.getSelectedRow();
+                    String result =(String) gridCaixa.getValueAt(lin, 0);
+                    
+                         com.mysql.jdbc.Connection connection = null;
+                         Class.forName(cb.JDBC_DRIVER()).newInstance();
+                         connection =    (com.mysql.jdbc.Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+                         com.mysql.jdbc.Statement s = (com.mysql.jdbc.Statement) connection.createStatement();
+                         
+                    Object[] options = { "Sim", "Não" };
+                        int opcao = JOptionPane.showOptionDialog(null, "Deseja Excluir Esta Venda ?", "AVISO",
+                                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                        if(opcao == 0){
+                                    String msg1 = "Venda Excluída";
+                                    String msg2 = "Erro ao Excluir Venda";
+                                    String sql = "delete from itensPedido WHERE produto='"+result+"'";
+
+                                    System.out.println(sql);
+                                    s.execute(sql);  
+                        }
+                                        
+                         carregaTabela();
+                         somaVendas();
+                     }                    
+                     
+                    }catch (Exception ex) {
+                       ex.printStackTrace(System.out);
+   //                    JOptionPane.showMessageDialog(null, "Não Foi Possível Abrir Serviços");
+                    }
+                }   
+          });
+    }//GEN-LAST:event_gridCaixaMouseClicked
 
     
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {  
@@ -768,6 +872,65 @@ public class Caixa extends javax.swing.JFrame {
         
     }
     
+    
+     public void somaVendas(){
+               conectaBanco cb = new conectaBanco();
+               int codigocompra = Integer.parseInt(txtNPedido.getText());
+               
+              
+               
+               
+              try{
+
+            Connection connection = null;
+            Class.forName(cb.JDBC_DRIVER()).newInstance();
+            connection =    (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+            Statement s = (Statement) connection.createStatement();
+
+            String pega = "SELECT SUM(total)soma " +
+                          "FROM itensPedido " +
+                          "WHERE npedido = "+codigocompra+"";
+
+            System.out.println(pega);
+
+            ResultSet r = s.executeQuery(pega);
+                 while(r.next()) {
+                        
+                        String soma = r.getString("soma");  
+                        int ponto = soma.indexOf(".");
+                        int tamanho = soma.length();
+                        int total = tamanho-(ponto+1);
+                        String somaEditada = soma.replace('.', ',');
+
+//                        System.out.println(total);
+
+                        if(ponto == -1){
+                           somaEditada = somaEditada+",00";
+                        }else{
+                            if(total==2)
+                                somaEditada = somaEditada;
+                            if(total==1)
+                                somaEditada = somaEditada+"0";
+                            if(total>2)
+                                somaEditada = somaEditada.substring(0, ponto+3);
+                        }
+                        
+                        txtTotalVenda.setText(somaEditada);
+                      
+                      }
+
+
+         }catch (Exception ex) {
+                    ex.printStackTrace(System.out);
+                    JOptionPane.showMessageDialog(null, "Não Foi Possível Somar as vendas");
+                }
+   }
+    
+    
+    
+    
+    
+    
      public void carregaTabela(){
        
          int npedido = Integer.parseInt(txtNPedido.getText());
@@ -782,6 +945,31 @@ public class Caixa extends javax.swing.JFrame {
 
         bf.tabelaCaixa(vsql, msg1, msg2, gridCaixa);
     }
+     
+     public void limpacampos1(){
+         
+         txtTelefone.setText("");
+                comboProduto.setSelectedItem("");
+                txtPreco.setText("");
+                txtCodProduto.setText("");
+                txtQtde.setText("");
+                txtTotal.setText("");
+         
+     }
+     
+     
+     public void limpacampos2(){
+         
+      
+                comboSabor1.setSelectedItem("");
+                comboSabor2.setSelectedItem("");
+                txtValorPizza1.setText("");
+                txtValorPizza2.setText("");
+                txtQtde2Sabores.setText("");
+                txtValorTotalPizza.setText("");
+         
+     }
+     
      
     /**
      * @param args the command line arguments
@@ -857,7 +1045,6 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -873,6 +1060,7 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JTextField txtQtde2Sabores;
     private javax.swing.JTextField txtTelefone;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtTotalVenda;
     private javax.swing.JTextField txtValorPizza1;
     private javax.swing.JTextField txtValorPizza2;
     private javax.swing.JTextField txtValorTotalPizza;
