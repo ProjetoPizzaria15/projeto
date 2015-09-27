@@ -11,6 +11,7 @@ import Banco.conectaBanco;
 import TelaClientes.Cliente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -41,6 +42,7 @@ public class Caixa extends javax.swing.JFrame {
         carregaSaborPizza1();
         carregaNumeroPedido();
         somaVendas();
+        
         txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
                   txtTelefoneFocusLost(evt);  
@@ -232,6 +234,7 @@ public class Caixa extends javax.swing.JFrame {
     private void initComponents() {
 
         grupoRadioPartes = new javax.swing.ButtonGroup();
+        radioTipoPedido = new javax.swing.ButtonGroup();
         internalProdutos = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -287,6 +290,9 @@ public class Caixa extends javax.swing.JFrame {
         txtObservacao = new javax.swing.JTextField();
         txtNPedido = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        radioPedidoBalcao = new javax.swing.JRadioButton();
+        rapidoPedidoEntrega = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -338,6 +344,12 @@ public class Caixa extends javax.swing.JFrame {
         jLabel5.setText("Ponto de Refêrencia:");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(10, 210, 130, 30);
+
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtTelefone);
         txtTelefone.setBounds(140, 40, 90, 30);
 
@@ -357,7 +369,7 @@ public class Caixa extends javax.swing.JFrame {
         btnAlterar.setBounds(180, 250, 250, 40);
 
         internalProdutos.getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 550, 310);
+        jPanel1.setBounds(0, 80, 550, 300);
 
         gridCaixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -378,16 +390,16 @@ public class Caixa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(gridCaixa);
 
         internalProdutos.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 320, 1170, 120);
+        jScrollPane1.setBounds(10, 390, 1170, 120);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
         jPanel2.setLayout(null);
 
         jLabel6.setText("Codigo Produto:");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(20, 10, 100, 30);
+        jLabel6.setBounds(20, 20, 100, 30);
         jPanel2.add(txtCodProduto);
-        txtCodProduto.setBounds(120, 10, 90, 30);
+        txtCodProduto.setBounds(120, 20, 90, 30);
 
         jLabel7.setText("Preço:");
         jPanel2.add(jLabel7);
@@ -415,6 +427,11 @@ public class Caixa extends javax.swing.JFrame {
         txtQtde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQtdeActionPerformed(evt);
+            }
+        });
+        txtQtde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQtdeKeyPressed(evt);
             }
         });
         jPanel2.add(txtQtde);
@@ -520,7 +537,7 @@ public class Caixa extends javax.swing.JFrame {
         jPanel3.setBounds(10, 130, 590, 160);
 
         internalProdutos.getContentPane().add(jPanel2);
-        jPanel2.setBounds(550, 10, 630, 300);
+        jPanel2.setBounds(550, 80, 630, 300);
 
         jLabel14.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel14);
@@ -530,37 +547,42 @@ public class Caixa extends javax.swing.JFrame {
 
         txtTotalVenda.setEditable(false);
         internalProdutos.getContentPane().add(txtTotalVenda);
-        txtTotalVenda.setBounds(1060, 450, 100, 30);
+        txtTotalVenda.setBounds(1060, 520, 100, 30);
 
         jLabel15.setText("Total:");
         internalProdutos.getContentPane().add(jLabel15);
-        jLabel15.setBounds(1010, 450, 80, 30);
+        jLabel15.setBounds(1010, 520, 80, 30);
 
         jLabel16.setText("Forma de Pagamento: ");
         internalProdutos.getContentPane().add(jLabel16);
-        jLabel16.setBounds(260, 510, 130, 30);
+        jLabel16.setBounds(260, 580, 130, 30);
 
         comboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
         internalProdutos.getContentPane().add(comboFormaPagamento);
-        comboFormaPagamento.setBounds(390, 510, 220, 30);
+        comboFormaPagamento.setBounds(390, 580, 220, 30);
 
         txtValorRecebido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorRecebidoFocusLost(evt);
             }
         });
+        txtValorRecebido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtValorRecebidoKeyPressed(evt);
+            }
+        });
         internalProdutos.getContentPane().add(txtValorRecebido);
-        txtValorRecebido.setBounds(740, 510, 70, 30);
+        txtValorRecebido.setBounds(740, 580, 70, 30);
 
         jLabel17.setText("Valor Recebido: ");
         internalProdutos.getContentPane().add(jLabel17);
-        jLabel17.setBounds(650, 510, 100, 30);
+        jLabel17.setBounds(650, 580, 100, 30);
 
         jLabel18.setText("Troco: ");
         internalProdutos.getContentPane().add(jLabel18);
-        jLabel18.setBounds(830, 510, 50, 30);
+        jLabel18.setBounds(830, 580, 50, 30);
         internalProdutos.getContentPane().add(txtTroco);
-        txtTroco.setBounds(880, 510, 70, 30);
+        txtTroco.setBounds(880, 580, 70, 30);
 
         jButton1.setText("Finalizar Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -569,27 +591,53 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         internalProdutos.getContentPane().add(jButton1);
-        jButton1.setBounds(1000, 500, 180, 40);
+        jButton1.setBounds(1000, 570, 180, 40);
 
         jLabel19.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel19);
-        jLabel19.setBounds(20, 450, 90, 30);
+        jLabel19.setBounds(20, 520, 90, 30);
         internalProdutos.getContentPane().add(txtObservacao);
-        txtObservacao.setBounds(110, 450, 820, 30);
+        txtObservacao.setBounds(110, 520, 820, 30);
 
         txtNPedido.setEditable(false);
         txtNPedido.setBackground(new java.awt.Color(255, 255, 204));
         internalProdutos.getContentPane().add(txtNPedido);
-        txtNPedido.setBounds(110, 510, 100, 30);
+        txtNPedido.setBounds(110, 580, 100, 30);
 
         jLabel20.setText("Número Pedido: ");
         internalProdutos.getContentPane().add(jLabel20);
-        jLabel20.setBounds(20, 510, 100, 30);
+        jLabel20.setBounds(20, 580, 100, 30);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Pedido"));
+        jPanel4.setLayout(null);
+
+        radioTipoPedido.add(radioPedidoBalcao);
+        radioPedidoBalcao.setText("Pedido Balcão");
+        radioPedidoBalcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioPedidoBalcaoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(radioPedidoBalcao);
+        radioPedidoBalcao.setBounds(50, 20, 140, 23);
+
+        radioTipoPedido.add(rapidoPedidoEntrega);
+        rapidoPedidoEntrega.setText("Pedido Entrega");
+        rapidoPedidoEntrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rapidoPedidoEntregaActionPerformed(evt);
+            }
+        });
+        jPanel4.add(rapidoPedidoEntrega);
+        rapidoPedidoEntrega.setBounds(200, 20, 150, 23);
+
+        internalProdutos.getContentPane().add(jPanel4);
+        jPanel4.setBounds(0, 10, 540, 60);
 
         getContentPane().add(internalProdutos);
-        internalProdutos.setBounds(0, 0, 1210, 580);
+        internalProdutos.setBounds(0, 0, 1210, 650);
 
-        setBounds(0, 0, 1245, 641);
+        setBounds(0, 0, 1276, 716);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
@@ -621,6 +669,21 @@ public class Caixa extends javax.swing.JFrame {
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
 
+        if(comboProduto.getSelectedItem().toString().equals("")){
+            
+            JOptionPane.showMessageDialog(null,"Selecione um produto");
+            
+            
+        }
+        
+        else if(txtQtde.getText().equals("")){
+            
+            JOptionPane.showMessageDialog(null,"Insira a quantidade");
+            
+        }
+        
+        else {
+        
         preencheTotal();
         
         
@@ -645,12 +708,27 @@ public class Caixa extends javax.swing.JFrame {
               
                 carregaTabela();
                 somaVendas();
-                
+        }  
                 
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnIncluir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluir2ActionPerformed
 
+        if(comboSabor1.getSelectedItem().toString().equals("") || comboSabor2.getSelectedItem().toString().equals("") ){
+            
+            JOptionPane.showMessageDialog(null,"Selecione os sabores");
+            
+            
+        }
+        
+        else if(txtQtde2Sabores.getText().equals("")){
+            
+            JOptionPane.showMessageDialog(null,"Insira a quantidade");
+            
+        }
+        
+        else{
+        
         preencheTotal2();
         
         String sabor1, sabor2,saborfinal;
@@ -696,12 +774,26 @@ public class Caixa extends javax.swing.JFrame {
               
                 carregaTabela();
                 somaVendas();
-        
+        }
     }//GEN-LAST:event_btnIncluir2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        //verifica se a jtable está vazia
+        if(gridCaixa.getRowCount() == 0){
+        
+            JOptionPane.showMessageDialog(null, "Insira ao menos um produto ao pedido");
       
-      
+        }
+        
+        else if (comboFormaPagamento.getSelectedItem().toString().equals("Escolha forma de Pagamento")){
+        
+        JOptionPane.showMessageDialog(null, "Escolha a forma de pagamento");
+        
+        
+        }
+            
+        else {
         Object[] options = { "Sim", "Não" };
                         int opcao = JOptionPane.showOptionDialog(null, "Finalizar Venda?", "AVISO",
                                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -732,7 +824,7 @@ public class Caixa extends javax.swing.JFrame {
                             
                         }
         
-        
+        }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -785,54 +877,65 @@ public class Caixa extends javax.swing.JFrame {
 
     private void txtValorRecebidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorRecebidoFocusLost
         
-        float total, valorrecebido, troco;
-        String aux;
-        
-        total = Float.parseFloat(txtTotalVenda.getText());
-        valorrecebido = Float.parseFloat(txtValorRecebido.getText());
-        
-        troco =  valorrecebido - total ;
-        
-        aux = String.valueOf(troco);
-        
-        txtTroco.setText(aux);
+        operacaoTroco();
         
         
     }//GEN-LAST:event_txtValorRecebidoFocusLost
 
+    private void txtValorRecebidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
+
+            operacaoTroco();         
+}  
+    }//GEN-LAST:event_txtValorRecebidoKeyPressed
+
+    private void txtQtdeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQtdeKeyPressed
+       
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
+
+            preencheTotal();
+            
+}  
+   
+    }//GEN-LAST:event_txtQtdeKeyPressed
+
+    private void txtTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyPressed
+        
+        
+          if(evt.getKeyCode() == KeyEvent.VK_ENTER){ 
+          
+          buscaCliente();
+          
+          }
+        
+        
+    }//GEN-LAST:event_txtTelefoneKeyPressed
+
+    private void radioPedidoBalcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPedidoBalcaoActionPerformed
+       
+        if(radioPedidoBalcao.isSelected()){
+            
+            jPanel1.setVisible(false);
+            jPanel2.setLocation(260, 80);
+        }
+        
+    }//GEN-LAST:event_radioPedidoBalcaoActionPerformed
+
+    private void rapidoPedidoEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rapidoPedidoEntregaActionPerformed
+        
+        if(rapidoPedidoEntrega.isSelected()){
+            
+            jPanel1.setVisible(true);
+            jPanel2.setLocation(550, 80);
+        }
+        
+    }//GEN-LAST:event_rapidoPedidoEntregaActionPerformed
+
     
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {  
-        ResultSet rs;
-   
-
-        String telefone = txtTelefone.getText();
-
-        if("".equals(telefone)){
-
-        }
-
+      
+        buscaCliente();
         
-        else{
-            
-            
-            rs = ba.buscaCliente(telefone);
-            try {
-
-                if (ba.buscaCliente(telefone) != null) {
-
-                   txtCliente.setText(rs.getString("nome"));
-                   txtEndereco.setText(rs.getString("endereco"));
-                   txtBairro.setText(rs.getString("bairro"));
-                   txtPontoRef.setText(rs.getString("complemento"));
-                       
-                   
-                }
-                else{
-
-                }
-            } catch (SQLException ex) {
-            }
-        } 
     }
     
    
@@ -968,7 +1071,7 @@ public class Caixa extends javax.swing.JFrame {
 
          }catch (Exception ex) {
                     ex.printStackTrace(System.out);
-                    JOptionPane.showMessageDialog(null, "Não Foi Possível Somar as vendas");
+                    
                 }
    }
     
@@ -1085,6 +1188,60 @@ public class Caixa extends javax.swing.JFrame {
          
      }
      
+     public void operacaoTroco(){
+         
+         float total, valorrecebido, troco;
+        String aux;
+        
+        total = Float.parseFloat(txtTotalVenda.getText());
+        valorrecebido = Float.parseFloat(txtValorRecebido.getText());
+        
+        troco =  valorrecebido - total ;
+        
+        aux = String.valueOf(troco);
+        
+        txtTroco.setText(aux);
+         
+     }
+     
+     public void buscaCliente(){
+         
+         
+           ResultSet rs;
+   
+
+        String telefone = txtTelefone.getText();
+
+        if("".equals(telefone)){
+
+        }
+
+        
+        else{
+            
+            
+            rs = ba.buscaCliente(telefone);
+            try {
+
+                if (ba.buscaCliente(telefone) != null) {
+
+                   txtCliente.setText(rs.getString("nome"));
+                   txtEndereco.setText(rs.getString("endereco"));
+                   txtBairro.setText(rs.getString("bairro"));
+                   txtPontoRef.setText(rs.getString("complemento"));
+                       
+                   
+                }
+                else{
+
+                }
+            } catch (SQLException ex) {
+            }
+        } 
+         
+         
+     }
+     
      
     /**
      * @param args the command line arguments
@@ -1159,8 +1316,12 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JRadioButton radioPedidoBalcao;
+    private javax.swing.ButtonGroup radioTipoPedido;
+    private javax.swing.JRadioButton rapidoPedidoEntrega;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtCodProduto;
