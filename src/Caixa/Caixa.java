@@ -19,8 +19,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimerTask;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,6 +48,9 @@ public class Caixa extends javax.swing.JFrame {
         carregaSaborPizza1();
         carregaNumeroPedido();
         somaVendas();
+        dataHoje();
+        horas();
+        desabilitaCampos();
         
         txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
@@ -133,11 +142,19 @@ public class Caixa extends javax.swing.JFrame {
                          
                          txtValorTotalPizza.setText(total);
                      }
+                     else{
+                         
+                         String total = String.valueOf(valor1);
+                         
+                         txtValorTotalPizza.setText(total);
+                         
+                     }
                      
                 }
 
                 else{
-
+                    
+                    
               
                 }
             } catch (SQLException ex) {
@@ -199,6 +216,13 @@ public class Caixa extends javax.swing.JFrame {
                          txtValorTotalPizza.setText(total);
                          
                      }
+                     else{
+                         
+                         String total = String.valueOf(valor2);
+                         
+                         txtValorTotalPizza.setText(total);
+                         
+                     }
                 }
 
                 else{
@@ -224,9 +248,11 @@ public class Caixa extends javax.swing.JFrame {
    }});   
           
            carregaTabela();
-        
+     
+      
     }
 
+    
 
     
     @SuppressWarnings("unchecked")
@@ -288,11 +314,16 @@ public class Caixa extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         txtObservacao = new javax.swing.JTextField();
-        txtNPedido = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         radioPedidoBalcao = new javax.swing.JRadioButton();
         rapidoPedidoEntrega = new javax.swing.JRadioButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        txtNPedido = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        txDataHoje = new com.toedter.calendar.JDateChooser();
+        jLabel23 = new javax.swing.JLabel();
+        txtHora = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -300,6 +331,16 @@ public class Caixa extends javax.swing.JFrame {
         internalProdutos.setClosable(true);
         internalProdutos.setTitle("PDV");
         internalProdutos.setVisible(true);
+        internalProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                internalProdutosMousePressed(evt);
+            }
+        });
+        internalProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                internalProdutosKeyPressed(evt);
+            }
+        });
         internalProdutos.getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
@@ -411,7 +452,6 @@ public class Caixa extends javax.swing.JFrame {
 
         txtPreco.setEditable(false);
         txtPreco.setBackground(new java.awt.Color(204, 204, 204));
-        txtPreco.setText("0");
         jPanel2.add(txtPreco);
         txtPreco.setBounds(180, 80, 70, 30);
 
@@ -443,7 +483,6 @@ public class Caixa extends javax.swing.JFrame {
 
         txtTotal.setEditable(false);
         txtTotal.setBackground(new java.awt.Color(204, 204, 204));
-        txtTotal.setText("0");
         jPanel2.add(txtTotal);
         txtTotal.setBounds(350, 80, 80, 30);
 
@@ -482,7 +521,6 @@ public class Caixa extends javax.swing.JFrame {
 
         txtValorPizza1.setEditable(false);
         txtValorPizza1.setBackground(new java.awt.Color(204, 204, 204));
-        txtValorPizza1.setText("0");
         jPanel3.add(txtValorPizza1);
         txtValorPizza1.setBounds(260, 30, 70, 30);
 
@@ -497,7 +535,6 @@ public class Caixa extends javax.swing.JFrame {
 
         txtValorPizza2.setEditable(false);
         txtValorPizza2.setBackground(new java.awt.Color(204, 204, 204));
-        txtValorPizza2.setText("0");
         jPanel3.add(txtValorPizza2);
         txtValorPizza2.setBounds(260, 80, 70, 30);
 
@@ -546,6 +583,7 @@ public class Caixa extends javax.swing.JFrame {
         jTextField12.setBounds(10, 730, 410, 30);
 
         txtTotalVenda.setEditable(false);
+        txtTotalVenda.setBackground(new java.awt.Color(204, 204, 204));
         internalProdutos.getContentPane().add(txtTotalVenda);
         txtTotalVenda.setBounds(1060, 520, 100, 30);
 
@@ -555,11 +593,11 @@ public class Caixa extends javax.swing.JFrame {
 
         jLabel16.setText("Forma de Pagamento: ");
         internalProdutos.getContentPane().add(jLabel16);
-        jLabel16.setBounds(260, 580, 130, 30);
+        jLabel16.setBounds(20, 580, 130, 30);
 
         comboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
         internalProdutos.getContentPane().add(comboFormaPagamento);
-        comboFormaPagamento.setBounds(390, 580, 220, 30);
+        comboFormaPagamento.setBounds(160, 580, 220, 30);
 
         txtValorRecebido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -572,17 +610,19 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         internalProdutos.getContentPane().add(txtValorRecebido);
-        txtValorRecebido.setBounds(740, 580, 70, 30);
+        txtValorRecebido.setBounds(510, 580, 70, 30);
 
         jLabel17.setText("Valor Recebido: ");
         internalProdutos.getContentPane().add(jLabel17);
-        jLabel17.setBounds(650, 580, 100, 30);
+        jLabel17.setBounds(420, 580, 100, 30);
 
         jLabel18.setText("Troco: ");
         internalProdutos.getContentPane().add(jLabel18);
-        jLabel18.setBounds(830, 580, 50, 30);
+        jLabel18.setBounds(600, 580, 50, 30);
+
+        txtTroco.setBackground(new java.awt.Color(204, 204, 204));
         internalProdutos.getContentPane().add(txtTroco);
-        txtTroco.setBounds(880, 580, 70, 30);
+        txtTroco.setBounds(650, 580, 90, 30);
 
         jButton1.setText("Finalizar Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -597,16 +637,7 @@ public class Caixa extends javax.swing.JFrame {
         internalProdutos.getContentPane().add(jLabel19);
         jLabel19.setBounds(20, 520, 90, 30);
         internalProdutos.getContentPane().add(txtObservacao);
-        txtObservacao.setBounds(110, 520, 820, 30);
-
-        txtNPedido.setEditable(false);
-        txtNPedido.setBackground(new java.awt.Color(255, 255, 204));
-        internalProdutos.getContentPane().add(txtNPedido);
-        txtNPedido.setBounds(110, 580, 100, 30);
-
-        jLabel20.setText("Número Pedido: ");
-        internalProdutos.getContentPane().add(jLabel20);
-        jLabel20.setBounds(20, 580, 100, 30);
+        txtObservacao.setBounds(110, 520, 630, 30);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Pedido"));
         jPanel4.setLayout(null);
@@ -632,10 +663,42 @@ public class Caixa extends javax.swing.JFrame {
         rapidoPedidoEntrega.setBounds(200, 20, 150, 23);
 
         internalProdutos.getContentPane().add(jPanel4);
-        jPanel4.setBounds(0, 10, 540, 60);
+        jPanel4.setBounds(0, 10, 550, 70);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
+        jPanel5.setToolTipText("");
+        jPanel5.setLayout(null);
+
+        jLabel20.setText("Número Pedido: ");
+        jPanel5.add(jLabel20);
+        jLabel20.setBounds(40, 20, 100, 30);
+
+        txtNPedido.setEditable(false);
+        txtNPedido.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel5.add(txtNPedido);
+        txtNPedido.setBounds(130, 20, 100, 30);
+
+        jLabel22.setText("Data:  ");
+        jPanel5.add(jLabel22);
+        jLabel22.setBounds(240, 20, 50, 30);
+
+        txDataHoje.setEnabled(false);
+        jPanel5.add(txDataHoje);
+        txDataHoje.setBounds(280, 20, 130, 30);
+
+        jLabel23.setText("Horário:");
+        jPanel5.add(jLabel23);
+        jLabel23.setBounds(430, 20, 70, 30);
+
+        txtHora.setEditable(false);
+        jPanel5.add(txtHora);
+        txtHora.setBounds(480, 20, 100, 30);
+
+        internalProdutos.getContentPane().add(jPanel5);
+        jPanel5.setBounds(550, 10, 620, 70);
 
         getContentPane().add(internalProdutos);
-        internalProdutos.setBounds(0, 0, 1210, 650);
+        internalProdutos.setBounds(0, 0, 1210, 660);
 
         setBounds(0, 0, 1276, 716);
     }// </editor-fold>//GEN-END:initComponents
@@ -789,7 +852,7 @@ public class Caixa extends javax.swing.JFrame {
         else if (comboFormaPagamento.getSelectedItem().toString().equals("Escolha forma de Pagamento")){
         
         JOptionPane.showMessageDialog(null, "Escolha a forma de pagamento");
-        
+        comboFormaPagamento.requestFocus(); 
         
         }
             
@@ -799,7 +862,9 @@ public class Caixa extends javax.swing.JFrame {
                                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
                         if(opcao == 0){
-                                   
+                           
+                            horas();
+                            
                             int pedido,telefone;
                             String formapagamento,observacao;
                             float total,valorrecebido,troco;
@@ -821,6 +886,11 @@ public class Caixa extends javax.swing.JFrame {
                              carregaNumeroPedido();
                              carregaTabela();
                              limparTodosCampos();
+                             
+                             
+                             desabilitaCampos();
+                             
+                             radioTipoPedido.clearSelection();
                             
                         }
         
@@ -914,9 +984,14 @@ public class Caixa extends javax.swing.JFrame {
     private void radioPedidoBalcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPedidoBalcaoActionPerformed
        
         if(radioPedidoBalcao.isSelected()){
+            habilitaCampos();
+            txtTelefone.setEditable(false);
+            limparTodosCampos();
+            horas();
+            horas();
+            btnAlterar.setEnabled(false);
             
-            jPanel1.setVisible(false);
-            jPanel2.setLocation(260, 80);
+            
         }
         
     }//GEN-LAST:event_radioPedidoBalcaoActionPerformed
@@ -925,11 +1000,33 @@ public class Caixa extends javax.swing.JFrame {
         
         if(rapidoPedidoEntrega.isSelected()){
             
-            jPanel1.setVisible(true);
-            jPanel2.setLocation(550, 80);
+            habilitaCampos();
+            txtTelefone.setEditable(true);
+            limparTodosCampos();
+            horas();
         }
         
     }//GEN-LAST:event_rapidoPedidoEntregaActionPerformed
+
+    private void internalProdutosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_internalProdutosKeyPressed
+        
+    }//GEN-LAST:event_internalProdutosKeyPressed
+
+    private void internalProdutosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_internalProdutosMousePressed
+      
+        if(radioPedidoBalcao.isSelected() || rapidoPedidoEntrega.isSelected()){
+            
+            habilitaCampos();
+            
+        }
+        else {
+            
+            JOptionPane.showMessageDialog(null, "Selecione o tipo do pedido");
+            
+            
+        }
+        
+    }//GEN-LAST:event_internalProdutosMousePressed
 
     
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {  
@@ -1147,6 +1244,52 @@ public class Caixa extends javax.swing.JFrame {
                 txtTroco.setText("");
      }
      
+     public void desabilitaCampos(){
+         
+         txtTelefone.setEditable(false);
+         txtCodProduto.setEditable(false);
+         txtQtde.setEditable(false);
+         txtQtde2Sabores.setEditable(false);
+         txtObservacao.setEditable(false);
+         txtValorRecebido.setEditable(false);
+         comboProduto.setEnabled(false);
+         comboSabor1.setEnabled(false);
+         comboSabor2.setEnabled(false);
+         comboFormaPagamento.setEnabled(false);
+         txtTelefone.setEditable(false);
+         btnIncluir.setEnabled(false);
+         btnRegistrarCliente.setEnabled(false);
+         btnAlterar.setEnabled(false);
+         btnIncluir2.setEnabled(false);
+          btnIncluir2.setEnabled(false);
+         jButton1.setEnabled(false);
+         
+         
+     }
+     
+     public void habilitaCampos(){
+         
+         txtTelefone.setEditable(true);
+         txtCodProduto.setEditable(true);
+         txtQtde.setEditable(true);
+         txtQtde2Sabores.setEditable(true);
+         txtObservacao.setEditable(true);
+         txtValorRecebido.setEditable(true);
+         comboProduto.setEnabled(true);
+         comboSabor1.setEnabled(true);
+         comboSabor2.setEnabled(true);
+         comboFormaPagamento.setEnabled(true);
+         txtTelefone.setEditable(true);
+         btnIncluir.setEnabled(true);
+         btnRegistrarCliente.setEnabled(true);
+         btnAlterar.setEnabled(true);
+         btnIncluir2.setEnabled(true);
+          btnIncluir2.setEnabled(true);
+         jButton1.setEnabled(true);
+         
+         
+     }
+     
      public void preencheTotal(){
          
        int  qtde;
@@ -1243,6 +1386,24 @@ public class Caixa extends javax.swing.JFrame {
      }
      
      
+     public void dataHoje(){
+        Date now = new Date();
+        DateFormat df = DateFormat.getDateInstance();
+        txDataHoje.setDate(now);
+   }
+     
+     public void horas(){
+         
+         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");  
+  
+       txtHora.setText(sdf.format(Calendar.getInstance().getTime()));  
+            
+     }
+     
+    
+     
+    
+     
     /**
      * @param args the command line arguments
      */
@@ -1306,6 +1467,8 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1317,15 +1480,18 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JRadioButton radioPedidoBalcao;
     private javax.swing.ButtonGroup radioTipoPedido;
     private javax.swing.JRadioButton rapidoPedidoEntrega;
+    private com.toedter.calendar.JDateChooser txDataHoje;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtNPedido;
     private javax.swing.JTextField txtObservacao;
     private javax.swing.JTextField txtPontoRef;
