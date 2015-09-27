@@ -1029,6 +1029,46 @@ public class Banco {
     
     }
     
+    
+    public boolean gravarVenda(int pedido,int telefone,String formapagamento,String observacao,float total,float valorrecebido,float troco) {
+        conecta();
+        String sql;
+
+
+//Captura os dados digitados
+
+        try {
+              
+          
+            
+                sql = "INSERT INTO venda(npedido,telefone,formaPagamento,observacao,valorrecebido,troco,total) VALUES ("; // nome das variaveis do BD
+                sql += pedido + ", " + telefone + ",'" + formapagamento + "' , '"+ observacao +"' , "+ total +", "+ valorrecebido +", "+ troco +")";
+                
+           
+
+                stmt.executeUpdate(sql);
+
+               
+                return true;
+ 
+            }
+        
+    
+
+           catch (SQLException e) {
+               
+                if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException){
+            
+                JOptionPane.showMessageDialog(null,"Numero de telefone já registrado" );
+            
+            }
+            System.out.println("Erro ao executar o comando SQL:" + e.toString());
+            return false;
+        }
+    
+    }
+    
+    
   
     public boolean gravarCompras(String nomeFor,String cpfFor,String cnpjFor,String formaPagto,String condicaoPagto ,
             String tipoPedido,String observacao,String tipoProduto,Float valorTotal,Float valorDesc,
