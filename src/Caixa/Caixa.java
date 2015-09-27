@@ -97,6 +97,7 @@ public class Caixa extends javax.swing.JFrame {
         
        ResultSet rs;
             
+       txtQtde2Sabores.setText("1");
         
         rs = ba.buscaProdutoNome(produto);
             try {
@@ -161,6 +162,7 @@ public class Caixa extends javax.swing.JFrame {
         
        ResultSet rs;
             
+        txtQtde2Sabores.setText("1");
         
         rs = ba.buscaProdutoNome(produto);
             try {
@@ -275,14 +277,14 @@ public class Caixa extends javax.swing.JFrame {
         txtTotalVenda = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextField2 = new javax.swing.JTextField();
+        comboFormaPagamento = new javax.swing.JComboBox();
+        txtValorRecebido = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtTroco = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtObservacao = new javax.swing.JTextField();
         txtNPedido = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
 
@@ -410,6 +412,11 @@ public class Caixa extends javax.swing.JFrame {
                 txtQtdeFocusLost(evt);
             }
         });
+        txtQtde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQtdeActionPerformed(evt);
+            }
+        });
         jPanel2.add(txtQtde);
         txtQtde.setBounds(260, 80, 80, 30);
 
@@ -427,14 +434,15 @@ public class Caixa extends javax.swing.JFrame {
         jPanel2.add(jLabel10);
         jLabel10.setBounds(350, 50, 40, 30);
 
-        btnIncluir.setText("Incluir no Pedido:");
+        btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/addproduto.png"))); // NOI18N
+        btnIncluir.setText("Incluir no Pedido");
         btnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIncluirActionPerformed(evt);
             }
         });
         jPanel2.add(btnIncluir);
-        btnIncluir.setBounds(440, 70, 150, 50);
+        btnIncluir.setBounds(440, 70, 160, 50);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pizza Com 2 Sabores:"));
         jPanel3.setLayout(null);
@@ -476,20 +484,20 @@ public class Caixa extends javax.swing.JFrame {
         jPanel3.add(txtValorPizza2);
         txtValorPizza2.setBounds(260, 80, 70, 30);
 
-        btnIncluir2.setText("Incluir no Pedido: ");
+        btnIncluir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/addproduto.png"))); // NOI18N
+        btnIncluir2.setText("Incluir no Pedido");
         btnIncluir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIncluir2ActionPerformed(evt);
             }
         });
         jPanel3.add(btnIncluir2);
-        btnIncluir2.setBounds(380, 30, 160, 60);
+        btnIncluir2.setBounds(380, 60, 170, 60);
 
         jLabel21.setText("Qtde: ");
         jPanel3.add(jLabel21);
         jLabel21.setBounds(20, 120, 60, 30);
 
-        txtQtde2Sabores.setText("1");
         txtQtde2Sabores.addHierarchyListener(new java.awt.event.HierarchyListener() {
             public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
                 txtQtde2SaboresHierarchyChanged(evt);
@@ -509,10 +517,10 @@ public class Caixa extends javax.swing.JFrame {
         txtQtde2Sabores.setBounds(100, 120, 40, 30);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(10, 130, 580, 160);
+        jPanel3.setBounds(10, 130, 590, 160);
 
         internalProdutos.getContentPane().add(jPanel2);
-        jPanel2.setBounds(550, 10, 610, 300);
+        jPanel2.setBounds(550, 10, 630, 300);
 
         jLabel14.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel14);
@@ -522,31 +530,37 @@ public class Caixa extends javax.swing.JFrame {
 
         txtTotalVenda.setEditable(false);
         internalProdutos.getContentPane().add(txtTotalVenda);
-        txtTotalVenda.setBounds(1040, 450, 100, 30);
+        txtTotalVenda.setBounds(1060, 450, 100, 30);
 
         jLabel15.setText("Total:");
         internalProdutos.getContentPane().add(jLabel15);
-        jLabel15.setBounds(1000, 450, 80, 30);
+        jLabel15.setBounds(1010, 450, 80, 30);
 
         jLabel16.setText("Forma de Pagamento: ");
         internalProdutos.getContentPane().add(jLabel16);
-        jLabel16.setBounds(220, 510, 130, 30);
+        jLabel16.setBounds(260, 510, 130, 30);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
-        internalProdutos.getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(360, 510, 180, 30);
-        internalProdutos.getContentPane().add(jTextField2);
-        jTextField2.setBounds(670, 510, 70, 30);
+        comboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
+        internalProdutos.getContentPane().add(comboFormaPagamento);
+        comboFormaPagamento.setBounds(390, 510, 220, 30);
+
+        txtValorRecebido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorRecebidoFocusLost(evt);
+            }
+        });
+        internalProdutos.getContentPane().add(txtValorRecebido);
+        txtValorRecebido.setBounds(740, 510, 70, 30);
 
         jLabel17.setText("Valor Recebido: ");
         internalProdutos.getContentPane().add(jLabel17);
-        jLabel17.setBounds(570, 510, 100, 30);
+        jLabel17.setBounds(650, 510, 100, 30);
 
         jLabel18.setText("Troco: ");
         internalProdutos.getContentPane().add(jLabel18);
-        jLabel18.setBounds(770, 510, 50, 30);
-        internalProdutos.getContentPane().add(jTextField3);
-        jTextField3.setBounds(820, 510, 70, 30);
+        jLabel18.setBounds(830, 510, 50, 30);
+        internalProdutos.getContentPane().add(txtTroco);
+        txtTroco.setBounds(880, 510, 70, 30);
 
         jButton1.setText("Finalizar Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -555,13 +569,13 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         internalProdutos.getContentPane().add(jButton1);
-        jButton1.setBounds(1000, 490, 180, 50);
+        jButton1.setBounds(1000, 500, 180, 40);
 
         jLabel19.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel19);
         jLabel19.setBounds(20, 450, 90, 30);
-        internalProdutos.getContentPane().add(jTextField4);
-        jTextField4.setBounds(110, 450, 620, 30);
+        internalProdutos.getContentPane().add(txtObservacao);
+        txtObservacao.setBounds(110, 450, 820, 30);
 
         txtNPedido.setEditable(false);
         txtNPedido.setBackground(new java.awt.Color(255, 255, 204));
@@ -575,7 +589,7 @@ public class Caixa extends javax.swing.JFrame {
         getContentPane().add(internalProdutos);
         internalProdutos.setBounds(0, 0, 1210, 580);
 
-        setBounds(0, 0, 1232, 628);
+        setBounds(0, 0, 1245, 641);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
@@ -585,17 +599,9 @@ public class Caixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     private void txtQtdeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtdeFocusLost
-        int  qtde;
-        float preco,aux;
-        
-        preco = Float.parseFloat(txtPreco.getText());
-        qtde = Integer.parseInt(txtQtde.getText());
-        
-        aux = (preco * qtde);
-        
-        String total = String.valueOf(aux);
-        
-        txtTotal.setText(total);
+       preencheTotal();
+       
+   
     }//GEN-LAST:event_txtQtdeFocusLost
 
     private void txtQtde2SaboresHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txtQtde2SaboresHierarchyChanged
@@ -606,24 +612,7 @@ public class Caixa extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQtde2SaboresHierarchyChanged
 
     private void txtQtde2SaboresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtde2SaboresFocusLost
-       float total,aux;
-        int qtde;
-
-        String total2;
-        
-       
-        
-        qtde = Integer.parseInt(txtQtde2Sabores.getText());
-        
-        total = Float.parseFloat(txtValorTotalPizza.getText());
-        
-        aux = total*qtde;
-        
-        
-        
-         total2 = String.valueOf(aux);
-        
-        txtValorTotalPizza.setText(total2);
+      
     }//GEN-LAST:event_txtQtde2SaboresFocusLost
 
     private void txtQtde2SaboresPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtQtde2SaboresPropertyChange
@@ -631,7 +620,10 @@ public class Caixa extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQtde2SaboresPropertyChange
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-       
+
+        preencheTotal();
+        
+        
         int pedido,qtde;
         String produto;
         float valorproduto,total;
@@ -658,6 +650,8 @@ public class Caixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnIncluir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluir2ActionPerformed
+
+        preencheTotal2();
         
         String sabor1, sabor2,saborfinal;
         
@@ -708,6 +702,37 @@ public class Caixa extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
       
+        Object[] options = { "Sim", "Não" };
+                        int opcao = JOptionPane.showOptionDialog(null, "Finalizar Venda?", "AVISO",
+                                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                        if(opcao == 0){
+                                   
+                            int pedido,telefone;
+                            String formapagamento,observacao;
+                            float total,valorrecebido,troco;
+                            
+                            pedido = Integer.parseInt(txtNPedido.getText());
+                            telefone = Integer.parseInt(txtTelefone.getText());
+                            
+                            formapagamento = comboFormaPagamento.getSelectedItem().toString();
+                            observacao = txtObservacao.getText();
+                            
+                            valorrecebido = Float.parseFloat(txtValorRecebido.getText());
+                             troco = Float.parseFloat(txtTroco.getText());
+                             total = Float.parseFloat(txtTotalVenda.getText());
+                             
+                             
+                            
+                             ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco);
+                            
+                             carregaNumeroPedido();
+                             carregaTabela();
+                             limparTodosCampos();
+                            
+                        }
+        
+        
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -753,6 +778,27 @@ public class Caixa extends javax.swing.JFrame {
                 }   
           });
     }//GEN-LAST:event_gridCaixaMouseClicked
+
+    private void txtQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQtdeActionPerformed
+
+    private void txtValorRecebidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorRecebidoFocusLost
+        
+        float total, valorrecebido, troco;
+        String aux;
+        
+        total = Float.parseFloat(txtTotalVenda.getText());
+        valorrecebido = Float.parseFloat(txtValorRecebido.getText());
+        
+        troco =  valorrecebido - total ;
+        
+        aux = String.valueOf(troco);
+        
+        txtTroco.setText(aux);
+        
+        
+    }//GEN-LAST:event_txtValorRecebidoFocusLost
 
     
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {  
@@ -900,7 +946,7 @@ public class Caixa extends javax.swing.JFrame {
                         int ponto = soma.indexOf(".");
                         int tamanho = soma.length();
                         int total = tamanho-(ponto+1);
-                        String somaEditada = soma.replace('.', ',');
+                        String somaEditada = soma.replace(',', '.');
 
 //                        System.out.println(total);
 
@@ -948,7 +994,7 @@ public class Caixa extends javax.swing.JFrame {
      
      public void limpacampos1(){
          
-         txtTelefone.setText("");
+        
                 comboProduto.setSelectedItem("");
                 txtPreco.setText("");
                 txtCodProduto.setText("");
@@ -967,6 +1013,75 @@ public class Caixa extends javax.swing.JFrame {
                 txtValorPizza2.setText("");
                 txtQtde2Sabores.setText("");
                 txtValorTotalPizza.setText("");
+         
+     }
+     
+     public void limparTodosCampos(){
+         
+                txtTelefone.setText("");
+                txtCliente.setText("");
+                txtEndereco.setText("");
+                txtBairro.setText("");
+                txtPontoRef.setText("");
+                
+                
+                comboProduto.setSelectedItem("");
+                txtPreco.setText("");
+                txtCodProduto.setText("");
+                txtQtde.setText("");
+                txtTotal.setText("");
+         
+                
+                comboSabor1.setSelectedItem("");
+                comboSabor2.setSelectedItem("");
+                txtValorPizza1.setText("");
+                txtValorPizza2.setText("");
+                txtQtde2Sabores.setText("");
+                txtValorTotalPizza.setText("");
+                txtObservacao.setText("");
+                comboFormaPagamento.setSelectedItem("Escolha forma de Pagamento");
+                txtValorRecebido.setText("");
+                txtTroco.setText("");
+     }
+     
+     public void preencheTotal(){
+         
+       int  qtde;
+        float preco,aux;
+        
+        preco = Float.parseFloat(txtPreco.getText());
+        qtde = Integer.parseInt(txtQtde.getText());
+        
+        aux = (preco * qtde);
+        
+        String total = String.valueOf(aux);
+        
+        txtTotal.setText(total);
+         
+         
+     }
+     
+     public void preencheTotal2(){
+         
+          float total,aux;
+        int qtde;
+
+        String total2;
+        
+       
+        
+        qtde = Integer.parseInt(txtQtde2Sabores.getText());
+        
+        total = Float.parseFloat(txtValorTotalPizza.getText());
+        
+        aux = total*qtde;
+        
+        
+        
+         total2 = String.valueOf(aux);
+        
+        txtValorTotalPizza.setText(total2);
+         
          
      }
      
@@ -1012,6 +1127,7 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnIncluir2;
     private javax.swing.JButton btnRegistrarCliente;
+    private javax.swing.JComboBox comboFormaPagamento;
     private javax.swing.JComboBox comboProduto;
     private javax.swing.JComboBox comboSabor1;
     private javax.swing.JComboBox comboSabor2;
@@ -1019,7 +1135,6 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoRadioPartes;
     public javax.swing.JInternalFrame internalProdutos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1046,14 +1161,12 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNPedido;
+    private javax.swing.JTextField txtObservacao;
     private javax.swing.JTextField txtPontoRef;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQtde;
@@ -1061,8 +1174,10 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefone;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotalVenda;
+    private javax.swing.JTextField txtTroco;
     private javax.swing.JTextField txtValorPizza1;
     private javax.swing.JTextField txtValorPizza2;
+    private javax.swing.JTextField txtValorRecebido;
     private javax.swing.JTextField txtValorTotalPizza;
     // End of variables declaration//GEN-END:variables
 }
