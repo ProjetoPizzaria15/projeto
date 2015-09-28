@@ -16,7 +16,7 @@ public class pintaTabelaEstoque implements TableCellRenderer{
   public static DefaultTableCellRenderer DEFAULT_RENDERER = new DefaultTableCellRenderer();
 
   public String getDataAtual(){
-     SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd");
+     SimpleDateFormat sdf= new SimpleDateFormat("dd/MM/yyyy");
      Date dt1 = new Date();
      return sdf.format(dt1);
   }
