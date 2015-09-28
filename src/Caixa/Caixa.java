@@ -28,7 +28,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-
+import Funcoes.LimitarCampos;
+import TelaClientes.AlterarClienteCaixa;
+import TelaClientes.RegistroClientesCaixa;
 /**
  *
  * @author Usuario
@@ -37,8 +39,11 @@ public class Caixa extends javax.swing.JFrame {
 
    Banco ba = new Banco();
     BancoFuncoes bf = new BancoFuncoes();
-    
+
     JInternalFrame intCliente;
+
+    
+    private String datahoje;
     
     public Caixa() {
         initComponents();
@@ -51,6 +56,10 @@ public class Caixa extends javax.swing.JFrame {
         dataHoje();
         horas();
         desabilitaCampos();
+        
+        
+       
+        
         
         txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
@@ -69,6 +78,15 @@ public class Caixa extends javax.swing.JFrame {
         String produto;
         
       produto = comboProduto.getSelectedItem().toString();
+      
+      if(produto.equals("")){
+          
+          txtPreco.setText("");
+          txtQtde.setText("");
+          txtTotal.setText("");
+      }
+      
+      else{
         
        ResultSet rs;
        txtQtde.setText("1");
@@ -80,7 +98,7 @@ public class Caixa extends javax.swing.JFrame {
                    
 
                      txtPreco.setText(rs.getString("valor"));
-
+                     txtTotal.setText(rs.getString("valor"));   
                 }
 
                 else{
@@ -90,9 +108,10 @@ public class Caixa extends javax.swing.JFrame {
             } catch (SQLException ex) {
             }
         
-       
+      }
         }
       }
+      
     );
          
          //ao trocar o valor do combo coloca o valor do produto do campo ao lado
@@ -101,7 +120,7 @@ public class Caixa extends javax.swing.JFrame {
       new ActionListener(){
         public void actionPerformed(ActionEvent e){
             
-              
+                
         String produto;
         
       produto = comboSabor1.getSelectedItem().toString();
@@ -236,6 +255,51 @@ public class Caixa extends javax.swing.JFrame {
         }
       }
     );
+          
+          comboFormaPagamento.addActionListener(
+      new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            
+              
+        String formaPagamento;
+        
+      formaPagamento = comboFormaPagamento.getSelectedItem().toString();
+        
+      if(formaPagamento.equals("Escolha forma de Pagamento")){
+          
+           FormaPagamento2();
+           txtValorRecebido.setEnabled(false);
+          txtTroco.setEnabled(false);
+      }
+      
+      else if(formaPagamento.equals("Dinheiro")){
+            
+            FormaPagamento2();
+            txtValorRecebido.setEnabled(true);
+          txtTroco.setEnabled(true);
+            
+        }
+      
+      else if(formaPagamento.equals("Cartão de Crédito")){
+          
+          FormaPagamento();
+      }
+      
+      else if (formaPagamento.equals("Cartão de Débito")){
+          
+          FormaPagamento();
+          
+           levalValorRecebido.setVisible(false);
+          txtValorRecebido.setVisible(false);
+          txtValorRecebido.setText("0");
+          labelTroco.setVisible(false);
+          txtTroco.setVisible(false);
+          txtTroco.setText("0");
+          
+      }
+      
+        }}
+    );
          
            gridCaixa.setModel(  
       new DefaultTableModel(  
@@ -249,6 +313,8 @@ public class Caixa extends javax.swing.JFrame {
           
            carregaTabela();
      
+           
+          
       
     }
 
@@ -308,8 +374,8 @@ public class Caixa extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         comboFormaPagamento = new javax.swing.JComboBox();
         txtValorRecebido = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        levalValorRecebido = new javax.swing.JLabel();
+        labelTroco = new javax.swing.JLabel();
         txtTroco = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
@@ -324,11 +390,11 @@ public class Caixa extends javax.swing.JFrame {
         txDataHoje = new com.toedter.calendar.JDateChooser();
         jLabel23 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        internalProdutos.setClosable(true);
         internalProdutos.setTitle("PDV");
         internalProdutos.setVisible(true);
         internalProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -392,7 +458,7 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtTelefone);
-        txtTelefone.setBounds(140, 40, 90, 30);
+        txtTelefone.setBounds(140, 40, 100, 30);
 
         btnRegistrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/registro.png"))); // NOI18N
         btnRegistrarCliente.setText("Registrar Novo Cliente");
@@ -402,15 +468,20 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegistrarCliente);
-        btnRegistrarCliente.setBounds(260, 30, 190, 50);
+        btnRegistrarCliente.setBounds(280, 30, 190, 50);
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
         btnAlterar.setText("Alterar Dados do Cliente");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAlterar);
         btnAlterar.setBounds(180, 250, 250, 40);
 
         internalProdutos.getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 80, 550, 300);
+        jPanel1.setBounds(0, 70, 550, 300);
 
         gridCaixa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -431,7 +502,7 @@ public class Caixa extends javax.swing.JFrame {
         jScrollPane1.setViewportView(gridCaixa);
 
         internalProdutos.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 390, 1170, 120);
+        jScrollPane1.setBounds(0, 370, 1190, 100);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
         jPanel2.setLayout(null);
@@ -439,6 +510,17 @@ public class Caixa extends javax.swing.JFrame {
         jLabel6.setText("Codigo Produto:");
         jPanel2.add(jLabel6);
         jLabel6.setBounds(20, 20, 100, 30);
+
+        txtCodProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodProdutoFocusLost(evt);
+            }
+        });
+        txtCodProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodProdutoKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtCodProduto);
         txtCodProduto.setBounds(120, 20, 90, 30);
 
@@ -574,7 +656,7 @@ public class Caixa extends javax.swing.JFrame {
         jPanel3.setBounds(10, 130, 590, 160);
 
         internalProdutos.getContentPane().add(jPanel2);
-        jPanel2.setBounds(550, 80, 630, 300);
+        jPanel2.setBounds(550, 70, 640, 300);
 
         jLabel14.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel14);
@@ -584,20 +666,21 @@ public class Caixa extends javax.swing.JFrame {
 
         txtTotalVenda.setEditable(false);
         txtTotalVenda.setBackground(new java.awt.Color(204, 204, 204));
+        txtTotalVenda.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         internalProdutos.getContentPane().add(txtTotalVenda);
-        txtTotalVenda.setBounds(1060, 520, 100, 30);
+        txtTotalVenda.setBounds(1040, 480, 140, 50);
 
         jLabel15.setText("Total:");
         internalProdutos.getContentPane().add(jLabel15);
-        jLabel15.setBounds(1010, 520, 80, 30);
+        jLabel15.setBounds(990, 480, 40, 50);
 
         jLabel16.setText("Forma de Pagamento: ");
         internalProdutos.getContentPane().add(jLabel16);
-        jLabel16.setBounds(20, 580, 130, 30);
+        jLabel16.setBounds(20, 540, 130, 30);
 
         comboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
         internalProdutos.getContentPane().add(comboFormaPagamento);
-        comboFormaPagamento.setBounds(160, 580, 220, 30);
+        comboFormaPagamento.setBounds(140, 540, 220, 30);
 
         txtValorRecebido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -610,19 +693,20 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         internalProdutos.getContentPane().add(txtValorRecebido);
-        txtValorRecebido.setBounds(510, 580, 70, 30);
+        txtValorRecebido.setBounds(510, 540, 70, 30);
 
-        jLabel17.setText("Valor Recebido: ");
-        internalProdutos.getContentPane().add(jLabel17);
-        jLabel17.setBounds(420, 580, 100, 30);
+        levalValorRecebido.setText("Valor Recebido: ");
+        internalProdutos.getContentPane().add(levalValorRecebido);
+        levalValorRecebido.setBounds(420, 540, 100, 30);
 
-        jLabel18.setText("Troco: ");
-        internalProdutos.getContentPane().add(jLabel18);
-        jLabel18.setBounds(600, 580, 50, 30);
+        labelTroco.setText("Troco: ");
+        internalProdutos.getContentPane().add(labelTroco);
+        labelTroco.setBounds(620, 540, 50, 30);
 
         txtTroco.setBackground(new java.awt.Color(204, 204, 204));
+        txtTroco.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         internalProdutos.getContentPane().add(txtTroco);
-        txtTroco.setBounds(650, 580, 90, 30);
+        txtTroco.setBounds(680, 510, 100, 60);
 
         jButton1.setText("Finalizar Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -631,13 +715,13 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         internalProdutos.getContentPane().add(jButton1);
-        jButton1.setBounds(1000, 570, 180, 40);
+        jButton1.setBounds(930, 540, 120, 30);
 
         jLabel19.setText("Observação: ");
         internalProdutos.getContentPane().add(jLabel19);
-        jLabel19.setBounds(20, 520, 90, 30);
+        jLabel19.setBounds(20, 500, 90, 30);
         internalProdutos.getContentPane().add(txtObservacao);
-        txtObservacao.setBounds(110, 520, 630, 30);
+        txtObservacao.setBounds(140, 500, 470, 30);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Pedido"));
         jPanel4.setLayout(null);
@@ -650,7 +734,7 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         jPanel4.add(radioPedidoBalcao);
-        radioPedidoBalcao.setBounds(50, 20, 140, 23);
+        radioPedidoBalcao.setBounds(50, 30, 140, 23);
 
         radioTipoPedido.add(rapidoPedidoEntrega);
         rapidoPedidoEntrega.setText("Pedido Entrega");
@@ -660,10 +744,10 @@ public class Caixa extends javax.swing.JFrame {
             }
         });
         jPanel4.add(rapidoPedidoEntrega);
-        rapidoPedidoEntrega.setBounds(200, 20, 150, 23);
+        rapidoPedidoEntrega.setBounds(200, 30, 150, 23);
 
         internalProdutos.getContentPane().add(jPanel4);
-        jPanel4.setBounds(0, 10, 550, 70);
+        jPanel4.setBounds(0, 0, 550, 70);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
         jPanel5.setToolTipText("");
@@ -680,7 +764,7 @@ public class Caixa extends javax.swing.JFrame {
 
         jLabel22.setText("Data:  ");
         jPanel5.add(jLabel22);
-        jLabel22.setBounds(240, 20, 50, 30);
+        jLabel22.setBounds(250, 20, 50, 30);
 
         txDataHoje.setEnabled(false);
         jPanel5.add(txDataHoje);
@@ -695,18 +779,31 @@ public class Caixa extends javax.swing.JFrame {
         txtHora.setBounds(480, 20, 100, 30);
 
         internalProdutos.getContentPane().add(jPanel5);
-        jPanel5.setBounds(550, 10, 620, 70);
+        jPanel5.setBounds(550, 0, 640, 70);
+
+        jButton2.setText("Sair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        internalProdutos.getContentPane().add(jButton2);
+        jButton2.setBounds(1060, 540, 120, 30);
 
         getContentPane().add(internalProdutos);
-        internalProdutos.setBounds(0, 0, 1210, 660);
+        internalProdutos.setBounds(0, 0, 1210, 610);
 
         setBounds(0, 0, 1276, 716);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarClienteActionPerformed
         
+      RegistroClientesCaixa registroClientes = new RegistroClientesCaixa();  
       
-        
+  
+      registroClientes.setVisible(true);  
+
+      
     }//GEN-LAST:event_btnRegistrarClienteActionPerformed
 
     private void txtQtdeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtdeFocusLost
@@ -840,65 +937,6 @@ public class Caixa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIncluir2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        //verifica se a jtable está vazia
-        if(gridCaixa.getRowCount() == 0){
-        
-            JOptionPane.showMessageDialog(null, "Insira ao menos um produto ao pedido");
-      
-        }
-        
-        else if (comboFormaPagamento.getSelectedItem().toString().equals("Escolha forma de Pagamento")){
-        
-        JOptionPane.showMessageDialog(null, "Escolha a forma de pagamento");
-        comboFormaPagamento.requestFocus(); 
-        
-        }
-            
-        else {
-        Object[] options = { "Sim", "Não" };
-                        int opcao = JOptionPane.showOptionDialog(null, "Finalizar Venda?", "AVISO",
-                                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
-                        if(opcao == 0){
-                           
-                            horas();
-                            
-                            int pedido,telefone;
-                            String formapagamento,observacao;
-                            float total,valorrecebido,troco;
-                            
-                            pedido = Integer.parseInt(txtNPedido.getText());
-                            telefone = Integer.parseInt(txtTelefone.getText());
-                            
-                            formapagamento = comboFormaPagamento.getSelectedItem().toString();
-                            observacao = txtObservacao.getText();
-                            
-                            valorrecebido = Float.parseFloat(txtValorRecebido.getText());
-                             troco = Float.parseFloat(txtTroco.getText());
-                             total = Float.parseFloat(txtTotalVenda.getText());
-                             
-                             
-                            
-                             ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco);
-                            
-                             carregaNumeroPedido();
-                             carregaTabela();
-                             limparTodosCampos();
-                             
-                             
-                             desabilitaCampos();
-                             
-                             radioTipoPedido.clearSelection();
-                            
-                        }
-        
-        }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void gridCaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridCaixaMouseClicked
          gridCaixa.addMouseListener(new MouseAdapter(){
                 public void mouseClicked(MouseEvent e){
@@ -927,10 +965,18 @@ public class Caixa extends javax.swing.JFrame {
 
                                     System.out.println(sql);
                                     s.execute(sql);  
+                                    
+                                    
                         }
                                         
                          carregaTabela();
                          somaVendas();
+                         
+                          if(gridCaixa.getRowCount() == 0){
+        
+                                            txtTotalVenda.setText("");
+      
+                                        }
                      }                    
                      
                     }catch (Exception ex) {
@@ -946,16 +992,47 @@ public class Caixa extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQtdeActionPerformed
 
     private void txtValorRecebidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorRecebidoFocusLost
+
+        
+        String valorrecebido = txtValorRecebido.getText();
+        
+        if(valorrecebido.equals("")){
+                 
+                 txtTroco.setText("");
+                 
+             }
+             else{
+        
+        
+        String valorrecebidoEditada = valorrecebido.replace(',', '.');
+        
+        txtValorRecebido.setText(valorrecebidoEditada);
         
         operacaoTroco();
         
-        
+        }
     }//GEN-LAST:event_txtValorRecebidoFocusLost
 
     private void txtValorRecebidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorRecebidoKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
 
-            operacaoTroco();         
+            
+             String valorrecebido = txtValorRecebido.getText();
+             
+             if(valorrecebido.equals("")){
+                 
+                 txtTroco.setText("");
+                 
+             }
+             else{
+             
+        String valorrecebidoEditada = valorrecebido.replace(',', '.');
+        
+        txtValorRecebido.setText(valorrecebidoEditada);
+            
+            
+            operacaoTroco();     
+             }
 }  
     }//GEN-LAST:event_txtValorRecebidoKeyPressed
 
@@ -985,7 +1062,7 @@ public class Caixa extends javax.swing.JFrame {
        
         if(radioPedidoBalcao.isSelected()){
             habilitaCampos();
-            txtTelefone.setEditable(false);
+            txtTelefone.setEnabled(false);
             limparTodosCampos();
             horas();
             horas();
@@ -1001,7 +1078,7 @@ public class Caixa extends javax.swing.JFrame {
         if(rapidoPedidoEntrega.isSelected()){
             
             habilitaCampos();
-            txtTelefone.setEditable(true);
+            txtTelefone.setEnabled(true);
             limparTodosCampos();
             horas();
         }
@@ -1027,6 +1104,119 @@ public class Caixa extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_internalProdutosMousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /* float total,valorrecebido;
+
+        total = Float.parseFloat(txtTotalVenda.getText());
+        valorrecebido = Float.parseFloat(txtValorRecebido.getText());
+        */
+
+        //verifica se a jtable está vazia
+        if(gridCaixa.getRowCount() == 0){
+
+            JOptionPane.showMessageDialog(null, "Insira ao menos um produto ao pedido");
+
+        }
+
+        else if (comboFormaPagamento.getSelectedItem().toString().equals("Escolha forma de Pagamento")){
+
+            JOptionPane.showMessageDialog(null, "Escolha a forma de pagamento");
+            comboFormaPagamento.requestFocus();
+
+        }
+
+        else {
+            Object[] options = { "Sim", "Não" };
+            int opcao = JOptionPane.showOptionDialog(null, "Finalizar Venda?", "AVISO",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+            if(opcao == 0){
+
+                horas();
+
+                int pedido;
+                String formapagamento,observacao,telefone,data,hora;
+                float troco,total,valorrecebido;
+
+                pedido = Integer.parseInt(txtNPedido.getText());
+                telefone = txtTelefone.getText();
+                data = getDatahoje();
+                hora = txtHora.getText();
+
+                formapagamento = comboFormaPagamento.getSelectedItem().toString();
+                observacao = txtObservacao.getText();
+
+                valorrecebido = Float.parseFloat(txtValorRecebido.getText());
+                troco = Float.parseFloat(txtTroco.getText());
+                total = Float.parseFloat(txtTotalVenda.getText());
+
+                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora);
+
+                carregaNumeroPedido();
+                carregaTabela();
+                limparTodosCampos();
+
+                desabilitaCampos();
+                
+                radioTipoPedido.clearSelection();
+
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       Object[] options = { "Sim", "Não" };
+                        int opcao = JOptionPane.showOptionDialog(null,"Ao sair se houver vendas, elas serão excluídas\n\nDeseja continuar ?", "AVISO",
+                                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                        if(opcao == 0){
+                            
+                              int npedido = Integer.parseInt(txtNPedido.getText());
+                            
+                              String msg1a = "Vendas Excluídas";
+                              String msg2a = "Erro ao Excluir Vendas";
+                              String sqla = "delete from venda WHERE npedido='"+npedido+"'";
+                              
+                              bf.salvar(sqla, msg1a, msg2a);
+                            
+                              String msg1 = "Itens Excluída";
+                              String msg2 = "Erro ao Excluir Itens";
+                              String sql = "delete from itensPedido WHERE npedido='"+npedido+"'";
+                              
+                              bf.salvar(sql, msg1, msg2);
+                              
+                            this.internalProdutos.dispose();
+                          
+                        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        
+     AlterarClienteCaixa alterarClientes = new AlterarClienteCaixa();  
+      
+  
+      alterarClientes.setVisible(true);  
+
+        
+        
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void txtCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodProdutoFocusLost
+       
+       pesquisaCodigoProduto();
+        
+        
+    }//GEN-LAST:event_txtCodProdutoFocusLost
+
+    private void txtCodProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProdutoKeyPressed
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
+         
+          pesquisaCodigoProduto();
+         
+         }
+    }//GEN-LAST:event_txtCodProdutoKeyPressed
 
     
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {  
@@ -1194,7 +1384,7 @@ public class Caixa extends javax.swing.JFrame {
      
      public void limpacampos1(){
          
-        
+                txtCodProduto.setText("");    
                 comboProduto.setSelectedItem("");
                 txtPreco.setText("");
                 txtCodProduto.setText("");
@@ -1242,6 +1432,7 @@ public class Caixa extends javax.swing.JFrame {
                 comboFormaPagamento.setSelectedItem("Escolha forma de Pagamento");
                 txtValorRecebido.setText("");
                 txtTroco.setText("");
+                txtTotalVenda.setText("");
      }
      
      public void desabilitaCampos(){
@@ -1263,7 +1454,7 @@ public class Caixa extends javax.swing.JFrame {
          btnIncluir2.setEnabled(false);
           btnIncluir2.setEnabled(false);
          jButton1.setEnabled(false);
-         
+         txtTroco.setEditable(false);
          
      }
      
@@ -1288,6 +1479,27 @@ public class Caixa extends javax.swing.JFrame {
          jButton1.setEnabled(true);
          
          
+     }
+     
+     public void FormaPagamento(){
+         
+         levalValorRecebido.setVisible(false);
+          txtValorRecebido.setVisible(false);
+          txtValorRecebido.setText("0");
+          labelTroco.setVisible(false);
+          txtTroco.setVisible(false);
+          txtTroco.setText("0");
+         
+     }
+     
+     public void FormaPagamento2(){
+         
+          levalValorRecebido.setVisible(true);
+          txtValorRecebido.setVisible(true);
+          txtValorRecebido.setText("");
+          labelTroco.setVisible(true);
+          txtTroco.setVisible(true);
+          txtTroco.setText("");
      }
      
      public void preencheTotal(){
@@ -1331,6 +1543,45 @@ public class Caixa extends javax.swing.JFrame {
          
      }
      
+     public void pesquisaCodigoProduto(){
+         
+          ResultSet rs;
+
+        String codigoproduto = txtCodProduto.getText();
+      
+
+        if("".equals(codigoproduto)){
+
+       
+            
+        }
+
+        else{
+
+            rs = ba.buscaProduto(codigoproduto);
+            try {
+
+                if (ba.buscaProduto(codigoproduto) != null) {
+                    String  produto ;
+
+                
+                    produto = rs.getString("descricao");
+                 
+                    comboProduto.setSelectedItem(produto);
+
+                }
+
+                else{
+
+                    
+                }
+            } catch (SQLException ex) {
+            }
+        }
+         
+         
+     }
+     
      public void operacaoTroco(){
          
          float total, valorrecebido, troco;
@@ -1339,11 +1590,20 @@ public class Caixa extends javax.swing.JFrame {
         total = Float.parseFloat(txtTotalVenda.getText());
         valorrecebido = Float.parseFloat(txtValorRecebido.getText());
         
+        if(valorrecebido < total){
+            
+            JOptionPane.showMessageDialog(null,"Atenção Valor recebido menor que o valor total");
+            
+        }
+        else{
+        
         troco =  valorrecebido - total ;
         
         aux = String.valueOf(troco);
         
         txtTroco.setText(aux);
+     }
+        
          
      }
      
@@ -1387,9 +1647,12 @@ public class Caixa extends javax.swing.JFrame {
      
      
      public void dataHoje(){
-        Date now = new Date();
-        DateFormat df = DateFormat.getDateInstance();
-        txDataHoje.setDate(now);
+        Date data = new Date();
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  
+        String novaData = formatador.format(data);  
+        txDataHoje.setDate(data);
+        
+        
    }
      
      public void horas(){
@@ -1453,6 +1716,7 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grupoRadioPartes;
     public javax.swing.JInternalFrame internalProdutos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1461,8 +1725,6 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1483,6 +1745,8 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JLabel labelTroco;
+    private javax.swing.JLabel levalValorRecebido;
     private javax.swing.JRadioButton radioPedidoBalcao;
     private javax.swing.ButtonGroup radioTipoPedido;
     private javax.swing.JRadioButton rapidoPedidoEntrega;
@@ -1507,4 +1771,22 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorRecebido;
     private javax.swing.JTextField txtValorTotalPizza;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the datahoje
+     */
+    public String getDatahoje() {
+       if (txDataHoje.getDate()!=null){
+          return datahoje = new SimpleDateFormat("dd-MM-yyyy").format(txDataHoje.getDate());
+        }else{
+          return null;
+        }
+    }
+
+    /**
+     * @param datahoje the datahoje to set
+     */
+    public void setDatahoje(String n) {
+        datahoje = n;
+    }
 }
