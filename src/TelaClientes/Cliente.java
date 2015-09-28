@@ -504,7 +504,7 @@ public class Cliente extends javax.swing.JPanel {
 
         
 
-            if("(    -    ".equals(telefone)){
+            if("".equals(telefone)){
 
         
                 JOptionPane.showMessageDialog(null,"Preencha o campo telefone para realizar uma busca");
