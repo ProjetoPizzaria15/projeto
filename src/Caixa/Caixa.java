@@ -327,7 +327,7 @@ public class Caixa extends javax.swing.JFrame {
 
         grupoRadioPartes = new javax.swing.ButtonGroup();
         radioTipoPedido = new javax.swing.ButtonGroup();
-        internalProdutos = new javax.swing.JInternalFrame();
+        internalCaixa = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
@@ -395,19 +395,19 @@ public class Caixa extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        internalProdutos.setTitle("PDV");
-        internalProdutos.setVisible(true);
-        internalProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+        internalCaixa.setTitle("PDV");
+        internalCaixa.setVisible(true);
+        internalCaixa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                internalProdutosMousePressed(evt);
+                internalCaixaMousePressed(evt);
             }
         });
-        internalProdutos.addKeyListener(new java.awt.event.KeyAdapter() {
+        internalCaixa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                internalProdutosKeyPressed(evt);
+                internalCaixaKeyPressed(evt);
             }
         });
-        internalProdutos.getContentPane().setLayout(null);
+        internalCaixa.getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
         jPanel1.setLayout(null);
@@ -480,7 +480,7 @@ public class Caixa extends javax.swing.JFrame {
         jPanel1.add(btnAlterar);
         btnAlterar.setBounds(180, 250, 250, 40);
 
-        internalProdutos.getContentPane().add(jPanel1);
+        internalCaixa.getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 70, 550, 300);
 
         gridCaixa.setModel(new javax.swing.table.DefaultTableModel(
@@ -501,7 +501,7 @@ public class Caixa extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(gridCaixa);
 
-        internalProdutos.getContentPane().add(jScrollPane1);
+        internalCaixa.getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(0, 370, 1190, 100);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
@@ -658,31 +658,31 @@ public class Caixa extends javax.swing.JFrame {
         jPanel2.add(jPanel3);
         jPanel3.setBounds(10, 130, 590, 160);
 
-        internalProdutos.getContentPane().add(jPanel2);
+        internalCaixa.getContentPane().add(jPanel2);
         jPanel2.setBounds(550, 70, 640, 300);
 
         jLabel14.setText("Observação: ");
-        internalProdutos.getContentPane().add(jLabel14);
+        internalCaixa.getContentPane().add(jLabel14);
         jLabel14.setBounds(10, 690, 90, 30);
-        internalProdutos.getContentPane().add(jTextField12);
+        internalCaixa.getContentPane().add(jTextField12);
         jTextField12.setBounds(10, 730, 410, 30);
 
         txtTotalVenda.setEditable(false);
         txtTotalVenda.setBackground(new java.awt.Color(204, 204, 204));
         txtTotalVenda.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        internalProdutos.getContentPane().add(txtTotalVenda);
+        internalCaixa.getContentPane().add(txtTotalVenda);
         txtTotalVenda.setBounds(1040, 480, 140, 50);
 
         jLabel15.setText("Total:");
-        internalProdutos.getContentPane().add(jLabel15);
+        internalCaixa.getContentPane().add(jLabel15);
         jLabel15.setBounds(990, 480, 40, 50);
 
         jLabel16.setText("Forma de Pagamento: ");
-        internalProdutos.getContentPane().add(jLabel16);
+        internalCaixa.getContentPane().add(jLabel16);
         jLabel16.setBounds(20, 540, 130, 30);
 
         comboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Escolha forma de Pagamento", "Dinheiro", "Cartão de Crédito", "Cartão de Débito" }));
-        internalProdutos.getContentPane().add(comboFormaPagamento);
+        internalCaixa.getContentPane().add(comboFormaPagamento);
         comboFormaPagamento.setBounds(140, 540, 220, 30);
 
         txtValorRecebido.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -695,20 +695,20 @@ public class Caixa extends javax.swing.JFrame {
                 txtValorRecebidoKeyPressed(evt);
             }
         });
-        internalProdutos.getContentPane().add(txtValorRecebido);
+        internalCaixa.getContentPane().add(txtValorRecebido);
         txtValorRecebido.setBounds(510, 540, 70, 30);
 
         levalValorRecebido.setText("Valor Recebido: ");
-        internalProdutos.getContentPane().add(levalValorRecebido);
+        internalCaixa.getContentPane().add(levalValorRecebido);
         levalValorRecebido.setBounds(420, 540, 100, 30);
 
         labelTroco.setText("Troco: ");
-        internalProdutos.getContentPane().add(labelTroco);
+        internalCaixa.getContentPane().add(labelTroco);
         labelTroco.setBounds(620, 540, 50, 30);
 
         txtTroco.setBackground(new java.awt.Color(204, 204, 204));
         txtTroco.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        internalProdutos.getContentPane().add(txtTroco);
+        internalCaixa.getContentPane().add(txtTroco);
         txtTroco.setBounds(680, 510, 120, 60);
 
         jButton1.setText("Finalizar Pedido");
@@ -717,13 +717,13 @@ public class Caixa extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        internalProdutos.getContentPane().add(jButton1);
+        internalCaixa.getContentPane().add(jButton1);
         jButton1.setBounds(930, 540, 120, 30);
 
         jLabel19.setText("Observação: ");
-        internalProdutos.getContentPane().add(jLabel19);
+        internalCaixa.getContentPane().add(jLabel19);
         jLabel19.setBounds(20, 500, 90, 30);
-        internalProdutos.getContentPane().add(txtObservacao);
+        internalCaixa.getContentPane().add(txtObservacao);
         txtObservacao.setBounds(140, 500, 470, 30);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Pedido"));
@@ -749,7 +749,7 @@ public class Caixa extends javax.swing.JFrame {
         jPanel4.add(rapidoPedidoEntrega);
         rapidoPedidoEntrega.setBounds(200, 30, 150, 23);
 
-        internalProdutos.getContentPane().add(jPanel4);
+        internalCaixa.getContentPane().add(jPanel4);
         jPanel4.setBounds(0, 0, 550, 70);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
@@ -781,7 +781,7 @@ public class Caixa extends javax.swing.JFrame {
         jPanel5.add(txtHora);
         txtHora.setBounds(480, 20, 100, 30);
 
-        internalProdutos.getContentPane().add(jPanel5);
+        internalCaixa.getContentPane().add(jPanel5);
         jPanel5.setBounds(550, 0, 640, 70);
 
         jButton2.setText("Sair");
@@ -790,11 +790,11 @@ public class Caixa extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        internalProdutos.getContentPane().add(jButton2);
+        internalCaixa.getContentPane().add(jButton2);
         jButton2.setBounds(1060, 540, 120, 30);
 
-        getContentPane().add(internalProdutos);
-        internalProdutos.setBounds(0, 0, 1210, 610);
+        getContentPane().add(internalCaixa);
+        internalCaixa.setBounds(10, 10, 1210, 610);
 
         setBounds(0, 0, 1276, 716);
     }// </editor-fold>//GEN-END:initComponents
@@ -952,6 +952,8 @@ public class Caixa extends javax.swing.JFrame {
                        int    lin = gridCaixa.getSelectedRow();
                     String result =(String) gridCaixa.getValueAt(lin, 0);
                     
+                    System.out.println(result);
+                    
                          com.mysql.jdbc.Connection connection = null;
                          Class.forName(cb.JDBC_DRIVER()).newInstance();
                          connection =    (com.mysql.jdbc.Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
@@ -1088,11 +1090,11 @@ public class Caixa extends javax.swing.JFrame {
         
     }//GEN-LAST:event_rapidoPedidoEntregaActionPerformed
 
-    private void internalProdutosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_internalProdutosKeyPressed
+    private void internalCaixaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_internalCaixaKeyPressed
         
-    }//GEN-LAST:event_internalProdutosKeyPressed
+    }//GEN-LAST:event_internalCaixaKeyPressed
 
-    private void internalProdutosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_internalProdutosMousePressed
+    private void internalCaixaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_internalCaixaMousePressed
       
         if(radioPedidoBalcao.isSelected() || rapidoPedidoEntrega.isSelected()){
             
@@ -1106,7 +1108,7 @@ public class Caixa extends javax.swing.JFrame {
             
         }
         
-    }//GEN-LAST:event_internalProdutosMousePressed
+    }//GEN-LAST:event_internalCaixaMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         /* float total,valorrecebido;
@@ -1190,7 +1192,7 @@ public class Caixa extends javax.swing.JFrame {
                               
                               bf.salvar(sql, msg1, msg2);
                               
-                            this.internalProdutos.dispose();
+                            this.internalCaixa.dispose();
                           
                         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1717,7 +1719,7 @@ public class Caixa extends javax.swing.JFrame {
     private javax.swing.JComboBox comboSabor2;
     private javax.swing.JTable gridCaixa;
     private javax.swing.ButtonGroup grupoRadioPartes;
-    public javax.swing.JInternalFrame internalProdutos;
+    public javax.swing.JInternalFrame internalCaixa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
