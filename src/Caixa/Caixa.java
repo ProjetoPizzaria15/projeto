@@ -534,6 +534,7 @@ public class Caixa extends javax.swing.JFrame {
 
         txtPreco.setEditable(false);
         txtPreco.setBackground(new java.awt.Color(204, 204, 204));
+        txtPreco.setText("0");
         jPanel2.add(txtPreco);
         txtPreco.setBounds(180, 80, 70, 30);
 
@@ -603,6 +604,7 @@ public class Caixa extends javax.swing.JFrame {
 
         txtValorPizza1.setEditable(false);
         txtValorPizza1.setBackground(new java.awt.Color(204, 204, 204));
+        txtValorPizza1.setText("0");
         jPanel3.add(txtValorPizza1);
         txtValorPizza1.setBounds(260, 30, 70, 30);
 
@@ -617,6 +619,7 @@ public class Caixa extends javax.swing.JFrame {
 
         txtValorPizza2.setEditable(false);
         txtValorPizza2.setBackground(new java.awt.Color(204, 204, 204));
+        txtValorPizza2.setText("0");
         jPanel3.add(txtValorPizza2);
         txtValorPizza2.setBounds(260, 80, 70, 30);
 
@@ -706,7 +709,7 @@ public class Caixa extends javax.swing.JFrame {
         txtTroco.setBackground(new java.awt.Color(204, 204, 204));
         txtTroco.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         internalProdutos.getContentPane().add(txtTroco);
-        txtTroco.setBounds(680, 510, 100, 60);
+        txtTroco.setBounds(680, 510, 120, 60);
 
         jButton1.setText("Finalizar Pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -1399,8 +1402,8 @@ public class Caixa extends javax.swing.JFrame {
       
                 comboSabor1.setSelectedItem("");
                 comboSabor2.setSelectedItem("");
-                txtValorPizza1.setText("");
-                txtValorPizza2.setText("");
+                txtValorPizza1.setText("0");
+                txtValorPizza2.setText("0");
                 txtQtde2Sabores.setText("");
                 txtValorTotalPizza.setText("");
          
@@ -1424,8 +1427,8 @@ public class Caixa extends javax.swing.JFrame {
                 
                 comboSabor1.setSelectedItem("");
                 comboSabor2.setSelectedItem("");
-                txtValorPizza1.setText("");
-                txtValorPizza2.setText("");
+                txtValorPizza1.setText("0");
+                txtValorPizza2.setText("0");
                 txtQtde2Sabores.setText("");
                 txtValorTotalPizza.setText("");
                 txtObservacao.setText("");
