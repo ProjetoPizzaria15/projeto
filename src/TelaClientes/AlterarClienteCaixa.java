@@ -9,6 +9,7 @@ import Banco.Banco;
 import Banco.BancoCep;
 import Caixa.Caixa;
 import Funcoes.LimitarCampos;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -136,6 +137,12 @@ public class AlterarClienteCaixa extends javax.swing.JFrame {
         jLabel2.setBounds(10, 20, 90, 30);
         jPanel4.add(txtNome);
         txtNome.setBounds(100, 70, 420, 30);
+
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyPressed(evt);
+            }
+        });
         jPanel4.add(txtTelefone);
         txtTelefone.setBounds(100, 20, 110, 30);
 
@@ -249,11 +256,44 @@ public class AlterarClienteCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarActionPerformed
-        ResultSet rs;
+      pesquisa();
+
+    }//GEN-LAST:event_PesquisarActionPerformed
+
+    private void txtUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUfActionPerformed
+
+    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroActionPerformed
+
+    private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
+
+        txtTelefone.setText("");
+        txtNome.setText("");
+        txtCep.setText("");
+        txtCidade.setText("");
+        txtBairro.setText("");
+        txtEndereco.setText("");
+        txtComplemento.setText("");
+        txtUf.setText("");
+        txtNumero.setText("");
+    }//GEN-LAST:event_NovoActionPerformed
+
+    private void txtTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyPressed
+          if(evt.getKeyCode() == KeyEvent.VK_ENTER){  
+        pesquisa();
+          }
+    }//GEN-LAST:event_txtTelefoneKeyPressed
+
+    public void pesquisa(){
+        
+          ResultSet rs;
 
         String telefone =txtTelefone.getText();
 
-        if("(    -    ".equals(telefone)){
+        if("".equals(telefone)){
 
             JOptionPane.showMessageDialog(null,"Preencha o campo telefone para realizar uma busca");
             txtTelefone.requestFocus();
@@ -284,30 +324,8 @@ public class AlterarClienteCaixa extends javax.swing.JFrame {
             } catch (SQLException ex) {
             }
         }
-
-    }//GEN-LAST:event_PesquisarActionPerformed
-
-    private void txtUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUfActionPerformed
-
-    private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroActionPerformed
-
-    private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
-
-        txtTelefone.setText("");
-        txtNome.setText("");
-        txtCep.setText("");
-        txtCidade.setText("");
-        txtBairro.setText("");
-        txtEndereco.setText("");
-        txtComplemento.setText("");
-        txtUf.setText("");
-        txtNumero.setText("");
-    }//GEN-LAST:event_NovoActionPerformed
-
+    }
+    
     /**
      * @param args the command line arguments
      */
