@@ -14,6 +14,7 @@ import Funcionario.Funcionario;
 import Compras.Compras;
 import Produtos.Produto;
 import Usuario.Usuario;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
@@ -29,7 +30,7 @@ public class Principal extends javax.swing.JFrame {
     JInternalFrame intFornecedor;
     JInternalFrame intContasPagarReceber;
     JInternalFrame intCompras;
-
+    JInternalFrame intCaixa;
     
     public Principal() {
         initComponents();
@@ -247,12 +248,12 @@ public class Principal extends javax.swing.JFrame {
     
     
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        if(intProdutos == null || intProdutos.isClosed()){
-             intProdutos = new Caixa().internalProdutos;
-             getContentPane().add(intProdutos);
-             desktop.add(intProdutos);
-             intProdutos.setLocation(130, 15);
-             intProdutos.moveToFront();
+        if(intCaixa == null || intCaixa.isClosed()){
+             intCaixa = new Caixa().internalCaixa;
+             getContentPane().add(intCaixa);
+             desktop.add(intCaixa);
+             intCaixa.setLocation(130, 15);
+             intCaixa.moveToFront();
          }
     }//GEN-LAST:event_btnProdutosActionPerformed
 
@@ -298,14 +299,22 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FornecedorActionPerformed
 
     private void EncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncerrarActionPerformed
+ if(intCaixa == null || intCaixa.isClosed()){
 
-        Object[] options = { "Sim", "Não" };
-        int opcao = JOptionPane.showOptionDialog(null,"Deseja fechar o sistema ?", "AVISO",
+            Object[] options = { "Sim", "Não" };
+            int opcao = JOptionPane.showOptionDialog(null,"Deseja fechar o sistema ?", "AVISO",
             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
-        if(opcao == 0){
+               if(opcao == 0){
 
-            System.exit(0);
+                   System.exit(0);
+               }
+        }else{
+            JOptionPane pane = new JOptionPane("O programa não pode ser fechado enquanto o 'PDV' estiver aberto\n\n"+
+                                                 "Feche o 'PDV' para poder fechar o programa");  
+            JDialog dialog = pane.createDialog("Aviso");  
+            dialog.setAlwaysOnTop(true);
+            dialog.show();
         }
     }//GEN-LAST:event_EncerrarActionPerformed
 
@@ -374,6 +383,8 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                
                 new Principal().setVisible(true);
             }
         });
