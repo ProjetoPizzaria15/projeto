@@ -48,7 +48,7 @@ CREATE TABLE `clientes` (
 
 /*Data for the table `clientes` */
 
-insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('25858180','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO');
+insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('10101010','Paulo','08080110','HIPOLITO CARON','10','dfgsgf','SAO PAULO','SP','PARQUE PAULISTANO'),('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('12345678','Teste Caixa','08081400','ALVARO COELHO','10','10','SAO PAULO','SP','PARQUE PAULISTANO'),('20258316','Teste Caixa','08080100','SUACUAPARA','10','proximo ao mercado nagumo','SAO PAULO','SP','PARQUE PAULISTANO'),('25858180','Teste Caixa','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO');
 
 /*Table structure for table `compras` */
 
@@ -196,7 +196,7 @@ CREATE TABLE `itenspedido` (
 
 /*Data for the table `itenspedido` */
 
-insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (6,'Meio a Meio de Pizza mussarela  e Atum',28.00,1,28.00),(6,'Meio a Meio de Pizza mussarela  e Atum',32.00,1,32.00),(6,'Pizza mussarela ',28.00,1,28.00),(6,'Pizza Calabresa',25.00,1,25.00),(7,'Pizza Calabresa',25.00,1,25.00),(8,'Atum',32.00,1,32.00),(8,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',0.00,1,25.00),(9,'Pizza Calabresa',25.00,1,25.00),(9,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',28.00,1,28.00);
+insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (6,'Meio a Meio de Pizza mussarela  e Atum',28.00,1,28.00),(6,'Meio a Meio de Pizza mussarela  e Atum',32.00,1,32.00),(8,'Atum',32.00,1,32.00),(12,'Meio a Meio de Pizza mussarela  e Pizza Calabresa',32.00,1,32.00),(13,'Pizza Calabresa',25.00,1,25.00),(13,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',32.00,1,32.00);
 
 /*Table structure for table `produtos` */
 
@@ -247,19 +247,20 @@ DROP TABLE IF EXISTS `venda`;
 
 CREATE TABLE `venda` (
   `npedido` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `telefone` int(8) DEFAULT NULL,
+  `telefone` varchar(13) DEFAULT NULL,
   `total` float(5,2) DEFAULT NULL,
   `formaPagamento` varchar(20) DEFAULT NULL,
   `observacao` varchar(50) DEFAULT NULL,
   `data` varchar(10) DEFAULT NULL,
   `valorrecebido` float(5,2) DEFAULT NULL,
   `troco` float(5,2) DEFAULT NULL,
+  `hora` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`npedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `venda` */
 
-insert  into `venda`(`npedido`,`telefone`,`total`,`formaPagamento`,`observacao`,`data`,`valorrecebido`,`troco`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,25858180,7.00,'Dinheiro','teste',NULL,113.00,120.00),(7,25858180,25.00,'Cartão de Crédito','testando',NULL,25.00,50.00),(8,25858180,23.00,'Dinheiro','teste',NULL,57.00,80.00),(9,2858180,7.00,'Dinheiro','teste',NULL,53.00,60.00);
+insert  into `venda`(`npedido`,`telefone`,`total`,`formaPagamento`,`observacao`,`data`,`valorrecebido`,`troco`,`hora`) values (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'25858180',7.00,'Dinheiro','teste',NULL,113.00,120.00,NULL),(7,'25858180',25.00,'Cartão de Crédito','testando',NULL,25.00,50.00,NULL),(8,'25858180',23.00,'Dinheiro','teste',NULL,57.00,80.00,NULL),(9,'2858180',7.00,'Dinheiro','teste',NULL,53.00,60.00,NULL),(10,'25858180',43.00,'Dinheiro','dsggggdfgdgfd',NULL,57.00,100.00,NULL),(11,'',75.00,'Cartão de Débito','',NULL,25.00,100.00,NULL),(12,'25858180',43.00,'Cartão de Crédito','teste hora data','28-09-2015',57.00,100.00,'09:13:07'),(13,'',43.00,'Dinheiro','','28-09-2015',57.00,100.00,'10:30:26');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
