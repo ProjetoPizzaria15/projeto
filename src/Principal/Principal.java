@@ -252,7 +252,7 @@ public class Principal extends javax.swing.JFrame {
              intCaixa = new Caixa().internalCaixa;
              getContentPane().add(intCaixa);
              desktop.add(intCaixa);
-             intCaixa.setLocation(130, 15);
+             intCaixa.setLocation(240, 30);
              intCaixa.moveToFront();
          }
     }//GEN-LAST:event_btnProdutosActionPerformed
@@ -262,7 +262,7 @@ public class Principal extends javax.swing.JFrame {
              intCompras = new Compras().internalCompras;
              getContentPane().add(intCompras);
              desktop.add(intCompras);
-             intCompras.setLocation(130, 15);
+             intCompras.setLocation(240, 30);
              intCompras.moveToFront();
          }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -273,7 +273,7 @@ public class Principal extends javax.swing.JFrame {
              intFuncionario = new Funcionario().internalFuncionario;
              getContentPane().add(intFuncionario);
              desktop.add(intFuncionario);
-             intFuncionario.setLocation(130, 15);
+             intFuncionario.setLocation(240, 30);
              intFuncionario.moveToFront();
          }
     }//GEN-LAST:event_btnFuncionarioActionPerformed
@@ -283,7 +283,7 @@ public class Principal extends javax.swing.JFrame {
              intCliente = new Cliente().internalCliente;
              getContentPane().add(intCliente);
              desktop.add(intCliente);
-             intCliente.setLocation(130, 15);
+             intCliente.setLocation(240, 30);
              intCliente.moveToFront();
          }
     }//GEN-LAST:event_btnClienteActionPerformed
@@ -293,7 +293,7 @@ public class Principal extends javax.swing.JFrame {
              intFornecedor = new Fornecedor().internalFornecedor;
              getContentPane().add(intFornecedor);
              desktop.add(intFornecedor);
-             intFornecedor.setLocation(130, 15);
+             intFornecedor.setLocation(240, 30);
              intFornecedor.moveToFront();
          }
     }//GEN-LAST:event_FornecedorActionPerformed
@@ -335,7 +335,7 @@ public class Principal extends javax.swing.JFrame {
              intProdutos = new Produto().internalProduto;
              getContentPane().add(intProdutos);
              desktop.add(intProdutos);
-             intProdutos.setLocation(130, 15);
+             intProdutos.setLocation(240, 30);
              intProdutos.moveToFront();
          }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -347,7 +347,7 @@ public class Principal extends javax.swing.JFrame {
              intContasPagarReceber = new ContasPagarReceber().internalContasPagarReceber;
              getContentPane().add(intContasPagarReceber);
              desktop.add(intContasPagarReceber);
-             intContasPagarReceber.setLocation(130, 15);
+             intContasPagarReceber.setLocation(240, 30);
              intContasPagarReceber.moveToFront();
          }
     }//GEN-LAST:event_jButton8ActionPerformed
