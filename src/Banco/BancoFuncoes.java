@@ -758,6 +758,43 @@ public class BancoFuncoes {
 
  }
            
-           
+            public BancoFuncoes
+           salvar(String sql, String msg1, String msg2){
+
+          com.mysql.jdbc.Connection connection = null;
+
+   try {
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (com.mysql.jdbc.Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        com.mysql.jdbc.Statement s = (com.mysql.jdbc.Statement) connection.createStatement();
+
+        s.execute(sql);
+
+        System.out.println("Conectado ao banco com sucesso");
+
+         s.close();
+         connection.close();
+
+//         JOptionPane.showMessageDialog(null, msg1);
+         System.out.println(sql);
+
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+  }
            
 }
