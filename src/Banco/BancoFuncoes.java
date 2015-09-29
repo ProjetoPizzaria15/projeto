@@ -786,11 +786,12 @@ public class BancoFuncoes {
 
                    while (rs.next()){
                        String npedido = rs.getString("npedido");
-                        String data = rs.getString("data");
+                       String tipopedido = rs.getString("tipopedido"); 
+                       String data = rs.getString("data");
                         String total = rs.getString("total");
              
                      
-                        dtm.addRow(new Object[]{npedido, data, total});
+                        dtm.addRow(new Object[]{npedido,tipopedido, data, total});
                    }
 
 
@@ -843,12 +844,72 @@ public class BancoFuncoes {
                    }
 
                    while (rs.next()){
+                      String npedido = rs.getString("npedido");
                        String produto = rs.getString("produto");
                         String qtde = rs.getString("qtde");
                         String preco = rs.getString("preco");
                         String total = rs.getString("total");
+                        
                      
-                        dtm.addRow(new Object[]{produto, qtde, preco, total});
+                        dtm.addRow(new Object[]{npedido,produto, qtde, preco, total});
+                   }
+
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+            public BancoFuncoes
+           tabelaDemonstrativoPagamento(String sql, String msg1, String msg2, final JTable gridPagamento){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridPagamento.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                      String npedido = rs.getString("npedido");
+                       String tipopagamento = rs.getString("formapagamento");
+                        String total = rs.getString("total");
+       
+                        
+                     
+                        dtm.addRow(new Object[]{npedido,tipopagamento,total});
                    }
 
 
