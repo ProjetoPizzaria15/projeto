@@ -1,6 +1,8 @@
 package Banco;
 
 
+import Funcoes.pintaDemonstrativoVenda;
+import Movimentacao.DemonstrativoVenda;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
@@ -758,6 +760,124 @@ public class BancoFuncoes {
 
  }
            
+           
+            public BancoFuncoes
+           tabelaVendas(String sql, String msg1, String msg2, final JTable gridContaReceber){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridContaReceber.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                       String npedido = rs.getString("npedido");
+                        String data = rs.getString("data");
+                        String total = rs.getString("total");
+             
+                     
+                        dtm.addRow(new Object[]{npedido, data, total});
+                   }
+
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+           
+             public BancoFuncoes
+           tabelaDemonstrativo(String sql, String msg1, String msg2, final JTable gridDemo){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridDemo.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                       String produto = rs.getString("produto");
+                        String qtde = rs.getString("qtde");
+                        String preco = rs.getString("preco");
+                        String total = rs.getString("total");
+                     
+                        dtm.addRow(new Object[]{produto, qtde, preco, total});
+                   }
+
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+           
+           
             public BancoFuncoes
            salvar(String sql, String msg1, String msg2){
 
@@ -796,5 +916,6 @@ public class BancoFuncoes {
       return null;
     }
   }
-           
-}
+             
+  
+}          
