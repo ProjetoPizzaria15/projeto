@@ -57,9 +57,12 @@ public class Caixa extends javax.swing.JFrame {
         horas();
         desabilitaCampos();
         
-        
-       
-        
+         txtTelefone.setDocument(new LimitarCampos(8));
+         txtCodProduto.setDocument(new LimitarCampos(10));
+         txtQtde.setDocument(new LimitarCampos(3));
+        txtQtde2Sabores.setDocument(new LimitarCampos(3));
+        txtObservacao.setDocument(new LimitarCampos(50));
+        txtValorRecebido.setDocument(new LimitarCampos(50));
         
         txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {  
               public void focusLost(java.awt.event.FocusEvent evt) {  
@@ -1141,8 +1144,20 @@ public class Caixa extends javax.swing.JFrame {
                 horas();
 
                 int pedido;
-                String formapagamento,observacao,telefone,data,hora;
+                String formapagamento,observacao,telefone,data,hora,tipopedido = "";
                 float troco,total,valorrecebido;
+                
+                if(radioPedidoBalcao.isSelected()){
+                    
+                    tipopedido += "Pedido Balcao";
+                    
+                }
+                
+                else if(rapidoPedidoEntrega.isSelected()){
+                    
+                     tipopedido += "Pedido Entrega";
+                    
+                }
 
                 pedido = Integer.parseInt(txtNPedido.getText());
                 telefone = txtTelefone.getText();
@@ -1156,7 +1171,7 @@ public class Caixa extends javax.swing.JFrame {
                 troco = Float.parseFloat(txtTroco.getText());
                 total = Float.parseFloat(txtTotalVenda.getText());
 
-                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora);
+                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora,tipopedido);
 
                 carregaNumeroPedido();
                 carregaTabela();
