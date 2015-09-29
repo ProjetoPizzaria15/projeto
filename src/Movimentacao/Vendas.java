@@ -17,7 +17,7 @@ public class Vendas extends javax.swing.JFrame {
          gridVenda.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Npedido", "Data", "Total", }) {  
+      new String[] {"Npedido","Tipo Pedido", "Data", "Total", }) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -172,7 +172,8 @@ public class Vendas extends javax.swing.JFrame {
 
               demovenda.setVisible(true);   
               
-               demovenda.carregaTabela(npedido);
+               demovenda.carregaTabela1(npedido);
+               demovenda.carregaTabela2(npedido);
                demovenda.buscaVenda(npedido);
                
              
@@ -183,7 +184,7 @@ public class Vendas extends javax.swing.JFrame {
     public void carregaTabela(){
         String msg1 = "Vendas recuperadas com sucesso";
         String msg2 = "Erro ao Recuperar vendas";
-        String vsql = "SELECT npedido, data, total " +
+        String vsql = "SELECT npedido,tipopedido, data, total " +
                       "FROM venda";
 
         bf.tabelaVendas(vsql, msg1, msg2, gridVenda);
