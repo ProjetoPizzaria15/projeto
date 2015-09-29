@@ -12,6 +12,7 @@ import Caixa.Caixa;
 import ContaPagarReceber.ContasPagarReceber;
 import Funcionario.Funcionario;
 import Compras.Compras;
+import Movimentacao.Vendas;
 import Produtos.Produto;
 import Usuario.Usuario;
 import javax.swing.JDialog;
@@ -31,6 +32,9 @@ public class Principal extends javax.swing.JFrame {
     JInternalFrame intContasPagarReceber;
     JInternalFrame intCompras;
     JInternalFrame intCaixa;
+    JInternalFrame intMovimentacao;
+
+    
     
     public Principal() {
         initComponents();
@@ -205,6 +209,11 @@ public class Principal extends javax.swing.JFrame {
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton10.setMargin(new java.awt.Insets(2, 25, 2, 25));
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton10);
 
         Encerrar.setBackground(new java.awt.Color(255, 255, 204));
@@ -351,6 +360,19 @@ public class Principal extends javax.swing.JFrame {
              intContasPagarReceber.moveToFront();
          }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        
+        
+        if(intMovimentacao == null || intMovimentacao.isClosed()){
+             intMovimentacao = new Vendas().internalMovimentacao;
+             getContentPane().add(intMovimentacao);
+             desktop.add(intMovimentacao);
+             intMovimentacao.setLocation(240, 30);
+             intMovimentacao.moveToFront();
+         }
+        
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
