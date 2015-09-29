@@ -470,6 +470,29 @@ public class Banco {
         }
 
     }
+       
+       
+        public ResultSet buscaVendaDemo(String npedido) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "SELECT c.nome, v.total, v.data FROM clientes c INNER JOIN venda v ON c.telefone = v.telefone WHERE v.npedido='" + npedido + "';";
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            rs.first();
+            if (rs.getString("npedido") != null) {
+                return rs;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+
+    }
       
        
        public ResultSet buscaProdutoNome(String produto) {
