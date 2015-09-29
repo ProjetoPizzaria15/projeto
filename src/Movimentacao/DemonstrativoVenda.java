@@ -31,7 +31,18 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
          gridDemo.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Produtos","Qtde","Preco","Total"}) {  
+      new String[] {"N°Pedido","Produtos","Qtde","Preco","Total"}) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }}); 
+         
+         
+         gridPagamento.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"N°Pedido","Tipo Pagt","Valor"}) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -56,7 +67,7 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
         gridDemo = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelaPagamento = new javax.swing.JTable();
+        gridPagamento = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         txtData = new javax.swing.JTextField();
@@ -82,17 +93,9 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
 
             },
             new String [] {
-                "cod", "Produto", "Quantidade", "Total"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jScrollPane1.setViewportView(gridDemo);
 
         jPanel2.add(jScrollPane1);
@@ -104,34 +107,26 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pagamento"));
         jPanel1.setLayout(null);
 
-        tabelaPagamento.setModel(new javax.swing.table.DefaultTableModel(
+        gridPagamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "pag", "Tipo", "Valor", "#"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
-        tabelaPagamento.addMouseListener(new java.awt.event.MouseAdapter() {
+        ));
+        gridPagamento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaPagamentoMouseClicked(evt);
+                gridPagamentoMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tabelaPagamento);
+        jScrollPane2.setViewportView(gridPagamento);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 20, 210, 210);
+        jScrollPane2.setBounds(10, 20, 320, 210);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(490, 50, 230, 240);
+        jPanel1.setBounds(490, 50, 340, 240);
 
         jLabel2.setText("Data da Venda:");
         getContentPane().add(jLabel2);
@@ -140,7 +135,7 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
         jButton1.setText("Imprimir Cupon");
         jButton1.setEnabled(false);
         getContentPane().add(jButton1);
-        jButton1.setBounds(553, 300, 110, 30);
+        jButton1.setBounds(720, 300, 110, 30);
 
         txtData.setEditable(false);
         getContentPane().add(txtData);
@@ -154,24 +149,36 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
         getContentPane().add(txtValorVenda);
         txtValorVenda.setBounds(110, 50, 150, 30);
 
-        setBounds(0, 0, 730, 396);
+        setBounds(0, 0, 860, 383);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaPagamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPagamentoMouseClicked
+    private void gridPagamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridPagamentoMouseClicked
        
-    }//GEN-LAST:event_tabelaPagamentoMouseClicked
+    }//GEN-LAST:event_gridPagamentoMouseClicked
 
     
-    public void carregaTabela(String npedido){
+    public void carregaTabela1(String npedido){
        
         String msg1 = "Produtos recuperados com sucesso";
         String msg2 = "Erro ao Recuperar Produtos";
-        String vsql = "SELECT produto,qtde,preco,total FROM itensPedido where npedido = "+npedido+"";
+        String vsql = "SELECT npedido,produto,qtde,preco,total FROM itensPedido where npedido = "+npedido+"";
 
 
         bf.tabelaDemonstrativo(vsql, msg1, msg2, gridDemo);
   
     }
+    
+    public void carregaTabela2(String npedido){
+       
+        String msg1 = "Produtos recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Produtos";
+        String vsql = "SELECT npedido,formapagamento,total from venda where npedido = "+npedido+"";
+
+
+        bf.tabelaDemonstrativoPagamento(vsql, msg1, msg2, gridPagamento);
+  
+    }
+    
     
     public void buscaVenda(String npedido){
         
@@ -186,9 +193,9 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
                
                     System.out.println("aaaaaaaaaaaa");
 
-                    txtCliente.setText(rs.getString("c.nome"));
-                    txtValorVenda.setText(rs.getString("v.total"));
-                    txtData.setText(rs.getString("v.data"));
+                    txtCliente.setText(rs.getString("nome"));
+                    txtValorVenda.setText(rs.getString("total"));
+                    txtData.setText(rs.getString("data"));
                  
 
                 }
@@ -240,6 +247,7 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable gridDemo;
+    public javax.swing.JTable gridPagamento;
     private javax.swing.JButton jButton1;
     public javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -248,7 +256,6 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JTable tabelaPagamento;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtValorVenda;
