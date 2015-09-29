@@ -594,6 +594,7 @@ public class Produto extends javax.swing.JFrame {
 
                 txtCategoriaProduto.setText("");
                 carregaTabelaCategoria();
+                carregaTipoPruduto();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Não encontrado");
