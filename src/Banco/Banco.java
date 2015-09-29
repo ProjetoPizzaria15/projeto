@@ -1053,7 +1053,7 @@ public class Banco {
     }
     
     
-    public boolean gravarVenda(int pedido,String telefone,String formapagamento,String observacao,float total,float valorrecebido,float troco,String data,String hora) {
+    public boolean gravarVenda(int pedido,String telefone,String formapagamento,String observacao,float total,float valorrecebido,float troco,String data,String hora,String tipopedido) {
         conecta();
         String sql;
 
@@ -1064,8 +1064,8 @@ public class Banco {
               
           
             
-                sql = "INSERT INTO venda(npedido,telefone,formaPagamento,observacao,valorrecebido,troco,total,data,hora) VALUES ("; // nome das variaveis do BD
-                sql += pedido + ", '" + telefone + "','" + formapagamento + "' , '"+ observacao +"' , "+ total +", "+ valorrecebido +", "+ troco +",'" + data + "','" + hora + "')";
+                sql = "INSERT INTO venda(npedido,telefone,formaPagamento,observacao,valorrecebido,troco,total,data,hora,tipopedido) VALUES ("; // nome das variaveis do BD
+                sql += pedido + ", '" + telefone + "','" + formapagamento + "' , '"+ observacao +"' , "+ valorrecebido +", "+ troco +", "+ total +",'" + data + "','" + hora + "','" + tipopedido + "')";
                 
            
 
