@@ -67,7 +67,6 @@ public class Usuario extends javax.swing.JFrame {
         txt_Cpf = new javax.swing.JFormattedTextField();
         jToolBar1 = new javax.swing.JToolBar();
         CriarAcesso1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário e Senha"));
         jPanel4.setLayout(null);
@@ -220,14 +219,6 @@ public class Usuario extends javax.swing.JFrame {
         });
         jToolBar1.add(CriarAcesso1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
-        jButton2.setText("Atualiza Tabela");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
-
         internalUsuario.getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 0, 680, 60);
 
@@ -370,7 +361,6 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JTable gridUsuarios;
     public javax.swing.JInternalFrame internalUsuario;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
