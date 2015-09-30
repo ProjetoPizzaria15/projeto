@@ -22,8 +22,9 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Banco {
-
+    
     Connection con;
+    
     Statement stmt;
     ResultSet rs;
     ResultSet rs2;
