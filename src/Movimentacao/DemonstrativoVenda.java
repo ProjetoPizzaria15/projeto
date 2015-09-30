@@ -191,7 +191,7 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
                                
                 if (ba.buscaVendaDemo(npedido) != null) {
                
-                    System.out.println("aaaaaaaaaaaa");
+                    System.out.println("teste");
 
                     txtCliente.setText(rs.getString("nome"));
                     txtValorVenda.setText(rs.getString("total"));
