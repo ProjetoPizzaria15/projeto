@@ -42,8 +42,8 @@ public class Fornecedor extends javax.swing.JPanel {
       gridFornecedor.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"Nome", "CNPJ_CPF","Inc_Est","Tipo", "Nome_Cont", "Telefone", "Telefone2","Celular"
-              , "UF", "Cidade", "Bairro", "Logradouro", "Numero", "Cep", "Site", "Email" ,"Tipo_Produto" }) {  
+      new String[] {"Nome", "CNPJ_CPF","Inc_Est","Tipo", "Nome Contato", "Telefone", "Celular"
+              , "UF", "Email" ,"Tipo_Produto" }) {  
   
           // BLOQUEIA A EDIÇÃO DA JTABLE
           
@@ -52,6 +52,7 @@ public class Fornecedor extends javax.swing.JPanel {
    
    }});   
         
+      carregaTabela();
         
           labelCpf.setVisible(false);
           txt_cpfFor.setVisible(false);
@@ -292,7 +293,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel20.setText("CEP:*");
+        jLabel20.setText("CEP:");
         jPanel4.add(jLabel20);
         jLabel20.setBounds(20, 20, 60, 30);
 
@@ -305,7 +306,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel26.setText("Cidade:*");
+        jLabel26.setText("Cidade:");
         jPanel4.add(jLabel26);
         jLabel26.setBounds(410, 20, 70, 30);
         jPanel4.add(txt_cidadeFor);
@@ -313,7 +314,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel16.setText("Bairro:*");
+        jLabel16.setText("Bairro:");
         jPanel4.add(jLabel16);
         jLabel16.setBounds(20, 60, 80, 30);
         jPanel4.add(txt_bairroFor);
@@ -321,14 +322,14 @@ public class Fornecedor extends javax.swing.JPanel {
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel22.setText("Endereço:*");
+        jLabel22.setText("Endereço:");
         jPanel4.add(jLabel22);
         jLabel22.setBounds(20, 100, 80, 30);
         jPanel4.add(txt_endeFor);
         txt_endeFor.setBounds(110, 100, 410, 30);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Número:*");
+        jLabel1.setText("Número:");
         jPanel4.add(jLabel1);
         jLabel1.setBounds(550, 100, 70, 30);
         jPanel4.add(txt_numFor);
@@ -360,10 +361,11 @@ public class Fornecedor extends javax.swing.JPanel {
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel29.setText("Telefone:*");
+        jLabel29.setText("Telefone:");
         jPanel5.add(jLabel29);
         jLabel29.setBounds(40, 60, 80, 30);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("WebSite:");
         jPanel5.add(jLabel3);
         jLabel3.setBounds(50, 100, 70, 30);
@@ -435,7 +437,7 @@ public class Fornecedor extends javax.swing.JPanel {
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel19.setText("Nome Fantasia:*");
+        jLabel19.setText("Nome :");
         jPanel3.add(jLabel19);
         jLabel19.setBounds(10, 110, 120, 30);
 
@@ -582,7 +584,7 @@ public class Fornecedor extends javax.swing.JPanel {
         jScrollPane1.setViewportView(gridFornecedor);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 150, 1240, 500);
+        jScrollPane1.setBounds(10, 140, 930, 400);
 
         try {
             txt_CnpjPesquisa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
@@ -615,10 +617,10 @@ public class Fornecedor extends javax.swing.JPanel {
         TabFornecedor.addTab("Pesquisar Fornecedor", jPanel1);
 
         internalFornecedor.getContentPane().add(TabFornecedor);
-        TabFornecedor.setBounds(0, 0, 1260, 580);
+        TabFornecedor.setBounds(0, 0, 960, 580);
 
         add(internalFornecedor);
-        internalFornecedor.setBounds(30, 20, 1280, 610);
+        internalFornecedor.setBounds(30, 20, 980, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     private void NovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovoActionPerformed
@@ -767,6 +769,7 @@ public class Fornecedor extends javax.swing.JPanel {
             txt_tel2For.setText("");
             txt_siteFor.setText("");
             txt_estadoFor.setText("");
+            comboTipoProduto.setSelectedItem("");
             AlertaCnpj.setVisible(false);
     }
     
@@ -1121,32 +1124,137 @@ public class Fornecedor extends javax.swing.JPanel {
     private void pessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pessoaFisicaActionPerformed
       if(pessoaFisica.isSelected()){
       
-            txt_cpfFor.setText("");
-          txt_cnpjFor2.setText("");
-          labelCpf.setVisible(true);
-          txt_cpfFor.setVisible(true);
-          labelEstadual.setVisible(false);
-          txt_estadualFor.setVisible(false);
-          
-          labelCnpj.setVisible(false);
-          txt_cnpjFor2.setVisible(false);
+           limpaCamposCPF();
       }
         
         
     }//GEN-LAST:event_pessoaFisicaActionPerformed
 
+    public void preencheCampos(String cpfCnpj){
+        
+         ResultSet rs;
+
+       
+        
+         if(CPF.isValido(cpfCnpj) == true){
+             
+        escondeCamposCPF();
+        limpaCamposCPF();
+            AlertaCnpj.setVisible(false);
+
+            rs = ba.buscaFornecedorCPF(cpfCnpj);
+            try {
+
+                if (ba.buscaFornecedorCPF(cpfCnpj) != null) {
+                    
+                   
+                    
+                    
+                    txt_cpfFor.setText(rs.getString("cpfFor"));
+                    nome_fantasiaFor.setText(rs.getString("nomeFantasia"));
+                    txt_endeFor.setText(rs.getString("endeFor"));
+                    txt_cidadeFor.setText(rs.getString("cidadeFor"));
+                    nome_contatoFor.setText(rs.getString("nomeContato"));
+                    txt_telFor.setText(rs.getString("telFor"));
+                    txt_emailFor.setText(rs.getString("emailFor"));
+                    txt_bairroFor.setText(rs.getString("bairroFor"));
+                    txt_cepFor.setText(rs.getString("cepFor"));
+                    txt_numFor.setText(rs.getString("numFor"));
+                    txt_celFor.setText(rs.getString("celFor"));
+                    txt_tel2For.setText(rs.getString("tel2For"));
+                    txt_siteFor.setText(rs.getString("siteFor"));
+                    txt_estadoFor.setText(rs.getString("ufFor"));
+
+                    txt_cpfFor.setText(txt_cpfFor.getText());
+
+                    String tipoproduto = rs.getString("tipoproduto");
+                  
+                    comboTipoProduto.setSelectedItem(tipoproduto);
+                    
+                }
+                else{
+
+                    limpacampos();
+
+                }
+            } catch (SQLException ex) {
+            }
+        
+         }
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+         else if(isValido(cpfCnpj) == true){
+
+        
+        
+
+            escondeCamposCNPJ();
+            limpaCamposCNPJ();
+            AlertaCnpj.setVisible(false);
+
+            rs = ba.buscaFornecedorCNPJ(cpfCnpj);
+            try {
+
+                if (ba.buscaFornecedorCNPJ(cpfCnpj) != null) {
+                    
+                    txt_cnpjFor2.setText(rs.getString("cnpjFor"));
+                    nome_fantasiaFor.setText(rs.getString("nomeFantasia"));
+                    txt_endeFor.setText(rs.getString("endeFor"));
+                    txt_cidadeFor.setText(rs.getString("cidadeFor"));
+                    nome_contatoFor.setText(rs.getString("nomeContato"));
+                    txt_telFor.setText(rs.getString("telFor"));
+                    txt_emailFor.setText(rs.getString("emailFor"));
+                    txt_bairroFor.setText(rs.getString("bairroFor"));
+                    txt_cepFor.setText(rs.getString("cepFor"));
+                    txt_numFor.setText(rs.getString("numFor"));
+                    txt_celFor.setText(rs.getString("celFor"));
+                    txt_estadualFor.setText(rs.getString("estadualFor"));
+                    txt_tel2For.setText(rs.getString("tel2For"));
+                    txt_cnpjFor2.setText(txt_cnpjFor2.getText());
+                    txt_siteFor.setText(rs.getString("siteFor"));
+                    
+                    String tipoproduto = rs.getString("tipoproduto");
+                  
+                    comboTipoProduto.setSelectedItem(tipoproduto);
+                }
+                else{
+
+                    limpacampos();
+
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        
+        
+    }
+        
+    
+    
+    
     private void pessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pessoaJuridicaActionPerformed
 
          if(pessoaJuridica.isSelected()){
       
-             txt_cnpjFor2.setText("");
-             txt_cpfFor.setText("");
-             labelCpf.setVisible(false);
-             txt_cpfFor.setVisible(false);
-          labelEstadual.setVisible(true);
-          txt_estadualFor.setVisible(true);
-          txt_cnpjFor2.setVisible(true);
-          labelCnpj.setVisible(true);
+             limpaCamposCNPJ();
+             
       }
         
 
@@ -1312,118 +1420,15 @@ public class Fornecedor extends javax.swing.JPanel {
           
         if (evt.getClickCount() == 2) {  
             
-            Object obj = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 0));  //coluna 0  
-            String nome = obj.toString();
+         
             
             Object obj1 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 1));  //coluna 0  
             String cnpjcpf = obj1.toString();
             
-            Object obj2 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 2));  //coluna 0  
-            String estadual = obj2.toString();
-            
-            Object obj3 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 3));  //coluna 0  
-            String tipo = obj3.toString();
-            
-            Object obj4 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 4));  //coluna 0  
-            String contato = obj4.toString();
-            
-            Object obj5 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 5));  //coluna 0  
-            String telefone = obj5.toString();
-            
-            Object obj6 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 6));  //coluna 0  
-            String telefone2 = obj6.toString();
-            
-            Object obj7 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 7));  //coluna 0  
-            String celular = obj7.toString();
-            
-            Object obj8 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 8));  //coluna 0  
-            String uf = obj8.toString();
-            
-            Object obj9 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 9));  //coluna 0  
-            String cidade = obj9.toString();
-            
-            Object obj10 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 10));  //coluna 0  
-            String bairro = obj10.toString();
-            
-            Object obj11 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 11));  //coluna 0  
-            String logradouro = obj11.toString();
-        
-            Object obj12 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 12));  //coluna 0  
-            String numero = obj12.toString();
-            
-            Object obj13 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 13));  //coluna 0  
-            String cep = obj13.toString();
-            
-            Object obj14 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 14));  //coluna 0  
-            String site = obj14.toString();
-            
-            Object obj15 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 15));  //coluna 0  
-            String email = obj15.toString();
-        
-            Object obj16 = (gridFornecedor.getValueAt(gridFornecedor.getSelectedRow(), 16));  //coluna 0  
-            String tipoproduto = obj16.toString();
+            preencheCampos(cnpjcpf);
         
            
-            // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
-
-
-            // VERIFICA SE É CnPJ OU CPF E COLOCA NO TEXTFIELD
-                 
-            if (CPF.isValido(cnpjcpf) == true){
-                 
-                 pessoaFisica.setSelected(true);
-                txt_cpfFor.setText(cnpjcpf);   
-                
-          labelCpf.setVisible(true);
-          txt_cpfFor.setVisible(true);
-          labelEstadual.setVisible(false);
-          txt_estadualFor.setVisible(false);
-          
-          labelCnpj.setVisible(false);
-          txt_cnpjFor2.setVisible(false);
-            
-         comboTipoProduto.setSelectedItem(tipoproduto);
-               
            
-           
-  
-            }
-            
-            if (isValido(cnpjcpf) == true){
-              
-                txt_cnpjFor2.setText(cnpjcpf);   
-                
-                pessoaJuridica.setSelected(true);
-               
-                txt_cpfFor.setVisible(true);
-                
-              
-      
-             
-             labelCpf.setVisible(false);
-             txt_cpfFor.setVisible(false);
-          labelEstadual.setVisible(true);
-          txt_estadualFor.setVisible(true);
-          txt_cnpjFor2.setVisible(true);
-          labelCnpj.setVisible(true);
-      
-            }
-             
-            
-            nome_fantasiaFor.setText(nome);  
-            txt_estadualFor.setText(estadual);  
-            txt_cepFor.setText(cep);  
-            txt_estadoFor.setText(uf);  
-            txt_cidadeFor.setText(cidade);  
-            txt_bairroFor.setText(bairro);  
-            txt_endeFor.setText(logradouro);  
-            txt_numFor.setText(numero); 
-            nome_contatoFor.setText(contato); 
-            txt_emailFor.setText(email); 
-            txt_telFor.setText(telefone); 
-            txt_tel2For.setText(telefone2); 
-            txt_celFor.setText(celular); 
-            txt_siteFor.setText(site); 
             
             
                // QUANDO SELECIONA A LINHA NA JTABLE MUDA A ABA
@@ -1448,7 +1453,68 @@ public class Fornecedor extends javax.swing.JPanel {
         carregaTabela();
         
     }//GEN-LAST:event_TabFornecedorMousePressed
-
+    public void escondeCamposCNPJ(){
+        
+        
+                
+                pessoaJuridica.setSelected(true);
+               
+                txt_cpfFor.setVisible(true);
+                
+              
+      
+             
+             labelCpf.setVisible(false);
+             txt_cpfFor.setVisible(false);
+          labelEstadual.setVisible(true);
+          txt_estadualFor.setVisible(true);
+          txt_cnpjFor2.setVisible(true);
+          labelCnpj.setVisible(true);
+        
+    }
+    
+    public void escondeCamposCPF(){
+        
+            pessoaFisica.setSelected(true);
+            
+                
+          labelCpf.setVisible(true);
+          txt_cpfFor.setVisible(true);
+          labelEstadual.setVisible(false);
+          txt_estadualFor.setVisible(false);
+          
+          labelCnpj.setVisible(false);
+          txt_cnpjFor2.setVisible(false);
+        
+    }
+    
+    
+    public void limpaCamposCPF(){
+         txt_cpfFor.setText("");
+          txt_cnpjFor2.setText("");
+          labelCpf.setVisible(true);
+          txt_cpfFor.setVisible(true);
+          labelEstadual.setVisible(false);
+          txt_estadualFor.setVisible(false);
+          
+          labelCnpj.setVisible(false);
+          txt_cnpjFor2.setVisible(false);
+        
+    }
+    
+    public void limpaCamposCNPJ(){
+        
+        
+             txt_cnpjFor2.setText("");
+             txt_cpfFor.setText("");
+             labelCpf.setVisible(false);
+             txt_cpfFor.setVisible(false);
+          labelEstadual.setVisible(true);
+          txt_estadualFor.setVisible(true);
+          txt_cnpjFor2.setVisible(true);
+          labelCnpj.setVisible(true);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlertaCnpj;
