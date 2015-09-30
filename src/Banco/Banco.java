@@ -132,13 +132,17 @@ public class Banco {
     }
     
     
-    public void atualizaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun,String ufFun,String cidadeFun,String setorFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun , String sexoFun) {
+    public void atualizaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun,String ufFun,String cidadeFun,String setorFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun , String sexoFun,String motoboy, String placamoto, String cnh, String modelomoto) {
         String sql;
         conecta();
 
         try {
 
-              sql = "UPDATE funcionario SET nomeFun ='"+nomeFun+"', nasciFun ='"+nasciFun+"', endeFun ='"+endeFun+"', compleFun ='"+compleFun+"', bairroFun ='"+bairroFun+"', ufFun ='"+ufFun+"', cidadeFun ='"+cidadeFun+"' , setorFun ='"+setorFun+"', rgFun ='"+rgFun+"' , cpfFun ='"+cpfFun+"' , cepFun ='"+cepFun+"', numFun ='"+numFun+"' , telFun ='"+telFun+"', celFun ='"+celFun+"', sexoFun ='"+sexoFun+"'  WHERE cpfFun = '"+cpfFun+"'"; 
+              sql = "UPDATE funcionario SET nomeFun ='"+nomeFun+"', nasciFun ='"+nasciFun+"',"
+                      + " endeFun ='"+endeFun+"', compleFun ='"+compleFun+"',"
+                      + " bairroFun ='"+bairroFun+"', ufFun ='"+ufFun+"', cidadeFun ='"+cidadeFun+"' ,"
+                      + " setorFun ='"+setorFun+"', rgFun ='"+rgFun+"' , cpfFun ='"+cpfFun+"' , cepFun ='"+cepFun+"',"
+                      + " numFun ='"+numFun+"' , telFun ='"+telFun+"', celFun ='"+celFun+"', sexoFun ='"+sexoFun+"', motoboy ='"+motoboy+"' , placamoto ='"+placamoto+"', cnh ='"+cnh+"', modelomoto ='"+modelomoto+"'  WHERE cpfFun = '"+cpfFun+"'"; 
 
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Cliente Atualizado com sucesso");
@@ -1137,7 +1141,7 @@ public class Banco {
     }
     
     
-    public boolean gravaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun ,String cidadeFun,String setorFun,String sexoFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun, String ufFun) {
+    public boolean gravaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun ,String cidadeFun,String setorFun,String sexoFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun, String ufFun,String motoboy, String placamoto, String cnh, String modelomoto) {
         conecta();
         String sql;
 
@@ -1148,8 +1152,8 @@ public class Banco {
               
           
             
-                sql = "INSERT INTO funcionario(nomeFun, rgFun, cpfFun, cepFun, numFun, telFun,celFun, nasciFun, endeFun,compleFun, bairroFun, setorFun, cidadeFun, sexoFun,ufFun) VALUES ('"; // nome das variaveis do BD
-                sql += nomeFun + "', '" + rgFun + "','" + cpfFun + "' , '"+ cepFun +"' , '"+ numFun +"' , '"+ telFun +"' ,'" + celFun + "', '" + nasciFun + "','" + endeFun + "','" + compleFun + "','" + bairroFun + "','" + setorFun +"','" + cidadeFun +"','" + sexoFun +"','" + ufFun +"')";
+                sql = "INSERT INTO funcionario(nomeFun, rgFun, cpfFun, cepFun, numFun, telFun,celFun, nasciFun, endeFun,compleFun, bairroFun, setorFun, cidadeFun, sexoFun,ufFun,motoboy,placamoto,cnh,modelomoto) VALUES ('"; // nome das variaveis do BD
+                sql += nomeFun + "', '" + rgFun + "','" + cpfFun + "' , '"+ cepFun +"' , '"+ numFun +"' , '"+ telFun +"' ,'" + celFun + "', '" + nasciFun + "','" + endeFun + "','" + compleFun + "','" + bairroFun + "','" + setorFun +"','" + cidadeFun +"','" + sexoFun +"','" + ufFun +"','" + motoboy +"','" + placamoto +"','" + cnh +"','" + modelomoto +"')";
                 
                 /*sql = "INSERT INTO usuario(login, senha, permissao) VALUES ('"; // nome das variaveis do BD
                 sql += loginFun + "', '"+ senhaFun +"' , '"+ permissao +"')";*/
