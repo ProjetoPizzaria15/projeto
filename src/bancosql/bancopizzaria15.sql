@@ -153,7 +153,7 @@ CREATE TABLE `fornecedor` (
 
 /*Data for the table `fornecedor` */
 
-insert  into `fornecedor`(`cnpjFor`,`cpfFor`,`nomeFantasia`,`endeFor`,`cidadeFor`,`nomeContato`,`emailFor`,`bairroFor`,`telFor`,`cepFor`,`celFor`,`estadualFor`,`numFor`,`tel2For`,`siteFor`,`tipopessoa`,`ufFor`,`tipoproduto`) values ('  .   .   /    -  ','455.365.058-40','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@qa.com','PARQUE PAULISTANO','(34)2342-3424','08080100','(24)32343-2423','   .   .   .   ','1','(32)4234-3242','a.com.br','Pessoa Fisica','SP','Massa'),('01.554.910/0001-89','   .   .   -  ','gfdgdf','SUACUAPARA','SAO PAULO','525235','a@a.com','PARQUE PAULISTANO','(45)2332-2525','08080100','(34)23252-5525','453.554.354.536','6','(34)2342-3252','gfsgdgs','Pessoa Juridica','SP','');
+insert  into `fornecedor`(`cnpjFor`,`cpfFor`,`nomeFantasia`,`endeFor`,`cidadeFor`,`nomeContato`,`emailFor`,`bairroFor`,`telFor`,`cepFor`,`celFor`,`estadualFor`,`numFor`,`tel2For`,`siteFor`,`tipopessoa`,`ufFor`,`tipoproduto`) values ('  .   .   /    -  ','455.365.058-40','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@a.com','PARQUE PAULISTANO','(42)3424-3242','08080100','(34)23525-4525','454.545.435.524','43','(23)1231-2423','a.com.br','Pessoa Fisica','SP','Pizza'),('38.362.852/0001-00','   .   .   -  ','Paulo','SUACUAPARA','SAO PAULO','Paulo','a@a.com','PARQUE PAULISTANO','(42)3424-3242','08080100','(34)23525-4525','454.545.435.524','43','(23)1231-2423','a.com.br','Pessoa Juridica','SP','Refrigerante');
 
 /*Table structure for table `funcionario` */
 
@@ -175,12 +175,16 @@ CREATE TABLE `funcionario` (
   `sexoFun` varchar(10) NOT NULL,
   `setorFun` varchar(20) DEFAULT NULL,
   `ufFun` varchar(2) DEFAULT NULL,
+  `motoboy` varchar(3) DEFAULT NULL,
+  `placamoto` varchar(7) DEFAULT NULL,
+  `cnh` varchar(11) DEFAULT NULL,
+  `modelomoto` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`cpfFun`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `funcionario` */
 
-insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`ufFun`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP'),('william','39.725.858-6','264.051.848-89','28/07/2000','SUACUAPARA','','PARQUE PAULISTANO','SAO PAULO','08080100','276','(11)2585-3775','(11)96791-6805','Masculino','caixa','SP'),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP');
+insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`ufFun`,`motoboy`,`placamoto`,`cnh`,`modelomoto`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP',NULL,NULL,NULL,NULL),('william','39.725.858-6','264.051.848-89','28/07/2000','SUACUAPARA','','PARQUE PAULISTANO','SAO PAULO','08080100','276','(11)2585-3775','(11)96791-6805','Masculino','caixa','SP','SIM','fd','dfsdfsff','dsfsfdf'),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP','SIM','abc3232','14434324','honda 3234');
 
 /*Table structure for table `itenspedido` */
 
@@ -239,7 +243,7 @@ CREATE TABLE `usuario` (
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'1','1','01','n','455.365.058-40'),(NULL,NULL,'2','2','10','n','264.051.848-89'),(NULL,NULL,'3','3','10','n','264.051.848-89'),(NULL,NULL,'pedro','pedro','01','n','057.045.958-39'),(NULL,NULL,'teste','teste','00','n','563.553.262-43'),(NULL,NULL,'wpossera','65856962','01','n','264.051.848-89');
+insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'2','2','10','n','264.051.848-89'),(NULL,NULL,'3','3','10','n','264.051.848-89'),(NULL,NULL,'pedro','pedro','01','n','057.045.958-39'),(NULL,NULL,'teste','teste','00','n','563.553.262-43'),(NULL,NULL,'wpossera','65856962','01','n','264.051.848-89');
 
 /*Table structure for table `venda` */
 
