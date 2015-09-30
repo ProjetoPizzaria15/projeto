@@ -30,13 +30,13 @@ public class Funcionario extends javax.swing.JPanel {
     public Funcionario() {
         initComponents();
         
-        
+        escondeMotoBoy();
         
         // BLOQUEA A EDIÇÃO DA JTABLE
         gridFuncionario.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"nomeFun", "sexoFun", "CPF", "RG", "Data_Nascimento", "UF", "Cidade", "Endereco", "Bairro", "Cep", "Numero", "Complemento", "Telefone", "Ceular", "Setor" }) {  
+      new String[] {"nomeFun", "sexoFun", "CPF", "RG","Telefone", "Ceular", "Setor", "MotoBoy" }) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -72,10 +72,13 @@ public class Funcionario extends javax.swing.JPanel {
         txt_endeFun.setDocument(new LimitarCampos(60));
         txtCompleFun.setDocument(new LimitarCampos(50));
         txtNumFun.setDocument(new LimitarCampos(6));
+        txtPlacaMoto.setDocument(new LimitarCampos(7));
+        txtCnh.setDocument(new LimitarCampos(11));
+        txtModeloMoto.setDocument(new LimitarCampos(15));
 
         
         
-        
+        carregaTabela();
         
         
     }
@@ -135,6 +138,14 @@ public class Funcionario extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txt_nasciFun = new javax.swing.JFormattedTextField();
+        jPanel3 = new javax.swing.JPanel();
+        checkMotoBoy = new javax.swing.JCheckBox();
+        labelPlaca = new javax.swing.JLabel();
+        labelCnh = new javax.swing.JLabel();
+        labelModelo = new javax.swing.JLabel();
+        txtPlacaMoto = new javax.swing.JTextField();
+        txtCnh = new javax.swing.JTextField();
+        txtModeloMoto = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         gridFuncionario = new javax.swing.JTable();
@@ -230,7 +241,7 @@ public class Funcionario extends javax.swing.JPanel {
         jToolBar2.add(jButton20);
 
         jPanel2.add(jToolBar2);
-        jToolBar2.setBounds(0, 0, 790, 80);
+        jToolBar2.setBounds(0, 0, 1050, 80);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
         jPanel5.setLayout(null);
@@ -243,9 +254,9 @@ public class Funcionario extends javax.swing.JPanel {
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel27.setText("UF:");
         jPanel5.add(jLabel27);
-        jLabel27.setBounds(150, 20, 40, 30);
+        jLabel27.setBounds(230, 20, 40, 30);
         jPanel5.add(txt_estadoFun);
-        txt_estadoFun.setBounds(180, 20, 40, 30);
+        txt_estadoFun.setBounds(260, 20, 40, 30);
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel33.setText("Cidade: ");
@@ -282,7 +293,7 @@ public class Funcionario extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         jPanel5.add(txt_cepFun);
-        txt_cepFun.setBounds(40, 20, 100, 30);
+        txt_cepFun.setBounds(100, 20, 100, 30);
         jPanel5.add(txt_cidadeFun);
         txt_cidadeFun.setBounds(100, 60, 230, 30);
         jPanel5.add(txtNumFun);
@@ -291,7 +302,7 @@ public class Funcionario extends javax.swing.JPanel {
         txtCompleFun.setBounds(100, 150, 340, 30);
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(10, 250, 1030, 190);
+        jPanel5.setBounds(10, 260, 720, 190);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
         jPanel7.setLayout(null);
@@ -323,7 +334,7 @@ public class Funcionario extends javax.swing.JPanel {
         txt_telFun.setBounds(70, 20, 140, 30);
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(10, 440, 1030, 80);
+        jPanel7.setBounds(10, 450, 720, 70);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoal"));
         jPanel6.setLayout(null);
@@ -402,7 +413,40 @@ public class Funcionario extends javax.swing.JPanel {
         txt_nasciFun.setBounds(140, 120, 80, 30);
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(10, 90, 1030, 160);
+        jPanel6.setBounds(10, 90, 720, 170);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Motoboy"));
+        jPanel3.setLayout(null);
+
+        checkMotoBoy.setText("Motoboy");
+        checkMotoBoy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkMotoBoyActionPerformed(evt);
+            }
+        });
+        jPanel3.add(checkMotoBoy);
+        checkMotoBoy.setBounds(100, 20, 67, 23);
+
+        labelPlaca.setText("Placa Moto:");
+        jPanel3.add(labelPlaca);
+        labelPlaca.setBounds(10, 50, 80, 30);
+
+        labelCnh.setText("CNH:");
+        jPanel3.add(labelCnh);
+        labelCnh.setBounds(10, 90, 50, 20);
+
+        labelModelo.setText("Modelo Moto:");
+        jPanel3.add(labelModelo);
+        labelModelo.setBounds(10, 130, 90, 30);
+        jPanel3.add(txtPlacaMoto);
+        txtPlacaMoto.setBounds(110, 50, 120, 30);
+        jPanel3.add(txtCnh);
+        txtCnh.setBounds(110, 90, 120, 30);
+        jPanel3.add(txtModeloMoto);
+        txtModeloMoto.setBounds(110, 130, 120, 30);
+
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(740, 90, 260, 180);
 
         TabFuncionario.addTab("Registro", jPanel2);
 
@@ -414,7 +458,7 @@ public class Funcionario extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nome", "Sexo", "CPF", "RG", "Data Nascimento", "UF", "Cidade", "Endereco", "Bairro", "Cep", "Numero", "Complemento", "Telefone", "Celular", "Setor"
+
             }
         ));
         gridFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -425,7 +469,7 @@ public class Funcionario extends javax.swing.JPanel {
         jScrollPane1.setViewportView(gridFuncionario);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 140, 1040, 400);
+        jScrollPane1.setBounds(10, 140, 990, 400);
 
         jLabel1.setText("CPF:");
         jPanel1.add(jLabel1);
@@ -452,7 +496,7 @@ public class Funcionario extends javax.swing.JPanel {
         TabFuncionario.addTab("Pesquisa", jPanel1);
 
         internalFuncionario.getContentPane().add(TabFuncionario);
-        TabFuncionario.setBounds(0, 0, 1060, 550);
+        TabFuncionario.setBounds(0, 0, 1020, 550);
 
         add(internalFuncionario);
         internalFuncionario.setBounds(0, 0, 1090, 580);
@@ -461,7 +505,7 @@ public class Funcionario extends javax.swing.JPanel {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
 
         String aux,nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, loginFun, senhaFun, sexoFun,
-        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, permissao = "";
+        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun,motoboy = "",placamoto,cnh,modelomoto;
 
        
         nomeFun = txt_nomeFun.getText();
@@ -478,9 +522,25 @@ public class Funcionario extends javax.swing.JPanel {
         numFun = txtNumFun.getText();
         telFun = txt_telFun.getText();
         celFun = txt_celFun.getText();
+        placamoto = txtPlacaMoto.getText();
+        cnh = txtCnh.getText();
+        modelomoto = txtModeloMoto.getText();
 
         sexoFun = cmb_sexoFun.getSelectedItem().toString();
         System.out.println(sexoFun);
+        
+        
+        if(checkMotoBoy.isSelected()){
+            
+            motoboy += "SIM";
+            
+        }
+        else{
+            
+            motoboy += "NAO";
+            
+        }
+        
 
         if(sexoFun.equals("-")){
             JOptionPane.showMessageDialog(null, "Escolha o sexo");
@@ -496,23 +556,10 @@ public class Funcionario extends javax.swing.JPanel {
         
              else {
              
-             ba.gravaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, sexoFun, rgFun, cpfFun, cepFun, numFun, telFun, celFun,ufFun);
+             ba.gravaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, sexoFun, rgFun, cpfFun, cepFun, numFun, telFun, celFun,ufFun,motoboy,placamoto,cnh,modelomoto);
 
-            txt_nomeFun.setText("");
-            txt_cpfFun.setText("");
-            txt_rgFun.setText("");
-            txt_nasciFun.setText("");
-            txt_endeFun.setText("");
-            txtCompleFun.setText("");
-            txt_bairroFun.setText("");
-            txt_cepFun.setText("");
-            txtNumFun.setText("");
-            txt_telFun.setText("");
-            txt_celFun.setText("");
-            txt_setorFun.setText("");
-            txt_cidadeFun.setText("");
-            txt_estadoFun.setText("");
-         
+            limpacampos();
+            
         }
       }
         
@@ -521,7 +568,7 @@ public class Funcionario extends javax.swing.JPanel {
     private void btnAlterarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFuncionarioActionPerformed
 
          String aux,nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, loginFun, senhaFun, sexoFun,
-        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, permissao = "";
+        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, motoboy ="", placamoto,cnh,modelomoto;
 
       
        
@@ -539,7 +586,23 @@ public class Funcionario extends javax.swing.JPanel {
         numFun = txtNumFun.getText();
         telFun = txt_telFun.getText();
         celFun = txt_celFun.getText();
+        placamoto = txtPlacaMoto.getText();
+        cnh = txtCnh.getText();
+        modelomoto = txtModeloMoto.getText();
+
+  
         
+        
+        if(checkMotoBoy.isSelected()){
+            
+            motoboy += "SIM";
+            
+        }
+        else{
+            
+            motoboy += "NAO";
+            
+        }
         sexoFun = cmb_sexoFun.getSelectedItem().toString();
 
         if("   .   .   -  ".equals(cpfFun)){
@@ -549,7 +612,7 @@ public class Funcionario extends javax.swing.JPanel {
         }
         else{
 
-            ba.atualizaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun, ufFun,cidadeFun, setorFun, rgFun,cpfFun, cepFun, numFun, telFun, celFun,sexoFun);
+            ba.atualizaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun, ufFun,cidadeFun, setorFun, rgFun,cpfFun, cepFun, numFun, telFun, celFun,sexoFun,motoboy,placamoto,cnh,modelomoto);
 
         }
         
@@ -646,25 +709,30 @@ public class Funcionario extends javax.swing.JPanel {
                      cmb_sexoFun.setSelectedItem(sexoFun);
                     
                     
+                     String motoboy = rs.getString("motoboy");
+                     
+                     if(motoboy.equals("SIM")){
+                         
+                         checkMotoBoy.setSelected(true);
+                         mostraMotoboy();
+                         
+                     }
+                     else{
+                         
+                         checkMotoBoy.setSelected(false);
+                         escondeMotoBoy();
+                     }
+                     
+                      txtPlacaMoto.setText(rs.getString("placamoto"));  
+                      txtCnh.setText(rs.getString("cnh"));  
+                      txtModeloMoto.setText(rs.getString("modelomoto"));  
+         
                 }
                 
              
                 else{
 
-                    txt_rgFun.setText("");
-                    txt_nomeFun.setText("");
-                    txt_setorFun.setText("");
-                    txt_nasciFun.setText("");
-                    txt_cepFun.setText("");
-                    txt_estadoFun.setText("");
-                    txt_cidadeFun.setText("");
-                    txt_bairroFun.setText("");
-                    txt_endeFun.setText("");
-                    txtCompleFun.setText("");
-                    txtNumFun.setText("");
-                    txt_cpfFun.setText("");
-                    txt_telFun.setText("");
-                     txt_celFun.setText("");   
+                   limpacampos();  
                 }
             } catch (SQLException ex) {
             }
@@ -675,20 +743,7 @@ public class Funcionario extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-            txt_nomeFun.setText("");
-            txt_cpfFun.setText("");
-            txt_rgFun.setText("");
-            txt_nasciFun.setText("");
-            txt_endeFun.setText("");
-            txtCompleFun.setText("");
-            txt_bairroFun.setText("");
-            txt_cepFun.setText("");
-            txtNumFun.setText("");
-            txt_telFun.setText("");
-            txt_celFun.setText("");
-            txt_setorFun.setText("");
-            txt_cidadeFun.setText("");
-            txt_estadoFun.setText("");
+           limpacampos();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void btnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaActionPerformed
@@ -753,74 +808,15 @@ public class Funcionario extends javax.swing.JPanel {
         
         
         if (evt.getClickCount() == 2) {  
-            Object obj = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 0));  //coluna 0  
-            String nome = obj.toString();
            
-            Object obj1 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 1));  //coluna 0  
-            String sexo = obj1.toString();
             
             Object obj2 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 2));  //coluna 0  
             String cpf = obj2.toString();  
             
-            Object obj3 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 3));  //coluna 0  
-            String rg = obj3.toString();  
-            
-            Object obj4 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 4));  //coluna 0  
-            String datanasci = obj4.toString();  
-            
-            Object obj5 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 5));  //coluna 0  
-            String uf = obj5.toString(); 
-            
-            Object obj6 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 6));  //coluna 0  
-            String cidade = obj6.toString();  
-            
-            Object obj7 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 7));  //coluna 0  
-            String endereco = obj7.toString();  
-            
-            Object obj8 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 8));  //coluna 0  
-            String bairro = obj8.toString();
            
-            Object obj9 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 9));  //coluna 0  
-            String cep = obj9.toString();  
+            preencheFuncionario(cpf);
             
-            Object obj10 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 10));  //coluna 0  
-            String numero = obj10.toString(); 
-            
-           Object obj11 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 11));  //coluna 0  
-            String complemento = obj11.toString();  
-           
-            Object obj12 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 12));  //coluna 0  
-            String telefone = obj12.toString();  
-            
-            Object obj13 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 13));  //coluna 0  
-            String celular = obj13.toString();  
-            
-             Object obj14 = (gridFuncionario.getValueAt(gridFuncionario.getSelectedRow(), 14));  //coluna 0  
-            String setor = obj14.toString();
-            
-            
-         
-            // SETA OS DADOS PEGO ACIMA PARA OS JTEXTFIELD
 
-             txt_cpfFun.setText(cpf);   
-             txt_rgFun.setText(rg); 
-             txt_nomeFun.setText(nome); 
-             txt_nasciFun.setText(datanasci); 
-             txt_estadoFun.setText(uf); 
-             txt_cidadeFun.setText(cidade); 
-             txt_bairroFun.setText(bairro);     
-             txt_endeFun.setText(endereco); 
-             txtNumFun.setText(numero);
-             txt_cepFun.setText(cep);       
-             txtCompleFun.setText(complemento); 
-             txt_setorFun.setText(setor); 
-         
-             txt_telFun.setText(telefone);    
-             txt_celFun.setText(celular);    
-              
-            cmb_sexoFun.setSelectedItem(sexo);
-           
-             
              
              
                // QUANDO SELECIONA A LINHA NA JTABLE MUDA A ABA
@@ -840,6 +836,21 @@ public class Funcionario extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_TabFuncionarioMousePressed
+
+    private void checkMotoBoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkMotoBoyActionPerformed
+        
+        if(checkMotoBoy.isSelected()){
+            
+            mostraMotoboy();
+            
+        }
+        else{
+            
+            escondeMotoBoy();
+        }
+        
+        
+    }//GEN-LAST:event_checkMotoBoyActionPerformed
 
     
     
@@ -907,21 +918,146 @@ public class Funcionario extends javax.swing.JPanel {
         public void carregaTabela(){
         String msg1 = "funcionario recuperados com sucesso";
         String msg2 = "Erro ao Recuperar funcionario";
-        String vsql = "SELECT " +
-                        "nomeFun, rgFun, cpfFun, nasciFun, endeFun, compleFun, bairroFun, cidadeFun, cepFun,numFun,telFun ,celFun ,sexoFun ,setorFun, ufFun " +
-                      "FROM " +
-                        "funcionario";
+        String vsql = "SELECT * from funcionario";
 
 
         bf.tabelaFuncionario(vsql, msg1, msg2, gridFuncionario);
     }
+        
+        public void preencheFuncionario(String cpf){
+            
+            
+            ResultSet rs;
+
+        
+    
+        String sexoFun = null;
        
+
+     
+            rs = ba.buscaFuncionario(cpf);
+            try {
+
+                if (ba.buscaFuncionario(cpf) != null) {
+                    
+                    txt_cpfFun.setText(rs.getString("cpfFun"));
+                     txt_rgFun.setText(rs.getString("rgFun"));
+                    txt_nomeFun.setText(rs.getString("nomeFun"));
+                    txt_setorFun.setText(rs.getString("setorFun"));
+                    txt_nasciFun.setText(rs.getString("nasciFun"));
+                    txt_cepFun.setText(rs.getString("cepFun"));
+                    txt_estadoFun.setText(rs.getString("ufFun"));
+                    txt_cidadeFun.setText(rs.getString("cidadeFun"));
+                    txt_bairroFun.setText(rs.getString("bairroFun"));
+                    txt_endeFun.setText(rs.getString("endeFun"));
+                    txtCompleFun.setText(rs.getString("compleFun"));
+                    txtNumFun.setText(rs.getString("numFun"));
+                    txt_cpfFun.setText(txt_cpfFun.getText());
+                    txt_telFun.setText(rs.getString("telFun"));
+                     txt_celFun.setText(rs.getString("celFun"));    
+                    sexoFun = rs.getString("sexoFun");
+                    
+                  
+                     cmb_sexoFun.setSelectedItem(sexoFun);
+                    
+                    
+                     String motoboy = rs.getString("motoboy");
+                     
+                     if(motoboy.equals("SIM")){
+                         
+                         checkMotoBoy.setSelected(true);
+                         mostraMotoboy();
+                         
+                     }
+                     else{
+                         
+                         checkMotoBoy.setSelected(false);
+                         escondeMotoBoy();
+                     }
+                     
+                      txtPlacaMoto.setText(rs.getString("placamoto"));  
+                      txtCnh.setText(rs.getString("cnh"));  
+                      txtModeloMoto.setText(rs.getString("modelomoto"));  
+         
+                }
+                
+             
+                else{
+
+                    txt_rgFun.setText("");
+                    txt_nomeFun.setText("");
+                    txt_setorFun.setText("");
+                    txt_nasciFun.setText("");
+                    txt_cepFun.setText("");
+                    txt_estadoFun.setText("");
+                    txt_cidadeFun.setText("");
+                    txt_bairroFun.setText("");
+                    txt_endeFun.setText("");
+                    txtCompleFun.setText("");
+                    txtNumFun.setText("");
+                    txt_cpfFun.setText("");
+                    txt_telFun.setText("");
+                     txt_celFun.setText("");   
+                }
+            } catch (SQLException ex) {
+            }
+        }
+        
+        public void escondeMotoBoy(){
+            
+            labelPlaca.setVisible(false);
+            labelCnh.setVisible(false);
+            labelModelo.setVisible(false);
+            txtPlacaMoto.setVisible(false);
+            txtCnh.setVisible(false);
+            txtModeloMoto.setVisible(false);
+            
+            
+            
+            
+        }
+        
+        public void mostraMotoboy(){
+            
+            
+            labelPlaca.setVisible(true);
+            labelCnh.setVisible(true);
+            labelModelo.setVisible(true);
+            txtPlacaMoto.setVisible(true);
+            txtCnh.setVisible(true);
+            txtModeloMoto.setVisible(true);
+            
+        }
+            
+        public void limpacampos(){
+            
+            txt_nomeFun.setText("");
+            txt_cpfFun.setText("");
+            txt_rgFun.setText("");
+            txt_nasciFun.setText("");
+            txt_endeFun.setText("");
+            txtCompleFun.setText("");
+            txt_bairroFun.setText("");
+            txt_cepFun.setText("");
+            txtNumFun.setText("");
+            txt_telFun.setText("");
+            txt_celFun.setText("");
+            txt_setorFun.setText("");
+            txt_cidadeFun.setText("");
+            txt_estadoFun.setText("");
+            txtPlacaMoto.setText("");
+            txtCnh.setText("");
+            txtModeloMoto.setText("");
+            checkMotoBoy.setSelected(false);
+            
+        }
        
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabFuncionario;
     private javax.swing.JButton btnAlterarFuncionario;
     private javax.swing.JButton btnPesquisa;
+    private javax.swing.JCheckBox checkMotoBoy;
     private javax.swing.JComboBox cmb_sexoFun;
     private javax.swing.JTable gridFuncionario;
     public javax.swing.JInternalFrame internalFuncionario;
@@ -947,6 +1083,7 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -956,9 +1093,15 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JLabel labelCnh;
+    private javax.swing.JLabel labelModelo;
+    private javax.swing.JLabel labelPlaca;
+    private javax.swing.JTextField txtCnh;
     private javax.swing.JTextField txtCompleFun;
+    private javax.swing.JTextField txtModeloMoto;
     private javax.swing.JTextField txtNumFun;
     private javax.swing.JFormattedTextField txtPesquisa;
+    private javax.swing.JTextField txtPlacaMoto;
     private javax.swing.JFormattedTextField txt_bairroFun;
     private javax.swing.JFormattedTextField txt_celFun;
     private javax.swing.JFormattedTextField txt_cepFun;
