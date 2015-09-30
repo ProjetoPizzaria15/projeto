@@ -318,8 +318,8 @@ public class BancoFuncoes {
                         String Telefone = rs.getString("telFun");
                         String Ceular = rs.getString("celFun");
                         String Setor = rs.getString("setorFun");
-             
-                        dtm.addRow(new Object[]{Nome ,Sexo ,CPF,RG ,Data_Nascimento , UF,Cidade ,Endereco ,Bairro ,Cep , Numero, Complemento,Telefone ,Ceular , Setor});
+                        String Motoboy = rs.getString("motoboy");
+                        dtm.addRow(new Object[]{Nome ,Sexo ,CPF,RG ,Telefone ,Ceular , Setor, Motoboy});
                    }
 
 
@@ -534,8 +534,8 @@ public class BancoFuncoes {
                 
                         
                         
-                        dtm.addRow(new Object[]{Nome, CPF_CNPJ,Inc_Est,Tipo, Nome_Cont, Telefone, Telefone2,Celular
-              , UF, Cidade, Bairro, Logradouro, Numero, Cep, Site, Email ,Tipo_Produto});
+                        dtm.addRow(new Object[]{Nome, CPF_CNPJ,Inc_Est,Tipo, Nome_Cont, Telefone,Celular
+              , UF, Email ,Tipo_Produto});
                    }
 
 
