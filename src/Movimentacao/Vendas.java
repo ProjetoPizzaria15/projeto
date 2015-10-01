@@ -174,8 +174,7 @@ public class Vendas extends javax.swing.JFrame {
               
                demovenda.carregaTabela1(npedido);
                demovenda.carregaTabela2(npedido);
-               demovenda.buscaVenda(npedido);
-               
+            
              
              
          }
