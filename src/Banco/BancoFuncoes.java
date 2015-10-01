@@ -845,13 +845,14 @@ public class BancoFuncoes {
 
                    while (rs.next()){
                       String npedido = rs.getString("npedido");
+                      String nome = rs.getString("nome");
                        String produto = rs.getString("produto");
                         String qtde = rs.getString("qtde");
                         String preco = rs.getString("preco");
                         String total = rs.getString("total");
-                        
+                        String data = rs.getString("data");
                      
-                        dtm.addRow(new Object[]{npedido,produto, qtde, preco, total});
+                        dtm.addRow(new Object[]{npedido,nome,produto, qtde, preco, total,data});
                    }
 
 
