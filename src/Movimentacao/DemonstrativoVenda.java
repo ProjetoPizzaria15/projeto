@@ -31,7 +31,7 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
          gridDemo.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"N°Pedido","Produtos","Qtde","Preco","Total"}) {  
+      new String[] {"N°Pedido","Nome","Produtos","Qtde","Preco","Total","Data"}) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -60,32 +60,18 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         gridDemo = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         gridPagamento = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtData = new javax.swing.JTextField();
-        txtCliente = new javax.swing.JTextField();
-        txtValorVenda = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel5.setText("Valor da Venda:");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(20, 50, 90, 30);
-
-        jLabel4.setText("Cliente:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 10, 90, 30);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedido"));
         jPanel2.setLayout(null);
 
         gridDemo.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,10 +85,10 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
         jScrollPane1.setViewportView(gridDemo);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 20, 450, 170);
+        jScrollPane1.setBounds(10, 20, 570, 210);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(10, 90, 470, 200);
+        jPanel2.setBounds(10, 10, 590, 240);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pagamento"));
         jPanel1.setLayout(null);
@@ -123,33 +109,17 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
         jScrollPane2.setViewportView(gridPagamento);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(10, 20, 320, 210);
+        jScrollPane2.setBounds(10, 20, 330, 210);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(490, 50, 340, 240);
-
-        jLabel2.setText("Data da Venda:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(480, 10, 90, 30);
+        jPanel1.setBounds(600, 10, 350, 240);
 
         jButton1.setText("Imprimir Cupon");
         jButton1.setEnabled(false);
         getContentPane().add(jButton1);
-        jButton1.setBounds(720, 300, 110, 30);
+        jButton1.setBounds(820, 260, 110, 30);
 
-        txtData.setEditable(false);
-        getContentPane().add(txtData);
-        txtData.setBounds(570, 10, 120, 30);
-
-        txtCliente.setEditable(false);
-        getContentPane().add(txtCliente);
-        txtCliente.setBounds(110, 10, 150, 30);
-
-        txtValorVenda.setEditable(false);
-        getContentPane().add(txtValorVenda);
-        txtValorVenda.setBounds(110, 50, 150, 30);
-
-        setBounds(0, 0, 860, 383);
+        setBounds(0, 0, 973, 337);
     }// </editor-fold>//GEN-END:initComponents
 
     private void gridPagamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridPagamentoMouseClicked
@@ -161,7 +131,12 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
        
         String msg1 = "Produtos recuperados com sucesso";
         String msg2 = "Erro ao Recuperar Produtos";
-        String vsql = "SELECT npedido,produto,qtde,preco,total FROM itensPedido where npedido = "+npedido+"";
+        String vsql = "SELECT V.NPEDIDO, C.NOME, I.PRODUTO, I.QTDE, I.PRECO, I.TOTAL, V.DATA\n" +
+"FROM CLIENTES C\n" +
+"JOIN VENDA V\n" +
+"ON V.TELEFONE = C.TELEFONE\n" +
+"JOIN ITENSPEDIDO I\n" +
+"ON  I.NPEDIDO = V.NPEDIDO WHERE V.NPEDIDO = "+npedido+"";
 
 
         bf.tabelaDemonstrativo(vsql, msg1, msg2, gridDemo);
@@ -180,35 +155,7 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
     }
     
     
-    public void buscaVenda(String npedido){
-        
-           ResultSet rs;
-
-        
-
-            rs = ba.buscaVendaDemo(npedido);
-            try {
-                               
-                if (ba.buscaVendaDemo(npedido) != null) {
-               
-                    System.out.println("teste");
-
-                    txtCliente.setText(rs.getString("nome"));
-                    txtValorVenda.setText(rs.getString("total"));
-                    txtData.setText(rs.getString("data"));
-                 
-
-                }
-
-                else{
-                        System.out.println("null");
-                  
-                }
-            } catch (SQLException ex) {
-            }
-        
-        
-    }
+   
     
     /**
      * @param args the command line arguments
@@ -249,15 +196,9 @@ public class DemonstrativoVenda extends javax.swing.JFrame {
     public javax.swing.JTable gridDemo;
     public javax.swing.JTable gridPagamento;
     private javax.swing.JButton jButton1;
-    public javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtData;
-    private javax.swing.JTextField txtValorVenda;
     // End of variables declaration//GEN-END:variables
 }
