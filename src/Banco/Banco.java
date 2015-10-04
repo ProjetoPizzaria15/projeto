@@ -178,6 +178,66 @@ public class Banco {
 
     }
     
+    public void atualizaPedidoSaiuEntrega(String npedido ,String situacao, String horasaida,String motoboy) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE venda SET situacaoEntrega ='"+situacao+"', hrsaida ='"+horasaida+"' , motoboy ='"+motoboy+"' WHERE npedido = '"+npedido+"'"; 
+
+            stmt.executeUpdate(sql);
+  
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
+    public void atualizaPedidoEntregaOK(String npedido ,String situacao, String horaentrega,String motoboy) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE venda SET situacaoEntrega ='"+situacao+"' , horaentrega ='"+horaentrega+"' , motoboy ='"+motoboy+"' WHERE npedido = '"+npedido+"'"; 
+
+            stmt.executeUpdate(sql);
+           
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
+    public void atualizaPedidoNaoOK(String npedido ,String situacao,String motoboy) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE venda SET situacaoEntrega ='"+situacao+"' , motoboy ='"+motoboy+"' WHERE npedido = '"+npedido+"'"; 
+
+            stmt.executeUpdate(sql);
+           
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
+    
       
     public void atualizaFornecedorCPF(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor,String tipoproduto) {
         String sql;
