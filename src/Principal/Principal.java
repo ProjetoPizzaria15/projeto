@@ -13,6 +13,7 @@ import ContaPagarReceber.ContasPagarReceber;
 import Funcionario.Funcionario;
 import Compras.Compras;
 import Movimentacao.Vendas;
+import Pedidos.Pedidos;
 import Produtos.Produto;
 import Usuario.Usuario;
 import javax.swing.JDialog;
@@ -33,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
     JInternalFrame intCompras;
     JInternalFrame intCaixa;
     JInternalFrame intMovimentacao;
+    JInternalFrame intPedidos;
 
     
     
@@ -158,6 +160,11 @@ public class Principal extends javax.swing.JFrame {
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setMargin(new java.awt.Insets(2, 25, 2, 25));
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton4);
 
         Fornecedor.setBackground(new java.awt.Color(255, 255, 204));
@@ -373,6 +380,16 @@ public class Principal extends javax.swing.JFrame {
          }
         
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(intPedidos == null || intPedidos.isClosed()){
+             intPedidos = new Pedidos().internalPedidos;
+             getContentPane().add(intPedidos);
+             desktop.add(intPedidos);
+             intPedidos.setLocation(240, 30);
+             intPedidos.moveToFront();
+         }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
