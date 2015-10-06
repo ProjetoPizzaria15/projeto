@@ -238,6 +238,26 @@ public class Banco {
 
     }
     
+    
+     public void atualizaPedidoCancelado(String npedido ,String situacao) {
+        String sql;
+        conecta();
+
+        try {
+
+              sql = "UPDATE venda SET situacaoEntrega ='"+situacao+"' WHERE npedido = '"+npedido+"'"; 
+
+            stmt.executeUpdate(sql);
+           
+
+
+
+        } catch (SQLException e) {
+            System.out.println( "Erro ao executar o comando SQL:" + e.toString());
+
+        }
+
+    }
       
     public void atualizaFornecedorCPF(String nomeFantasia,String  endeFor,String  cidadeFor,String  nomeContato,String  emailFor,String  bairroFor,String cnpjFor,String  cepFor,String  telFor, String celFor,String  estadualFor,String  numFor,String  tel2For, String siteFor,String  cpfFor,String  ufFor,String tipoproduto) {
         String sql;
