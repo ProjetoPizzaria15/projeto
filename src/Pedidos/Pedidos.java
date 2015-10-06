@@ -26,7 +26,7 @@ public class Pedidos extends javax.swing.JFrame {
         initComponents();
         carregaMotoboy();
         desabilitaCampos();
-        
+        Cancelar.setEnabled(false);
         
          gridPedidos.setModel(  
       new DefaultTableModel(  
@@ -38,6 +38,21 @@ public class Pedidos extends javax.swing.JFrame {
            return false;  
    
    }}); 
+         
+        
+         
+         
+           gridCancelar.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"N°Pedido", "Nome", "Telefone", "Forma Pagamento","Total",
+                        "Motoboy","Situação", "Hora Pedido"}) {  
+  
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }}); 
+         
         
     }
 
@@ -52,7 +67,8 @@ public class Pedidos extends javax.swing.JFrame {
 
         grupoRadio = new javax.swing.ButtonGroup();
         grupoRadio2 = new javax.swing.ButtonGroup();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        radioCancelar = new javax.swing.ButtonGroup();
+        internalPedidos = new javax.swing.JInternalFrame();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -71,12 +87,24 @@ public class Pedidos extends javax.swing.JFrame {
         txtNpedido = new javax.swing.JTextField();
         btnAtualiza = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        radioBalcaoCancelar = new javax.swing.JRadioButton();
+        radioEntregaCancelar = new javax.swing.JRadioButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        gridCancelar = new javax.swing.JTable();
+        Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jInternalFrame1.setVisible(true);
-        jInternalFrame1.getContentPane().setLayout(null);
+        internalPedidos.setVisible(true);
+        internalPedidos.getContentPane().setLayout(null);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jPanel1.setLayout(null);
 
@@ -104,7 +132,7 @@ public class Pedidos extends javax.swing.JFrame {
         radioEntrega.setBounds(120, 30, 93, 23);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 20, 240, 70);
+        jPanel3.setBounds(10, 20, 230, 70);
 
         gridPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,10 +185,10 @@ public class Pedidos extends javax.swing.JFrame {
         radioNao.setBounds(10, 90, 150, 23);
 
         jPanel4.add(jPanel5);
-        jPanel5.setBounds(250, 20, 590, 130);
+        jPanel5.setBounds(250, 30, 590, 130);
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(180, 310, 910, 180);
+        jPanel4.setBounds(180, 280, 910, 170);
 
         jLabel1.setText("N° Pedido:");
         jPanel1.add(jLabel1);
@@ -170,6 +198,7 @@ public class Pedidos extends javax.swing.JFrame {
         jPanel1.add(txtNpedido);
         txtNpedido.setBounds(80, 320, 90, 30);
 
+        btnAtualiza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/atualizar.png"))); // NOI18N
         btnAtualiza.setText("Atualizar Entrega");
         btnAtualiza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,28 +206,76 @@ public class Pedidos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnAtualiza);
-        btnAtualiza.setBounds(940, 500, 130, 30);
+        btnAtualiza.setBounds(890, 460, 180, 40);
 
         jTabbedPane1.addTab("Pedidos", jPanel1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1105, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 542, Short.MAX_VALUE)
-        );
+        jPanel2.setLayout(null);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Pedido"));
+        jPanel6.setLayout(null);
+
+        radioCancelar.add(radioBalcaoCancelar);
+        radioBalcaoCancelar.setText("Balcão");
+        radioBalcaoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBalcaoCancelarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(radioBalcaoCancelar);
+        radioBalcaoCancelar.setBounds(20, 23, 90, 30);
+
+        radioCancelar.add(radioEntregaCancelar);
+        radioEntregaCancelar.setText("Entrega");
+        radioEntregaCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioEntregaCancelarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(radioEntregaCancelar);
+        radioEntregaCancelar.setBounds(120, 23, 93, 30);
+
+        jPanel2.add(jPanel6);
+        jPanel6.setBounds(10, 20, 230, 70);
+
+        gridCancelar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        gridCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridCancelarMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(gridCancelar);
+
+        jPanel2.add(jScrollPane2);
+        jScrollPane2.setBounds(10, 100, 1080, 170);
+
+        Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1444154342_close.png"))); // NOI18N
+        Cancelar.setText("Cancelar Pedido");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Cancelar);
+        Cancelar.setBounds(910, 280, 170, 50);
 
         jTabbedPane1.addTab("Cancelar Pedidos", jPanel2);
 
-        jInternalFrame1.getContentPane().add(jTabbedPane1);
-        jTabbedPane1.setBounds(0, 0, 1110, 570);
+        internalPedidos.getContentPane().add(jTabbedPane1);
+        jTabbedPane1.setBounds(0, 0, 1100, 540);
 
-        getContentPane().add(jInternalFrame1);
-        jInternalFrame1.setBounds(0, 0, 1140, 680);
+        getContentPane().add(internalPedidos);
+        internalPedidos.setBounds(0, 0, 1130, 610);
 
         setBounds(0, 0, 1170, 733);
     }// </editor-fold>//GEN-END:initComponents
@@ -212,6 +289,9 @@ public class Pedidos extends javax.swing.JFrame {
             habilitaCampos();
             comboMotoboy.setEnabled(false);
             radioSaiu.setEnabled(false);
+ 
+      
+            
         }
         
     }//GEN-LAST:event_radioBalcaoActionPerformed
@@ -225,6 +305,7 @@ public class Pedidos extends javax.swing.JFrame {
             habilitaCampos();
             comboMotoboy.setEnabled(true);
             radioSaiu.setEnabled(true);
+           
         }
         
     }//GEN-LAST:event_radioEntregaActionPerformed
@@ -307,6 +388,55 @@ public class Pedidos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAtualizaActionPerformed
 
+    private void radioBalcaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBalcaoCancelarActionPerformed
+           if(radioBalcaoCancelar.isSelected()){
+            
+            carregaTabelaBalcaoCancelar();
+            Cancelar.setEnabled(true);
+        }
+    }//GEN-LAST:event_radioBalcaoCancelarActionPerformed
+
+    private void radioEntregaCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioEntregaCancelarActionPerformed
+       if(radioEntregaCancelar.isSelected()){
+            
+            carregaTabelaEntregaCancelar();
+            Cancelar.setEnabled(true);
+        }
+    }//GEN-LAST:event_radioEntregaCancelarActionPerformed
+
+    private void gridCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridCancelarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gridCancelarMouseClicked
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        
+         Object obj0 = (gridCancelar.getValueAt(gridCancelar.getSelectedRow(), 0));  //coluna 0  
+            String npedido = obj0.toString();
+            
+            txtNpedido.setText(npedido);
+            String situacao = "Cancelado";
+            ba.atualizaPedidoCancelado(npedido, situacao);
+            
+            if(radioBalcaoCancelar.isSelected()){
+                
+                carregaTabelaBalcaoCancelar();
+                
+            }
+            
+            else if(radioEntregaCancelar.isSelected()){
+                
+                 carregaTabelaEntregaCancelar();
+                
+            }
+            
+            JOptionPane.showMessageDialog(null, "Pedido Cancelado");
+        
+    }//GEN-LAST:event_CancelarActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+    
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -325,14 +455,24 @@ public class Pedidos extends javax.swing.JFrame {
 
          String msg1 = "Itens recuperados com sucesso";
         String msg2 = "Erro ao Recuperar Pedidos";
-        String vsql = "SELECT v.npedido, c.nome, c.telefone, v.formapagamento, v.total, v.motoboy, v.situacaoentrega,v.hora, v.hrsaida, v.horaentrega\n" +
+        String vsql = "SELECT v.npedido, v.formapagamento, v.total, v.situacaoentrega,v.hora, v.hrsaida, v.horaentrega\n" +
 "FROM VENDA V\n" +
-"JOIN CLIENTES C \n" +
-"ON V.TELEFONE = C.TELEFONE\n" +
 "WHERE v.tipopedido = 'Pedido Balcao'";
 
 
-        bf.tabelaPedidos(vsql, msg1, msg2, gridPedidos);
+        bf.tabelaPedidosBalcao(vsql, msg1, msg2, gridPedidos);
+    }
+    
+     public void carregaTabelaBalcaoCancelar(){
+
+         String msg1 = "Itens recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Pedidos";
+        String vsql = "SELECT v.npedido, v.formapagamento, v.total, v.situacaoentrega,v.hora, v.hrsaida, v.horaentrega\n" +
+"FROM VENDA V\n" +
+"WHERE v.tipopedido = 'Pedido Balcao'";
+
+
+        bf.tabelaPedidosBalcao(vsql, msg1, msg2, gridCancelar);
     }
     
     public void carregaTabelaEntrega(){
@@ -346,7 +486,25 @@ public class Pedidos extends javax.swing.JFrame {
 "WHERE v.tipopedido = 'Pedido Entrega'" ;
 
 
-        bf.tabelaPedidos(vsql, msg1, msg2, gridPedidos);
+        bf.tabelaPedidosEntrega(vsql, msg1, msg2, gridPedidos);
+    }
+    
+     public void carregaTabelaEntregaCancelar(){
+
+         String msg1 = "Itens recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Pedidos";
+        String vsql = "SELECT v.npedido, c.nome, c.telefone, v.formapagamento, v.total, v.motoboy, v.situacaoentrega,v.hora, v.hrsaida, v.horaentrega\n" +
+"FROM VENDA V\n" +
+"JOIN CLIENTES C \n" +
+"ON V.TELEFONE = C.TELEFONE\n" +
+"WHERE v.tipopedido = 'Pedido Entrega'" ;
+
+
+        bf.tabelaPedidosEntrega(vsql, msg1, msg2, gridCancelar);
+    }
+     
+     public void carregaTabelaTudo(){
+
     }
     
     public void desabilitaCampos(){
@@ -400,12 +558,14 @@ public class Pedidos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancelar;
     private javax.swing.JButton btnAtualiza;
     private javax.swing.JComboBox comboMotoboy;
+    private javax.swing.JTable gridCancelar;
     private javax.swing.JTable gridPedidos;
     private javax.swing.ButtonGroup grupoRadio;
     private javax.swing.ButtonGroup grupoRadio2;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    public javax.swing.JInternalFrame internalPedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -413,10 +573,15 @@ public class Pedidos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton radioBalcao;
+    private javax.swing.JRadioButton radioBalcaoCancelar;
+    private javax.swing.ButtonGroup radioCancelar;
     private javax.swing.JRadioButton radioEntrega;
+    private javax.swing.JRadioButton radioEntregaCancelar;
     private javax.swing.JRadioButton radioNao;
     private javax.swing.JRadioButton radioOK;
     private javax.swing.JRadioButton radioSaiu;
