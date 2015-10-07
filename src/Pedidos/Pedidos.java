@@ -185,7 +185,7 @@ public class Pedidos extends javax.swing.JFrame {
         radioNao.setBounds(10, 90, 150, 23);
 
         jPanel4.add(jPanel5);
-        jPanel5.setBounds(250, 30, 590, 130);
+        jPanel5.setBounds(250, 20, 590, 130);
 
         jPanel1.add(jPanel4);
         jPanel4.setBounds(180, 280, 910, 170);
@@ -275,7 +275,7 @@ public class Pedidos extends javax.swing.JFrame {
         jTabbedPane1.setBounds(0, 0, 1100, 540);
 
         getContentPane().add(internalPedidos);
-        internalPedidos.setBounds(0, 0, 1130, 610);
+        internalPedidos.setBounds(0, 0, 1130, 600);
 
         setBounds(0, 0, 1170, 733);
     }// </editor-fold>//GEN-END:initComponents
