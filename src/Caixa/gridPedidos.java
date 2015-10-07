@@ -63,13 +63,22 @@ public class gridPedidos extends javax.swing.JFrame {
 
             }
         ));
+        gridPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridPedidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(gridPedidos);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 0, 1110, 560);
+        jScrollPane1.setBounds(0, 0, 1120, 560);
 
         setBounds(0, 0, 1139, 604);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void gridPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridPedidosMouseClicked
+        carregaTabelaPedidos();
+    }//GEN-LAST:event_gridPedidosMouseClicked
 
    public void carregaTabelaPedidos(){
 
