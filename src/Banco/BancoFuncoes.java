@@ -280,6 +280,68 @@ public class BancoFuncoes {
  }
            
            
+                 public BancoFuncoes
+           tabelaPedidosAberto(String sql, String msg1, String msg2, final JTable gridCaixa){
+
+               
+               
+          Connection connection = null;
+
+   try {
+
+        Class.forName(cb.JDBC_DRIVER()).newInstance();
+        connection = (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+
+        Statement s = (Statement) connection.createStatement();
+
+          ResultSet rs = s.executeQuery(sql);
+
+          javax.swing.table.DefaultTableModel dtm = (javax.swing.table.DefaultTableModel)gridCaixa.getModel();
+                   int i = dtm.getRowCount();
+                   for(int a = 0; a < i; a++)
+                   {
+                   dtm.removeRow(0);
+                   }
+
+                   while (rs.next()){
+                       String npedido = rs.getString("npedido");
+                        String itens = rs.getString("produto");
+                        String qtde = rs.getString("qtde");
+                        String hora = rs.getString("hora");
+             
+                  
+               
+                        dtm.addRow(new Object[]{npedido, itens, qtde, hora});
+                   }
+
+
+//        System.out.println("Fornecedores Recuperados com sucesso");
+
+         s.close();
+         connection.close();
+
+         System.out.println(msg1);
+         System.out.println(sql);
+         return banco;
+
+   }catch(SQLException ex){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println("SQLException: " + ex.getMessage());
+      System.out.println("SQLState: " + ex.getSQLState());
+      System.out.println("Error: " + ex.getErrorCode());
+      System.out.println(sql);
+      return null;
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(null, msg2);
+      System.out.println(sql);
+      System.out.println("Problemas ao tentar conectar com o banco de dados: " + e);
+      return null;
+    }
+
+ }
+           
+           
             public BancoFuncoes
            tabelaPedidosBalcao(String sql, String msg1, String msg2, final JTable gridCaixa){
 
