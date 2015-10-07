@@ -7,6 +7,7 @@ package Pedidos;
 
 import Banco.Banco;
 import Banco.BancoFuncoes;
+import Caixa.gridPedidos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class Pedidos extends javax.swing.JFrame {
     
     Banco ba = new Banco();
     BancoFuncoes bf = new BancoFuncoes();
+    gridPedidos gp = new gridPedidos();
     
     public Pedidos() {
         initComponents();
@@ -97,6 +99,7 @@ public class Pedidos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        internalPedidos.setClosable(true);
         internalPedidos.setVisible(true);
         internalPedidos.getContentPane().setLayout(null);
 
@@ -345,7 +348,7 @@ public class Pedidos extends javax.swing.JFrame {
             horasaida = sdf.format(Calendar.getInstance().getTime());  
             situacao += "Saiu Para Entregar";
             ba.atualizaPedidoSaiuEntrega(npedido,situacao,horasaida,motoboy);
-            
+            gp.carregaTabelaPedidos();
         }
         
         else if(radioOK.isSelected()){
@@ -353,7 +356,7 @@ public class Pedidos extends javax.swing.JFrame {
             situacao += "Entrega OK";
             
              ba.atualizaPedidoEntregaOK(npedido,situacao,horaentrega,motoboy);
-            
+             gp.carregaTabelaPedidos();
             
         }
         
@@ -362,6 +365,7 @@ public class Pedidos extends javax.swing.JFrame {
             situacao += "Não Entregue";
             
              ba.atualizaPedidoNaoOK(npedido,situacao,motoboy);
+              gp.carregaTabelaPedidos();
         }
         
         if(radioBalcao.isSelected()){
@@ -369,6 +373,7 @@ public class Pedidos extends javax.swing.JFrame {
             carregaTabelaBalcao();
             comboMotoboy.setEnabled(false);
             radioSaiu.setEnabled(false);
+            
             
         }
         

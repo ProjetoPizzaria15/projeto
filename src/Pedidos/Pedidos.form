@@ -38,6 +38,7 @@
   <SubComponents>
     <Container class="javax.swing.JInternalFrame" name="internalPedidos">
       <Properties>
+        <Property name="closable" type="boolean" value="true"/>
         <Property name="visible" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
