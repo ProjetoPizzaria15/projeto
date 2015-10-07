@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableModel;
 import Funcoes.LimitarCampos;
 import TelaClientes.AlterarClienteCaixa;
 import TelaClientes.RegistroClientesCaixa;
+import javax.swing.JFrame;
 /**
  *
  * @author Usuario
@@ -1144,7 +1145,7 @@ public class Caixa extends javax.swing.JFrame {
                 horas();
 
                 int pedido;
-                String formapagamento,observacao,telefone,data,hora,tipopedido = "";
+                String formapagamento,observacao,telefone,data,hora,tipopedido = "",situacao ="Aberto";
                 float troco,total,valorrecebido;
                 
                 if(radioPedidoBalcao.isSelected()){
@@ -1171,7 +1172,7 @@ public class Caixa extends javax.swing.JFrame {
                 troco = Float.parseFloat(txtTroco.getText());
                 total = Float.parseFloat(txtTotalVenda.getText());
 
-                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora,tipopedido);
+                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora,tipopedido,situacao);
 
                 carregaNumeroPedido();
                 carregaTabela();
@@ -1180,7 +1181,24 @@ public class Caixa extends javax.swing.JFrame {
                 desabilitaCampos();
                 
                 radioTipoPedido.clearSelection();
-
+                
+                JFrame gridPedidos;
+                 gridPedidos pedidos = new gridPedidos();  
+                 gridPedidos = new gridPedidos();  
+                 
+                
+                 
+                 
+                 if(gridPedidos == null){
+                     
+                     pedidos.carregaTabelaPedidos();
+                     
+                 }
+                 else{
+                     
+                     pedidos.setVisible(true);  
+                 }
+                 
             }
 
         }
