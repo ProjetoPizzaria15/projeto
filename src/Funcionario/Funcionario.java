@@ -36,7 +36,7 @@ public class Funcionario extends javax.swing.JPanel {
         gridFuncionario.setModel(  
       new DefaultTableModel(  
       new Object[] []{ },  
-      new String[] {"nomeFun", "sexoFun", "CPF", "RG","Telefone", "Ceular", "Setor", "MotoBoy" }) {  
+      new String[] {"nomeFun", "sexoFun", "CPF", "RG","Telefone", "Ceular", "Setor", "MotoBoy", "Situacao" }) {  
   
    public boolean isCellEditable(int row, int col) {  
            return false;  
@@ -79,7 +79,7 @@ public class Funcionario extends javax.swing.JPanel {
         
         
         carregaTabela();
-        
+        painel.setVisible(false);
         
     }
 
@@ -102,7 +102,7 @@ public class Funcionario extends javax.swing.JPanel {
         jSeparator7 = new javax.swing.JToolBar.Separator();
         btnAlterarFuncionario = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
-        jButton19 = new javax.swing.JButton();
+        Desativar = new javax.swing.JButton();
         jSeparator16 = new javax.swing.JToolBar.Separator();
         jButton20 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -146,6 +146,9 @@ public class Funcionario extends javax.swing.JPanel {
         txtPlacaMoto = new javax.swing.JTextField();
         txtCnh = new javax.swing.JTextField();
         txtModeloMoto = new javax.swing.JTextField();
+        painel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        comboSituacao = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         gridFuncionario = new javax.swing.JTable();
@@ -213,18 +216,18 @@ public class Funcionario extends javax.swing.JPanel {
         jToolBar2.add(btnAlterarFuncionario);
         jToolBar2.add(jSeparator10);
 
-        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
-        jButton19.setText("Excluir");
-        jButton19.setFocusable(false);
-        jButton19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton19.setMargin(new java.awt.Insets(2, 25, 2, 25));
-        jButton19.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
+        Desativar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
+        Desativar.setText("Desativar Funcionario");
+        Desativar.setFocusable(false);
+        Desativar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Desativar.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        Desativar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Desativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
+                DesativarActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton19);
+        jToolBar2.add(Desativar);
         jToolBar2.add(jSeparator16);
 
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
@@ -446,7 +449,21 @@ public class Funcionario extends javax.swing.JPanel {
         txtModeloMoto.setBounds(110, 130, 120, 30);
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(740, 90, 260, 180);
+        jPanel3.setBounds(740, 90, 260, 170);
+
+        painel.setBorder(javax.swing.BorderFactory.createTitledBorder("Situação"));
+        painel.setLayout(null);
+
+        jLabel2.setText("Situacão:");
+        painel.add(jLabel2);
+        jLabel2.setBounds(20, 40, 80, 30);
+
+        comboSituacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Ativado", "Desativado" }));
+        painel.add(comboSituacao);
+        comboSituacao.setBounds(90, 40, 100, 30);
+
+        jPanel2.add(painel);
+        painel.setBounds(740, 260, 260, 190);
 
         TabFuncionario.addTab("Registro", jPanel2);
 
@@ -505,7 +522,7 @@ public class Funcionario extends javax.swing.JPanel {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
 
         String aux,nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, loginFun, senhaFun, sexoFun,
-        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun,motoboy = "",placamoto,cnh,modelomoto;
+        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun,motoboy = "",placamoto,cnh,modelomoto,situacao;
 
        
         nomeFun = txt_nomeFun.getText();
@@ -525,7 +542,7 @@ public class Funcionario extends javax.swing.JPanel {
         placamoto = txtPlacaMoto.getText();
         cnh = txtCnh.getText();
         modelomoto = txtModeloMoto.getText();
-
+        situacao = "Ativado";
         sexoFun = cmb_sexoFun.getSelectedItem().toString();
         System.out.println(sexoFun);
         
@@ -556,7 +573,9 @@ public class Funcionario extends javax.swing.JPanel {
         
              else {
              
-             ba.gravaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, sexoFun, rgFun, cpfFun, cepFun, numFun, telFun, celFun,ufFun,motoboy,placamoto,cnh,modelomoto);
+             ba.gravaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun ,
+                     cidadeFun, setorFun, sexoFun, rgFun, cpfFun, cepFun, numFun, telFun,
+                     celFun,ufFun,motoboy,placamoto,cnh,modelomoto,situacao);
 
             limpacampos();
             
@@ -568,7 +587,7 @@ public class Funcionario extends javax.swing.JPanel {
     private void btnAlterarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFuncionarioActionPerformed
 
          String aux,nomeFun, nasciFun, endeFun, compleFun, bairroFun , cidadeFun, setorFun, loginFun, senhaFun, sexoFun,
-        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, motoboy ="", placamoto,cnh,modelomoto;
+        rgFun, cpfFun, cepFun, numFun,ufFun, telFun, celFun, motoboy ="", placamoto,cnh,modelomoto,situacao;
 
       
        
@@ -589,7 +608,7 @@ public class Funcionario extends javax.swing.JPanel {
         placamoto = txtPlacaMoto.getText();
         cnh = txtCnh.getText();
         modelomoto = txtModeloMoto.getText();
-
+        situacao = comboSituacao.getSelectedItem().toString();
   
         
         
@@ -612,8 +631,8 @@ public class Funcionario extends javax.swing.JPanel {
         }
         else{
 
-            ba.atualizaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun, ufFun,cidadeFun, setorFun, rgFun,cpfFun, cepFun, numFun, telFun, celFun,sexoFun,motoboy,placamoto,cnh,modelomoto);
-
+            ba.atualizaFuncionario(nomeFun, nasciFun, endeFun, compleFun, bairroFun, ufFun,cidadeFun, setorFun, rgFun,cpfFun, cepFun, numFun, telFun, celFun,sexoFun,motoboy,placamoto,cnh,modelomoto,situacao);
+            painel.setVisible(false);
         }
         
     }//GEN-LAST:event_btnAlterarFuncionarioActionPerformed
@@ -622,13 +641,14 @@ public class Funcionario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_setorFunActionPerformed
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+    private void DesativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DesativarActionPerformed
           //String nomeFantasia = nome_fantasiaFor.getText();
         
        
             
              
         String cpf =txt_cpfFun.getText();
+        String situacao = "Desativado";
 
         if(CPF.isValido(cpf) == false ||"   .   .   -  ".equals(cpf)){
 
@@ -639,23 +659,10 @@ public class Funcionario extends javax.swing.JPanel {
         }
 
         else{
-            if (ba.excluiUsuario(cpf)) {
-                JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+            if (ba.desativaFuncionario(cpf,situacao)) {
+                JOptionPane.showMessageDialog(null, "Desativado com sucesso");
 
-             txt_nomeFun.setText("");
-            txt_cpfFun.setText("");
-            txt_rgFun.setText("");
-            txt_nasciFun.setText("");
-            txt_endeFun.setText("");
-            txtCompleFun.setText("");
-            txt_bairroFun.setText("");
-            txt_cepFun.setText("");
-            txtNumFun.setText("");
-            txt_telFun.setText("");
-            txt_celFun.setText("");
-            txt_setorFun.setText("");
-            txt_cidadeFun.setText("");
-            txt_estadoFun.setText("");
+                 limpacampos();
 
             }
             else {
@@ -666,7 +673,7 @@ public class Funcionario extends javax.swing.JPanel {
         
         
          
-    }//GEN-LAST:event_jButton19ActionPerformed
+    }//GEN-LAST:event_DesativarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
          ResultSet rs;
@@ -704,7 +711,8 @@ public class Funcionario extends javax.swing.JPanel {
                     txt_telFun.setText(rs.getString("telFun"));
                      txt_celFun.setText(rs.getString("celFun"));    
                     sexoFun = rs.getString("sexoFun");
-                    
+                    String situacao = rs.getString("Situacao");
+                    comboSituacao.setSelectedItem(situacao);
                   
                      cmb_sexoFun.setSelectedItem(sexoFun);
                     
@@ -727,6 +735,7 @@ public class Funcionario extends javax.swing.JPanel {
                       txtCnh.setText(rs.getString("cnh"));  
                       txtModeloMoto.setText(rs.getString("modelomoto"));  
          
+                      painel.setVisible(true);
                 }
                 
              
@@ -978,6 +987,11 @@ public class Funcionario extends javax.swing.JPanel {
                       txtPlacaMoto.setText(rs.getString("placamoto"));  
                       txtCnh.setText(rs.getString("cnh"));  
                       txtModeloMoto.setText(rs.getString("modelomoto"));  
+                      String situacao = rs.getString("situacao");
+                      comboSituacao.setSelectedItem(situacao);
+                      
+                      painel.setVisible(true);
+                      
          
                 }
                 
@@ -1054,21 +1068,23 @@ public class Funcionario extends javax.swing.JPanel {
        
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Desativar;
     private javax.swing.JTabbedPane TabFuncionario;
     private javax.swing.JButton btnAlterarFuncionario;
     private javax.swing.JButton btnPesquisa;
     private javax.swing.JCheckBox checkMotoBoy;
     private javax.swing.JComboBox cmb_sexoFun;
+    private javax.swing.JComboBox comboSituacao;
     private javax.swing.JTable gridFuncionario;
     public javax.swing.JInternalFrame internalFuncionario;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1096,6 +1112,7 @@ public class Funcionario extends javax.swing.JPanel {
     private javax.swing.JLabel labelCnh;
     private javax.swing.JLabel labelModelo;
     private javax.swing.JLabel labelPlaca;
+    private javax.swing.JPanel painel;
     private javax.swing.JTextField txtCnh;
     private javax.swing.JTextField txtCompleFun;
     private javax.swing.JTextField txtModeloMoto;
