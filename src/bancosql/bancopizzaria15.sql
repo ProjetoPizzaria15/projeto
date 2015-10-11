@@ -43,12 +43,13 @@ CREATE TABLE `clientes` (
   `cidade` varchar(50) DEFAULT NULL,
   `uf` varchar(2) DEFAULT NULL,
   `bairro` varchar(50) DEFAULT NULL,
+  `situacao` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`telefone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `clientes` */
 
-insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`) values ('10101010','Paulo','08080110','HIPOLITO CARON','10','dfgsgf','SAO PAULO','SP','PARQUE PAULISTANO'),('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO'),('12345678','Teste Caixa','08081400','ALVARO COELHO','10','10','SAO PAULO','SP','PARQUE PAULISTANO'),('20258316','Teste Caixa','08080100','SUACUAPARA','10','proximo ao mercado nagumo','SAO PAULO','SP','PARQUE PAULISTANO'),('25853775','andreia','08080100','SUACUAPARA','276','','SAO PAULO','SP','PARQUE PAULISTANO'),('25858180','Teste Caixa','08080300','FIGUEIREDO PIMENTEL','10','aaaaaaa','SAO PAULO','SP','PARQUE PAULISTANO');
+insert  into `clientes`(`telefone`,`nome`,`cep`,`endereco`,`numero`,`complemento`,`cidade`,`uf`,`bairro`,`situacao`) values ('10101010','Paulo','08080110','HIPOLITO CARON','10','dfgsgf','SAO PAULO','SP','PARQUE PAULISTANO',NULL),('11343485','Paulo','08080300','FIGUEIREDO PIMENTEL','10','dfsfds','SAO PAULO','SP','PARQUE PAULISTANO',NULL),('12345678','Teste Caixa','08081400','ALVARO COELHO','10','10','SAO PAULO','SP','PARQUE PAULISTANO',NULL),('20258316','Teste Caixa','08080100','SUACUAPARA','10','proximo ao mercado nagumo','SAO PAULO','SP','PARQUE PAULISTANO',NULL),('25853775','andreia','08080100','SUACUAPARA','276','','SAO PAULO','SP','PARQUE PAULISTANO',NULL),('25858180','Teste Caixa','08080300','FIGUEIREDO PIMENTEL','10','aaaaaaa','SAO PAULO','SP','PARQUE PAULISTANO',NULL);
 
 /*Table structure for table `compras` */
 
@@ -179,12 +180,13 @@ CREATE TABLE `funcionario` (
   `placamoto` varchar(7) DEFAULT NULL,
   `cnh` varchar(11) DEFAULT NULL,
   `modelomoto` varchar(15) DEFAULT NULL,
+  `situacao` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`cpfFun`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `funcionario` */
 
-insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`ufFun`,`motoboy`,`placamoto`,`cnh`,`modelomoto`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP',NULL,NULL,NULL,NULL),('william','39.725.858-6','264.051.848-89','28/07/2000','SUACUAPARA','','PARQUE PAULISTANO','SAO PAULO','08080100','276','(11)2585-3775','(11)96791-6805','Masculino','caixa','SP','SIM','fd','dfsdfsff','dsfsfdf'),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP','SIM','abc3232','14434324','honda 3234');
+insert  into `funcionario`(`nomeFun`,`rgFun`,`cpfFun`,`nasciFun`,`endeFun`,`compleFun`,`bairroFun`,`cidadeFun`,`cepFun`,`numFun`,`telFun`,`celFun`,`sexoFun`,`setorFun`,`ufFun`,`motoboy`,`placamoto`,`cnh`,`modelomoto`,`situacao`) values ('Paulo','48.695.431-6','057.045.958-39','29/01/1995','SUACUAPARA','sds','PARQUE PAULISTANO','SAO PAULO','08080100',' 10','(11)2585-8180','(11)25813-1621','Masculino','balcao','SP',NULL,NULL,NULL,NULL,NULL),('william','39.725.858-6','264.051.848-89','28/07/2000','SUACUAPARA','','PARQUE PAULISTANO','SAO PAULO','08080100','276','(11)2585-3775','(11)96791-6805','Masculino','caixa','SP','SIM','fd','dfsdfsff','dsfsfdf',NULL),('Paulo','48.695.431-6','455.365.058-40','29/01/1995','SUACUAPARA','a','PARQUE PAULISTANO','SAO PAULO','08080100','5','(11)2154-5221','(54)54121-2548','Masculino','caixa','SP','NAO','','','','Ativado');
 
 /*Table structure for table `itenspedido` */
 
@@ -200,7 +202,7 @@ CREATE TABLE `itenspedido` (
 
 /*Data for the table `itenspedido` */
 
-insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (6,'Meio a Meio de Pizza mussarela  e Atum',28.00,1,28.00),(6,'Meio a Meio de Pizza mussarela  e Atum',32.00,1,32.00),(13,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',32.00,1,32.00),(16,'Pizza Calabresa',25.00,1,25.00),(17,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',0.00,1,25.00),(19,'Pizza Calabresa',25.00,1,25.00),(20,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',0.00,1,25.00),(21,'Pizza Calabresa',25.00,1,25.00),(22,'Meio a Meio de Atum e Pizza Calabresa',32.00,1,32.00),(23,'Meio a Meio de Pizza mussarela  e Pizza Calabresa',28.00,1,28.00),(24,'Meio a Meio de Pizza Calabresa e Pizza mussarela ',28.00,1,28.00),(25,'Meio a Meio de Pizza Calabresa e Pizza mussarela ',28.00,1,28.00),(26,'Pizza Calabresa',25.00,1,25.00),(27,'Atum',32.00,1,32.00),(27,'Meio a Meio de Pizza Calabresa e Atum',32.00,1,32.00),(28,'Pizza mussarela ',28.00,1,28.00),(29,'Atum',32.00,1,32.00),(30,'Refrigerante 300ML',5.99,1,5.99),(30,'Meio a Meio de Pizza Calabresa e Atum',32.00,1,32.00),(31,'Pizza mussarela ',28.00,1,28.00),(32,'Pizza Calabresa',25.00,1,25.00),(33,'Pizza Calabresa',25.00,1,25.00),(34,'Refrigerante 300ML',5.99,1,5.99);
+insert  into `itenspedido`(`npedido`,`produto`,`preco`,`qtde`,`total`) values (6,'Meio a Meio de Pizza mussarela  e Atum',28.00,1,28.00),(6,'Meio a Meio de Pizza mussarela  e Atum',32.00,1,32.00),(8,'Atum',32.00,1,32.00),(13,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',32.00,1,32.00),(14,'Refrigerante 300ML',5.99,1,5.99),(15,'Refrigerante 300ML',5.99,1,5.99),(16,'Pizza Calabresa',25.00,1,25.00),(17,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',0.00,1,25.00),(18,'Pizza mussarela ',28.00,1,28.00),(19,'Pizza Calabresa',25.00,1,25.00),(20,'Meio a Meio de Pizza Calabresa e Pizza Calabresa',0.00,1,25.00),(21,'Pizza Calabresa',25.00,1,25.00),(22,'Meio a Meio de Atum e Pizza Calabresa',32.00,1,32.00),(23,'Meio a Meio de Pizza mussarela  e Pizza Calabresa',28.00,1,28.00),(23,'Atum',32.00,1,32.00),(23,'Refrigerante 300ML',5.99,1,5.99),(24,'Atum',32.00,1,32.00),(24,'Meio a Meio de Pizza Calabresa e Pizza mussarela ',28.00,1,28.00),(25,'Pizza Calabresa',25.00,1,25.00),(26,'Pizza mussarela ',28.00,1,28.00),(27,'Pizza mussarela ',28.00,1,28.00),(28,'Pizza Calabresa',25.00,1,25.00),(29,'Pizza mussarela ',28.00,1,28.00);
 
 /*Table structure for table `produtos` */
 
@@ -243,7 +245,7 @@ CREATE TABLE `usuario` (
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'1','1','01','s','455.365.058-40'),(NULL,NULL,'2','2','10','n','264.051.848-89'),(NULL,NULL,'3','3','10','n','264.051.848-89'),(NULL,NULL,'pedro','pedro','01','n','057.045.958-39'),(NULL,NULL,'teste','teste','00','n','563.553.262-43'),(NULL,NULL,'wpossera','65856962','01','n','264.051.848-89');
+insert  into `usuario`(`codigo`,`nome`,`login`,`senha`,`permissao`,`logado`,`cpfFun`) values (NULL,NULL,'1','1','1',NULL,'455.365.058-40'),(NULL,NULL,'teste','teste','00','n','563.553.262-43');
 
 /*Table structure for table `venda` */
 
@@ -265,11 +267,11 @@ CREATE TABLE `venda` (
   `horaentrega` varchar(8) DEFAULT NULL,
   `motoboy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`npedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 /*Data for the table `venda` */
 
-insert  into `venda`(`npedido`,`telefone`,`total`,`formaPagamento`,`observacao`,`data`,`valorrecebido`,`troco`,`hora`,`tipopedido`,`situacaoEntrega`,`hrsaida`,`horaentrega`,`motoboy`) values (21,'',25.00,'Cartão de Crédito','','29-09-2015',0.00,0.00,'02:46:04','Pedido Entrega',NULL,NULL,NULL,NULL),(22,'25858180',32.00,'Cartão de Crédito','','29-09-2015',0.00,0.00,'02:46:51','Pedido Entrega','Cancelado','12:28:16','','Paulo'),(23,'25853775',65.99,'Dinheiro','calotero','29-09-2015',100.00,34.01,'03:15:56','Pedido Entrega','Cancelado','12:33:02','12:33:05','william'),(24,'25858180',60.00,'Dinheiro','','29-09-2015',100.00,40.00,'03:56:15','Pedido Entrega','Saiu Para Entregar','10:04:49','08:10:28','Paulo'),(25,'',60.00,'Dinheiro','','06-10-2015',100.00,40.00,'09:14:05','Pedido Balcao','Entrega OK',NULL,'09:48:09',''),(26,'',25.00,'Dinheiro','','07-10-2015',100.00,75.00,'09:07:23','Pedido Entrega','Aberto',NULL,NULL,NULL),(27,'25858180',64.00,'Cartão de Crédito','','07-10-2015',0.00,0.00,'09:27:43','Pedido Entrega','Aberto',NULL,NULL,NULL),(28,'',28.00,'Dinheiro','','07-10-2015',100.00,72.00,'09:53:12','Pedido Entrega','Aberto',NULL,NULL,NULL),(29,'',32.00,'Cartão de Débito','','07-10-2015',0.00,0.00,'09:53:36','Pedido Entrega','Aberto',NULL,NULL,NULL),(30,'',37.99,'Cartão de Crédito','','07-10-2015',0.00,0.00,'09:57:53','Pedido Entrega','Aberto',NULL,NULL,NULL),(31,'',28.00,'Cartão de Débito','','07-10-2015',0.00,0.00,'09:58:38','Pedido Balcao','Aberto',NULL,NULL,NULL),(32,'',25.00,'Cartão de Débito','','07-10-2015',0.00,0.00,'10:04:43','Pedido Balcao','Aberto',NULL,NULL,NULL),(33,'',25.00,'Cartão de Crédito','','07-10-2015',0.00,0.00,'10:06:40','Pedido Balcao','Aberto',NULL,NULL,NULL),(34,'',5.99,'Cartão de Crédito','','07-10-2015',0.00,0.00,'10:07:02','Pedido Entrega','Aberto',NULL,NULL,NULL);
+insert  into `venda`(`npedido`,`telefone`,`total`,`formaPagamento`,`observacao`,`data`,`valorrecebido`,`troco`,`hora`,`tipopedido`,`situacaoEntrega`,`hrsaida`,`horaentrega`,`motoboy`) values (21,'',25.00,'Cartão de Crédito','','29-09-2015',0.00,0.00,'02:46:04','Pedido Entrega',NULL,NULL,NULL,NULL),(22,'25858180',32.00,'Cartão de Crédito','','29-09-2015',0.00,0.00,'02:46:51','Pedido Entrega','Saiu Para Entregar','12:28:16','','Paulo'),(23,'25853775',65.99,'Dinheiro','calotero','29-09-2015',100.00,34.01,'03:15:56','Pedido Entrega','Não Entregue','12:33:02','12:33:05','william'),(24,'25858180',60.00,'Dinheiro','','29-09-2015',100.00,40.00,'03:56:15','Pedido Entrega','Cancelado','12:43:26','12:43:24','Paulo'),(25,'',25.00,'Cartão de Débito','','07-10-2015',0.00,0.00,'03:29:22','Pedido Entrega','Aberto',NULL,NULL,NULL),(26,'',28.00,'Cartão de Crédito','','07-10-2015',0.00,0.00,'03:33:17','Pedido Balcao','Entrega OK',NULL,'03:33:36',''),(27,'',28.00,'Cartão de Crédito','','07-10-2015',0.00,0.00,'03:34:22','Pedido Balcao','Entrega OK',NULL,'03:34:35',''),(28,'',25.00,'Cartão de Débito','','07-10-2015',0.00,0.00,'03:35:13','Pedido Balcao','Aberto',NULL,NULL,NULL),(29,'25858180',28.00,'Cartão de Débito','','07-10-2015',0.00,0.00,'03:48:38','Pedido Entrega','Aberto',NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
