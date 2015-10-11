@@ -9,6 +9,9 @@ import Banco.Banco;
 import Banco.BancoFuncoes;
 import Funcoes.LimitarCampos;
 import Funcoes.ValidaCnpj;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.alfredlibrary.validadores.CPF;
@@ -27,12 +30,22 @@ public class Usuario extends javax.swing.JFrame {
                 txt_loginFun1.setDocument(new LimitarCampos(15));
                 txt_senhaFun1.setDocument(new LimitarCampos(15));
                 
-                carregaTabela();
+              
                 
+                desabilitaCampos();
+        
+        gridUsuarios.setModel(  
+      new DefaultTableModel(  
+      new Object[] []{ },  
+      new String[] {"Nome", "CPF", "Login", "Permissao" }) {  
   
-        
-        
+   public boolean isCellEditable(int row, int col) {  
+           return false;  
+   
+   }});   
       
+          carregaTabela();
+        
     }
 
 
@@ -67,6 +80,7 @@ public class Usuario extends javax.swing.JFrame {
         txt_Cpf = new javax.swing.JFormattedTextField();
         jToolBar1 = new javax.swing.JToolBar();
         CriarAcesso1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário e Senha"));
         jPanel4.setLayout(null);
@@ -170,10 +184,10 @@ public class Usuario extends javax.swing.JFrame {
         Adm1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Adm1.setText("Administração");
         jPanel9.add(Adm1);
-        Adm1.setBounds(30, 60, 130, 25);
+        Adm1.setBounds(30, 70, 130, 25);
 
         jPanel5.add(jPanel9);
-        jPanel9.setBounds(250, 20, 210, 110);
+        jPanel9.setBounds(290, 20, 210, 120);
 
         internalUsuario.getContentPane().add(jPanel5);
         jPanel5.setBounds(10, 150, 640, 150);
@@ -189,6 +203,11 @@ public class Usuario extends javax.swing.JFrame {
                 "Nome", "CPF", "Login", "Permissao"
             }
         ));
+        gridUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(gridUsuarios);
 
         internalUsuario.getContentPane().add(jScrollPane1);
@@ -204,6 +223,11 @@ public class Usuario extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txt_Cpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_CpfKeyPressed(evt);
+            }
+        });
         internalUsuario.getContentPane().add(txt_Cpf);
         txt_Cpf.setBounds(70, 90, 140, 30);
 
@@ -218,6 +242,19 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(CriarAcesso1);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/delete.png"))); // NOI18N
+        jButton2.setText("Excluir");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMargin(new java.awt.Insets(2, 25, 2, 25));
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
 
         internalUsuario.getContentPane().add(jToolBar1);
         jToolBar1.setBounds(0, 0, 680, 60);
@@ -256,16 +293,12 @@ public class Usuario extends javax.swing.JFrame {
         else{
         
         if (Caixa1.isSelected()) {
-            permissao += "1";
-        } else {
             permissao += "0";
-        }
+        } 
 
-        if (Adm1.isSelected()) {
+        else if (Adm1.isSelected()) {
             permissao += "1";
-        } else {
-            permissao += "0";
-        }
+        } 
         
        
        
@@ -277,11 +310,82 @@ public class Usuario extends javax.swing.JFrame {
             txt_loginFun1.setText("");
             txt_senhaFun1.setText("");
             txt_Cpf.setText("");
-
+            desabilitaCampos();
+            carregaTabela();
              }
            }
         
     }//GEN-LAST:event_CriarAcesso1ActionPerformed
+
+    private void txt_CpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CpfKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){  
+        
+        ResultSet rs;
+
+        
+        String cpf = txt_Cpf.getText();
+        
+     if(cpf.equals("   .   .   -  ") || CPF.isValido(cpf) == false){
+         
+          JOptionPane.showMessageDialog(null,"Atenção Cpf inválido");
+         
+     }
+
+           
+        rs = ba.buscaFuncionario(cpf);
+        
+
+                if (ba.buscaFuncionario(cpf) != null) {
+          
+                    habilitaCampos();
+                    
+                }
+                else {
+                    
+                    JOptionPane.showMessageDialog(null,"Cpf não registrado");
+                    
+                }
+            
+            
+        
+   
+        }
+        
+        
+        
+    }//GEN-LAST:event_txt_CpfKeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        String cpf =txt_Cpf.getText();
+
+       
+
+        
+                if (ba.excluiUsuario(cpf)) {
+                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+                    
+                       txt_Cpf.setText("");
+                       carregaTabela();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Não encontrado");
+                
+            }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void gridUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridUsuariosMouseClicked
+        
+        if (evt.getClickCount() == 2) {  
+            Object obj = (gridUsuarios.getValueAt(gridUsuarios.getSelectedRow(), 1));  //coluna 1
+            String cpf = obj.toString();
+            
+            txt_Cpf.setText(cpf);
+            habilitaCampos();
+        }
+        
+    }//GEN-LAST:event_gridUsuariosMouseClicked
 
        private void jTextField1FocusLostCpf(java.awt.event.FocusEvent evt) {
         String cpfFor = txt_Cpf.getText();
@@ -314,6 +418,24 @@ public class Usuario extends javax.swing.JFrame {
 
 
         bf.tabelaUsuario(vsql, msg1, msg2, gridUsuarios);
+    }
+    
+    public void desabilitaCampos(){
+        
+        txt_loginFun1.setEnabled(false);
+        txt_senhaFun1.setEnabled(false);
+        Caixa1.setEnabled(false);
+        Adm1.setEnabled(false);
+        
+    }
+    
+    public void habilitaCampos(){
+        
+        txt_loginFun1.setEnabled(true);
+        txt_senhaFun1.setEnabled(true);
+        Caixa1.setEnabled(true);
+        Adm1.setEnabled(true);
+        
     }
     
     /**
@@ -361,6 +483,7 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JTable gridUsuarios;
     public javax.swing.JInternalFrame internalUsuario;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
