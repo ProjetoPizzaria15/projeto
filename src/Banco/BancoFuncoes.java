@@ -503,19 +503,12 @@ public class BancoFuncoes {
                         String Sexo = rs.getString("sexoFun");
                         String CPF = rs.getString("cpfFun");
                         String RG = rs.getString("rgFun");
-                        String Data_Nascimento = rs.getString("nasciFun");
-                        String UF = rs.getString("ufFun");
-                        String Cidade = rs.getString("cidadeFun");
-                        String Endereco = rs.getString("endeFun");
-                        String Bairro = rs.getString("bairroFun");
-                        String Cep = rs.getString("cepFun");
-                        String Numero = rs.getString("numFun");
-                        String Complemento = rs.getString("compleFun");
+                        String Situacao = rs.getString("situacao");
                         String Telefone = rs.getString("telFun");
                         String Ceular = rs.getString("celFun");
                         String Setor = rs.getString("setorFun");
                         String Motoboy = rs.getString("motoboy");
-                        dtm.addRow(new Object[]{Nome ,Sexo ,CPF,RG ,Telefone ,Ceular , Setor, Motoboy});
+                        dtm.addRow(new Object[]{Nome ,Sexo ,CPF,RG ,Telefone ,Ceular , Setor, Motoboy, Situacao});
                    }
 
 
@@ -574,9 +567,19 @@ public class BancoFuncoes {
                         String CPF = rs.getString("u.cpfFun");
                         String Login = rs.getString("u.login");
                         String Permissao = rs.getString("u.permissao");
-      
+                        String Permissao2="";
+                        
+                        if(Permissao.equals("0")){
+                            
+                            Permissao2 += "Caixa";
+                            
+                        }
+                        else if (Permissao.equals("1")){
              
-                        dtm.addRow(new Object[]{Nome ,CPF ,Login,Permissao});
+                            Permissao2 += "Adm";
+                        }
+                        
+                        dtm.addRow(new Object[]{Nome ,CPF ,Login,Permissao2});
                    }
 
 
