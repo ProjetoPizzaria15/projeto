@@ -133,7 +133,7 @@ public class Banco {
     }
     
     
-    public void atualizaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun,String ufFun,String cidadeFun,String setorFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun , String sexoFun,String motoboy, String placamoto, String cnh, String modelomoto) {
+    public void atualizaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun,String ufFun,String cidadeFun,String setorFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun , String sexoFun,String motoboy, String placamoto, String cnh, String modelomoto,String situacao) {
         String sql;
         conecta();
 
@@ -143,7 +143,7 @@ public class Banco {
                       + " endeFun ='"+endeFun+"', compleFun ='"+compleFun+"',"
                       + " bairroFun ='"+bairroFun+"', ufFun ='"+ufFun+"', cidadeFun ='"+cidadeFun+"' ,"
                       + " setorFun ='"+setorFun+"', rgFun ='"+rgFun+"' , cpfFun ='"+cpfFun+"' , cepFun ='"+cepFun+"',"
-                      + " numFun ='"+numFun+"' , telFun ='"+telFun+"', celFun ='"+celFun+"', sexoFun ='"+sexoFun+"', motoboy ='"+motoboy+"' , placamoto ='"+placamoto+"', cnh ='"+cnh+"', modelomoto ='"+modelomoto+"'  WHERE cpfFun = '"+cpfFun+"'"; 
+                      + " numFun ='"+numFun+"' , telFun ='"+telFun+"', celFun ='"+celFun+"', sexoFun ='"+sexoFun+"', motoboy ='"+motoboy+"' , placamoto ='"+placamoto+"', cnh ='"+cnh+"', modelomoto ='"+modelomoto+"', situacao ='"+situacao+"'  WHERE cpfFun = '"+cpfFun+"'"; 
 
             stmt.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Cliente Atualizado com sucesso");
@@ -770,6 +770,24 @@ public class Banco {
 
     }
     
+    public boolean excluiUsuario(String cpf) {
+        String sql;
+        conecta();
+
+        try {
+            sql = "DELETE FROM usuario WHERE cpfFun= '" + cpf + "';";
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            
+            return true;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+
+    }
+    
      public boolean excluiCompra(String npedido) {
         String sql;
         conecta();
@@ -788,12 +806,12 @@ public class Banco {
 
     }
     
-    public boolean excluiUsuario(String cpf) {
+    public boolean desativaFuncionario(String cpf,String situacao) {
         String sql;
         conecta();
-
+        
         try {
-            sql = "DELETE FROM funcionario WHERE cpfFun= '" + cpf + "';";
+            sql = "UPDATE funcionario SET situacao ='"+situacao+"'  WHERE cpfFun = '"+cpf+"'";
             System.out.println(sql);
             stmt.executeUpdate(sql);
             
@@ -1222,7 +1240,7 @@ public class Banco {
     }
     
     
-    public boolean gravaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun ,String cidadeFun,String setorFun,String sexoFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun, String ufFun,String motoboy, String placamoto, String cnh, String modelomoto) {
+    public boolean gravaFuncionario(String nomeFun,String nasciFun,String endeFun,String compleFun,String bairroFun ,String cidadeFun,String setorFun,String sexoFun,String rgFun,String cpfFun,String cepFun,String numFun,String telFun,String celFun, String ufFun,String motoboy, String placamoto, String cnh, String modelomoto,String situacao) {
         conecta();
         String sql;
 
@@ -1233,8 +1251,8 @@ public class Banco {
               
           
             
-                sql = "INSERT INTO funcionario(nomeFun, rgFun, cpfFun, cepFun, numFun, telFun,celFun, nasciFun, endeFun,compleFun, bairroFun, setorFun, cidadeFun, sexoFun,ufFun,motoboy,placamoto,cnh,modelomoto) VALUES ('"; // nome das variaveis do BD
-                sql += nomeFun + "', '" + rgFun + "','" + cpfFun + "' , '"+ cepFun +"' , '"+ numFun +"' , '"+ telFun +"' ,'" + celFun + "', '" + nasciFun + "','" + endeFun + "','" + compleFun + "','" + bairroFun + "','" + setorFun +"','" + cidadeFun +"','" + sexoFun +"','" + ufFun +"','" + motoboy +"','" + placamoto +"','" + cnh +"','" + modelomoto +"')";
+                sql = "INSERT INTO funcionario(nomeFun, rgFun, cpfFun, cepFun, numFun, telFun,celFun, nasciFun, endeFun,compleFun, bairroFun, setorFun, cidadeFun, sexoFun,ufFun,motoboy,placamoto,cnh,modelomoto,situacao) VALUES ('"; // nome das variaveis do BD
+                sql += nomeFun + "', '" + rgFun + "','" + cpfFun + "' , '"+ cepFun +"' , '"+ numFun +"' , '"+ telFun +"' ,'" + celFun + "', '" + nasciFun + "','" + endeFun + "','" + compleFun + "','" + bairroFun + "','" + setorFun +"','" + cidadeFun +"','" + sexoFun +"','" + ufFun +"','" + motoboy +"','" + placamoto +"','" + cnh +"','" + modelomoto +"','" + situacao +"')";
                 
                 /*sql = "INSERT INTO usuario(login, senha, permissao) VALUES ('"; // nome das variaveis do BD
                 sql += loginFun + "', '"+ senhaFun +"' , '"+ permissao +"')";*/
