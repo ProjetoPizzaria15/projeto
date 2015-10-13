@@ -58,10 +58,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
        
        // limita campos contas a pagar
        txt_notaPagar.setDocument(new LimitarCampos(50));
+       txtfiscal.setDocument(new LimitarCampos(50));
        txt_descricaoPagar.setDocument(new LimitarCampos(200));
        txt_valorPagar.setDocument(new LimitarCampos(10));
        txt_jurosPagar.setDocument(new LimitarCampos(10));
        txt_multaPagar.setDocument(new LimitarCampos(10));
+       telefone.setDocument(new LimitarCampos(13));
        
        // limita campos contas a receber
        
@@ -135,7 +137,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         gridContasPagar = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
+        txtfiscal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -180,7 +182,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         gridContaReceber = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        telefone = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -394,9 +396,15 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
         jPanel10.setLayout(null);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
         jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel10.add(jButton1);
-        jButton1.setBounds(420, 40, 110, 40);
+        jButton1.setBounds(510, 40, 170, 40);
 
         gridContasPagar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -421,12 +429,12 @@ public class ContasPagarReceber extends javax.swing.JFrame {
 
         jPanel10.add(jScrollPane3);
         jScrollPane3.setBounds(10, 120, 840, 240);
-        jPanel10.add(jTextField2);
-        jTextField2.setBounds(280, 40, 120, 40);
+        jPanel10.add(txtfiscal);
+        txtfiscal.setBounds(160, 40, 340, 40);
 
         jLabel5.setText("Nota Fiscal :");
         jPanel10.add(jLabel5);
-        jLabel5.setBounds(190, 40, 90, 30);
+        jLabel5.setBounds(90, 40, 90, 40);
 
         tabContas.addTab("Pesquisar Contas a Pagar", jPanel10);
 
@@ -671,11 +679,17 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         jPanel11.add(jScrollPane4);
         jScrollPane4.setBounds(10, 140, 840, 240);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
         jButton2.setText("Pesquisar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel11.add(jButton2);
-        jButton2.setBounds(380, 50, 110, 40);
-        jPanel11.add(jTextField1);
-        jTextField1.setBounds(250, 50, 120, 40);
+        jButton2.setBounds(380, 50, 170, 40);
+        jPanel11.add(telefone);
+        telefone.setBounds(250, 50, 120, 40);
 
         jLabel4.setText("Telefone :");
         jPanel11.add(jLabel4);
@@ -1176,6 +1190,50 @@ public class ContasPagarReceber extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_gridContaReceberMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       String cod = txtfiscal.getText();
+       
+       if(cod.equals("")){
+           
+           
+            JOptionPane.showMessageDialog(null,"Insira o codigo da nota fiscal");
+           
+       }
+       else {
+       
+         String msg1 = "Clientes recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Clientes";
+        String vsql = "SELECT * from contaspagar where notaFiscal = "+cod+"";
+
+
+        bf.tabelaContasPagar(vsql, msg1, msg2, gridContasPagar);
+        
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+         String tel = telefone.getText();
+       
+       if(tel.equals("")){
+           
+           
+            JOptionPane.showMessageDialog(null,"Insira o telefone");
+           
+       }
+       else {
+       
+         String msg1 = "Clientes recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Clientes";
+        String vsql = "SELECT * from contasreceber where telefone = "+tel+"";
+
+
+       bf.tabelaContasReceber(vsql, msg1, msg2, gridContaReceber);
+        
+       }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1277,14 +1335,13 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator18;
     private javax.swing.JToolBar.Separator jSeparator19;
     private javax.swing.JToolBar.Separator jSeparator7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
     private javax.swing.JFormattedTextField msk_emissaoPagar;
     private javax.swing.JFormattedTextField msk_recebimentoPagar;
     private javax.swing.JFormattedTextField msk_vencimentoPagar;
     private javax.swing.JTabbedPane tabContas;
+    private javax.swing.JTextField telefone;
     private javax.swing.JTextField txt_ClienteReceber;
     private javax.swing.JTextField txt_TelefoneClienteReceber;
     private javax.swing.JFormattedTextField txt_dataRecebimento;
@@ -1299,6 +1356,7 @@ public class ContasPagarReceber extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txt_notaPagar;
     private javax.swing.JFormattedTextField txt_valorPagar;
     private javax.swing.JTextField txt_valorReceber;
+    private javax.swing.JTextField txtfiscal;
     // End of variables declaration//GEN-END:variables
 
     /**
