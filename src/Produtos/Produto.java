@@ -73,7 +73,7 @@ public class Produto extends javax.swing.JFrame {
         TxtQtdeEstoque.setDocument(new LimitarCampos(6));
         txtValor.setDocument(new LimitarCampos(6));
         txtCategoriaProduto.setDocument(new LimitarCampos(20));
-        
+         txtCodProduto.setDocument(new LimitarCampos(10));
     
 
     }
@@ -156,11 +156,11 @@ public class Produto extends javax.swing.JFrame {
         jSeparator14 = new javax.swing.JToolBar.Separator();
         txtDataRegistro = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCodProduto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         gridProdutos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -486,16 +486,12 @@ public class Produto extends javax.swing.JFrame {
         tabProduto.addTab("Registrar Produto", jPanel2);
 
         jPanel3.setLayout(null);
-        jPanel3.add(jTextField1);
-        jTextField1.setBounds(270, 50, 140, 40);
+        jPanel3.add(txtCodProduto);
+        txtCodProduto.setBounds(270, 50, 140, 40);
 
         jLabel8.setText("Codigo Produto: ");
         jPanel3.add(jLabel8);
         jLabel8.setBounds(170, 50, 110, 40);
-
-        jButton1.setText("Pesquisar");
-        jPanel3.add(jButton1);
-        jButton1.setBounds(440, 50, 100, 40);
 
         gridProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -517,6 +513,15 @@ public class Produto extends javax.swing.JFrame {
 
         jPanel3.add(jScrollPane4);
         jScrollPane4.setBounds(10, 130, 750, 230);
+
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1);
+        jButton1.setBounds(440, 50, 150, 40);
 
         tabProduto.addTab("Pesquisar Produtos", jPanel3);
 
@@ -1017,6 +1022,31 @@ public class Produto extends javax.swing.JFrame {
         
     }//GEN-LAST:event_gridProdutosMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+         String cod = txtCodProduto.getText();
+        
+        if(cod.equals("")){
+            
+            JOptionPane.showMessageDialog(null,"Insira o codigo do produto");
+            
+
+        }
+        else {
+      
+        
+      
+        String msg1 = "Produtos recuperados com sucesso";
+        String msg2 = "Erro ao Recuperar Produtos";
+        String vsql = "SELECT codigoproduto,tipoproduto,descricao,ingredientes,unidmedida, estocavel,"
+                + "qtdeminima,acabadoprima,valor,qtdeestoque,produtovenda,dataregistro FROM produtos where codigoproduto ="+cod+"  order by codigoproduto";
+
+
+        bf.tabelaProdutos(vsql, msg1, msg2, gridProdutos);
+    
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1098,7 +1128,6 @@ public class Produto extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator14;
     private javax.swing.JToolBar.Separator jSeparator16;
     private javax.swing.JToolBar.Separator jSeparator7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelValor;
@@ -1106,6 +1135,7 @@ public class Produto extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioPrima;
     private javax.swing.JTabbedPane tabProduto;
     private javax.swing.JTextField txtCategoriaProduto;
+    private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtCodigoProduto;
     private com.toedter.calendar.JDateChooser txtDataRegistro;
     private javax.swing.JTextField txtDescricao;
