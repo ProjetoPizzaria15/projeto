@@ -1163,6 +1163,7 @@ public class Caixa extends javax.swing.JFrame {
                 pedido = Integer.parseInt(txtNPedido.getText());
                 telefone = txtTelefone.getText();
                 data = getDatahoje();
+                String dataformat = getDataFormat();
                 hora = txtHora.getText();
 
                 formapagamento = comboFormaPagamento.getSelectedItem().toString();
@@ -1172,7 +1173,7 @@ public class Caixa extends javax.swing.JFrame {
                 troco = Float.parseFloat(txtTroco.getText());
                 total = Float.parseFloat(txtTotalVenda.getText());
 
-                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora,tipopedido,situacao);
+                ba.gravarVenda(pedido, telefone, formapagamento, observacao, total,valorrecebido,troco,data,hora,tipopedido,situacao,dataformat);
 
                 carregaNumeroPedido();
                 carregaTabela();
@@ -1815,7 +1816,14 @@ public class Caixa extends javax.swing.JFrame {
      */
     public String getDatahoje() {
        if (txDataHoje.getDate()!=null){
-          return datahoje = new SimpleDateFormat("dd-MM-yyyy").format(txDataHoje.getDate());
+          return datahoje = new SimpleDateFormat("dd/MM/yyyy").format(txDataHoje.getDate());
+        }else{
+          return null;
+        }
+    }
+     public String getDataFormat() {
+       if (txDataHoje.getDate()!=null){
+          return datahoje = new SimpleDateFormat("yyyy/MM/dd").format(txDataHoje.getDate());
         }else{
           return null;
         }
