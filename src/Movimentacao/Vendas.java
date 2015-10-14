@@ -1,8 +1,14 @@
 package Movimentacao;
 
 import Banco.BancoFuncoes;
+import Banco.conectaBanco;
 import Movimentacao.DemonstrativoVenda;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Vendas extends javax.swing.JFrame {
@@ -27,7 +33,7 @@ public class Vendas extends javax.swing.JFrame {
            
         
         carregaTabela();
-        
+        somaVendas();
         
          
     }
@@ -40,15 +46,23 @@ public class Vendas extends javax.swing.JFrame {
         codigo = d;
     }
     public String getCodigo(){
-        return codigo = txCodigo.getText();
+        return codigo = txtNpedido.getText();
     }
     
     public void setVendaInicial(String n){
         vendaInicial = n;
     }
-    public String getVendaInicial(){
-        if (jdcVendaIncial.getDate()!=null){
-          return vendaInicial = new SimpleDateFormat("yyyy-MM-dd").format(jdcVendaIncial.getDate());
+    public String getVendaData1(){
+        if (txtData1.getDate()!=null){
+          return vendaInicial = new SimpleDateFormat("yyyy/MM/dd").format(txtData1.getDate());
+        }else{
+          return null;
+        }
+    }
+    
+     public String getVendaData2(){
+        if (txtData1.getDate()!=null){
+          return vendaInicial = new SimpleDateFormat("yyyy/MM/dd").format(txtData2.getDate());
         }else{
           return null;
         }
@@ -58,8 +72,8 @@ public class Vendas extends javax.swing.JFrame {
         vendaFinal = n;
     }
     public String getVendaFinal(){
-        if (jdcVendaFinal.getDate()!=null){
-          return vendaFinal = new SimpleDateFormat("yyyy-MM-dd").format(jdcVendaFinal.getDate());
+        if (txtData2.getDate()!=null){
+          return vendaFinal = new SimpleDateFormat("yyyy-MM-dd").format(txtData2.getDate());
         }else{
           return null;
         }
@@ -70,18 +84,23 @@ public class Vendas extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jButton1 = new javax.swing.JButton();
         internalMovimentacao = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         bnPesquisa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txCodigo = new javax.swing.JTextField();
-        jdcVendaIncial = new com.toedter.calendar.JDateChooser();
-        jdcVendaFinal = new com.toedter.calendar.JDateChooser();
+        txtNpedido = new javax.swing.JTextField();
+        txtData1 = new com.toedter.calendar.JDateChooser();
+        txtData2 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         gridVenda = new javax.swing.JTable();
+        txtTotal = new javax.swing.JTextField();
+
+        jButton1.setText("Pesquisar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -103,17 +122,17 @@ public class Vendas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(bnPesquisa);
-        bnPesquisa.setBounds(570, 60, 110, 30);
+        bnPesquisa.setBounds(640, 60, 110, 30);
 
         jLabel2.setText("À:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(370, 60, 30, 30);
-        jPanel1.add(txCodigo);
-        txCodigo.setBounds(20, 60, 110, 30);
-        jPanel1.add(jdcVendaIncial);
-        jdcVendaIncial.setBounds(220, 60, 140, 30);
-        jPanel1.add(jdcVendaFinal);
-        jdcVendaFinal.setBounds(400, 60, 130, 30);
+        jLabel2.setBounds(460, 60, 30, 30);
+        jPanel1.add(txtNpedido);
+        txtNpedido.setBounds(20, 60, 110, 30);
+        jPanel1.add(txtData1);
+        txtData1.setBounds(310, 60, 140, 30);
+        jPanel1.add(txtData2);
+        txtData2.setBounds(490, 60, 130, 30);
 
         jLabel3.setText("N° Pedido:");
         jPanel1.add(jLabel3);
@@ -121,11 +140,20 @@ public class Vendas extends javax.swing.JFrame {
 
         jLabel4.setText("Período da Venda:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(220, 30, 110, 30);
+        jLabel4.setBounds(310, 30, 110, 30);
 
         jLabel5.setText("De:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(190, 60, 30, 30);
+        jLabel5.setBounds(280, 60, 30, 30);
+
+        jButton2.setText("Pesquisar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(150, 60, 110, 30);
 
         internalMovimentacao.getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 10, 790, 120);
@@ -149,7 +177,13 @@ public class Vendas extends javax.swing.JFrame {
         jScrollPane2.setViewportView(gridVenda);
 
         internalMovimentacao.getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 140, 780, 310);
+        jScrollPane2.setBounds(10, 140, 780, 270);
+
+        txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(204, 204, 204));
+        txtTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        internalMovimentacao.getContentPane().add(txtTotal);
+        txtTotal.setBounds(620, 430, 150, 40);
 
         getContentPane().add(internalMovimentacao);
         internalMovimentacao.setBounds(10, 10, 810, 530);
@@ -158,7 +192,74 @@ public class Vendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bnPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnPesquisaActionPerformed
-     
+        String data1,data2;
+        
+        data1 = getVendaData1();
+        data2 = getVendaData2();
+        
+        if(data1 == null || data2 == null){
+            
+            JOptionPane.showMessageDialog(null,"Entre com as datas");
+            
+        }
+        else{
+        
+         String msg1 = "Vendas recuperadas com sucesso";
+        String msg2 = "Erro ao Recuperar vendas";
+        String vsql = "SELECT v.npedido,v.tipopedido, v.data, v.total FROM venda v WHERE\n" +
+        "v.dataformat BETWEEN '"+data1+"' AND '"+data2+"';";
+
+        bf.tabelaVendas(vsql, msg1, msg2, gridVenda);
+        
+        
+         conectaBanco cb = new conectaBanco();
+              
+ 
+              try{
+
+            Connection connection = null;
+            Class.forName(cb.JDBC_DRIVER()).newInstance();
+            connection =    (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+            Statement s = (Statement) connection.createStatement();
+
+            String pega = "SELECT SUM(v.total)soma " +
+                          "FROM venda v where v.dataformat BETWEEN '"+data1+"' AND '"+data2+"'";
+
+            System.out.println(pega);
+
+            ResultSet r = s.executeQuery(pega);
+                 while(r.next()) {
+                        
+                        String soma = r.getString("soma");  
+                        int ponto = soma.indexOf(".");
+                        int tamanho = soma.length();
+                        int total = tamanho-(ponto+1);
+                        String somaEditada = soma.replace(',', '.');
+
+//                        System.out.println(total);
+
+                        if(ponto == -1){
+                           somaEditada = somaEditada+",00";
+                        }else{
+                            if(total==2)
+                                somaEditada = somaEditada;
+                            if(total==1)
+                                somaEditada = somaEditada+"0";
+                            if(total>2)
+                                somaEditada = somaEditada.substring(0, ponto+3);
+                        }
+                        
+                        txtTotal.setText(somaEditada);
+                      
+                      }
+
+
+         }catch (Exception ex) {
+                    ex.printStackTrace(System.out);
+                    
+                }
+        }
+        
     }//GEN-LAST:event_bnPesquisaActionPerformed
 
     private void gridVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridVendaMouseClicked
@@ -180,6 +281,75 @@ public class Vendas extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_gridVendaMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        
+        String cod = txtNpedido.getText();
+        
+        if(cod.equals("")){
+        
+            
+            JOptionPane.showMessageDialog(null,"Entre com o número do pedido");
+        
+        }
+        else{
+        String msg1 = "Vendas recuperadas com sucesso";
+        String msg2 = "Erro ao Recuperar vendas";
+        String vsql = "SELECT npedido,tipopedido, data, total " +
+                      "FROM venda where npedido = "+cod+"";
+
+        bf.tabelaVendas(vsql, msg1, msg2, gridVenda);
+        
+         conectaBanco cb = new conectaBanco();
+              
+ 
+              try{
+
+            Connection connection = null;
+            Class.forName(cb.JDBC_DRIVER()).newInstance();
+            connection =    (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+            Statement s = (Statement) connection.createStatement();
+
+            String pega = "SELECT SUM(v.total)soma " +
+                          "FROM venda v where npedido = '"+cod+"'";
+
+            System.out.println(pega);
+
+            ResultSet r = s.executeQuery(pega);
+                 while(r.next()) {
+                        
+                        String soma = r.getString("soma");  
+                        int ponto = soma.indexOf(".");
+                        int tamanho = soma.length();
+                        int total = tamanho-(ponto+1);
+                        String somaEditada = soma.replace(',', '.');
+
+//                        System.out.println(total);
+
+                        if(ponto == -1){
+                           somaEditada = somaEditada+",00";
+                        }else{
+                            if(total==2)
+                                somaEditada = somaEditada;
+                            if(total==1)
+                                somaEditada = somaEditada+"0";
+                            if(total>2)
+                                somaEditada = somaEditada.substring(0, ponto+3);
+                        }
+                        
+                        txtTotal.setText(somaEditada);
+                      
+                      }
+
+
+         }catch (Exception ex) {
+                    ex.printStackTrace(System.out);
+                    
+                }
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public void carregaTabela(){
         String msg1 = "Vendas recuperadas com sucesso";
         String msg2 = "Erro ao Recuperar vendas";
@@ -188,6 +358,55 @@ public class Vendas extends javax.swing.JFrame {
 
         bf.tabelaVendas(vsql, msg1, msg2, gridVenda);
     }
+    
+    public void somaVendas(){
+               conectaBanco cb = new conectaBanco();
+              
+ 
+              try{
+
+            Connection connection = null;
+            Class.forName(cb.JDBC_DRIVER()).newInstance();
+            connection =    (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
+            Statement s = (Statement) connection.createStatement();
+
+            String pega = "SELECT SUM(total)soma " +
+                          "FROM venda";
+
+            System.out.println(pega);
+
+            ResultSet r = s.executeQuery(pega);
+                 while(r.next()) {
+                        
+                        String soma = r.getString("soma");  
+                        int ponto = soma.indexOf(".");
+                        int tamanho = soma.length();
+                        int total = tamanho-(ponto+1);
+                        String somaEditada = soma.replace(',', '.');
+
+//                        System.out.println(total);
+
+                        if(ponto == -1){
+                           somaEditada = somaEditada+",00";
+                        }else{
+                            if(total==2)
+                                somaEditada = somaEditada;
+                            if(total==1)
+                                somaEditada = somaEditada+"0";
+                            if(total>2)
+                                somaEditada = somaEditada.substring(0, ponto+3);
+                        }
+                        
+                        txtTotal.setText(somaEditada);
+                      
+                      }
+
+
+         }catch (Exception ex) {
+                    ex.printStackTrace(System.out);
+                    
+                }
+   }
 
 
         
@@ -232,15 +451,18 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTable gridVenda;
     public javax.swing.JInternalFrame internalMovimentacao;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    public com.toedter.calendar.JDateChooser jdcVendaFinal;
-    public com.toedter.calendar.JDateChooser jdcVendaIncial;
-    private javax.swing.JTextField txCodigo;
+    public com.toedter.calendar.JDateChooser txtData1;
+    public com.toedter.calendar.JDateChooser txtData2;
+    private javax.swing.JTextField txtNpedido;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 
     /**
