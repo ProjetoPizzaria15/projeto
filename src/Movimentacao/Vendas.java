@@ -94,11 +94,12 @@ public class Vendas extends javax.swing.JFrame {
         txtData2 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         gridVenda = new javax.swing.JTable();
         txtTotal = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         jButton1.setText("Pesquisar");
 
@@ -142,10 +143,6 @@ public class Vendas extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(310, 30, 110, 30);
 
-        jLabel5.setText("De:");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(280, 60, 30, 30);
-
         jButton2.setText("Pesquisar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +151,10 @@ public class Vendas extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2);
         jButton2.setBounds(150, 60, 110, 30);
+
+        jLabel6.setText("De:");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(280, 60, 30, 30);
 
         internalMovimentacao.getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 10, 790, 120);
@@ -183,7 +184,11 @@ public class Vendas extends javax.swing.JFrame {
         txtTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         internalMovimentacao.getContentPane().add(txtTotal);
-        txtTotal.setBounds(620, 430, 150, 40);
+        txtTotal.setBounds(660, 430, 110, 40);
+
+        jLabel5.setText("Total:");
+        internalMovimentacao.getContentPane().add(jLabel5);
+        jLabel5.setBounds(600, 430, 50, 40);
 
         getContentPane().add(internalMovimentacao);
         internalMovimentacao.setBounds(10, 10, 810, 530);
@@ -410,6 +415,7 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     public com.toedter.calendar.JDateChooser txtData1;
