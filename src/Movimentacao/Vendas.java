@@ -32,8 +32,8 @@ public class Vendas extends javax.swing.JFrame {
          
            
         
-        carregaTabela();
-        somaVendas();
+       
+       
         
          
     }
@@ -359,54 +359,7 @@ public class Vendas extends javax.swing.JFrame {
         bf.tabelaVendas(vsql, msg1, msg2, gridVenda);
     }
     
-    public void somaVendas(){
-               conectaBanco cb = new conectaBanco();
-              
- 
-              try{
-
-            Connection connection = null;
-            Class.forName(cb.JDBC_DRIVER()).newInstance();
-            connection =    (Connection) DriverManager.getConnection(cb.DB_URL(), cb.DB_USER(), cb.DB_PASS());
-            Statement s = (Statement) connection.createStatement();
-
-            String pega = "SELECT SUM(total)soma " +
-                          "FROM venda";
-
-            System.out.println(pega);
-
-            ResultSet r = s.executeQuery(pega);
-                 while(r.next()) {
-                        
-                        String soma = r.getString("soma");  
-                        int ponto = soma.indexOf(".");
-                        int tamanho = soma.length();
-                        int total = tamanho-(ponto+1);
-                        String somaEditada = soma.replace(',', '.');
-
-//                        System.out.println(total);
-
-                        if(ponto == -1){
-                           somaEditada = somaEditada+",00";
-                        }else{
-                            if(total==2)
-                                somaEditada = somaEditada;
-                            if(total==1)
-                                somaEditada = somaEditada+"0";
-                            if(total>2)
-                                somaEditada = somaEditada.substring(0, ponto+3);
-                        }
-                        
-                        txtTotal.setText(somaEditada);
-                      
-                      }
-
-
-         }catch (Exception ex) {
-                    ex.printStackTrace(System.out);
-                    
-                }
-   }
+   
 
 
         
