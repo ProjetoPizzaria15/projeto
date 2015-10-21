@@ -116,6 +116,7 @@ public class Vendas extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
         jPanel1.setLayout(null);
 
+        bnPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
         bnPesquisa.setText("Pesquisar");
         bnPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +124,7 @@ public class Vendas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(bnPesquisa);
-        bnPesquisa.setBounds(640, 60, 110, 30);
+        bnPesquisa.setBounds(640, 60, 130, 30);
 
         jLabel2.setText("À:");
         jPanel1.add(jLabel2);
@@ -143,6 +144,7 @@ public class Vendas extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(310, 30, 110, 30);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
         jButton2.setText("Pesquisar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +152,7 @@ public class Vendas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(150, 60, 110, 30);
+        jButton2.setBounds(140, 60, 130, 30);
 
         jLabel6.setText("De:");
         jPanel1.add(jLabel6);
