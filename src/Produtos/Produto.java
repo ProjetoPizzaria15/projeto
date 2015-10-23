@@ -514,6 +514,7 @@ public class Produto extends javax.swing.JFrame {
         jPanel3.add(jScrollPane4);
         jScrollPane4.setBounds(10, 130, 750, 230);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/procurar.png"))); // NOI18N
         jButton1.setText("Pesquisar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
